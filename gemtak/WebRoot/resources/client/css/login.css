@@ -1,0 +1,70 @@
+
+/*µÇÂ½*/
+.tit_log{width:100%;margin:20px auto 0px;line-height:35px;font-size:18px;color:#8c0000;font-weight:normal;overflow:hidden;}
+.w_442{widths:45%;margin:20px auto;overflow:hidden;}
+.fl_le{float:left}
+.fl_ri{float:right}
+.side{border:1px solid #bbb;background:#fff;padding-top:20px}
+.pass{border:1px solid #bbb;padding-bottom:15px;background:#fff;padding-top:20px}
+.w_442 h3{font-size:16px;font-weight:normal;color:#777;background: -webkit-gradient(linear, left top, left bottom, from(#eeeeed),
+ to(#deddde) );background-image: -moz-linear-gradient(center top , #eeeeed, #deddde);height:32px;line-height:32px;border:1px solid #bbb;border-bottom:none}
+.w_442 h3 span{padding-left:19px;}
+.word{margin:0 auto;border-bottom:1px solid #bbb;overflow:hidden;padding-bottom:10px;width:97%}
+.word.redo{border-bottom:none;padding-bottom:23px;}
+.word.redo li{margin:18px 0 0px 30px;}
+.word li{font-size:14px;color:#777;width:100%;float:left;margin:10px auto 10px;line-height:30px;overflow:hidden}
+.word li span{float:left;}
+.word li label{display:block;width:23%;float:left;text-align:right;margin-right:1%;font-weight: normal;}
+.pass .word li{margin:11px auto 10px;}
+.s_te{width:76%;float:left;overflow:hidden}
+.inp_text{width:82%;line-height:30px;float:left;border:1px solid #9b9b9b;}
+.inp_sub{background: -webkit-gradient(linear, left top, left bottom, from(#c00000),
+ to(#8f0000) );
+background-image: -moz-linear-gradient(center top , #c00000, #8f0000);
+border:none;width:20%;line-height:25px;cursor:pointer;font-size:14px;color:#eee;margin-right:17%;float:right;}
+.inp_che{margin-right:8px;position:relative;top:2px;}
+.error{float:left;font-weight:normal;margin-left:5px;font-size:12px;width:50px;color:#ff0000}
+.left{float:left;}
+.right{float:right;}
+.w_442 p{margin:0px auto;line-height:20px;color:#333;width:95%;}
+.w_442 p.forget{font-size:14px;color:#444;padding:5px 0;}
+.w_442 p.least{margin-left:45px;}
+.w_442 p.forget.least{padding:14px 0 2px;}
+.inp_sub.register{background: -webkit-gradient(linear, left top, left bottom, from(#c00000),
+ to(#8f0000) );background-image: -moz-linear-gradient(center top , #c00000, #8f0000);border:none;width:20%;border:none;line-height:25px;cursor:pointer;color:#eee;margin-right:17%;float:right;}
+.word li.mail{margin-top:12px;}
+.word li.once{margin-top:30px;}
+
+
+
+
+
+
+
+/*
+
+@media (max-width:768px){
+.w_442{width:90%;margin:10px auto;overflow:hidden;}
+.fl_le{float:none}
+.fl_ri{float:none}	
+
+.tit_log{margin-top:10px;width:90%}
+}
+
+
+@media (max-width:992px){
+
+.w_442{width:90%;margin:10px auto 20px;overflow:hidden;}
+.fl_le{float:none}
+.fl_ri{float:none}
+.tit_log{margin-top:10px;width:90%}
+}
+
+
+*/
+
+
+
+
+
+
