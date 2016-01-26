@@ -17,7 +17,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
     <!-- 所以配置了<context:component-scan base-package="">之后,便无需再配置<context:annotation-config> -->  
     <context:annotation-config />
     <!-- 对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
-	<context:component-scan base-package="com.bavlo.counter.web,com.bavlo.gemtak.web"/>
+	<context:component-scan base-package="com.bavlo.gemtak,com.bavlo.gemtak.web"/>
     <!-- 静态资源访问 -->
     <mvc:resources location="/resources/" mapping="/resources/**"/> 
     <!-- 启用SpringMVC的注解功能,它会自动注册HandlerMapping、HandlerAdapter、ExceptionResolver的相关实例 --> 
