@@ -16,7 +16,7 @@
 	<context:property-placeholder location="classpath*:application.properties" ignore-resource-not-found="true" />
 	
 	<context:annotation-config />
-	<context:component-scan base-package="com.bavlo.counter,com.bavlo.gemtak" />
+	<context:component-scan base-package="com.bavlo.gemtak" />
 	<tx:annotation-driven proxy-target-class="true" />
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
@@ -25,7 +25,7 @@
 		</tx:attributes>
 	</tx:advice>
 	<aop:config proxy-target-class="true">
-		<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.bavlo.counter.dao.HibernateDAO.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.bavlo.gemtak.dao.HibernateDAO.*(..))"/>
 	</aop:config>
 	 
  	<!-- Shiro配置********************开始 -->
@@ -115,7 +115,7 @@
 		   <value>root</value>
 		  </property>
 		  <property name="password">
-		   <value>root</value>
+		   <value>123456</value>
 		  </property>
 		 </bean>
 	</beans>	
