@@ -18,7 +18,7 @@ public class SystemController extends BaseController {
 	public ModelAndView index(HttpServletRequest request,HttpSession session){
 		ModelAndView model = new ModelAndView("index");
 		Object loginInfo = session.getAttribute("loginInfo");
-		if(loginInfo != null){
+		/*if(loginInfo != null){
 			if(StringUtil.isEmpty(((LoginVO)loginInfo).getUserId())){
 				model.setViewName("redirect:/index.do");
 			}
@@ -26,7 +26,7 @@ public class SystemController extends BaseController {
 			model.addObject("uvo", loginVO);
 		}else{
 			model.setViewName("redirect:/index.do");
-		}
+		}*/
 		System.out.println("µÇÂ¼ÈËÐÅÏ¢:"+JsonUtils.getJsonString4JavaPOJO(loginInfo));
 		return model;
 	}

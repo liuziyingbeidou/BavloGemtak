@@ -39,7 +39,7 @@ public class FileController extends BaseController implements ServletContextAwar
             HttpServletResponse response) {
     	 //所要下载的文件路径，从数据库中查询得到，当然也可以直接写文件路径，如：C:\\Users\\Administrator\\Desktop\\csv\\号码_utf8_100.csv
     	String basePath = servletContext.getRealPath("/");  
-        String path = basePath +"/"+IConstant.FILE_DIR+"//"+filePath;
+        String path = basePath +"//"+filePath;
         filePath = path + File.separator + fileName;
          try {
              File file = new File(filePath);
@@ -123,7 +123,7 @@ public class FileController extends BaseController implements ServletContextAwar
         	*/
         	
         	String basePath = servletContext.getRealPath("/");  
-            String path = basePath +"/"+IConstant.FILE_DIR+"//"+filePath;//这个download目录为啥建立在classes下的
+            String path = basePath +"/"+filePath;//这个download目录为啥建立在classes下的
             InputStream inputStream = new FileInputStream(new File(path
                     + File.separator + fileName));
  
