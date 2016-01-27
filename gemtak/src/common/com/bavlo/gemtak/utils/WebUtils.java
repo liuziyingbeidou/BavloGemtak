@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,6 +21,7 @@ import org.apache.struts2.ServletActionContext;
 import com.bavlo.gemtak.commonbeans.BtcConstant;
 import com.bavlo.gemtak.commonbeans.Page;
 import com.bavlo.gemtak.config.Constant;
+import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.exception.JException;
 
 
@@ -302,5 +304,56 @@ public class WebUtils {
 		}
 		return paramValue;
 	}
+	
+	/**
+     * 根据名字获取cookie
+     * @param request
+     * @param name cookie名字
+     * @return
+     */
+    public static Cookie getCookieByName(HttpServletRequest request,String name){
+        Map<String,Cookie> cookieMap = ReadCookieMap(request);
+        if(cookieMap.containsKey(name)){
+            Cookie cookie = (Cookie)cookieMap.get(name);
+            return cookie;
+        }else{
+            return null;
+        }   
+    }
+      
+      
+      
+    /**
+     * 将cookie封装到Map里面
+     * @param request
+     * @return
+     */
+    private static Map<String,Cookie> ReadCookieMap(HttpServletRequest request){  
+        Map<String,Cookie> cookieMap = new HashMap<String,Cookie>();
+        Cookie[] cookies = request.getCookies();
+        if(null!=cookies){
+            for(Cookie cookie : cookies){
+                cookieMap.put(cookie.getName(), cookie);
+            }
+        }
+        return cookieMap;
+    }
+    
+    /**
+     * @Description: 获取本地语言
+     * @param @param request
+     * @param @return
+     * @return String
+     */
+    public static String getLang(HttpServletRequest request){
+    	String StrLang = IConstant.ZH_CN;
+    	Cookie  lcki = getCookieByName(request,IConstant.COOKIE_LANG);
+    	if(lcki != null){
+    		if(lcki.getValue() != null && !"".equals(lcki.getValue())){
+    			StrLang = lcki.getValue();
+    		}
+    	}
+    	return StrLang;
+    }
 
 }

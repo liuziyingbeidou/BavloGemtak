@@ -64,19 +64,7 @@ public class UploadHelper {
     public void setFileNames(String[] fileNames) {
         this.fileNames = fileNames;
     }
-    public String getModel() {
-		return StringUtil.isEmpty(model) ? IConstant.FILE_MODEL : model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	//上传文件目录
-	public String getStaticDir() {
-		return IConstant.FILE_DIR;
-	}
-
+    
     public String getfName() {
 		return fName;
 	}
@@ -142,9 +130,9 @@ public class UploadHelper {
                     throw new Exception("您上传的文件大小已经超出范围");
                 }
                 if(StringUtil.isEmpty(destDir)){
-                	destDir = getStaticDir() + getModel();
+                	destDir = "";
                 }else{
-                	destDir = getStaticDir() + destDir;
+                	destDir = destDir;
                 }
                 String realPath = request.getSession().getServletContext().getRealPath("/");
                 File destFile = new File(realPath+destDir);
@@ -184,9 +172,9 @@ public class UploadHelper {
                     throw new Exception("您上传的文件大小已经超出范围");
                 }
                 if(StringUtil.isEmpty(destDir)){
-                	destDir = getStaticDir() + getModel();
+                	//destDir = "";
                 }else{
-                	destDir = getStaticDir() + destDir;
+                	//destDir = getStaticDir() + destDir;
                 }
                 String realPath = request.getSession().getServletContext().getRealPath("/");
                 File destFile = new File(realPath+destDir);
@@ -199,10 +187,7 @@ public class UploadHelper {
                 f.createNewFile();
                 fileName = basePath+destDir+fileNameNew;
                 fName = fileNameNew;
-                if(IConstant.RES_TYPE_PIC.equals(fileType)){
-                	setMinFilePath(realPath+destDir+"min/");
-                	toZoom(f);
-                }
+                
         } catch (Exception e) {
             throw e;
     }

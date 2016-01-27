@@ -37,14 +37,6 @@ public class UploadController extends BaseController {
 
 	Logger log = Logger.getLogger(UploadController.class);
 	
-	@RequestMapping("/uppage")
-	public ModelAndView upPage(){
-		
-		ModelAndView model = new ModelAndView(IConstant.PATH_COMMON + IConstant.COMMON_UPLOAD);
-		
-		return model;
-	}
-	
 	/*@RequestMapping("/showpic")
 	public ModelAndView showPic(HttpServletRequest request){
 		String id = request.getParameter("id");
@@ -74,7 +66,7 @@ public class UploadController extends BaseController {
 		String fkey = request.getParameter("fkey");//外键
 		String ptype = request.getParameter("ptype");//类别字段
 		String vtype = request.getParameter("vtype");//类别字段值
-		ModelAndView model = new ModelAndView(IConstant.PATH_COMMON + IConstant.COMMON_SHOWPIC);
+		ModelAndView model = new ModelAndView("");
 		
 		String wh = null;
 		if(id != null){
@@ -104,7 +96,7 @@ public class UploadController extends BaseController {
 		String id = request.getParameter("id");//外键值
 		String table = request.getParameter("cpath");//表
 		String fkey = request.getParameter("fkey");//外键
-		ModelAndView model = new ModelAndView(IConstant.PATH_COMMON + IConstant.COMMON_SHOWPIC);
+		ModelAndView model = new ModelAndView("");
 		
 		try {
 			Class cls = Class.forName(table);
@@ -131,7 +123,7 @@ public class UploadController extends BaseController {
         	String type = request.getParameter("filetype");
             String picName = super.upload(file,type, "/"+model+"/",request);
             File originalImage = new File(getSrcFilePath());
-            if(IConstant.RES_TYPE_PIC.equals(type)){
+            if("".equals(type)){
             	File destFile = new File(getMinFilePath());
                 if(!destFile.exists()){
                     destFile.mkdirs();
