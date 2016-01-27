@@ -34,6 +34,7 @@ em, i{ font-style:normal; }
 .nav_home{display:none;}
 /*内容*/
 .conbg{background:url(../images/bj.jpg) repeat-x;}
+
 .tit{margin:0px auto;overflow:hidden;padding:0px 0px 10px;}
 .tit p a{display:inline-black;float:left;margin-right:25px;text-align:left;font-size:1.1em;padding-bottom:5px}
 .tit p a b{margin-left:5px;font-weight:normal;font-size:1em}
@@ -46,7 +47,7 @@ em, i{ font-style:normal; }
 /*线*/
 .line{margin:0px auto 5px;overflow:hidden;height:1px;border-top:1px solid #d1d1d1}
 /*产品说明*/
-.tit_all{margin:0px auto;overflow:hidden;padding:10px 3px;}
+.tit_all{margin:0px auto 0px;overflow:hidden;padding:10px 3px;}
 .tit_all_left{margin:10px auto 0px;overflow:hidden;}
 .tit_img{width:100%;position:relative;}
 .tit_img span{position:absolute;top:5%;right:5%}
@@ -349,6 +350,12 @@ background-size: 25px 15px;text-align:right;height: 25px;margin-right: 10px;curs
   /*订单*/
 .wrap_br_d{border:1px solid #bbb}
 .gw_nav{margin:10px auto;overflow:hidden;}
+.gw_nav ul{background:#bbb;height:40px;line-height:40px;margin:0px auto;overflow:hidden;border-right:1px solid #bbb;}
+.gw_nav ul li{color:#333;text-align:center;border-right:1px solid #fff;font-size:16px}
+.gw_nav ul li:last-child{border-right:none}
+.gw_nav ul li span{background:#fff;color:#8c0000;border-radius:55%;padding:2px 8px;margin-right:10px}
+.gw_nav ul .gw_nav_sel{background:#8c0000;color:#fff;}
+
 .srxx{border-bottom:1px solid #bbb;padding:15px;overflow:hidden;margin:0px auto;}
 .srxx li{line-height:35px;font-size:16px;margin:0px auto 0px;overflow:hidden;}
 .srxx li span{margin:0px 5px}
@@ -401,8 +408,10 @@ background-size: 25px 15px;text-align:right;height: 25px;margin-right: 10px;curs
  .scdd1 p{padding:0px;text-align:center} 
 .scdd1 p span{margin:0px 5px 0px 5px}
 .fc_0{color:#8c0000}
+
+.m_bottom_80{margin-bottom:80px}
 /*尾部*/
-.footer{margin:0px auto;overflow:hidden;}
+.footer{position: fixed;left:0px;bottom:0px;width:100%;margin:0px auto 0px;overflow:hidden;}
 .foot{background:#8c0000;margin:0px auto;overflow:hidden;line-height:30px;padding:5px 0px}
 .foot p{width:100%;line-height:30px;color:#bbbbbb;text-align:center}
 .foot p a{color:#bbbbbb;margin:0px 5px;}
@@ -431,6 +440,7 @@ background-size: 25px 15px;text-align:right;height: 25px;margin-right: 10px;curs
 
 .spqd dd{margin-top:0px;}
 .spqd dd p{line-height:28px;}
+.m_bottom_80{margin-bottom:0px}
 }
 @media (max-width:768px){
 .jcarousel-clip-horizontal{width:592px;margin-left:30px}
