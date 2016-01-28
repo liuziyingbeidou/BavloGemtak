@@ -49,7 +49,7 @@ public class CookieController extends BaseController {
     @RequestMapping("/addCookie")
     public void addCookie(HttpServletResponse response,String name,String value){
         Cookie cookie = new Cookie(name.trim(), value.trim());
-        cookie.setMaxAge(30 * 60);// 设置为30min
+        cookie.setMaxAge(-1);// 设置为30min
         cookie.setPath("/");
         System.out.println(name+"Cookie已添加===============");
         response.addCookie(cookie);
