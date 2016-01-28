@@ -14,12 +14,46 @@ import com.bavlo.gemtak.model.page.AGemCardVO;
 public class PageLangUtil {
 
 	/**
+	 * @Description: 管理宝石表头界面
+	 * @param @param lang
+	 * @param @return
+	 * @return AGemCardVO
+	 */
+	public static AGemCardVO getAGemCardHeadPageVO(String lang){
+		AGemCardVO aGemCardVO = new AGemCardVO();
+		//英文
+		if(IConstant.EN_UK.equals(lang)){
+			
+		}else{//中文
+			
+		}
+		return aGemCardVO;
+	}
+	
+	/**
+	 * @Description: 管理宝石表尾界面
+	 * @param @param lang
+	 * @param @return
+	 * @return AGemCardVO
+	 */
+	public static AGemCardVO getAGemCardFootPageVO(String lang){
+		AGemCardVO aGemCardVO = new AGemCardVO();
+		//英文
+		if(IConstant.EN_UK.equals(lang)){
+			
+		}else{//中文
+			
+		}
+		return aGemCardVO;
+	}
+	
+	/**
 	 * @Description: 管理宝石信息录入界面
 	 * @param @param lang
 	 * @param @return
 	 * @return AGemCardVO
 	 */
-	public static AGemCardVO getAGemCardPageVO(String lang){
+	public static AGemCardVO getAGemCardBodyPageVO(String lang){
 		AGemCardVO aGemCardVO = new AGemCardVO();
 		//英文
 		if(IConstant.EN_UK.equals(lang)){

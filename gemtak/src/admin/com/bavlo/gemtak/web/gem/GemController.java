@@ -55,8 +55,12 @@ public class GemController extends BaseController {
 	 * @return Model
 	 */
 	public void getPageModel(Model model,String lang){
-		//页面VO
-		model.addAttribute("pagevo", PageLangUtil.getAGemCardPageVO(lang));
+		//页面BodyVO
+		model.addAttribute("pagevo", PageLangUtil.getAGemCardBodyPageVO(lang));
+		//页面HeadVO
+		model.addAttribute("pagehvo", PageLangUtil.getAGemCardHeadPageVO(lang));
+		//页面FootVO
+		model.addAttribute("pagefvo", PageLangUtil.getAGemCardFootPageVO(lang));
 		//宝石类型
 		String rmGemTypeJson = HttpTools.getDataByURL(IConstant.URL_GEMTYPE);
 		List<KeyValueVO> listGemType = SelectUtil.getGemType(lang,rmGemTypeJson);
