@@ -3,7 +3,7 @@ package com.bavlo.gemtak.model.page;
 /**
  * @Title: 宝珑Gemtak
  * @ClassName: AGemCardVO 
- * @Description: 页面VO
+ * @Description: 页面VO  A- 后台
  * @author liuzy
  * @date 2016-1-27 下午02:19:07
  */
