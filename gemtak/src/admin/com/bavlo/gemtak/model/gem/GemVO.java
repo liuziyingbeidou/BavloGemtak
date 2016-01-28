@@ -33,6 +33,8 @@ public class GemVO extends IdEntity implements Serializable {
 	private String color_id;
 	private String color_cn;
 	private String color_en;
+	//是否标准形状 非规格
+	private String isstand;
 	//		宝石形状			接口
 	private String shape_id;
 	private String shape_cn;
@@ -42,7 +44,9 @@ public class GemVO extends IdEntity implements Serializable {
 	//		规格			接口(上行参数：形状ID)
 	private String calibrated_id;
 	//		自定义规格			输入
-	private String size;
+	private String size_l;
+	private String size_w;
+	private String size_h;
 	//		宝石切工			接口
 	private String cut_id;
 	private String cut_cn;
@@ -185,11 +189,24 @@ public class GemVO extends IdEntity implements Serializable {
 	public void setCalibrated_id(String calibrated_id) {
 		this.calibrated_id = calibrated_id;
 	}
-	public String getSize() {
-		return size;
+	
+	public String getSize_l() {
+		return size_l;
 	}
-	public void setSize(String size) {
-		this.size = size;
+	public void setSize_l(String size_l) {
+		this.size_l = size_l;
+	}
+	public String getSize_w() {
+		return size_w;
+	}
+	public void setSize_w(String size_w) {
+		this.size_w = size_w;
+	}
+	public String getSize_h() {
+		return size_h;
+	}
+	public void setSize_h(String size_h) {
+		this.size_h = size_h;
 	}
 	public String getCut_id() {
 		return cut_id;
@@ -412,6 +429,12 @@ public class GemVO extends IdEntity implements Serializable {
 	}
 	public void setCreatedate(Timestamp createdate) {
 		this.createdate = createdate;
+	}
+	public String getIsstand() {
+		return isstand;
+	}
+	public void setIsstand(String isstand) {
+		this.isstand = isstand;
 	}
 
 }
