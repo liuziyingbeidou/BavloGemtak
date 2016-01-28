@@ -30,7 +30,7 @@
 		   <div class="tit_game">
 		      <h2 class="col-sm-12 col-md-5 "><span>${pagevo['titleEdit'] }</span>GID 2281559</h2>
 			  <div class="line col-sm-12 hidden-md hidden-lg"></div>
-			  <p class="col-sm-12 col-md-5 "><span>更新:2016-02-09-23 20:11</span><span>已浏览:287次</span></p>
+			  <p class="col-sm-12 col-md-5 "><span>${pagevo['tableModify'] }: 2016-02-09-23 20:11</span><span>${pagevo['tablePageviews'] }: 287 ${pagevo['tablePageviewsTime'] }</span></p>
 			  <div class="line col-sm-12 hidden-xs hidden-sm"></div>
 		   </div>
 		   <div class="game_ul">
@@ -42,24 +42,59 @@
 					  <option value="${bean.pKey}">${bean.pValue}</option>
 					 </c:forEach>
 			       	 </select>
-			       	 </li>  
-					 <li><select class="form-control input-lg"><option>标准形状 非标规格</option><option></option><option></option><option></option></select></li> 
-					 <li><select class="form-control input-lg"><option>圆形</option><option></option><option></option><option></option></select></li> 
+			       	 </li>
+					 <li>
+					 <select class="form-control input-lg">
+					 <option value="sst">${pagevo['tableSTSPNCB'] }</option>
+					 <option value="cst">${pagevo['tableNSPNCB'] }</option>
+					 </select>
+					 </li> 
+					 <li>
+					 <select class="form-control input-lg">
+					 <c:forEach var="bean" items="${listGemShape}">
+					  <option value="${bean.pKey}">${bean.pValue}</option>
+					 </c:forEach>
+					 </select>
+					 </li> 
 				     <li>
-						  <div class="li_inp_p0 col-xs-4"><input type="text" class="form-control" placeholder="长"></div>
-						  <div class="col-xs-4"><input type="text" class="form-control" placeholder="宽"></div>
-						  <div class="li_inp_p0 col-xs-4"><input type="text" class="form-control" placeholder="高"></div>
+						  <div class="li_inp_p0 col-xs-4"><input type="text" class="form-control" placeholder="${pagevo['tableGemCalibratedL'] }"></div>
+						  <div class="col-xs-4"><input type="text" class="form-control" placeholder="${pagevo['tableGemCalibratedW'] }"></div>
+						  <div class="li_inp_p0 col-xs-4"><input type="text" class="form-control" placeholder="${pagevo['tableGemCalibratedH'] }"></div>
 					</li>
 					<li>
-					     <div class="li_inp_pl col-xs-6"><select class="form-control input-lg fc_a1"><option>切工  很好</option><option></option><option></option><option></option></select></div>
-					     <div class="li_inp_pr col-xs-6"><select class="form-control input-lg fc_a1"><option>净度  VS</option><option></option><option></option><option></option></select></div>
+					     <div class="li_inp_pl col-xs-6">
+					     <select class="form-control input-lg fc_a1">
+					     <c:forEach var="bean" items="${listGemCut}">
+						  <option value="${bean.pKey}">${pagevo['tableGemCut'] } ${bean.pValue}</option>
+						 </c:forEach>
+					     </select>
+					     </div>
+					     <div class="li_inp_pr col-xs-6">
+					     <select class="form-control input-lg fc_a1">
+					      <c:forEach var="bean" items="${listGemClarity}">
+						  <option value="${bean.pKey}">${pagevo['tableGemClarity'] } ${bean.pValue}</option>
+						  </c:forEach>
+					     </select>
+					     </div>
 					</li> 
-                    <li><div class="li_inp_pl col-xs-6"><input type="text" class="form-control  fc_a2" placeholder="视角"></div>
-					     <div class="li_inp_pr col-xs-6"><input type="text" class="form-control  fc_a3" placeholder="平均值"></div>
+                    <li><div class="li_inp_pl col-xs-6"><input type="text" class="form-control  fc_a2" placeholder="${pagevo['tableViewpoint'] }"></div>
+					     <div class="li_inp_pr col-xs-6"><input type="text" class="form-control  fc_a3" placeholder="${pagevo['tableAverageColor'] }"></div>
 					</li> 						
 					 <li>
-					     <div class="li_inp_pl col-xs-6"><select class="form-control input-lg"><option>产地  巴西</option><option></option><option></option><option></option></select></div>
-					     <div class="li_inp_pr col-xs-6"><select class="form-control input-lg"><option>处理  heated</option><option></option><option></option><option></option></select></div>
+					     <div class="li_inp_pl col-xs-6">
+					     <select class="form-control input-lg">
+					      <c:forEach var="bean" items="${listGemOrigin}">
+						  <option value="${bean.pKey}">${pagevo['tableOrigin'] } ${bean.pValue}</option>
+						  </c:forEach>
+					     </select>
+					     </div>
+					     <div class="li_inp_pr col-xs-6">
+					     <select class="form-control input-lg">
+					      <c:forEach var="bean" items="${listGemTreatment}">
+						  <option value="${bean.pKey}">${pagevo['tableTreatment'] } ${bean.pValue}</option>
+						  </c:forEach>
+					     </select>
+					     </div>
 					 </li>
 					 <li><textarea class="form-control" rows="5"></textarea><li>					
 			   </ul>
@@ -67,41 +102,53 @@
 		       <ul class="mt_0 col-sm-6 col-md-5">
 				     <li>
 						  <div class="li_inp_p0 col-xs-4"><input type="text" class="form-control fc_a2" placeholder="6.65ct"></div>
-						  <div class="col-xs-4"><input type="text" class="form-control" placeholder="库存数 1"></div>
-						  <div class="li_inp_p0 col-xs-4"><select class="form-control input-lg"><option>单位</option><option></option><option></option><option></option></select></div>
+						  <div class="col-xs-4"><input type="text" class="form-control" placeholder="${pagevo['tableStockQty'] }"></div>
+						  <div class="li_inp_p0 col-xs-4">
+						  <select class="form-control input-lg">
+						  <option value="sl">${pagevo['tablePairsSL'] }</option>
+						  <option value="ml">${pagevo['tablePairsML'] }</option>
+						  <option value="pl">${pagevo['tablePairsPL'] }</option>
+						  </select>
+						  </div>
 					</li>
 					<li>
-					     <div class="li_inp_pl col-xs-6"><input type="text" class="form-control" placeholder="进价 13500"></div>
+					     <div class="li_inp_pl col-xs-6"><input type="text" class="form-control" placeholder="${pagevo['tablePurchasePrice'] }"></div>
 					     <div class="li_inp_pr col-xs-6"><select class="form-control input-lg"><option>元/ct</option><option></option><option></option><option></option></select></div>
 					</li> 
-                    <li><div class="li_inp_pl col-xs-6"><input type="text" class="form-control" placeholder="批发价 155000"></div>
+                    <li><div class="li_inp_pl col-xs-6"><input type="text" class="form-control" placeholder="${pagevo['tableTradePrice'] }"></div>
 					     <div class="li_inp_pr col-xs-6"><select class="form-control input-lg"><option>元/ct</option><option></option><option></option><option></option></select></div>
 					</li> 	
-                    <li><div class="li_inp_pl col-xs-6"><input type="text" class="form-control" placeholder="零售价 188000"></div>
+                    <li><div class="li_inp_pl col-xs-6"><input type="text" class="form-control" placeholder="${pagevo['tableRetailPrice'] }"></div>
 					     <div class="li_inp_pr col-xs-6"><select class="form-control input-lg"><option>元/ct</option><option></option><option></option><option></option></select></div>
-					</li>					
+					</li>
 					 <li>
-					     <div class="li_inp_pl col-xs-6"><select class="form-control input-lg"><option>证书 GIT</option><option></option><option></option><option></option></select></div>
-					     <div class="li_inp_pr col-xs-6"><input type="text" class="form-control" placeholder="编码"></div>
+					     <div class="li_inp_pl col-xs-6">
+					     <select class="form-control input-lg">
+					      <c:forEach var="bean" items="${listGemLab}">
+						  <option value="${bean.pKey}">${pagevo['tableLabType'] } ${bean.pValue}</option>
+						  </c:forEach>
+					     </select>
+					     </div>
+					     <div class="li_inp_pr col-xs-6"><input type="text" class="form-control" placeholder="${pagevo['tableLabNo'] }"></div>
 					 </li>
 					 <li>
-					     <div class="li_inp_pl col-xs-6"><input type="text" class="form-control" placeholder="卖家"></div>
-					     <div class="li_inp_pr col-xs-6"><input type="text" class="form-control" placeholder="自编码"></div>
+					     <div class="li_inp_pl col-xs-6"><input type="text" class="form-control" placeholder="${pagevo['tableSupplier'] }"></div>
+					     <div class="li_inp_pr col-xs-6"><input type="text" class="form-control" placeholder="${pagevo['tableSupplierCode'] }"></div>
 					</li>
-					<li><select class="form-control input-lg"><option>货址  惠兴宝石有限公司</option><option></option><option></option><option></option></select></li>  
+					<li><input type="text" class="form-control" placeholder="${pagevo['tableLocation'] }"></li>  
 			         <li>
 					     <div class="li_inp_pl col-xs-5">
 						   <div class="radio">
-								 <label class="li_inp_pl col-xs-12"><input type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">所有人可见 </label>
-								 <label class="li_inp_pl col-xs-12"><input type="radio" name="blankRadio" id="blankRadio2" value="option2" aria-label="...">商家可见 </label>
-								 <label class="li_inp_pl col-xs-12"><input type="radio" name="blankRadio" id="blankRadio3" value="option3" aria-label="...">只自己可见 </label>
+								 <label class="li_inp_pl col-xs-12"><input type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">${pagevo['tableAllPower'] } </label>
+								 <label class="li_inp_pl col-xs-12"><input type="radio" name="blankRadio" id="blankRadio2" value="option2" aria-label="...">${pagevo['tableSupplierPower'] } </label>
+								 <label class="li_inp_pl col-xs-12"><input type="radio" name="blankRadio" id="blankRadio3" value="option3" aria-label="...">${pagevo['tableSelfPower'] }</label>
 							</div>
 						 </div>
 						 <div class=" col-xs-2"><p class="s_xian"></p></div>
 					     <div class="li_inp_pr col-xs-5">
 						    <p>
-							  <button type="button" class="btn btn-col btn-lg btn-block" style="margin-bottom:15px">查看详细页面</button>
-							  <button type="button" class="btn btn-col btn-lg btn-block">查看我的宝石</button>
+							  <button type="button" class="btn btn-col btn-lg btn-block" style="margin-bottom:15px">${pagevo['buttonInfo'] }</button>
+							  <button type="button" class="btn btn-col btn-lg btn-block">${pagevo['buttonViewGem'] }</button>
 							</p>
 						 </div>
 					</li>
@@ -112,19 +159,17 @@
 	  <div class="line col-sm-12 col-md-12 "></div>
 	  <div class="tit tit_bnt col-sm-12 col-md-12">
 	     <div class="col-xs-6 col-md-5">
-		    <p class=" sc_file col-xs-6 col-md-4"><input type="file" name="file"><button type="button" class="btn btn-col btn-lg btn-block">上传证书</button></p>
+		    <p class=" sc_file col-xs-6 col-md-4"><input type="file" name="file"><button type="button" class="btn btn-col btn-lg btn-block">${pagevo['buttonCert'] }</button></p>
 			<p class="zhizhao col-xs-2 col-md-4"><img src="${ctx }/resources/admin/images/zhizhao.jpg"  /></p>
-			<p class="col-xs-4 col-md-4"><a href="#" class="btn btn-col btn-lg btn-block" role="button">删除</a></p>
+			<p class="col-xs-4 col-md-4"><a href="#" class="btn btn-col btn-lg btn-block" role="button">${pagevo['buttonDelete'] }</a></p>
 		 </div>
 		 <div class="col-xs-1 col-md-2"></div>
 		 <div class="col-xs-5 col-md-5">
-			 <p class="col-xs-6 col-md-5" ><button type="button" class="btn btn-col btn-lg btn-block">退出编辑</button></p>
+			 <p class="col-xs-6 col-md-5" ><button type="button" class="btn btn-col btn-lg btn-block">${pagevo['buttonClose'] }</button></p>
 			 <p class="col-xs-1 col-md-2" ></p>
-			 <p class="col-xs-5 col-md-5"><button type="button" class="btn btn-col btn-lg btn-block">保存</button></p>
+			 <p class="col-xs-5 col-md-5"><button type="button" class="btn btn-col btn-lg btn-block">${pagevo['buttonSave'] }</button></p>
 		 </div>
-		 
 	  </div>
-	  
 	
   </div>
 </div>
