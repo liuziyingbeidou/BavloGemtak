@@ -20,13 +20,11 @@
 <body>
 
 <div class="nav col-xs-12">
-     <div class="container">
-		 <div class="nav_logo"><a href="./.html">Gemtak后台管理 </a></div>
-	 </div>
+	<jsp:include page="../head.jsp"></jsp:include>
 </div>  
 <div class="tit_all">
 	<div class="container">
-	    <div class="tit col-sm-12">		    
+	    <div class="tit col-sm-12">
 		   <div class="tit_game">
 		      <h2 class="col-sm-12 col-md-5 "><span>${pagevo['titleEdit'] }</span>GID 2281559</h2>
 			  <div class="line col-sm-12 hidden-md hidden-lg"></div>
@@ -174,10 +172,7 @@
   </div>
 </div>
 <div class="footer hidden-xs hidden-sm">
-    <div class="foot"> 
-	   <p><a href="">关于Gemtak</a><font>|</font><a href="">隐私条款</a><font>|</font><a href="">版权声明</a><font>|</font><a href="">质量承诺</a><font>|</font><a href="">加入我们</a><font>|</font><a href="">京ICP备11048465号</a><font>|</font> 恭候致电 010-82830789</p>
-	   <p>Copyright © 2016 Gemtak.com All Right Reserved。</p>
-	</div>
+    <jsp:include page="../foot.jsp"></jsp:include>
 </div>	
 	  
  <script language="Javascript">
