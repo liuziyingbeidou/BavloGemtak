@@ -9,9 +9,6 @@ package com.bavlo.gemtak.constant.page;
  */
 public interface AGemCardLang {
 
-	public static final String MANAGE_CN = "Gemtak后台管理";
-	public static final String MANAGE_EN = "Gemtak Management";
-	
 	//标题
 	public static final String TITLE_EDIT_CN = "编辑宝石数据";
 	public static final String TITLE_EDIT_EN = "EDIT GEM";
@@ -99,6 +96,13 @@ public interface AGemCardLang {
 	//零售价单位	
 	public static final String table_RetailUnit_CN = "";
 	public static final String table_RetailUnit_EN = "";
+	
+	//价格单位
+	public static final String table_PriceUnitGL_CN = "元/粒";
+	public static final String table_PriceUnitGL_EN = "CNY YUAN/GRANULE";
+	public static final String table_PriceUnitCT_CN = "元/克拉";
+	public static final String table_PriceUnitCT_EN = "CNY YUAN/CT";
+	
 	//宝石证书类型	
 	public static final String table_LabType_CN = "证书";
 	public static final String table_LabType_EN = "LAB";
@@ -137,7 +141,7 @@ public interface AGemCardLang {
 	public static final String BUTTON_DELETE_EN = "DELETE";
 	
 	public static final String BUTTON_CLOSE_CN = "退出编辑";
-	public static final String BUTTON_CLOSE_EN = "CLOSE";
+	public static final String BUTTON_CLOSE_EN = "EXIT EDIT";
 	
 	public static final String BUTTON_SAVE_CN = "保存";
 	public static final String BUTTON_SAVE_EN = "SAVE";
