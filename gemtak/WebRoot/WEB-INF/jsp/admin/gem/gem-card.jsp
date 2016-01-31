@@ -12,7 +12,7 @@
 <meta name="description" content="bavlo">
 <meta name="keywords" content="bavlo">
 <meta name="author" content="bavlo">
-<title>bavlo</title>
+<title>Gemtak</title>
 <link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
 <link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
 <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script>
@@ -20,17 +20,20 @@
 <body>
 
 <div class="nav col-xs-12">
+	<!-- 头部 -->
 	<jsp:include page="../head.jsp"></jsp:include>
 </div>  
 <div class="tit_all">
 	<div class="container">
 	    <div class="tit col-sm-12">
+	       <!-- 表头 -->
 		   <div class="tit_game">
 		      <h2 class="col-sm-12 col-md-5 "><span>${pagevo['titleEdit'] }</span>GID 2281559</h2>
 			  <div class="line col-sm-12 hidden-md hidden-lg"></div>
 			  <p class="col-sm-12 col-md-5 "><span>${pagevo['tableModify'] }: 2016-02-09-23 20:11</span><span>${pagevo['tablePageviews'] }: 287 ${pagevo['tablePageviewsTime'] }</span></p>
 			  <div class="line col-sm-12 hidden-xs hidden-sm"></div>
 		   </div>
+		   <!-- Body域 -->
 		   <div class="game_ul">
 		       <ul class="col-sm-5">
 
@@ -111,13 +114,28 @@
 					</li>
 					<li>
 					     <div class="li_inp_pl col-xs-6"><input type="text" class="form-control" placeholder="${pagevo['tablePurchasePrice'] }"></div>
-					     <div class="li_inp_pr col-xs-6"><select class="form-control input-lg"><option>元/ct</option><option></option><option></option><option></option></select></div>
+					     <div class="li_inp_pr col-xs-6">
+					     <select class="form-control input-lg">
+					      <option value="gl">${pagevo['tablePriceUnitGL'] }</option>
+						  <option value="ct">${pagevo['tablePriceUnitCT'] }</option>
+					     </select>
+					     </div>
 					</li> 
                     <li><div class="li_inp_pl col-xs-6"><input type="text" class="form-control" placeholder="${pagevo['tableTradePrice'] }"></div>
-					     <div class="li_inp_pr col-xs-6"><select class="form-control input-lg"><option>元/ct</option><option></option><option></option><option></option></select></div>
+					     <div class="li_inp_pr col-xs-6">
+					     <select class="form-control input-lg">
+					      <option value="gl">${pagevo['tablePriceUnitGL'] }</option>
+						  <option value="ct">${pagevo['tablePriceUnitCT'] }</option>
+					     </select>
+					     </div>
 					</li> 	
                     <li><div class="li_inp_pl col-xs-6"><input type="text" class="form-control" placeholder="${pagevo['tableRetailPrice'] }"></div>
-					     <div class="li_inp_pr col-xs-6"><select class="form-control input-lg"><option>元/ct</option><option></option><option></option><option></option></select></div>
+					     <div class="li_inp_pr col-xs-6">
+					     <select class="form-control input-lg">
+					      <option value="gl">${pagevo['tablePriceUnitGL'] }</option>
+						  <option value="ct">${pagevo['tablePriceUnitCT'] }</option>
+					     </select>
+					     </div>
 					</li>
 					 <li>
 					     <div class="li_inp_pl col-xs-6">
@@ -155,6 +173,7 @@
 		   </div>
 	  </div>
 	  <div class="line col-sm-12 col-md-12 "></div>
+	  <!-- 按钮域 -->
 	  <div class="tit tit_bnt col-sm-12 col-md-12">
 	     <div class="col-xs-6 col-md-5">
 		    <p class=" sc_file col-xs-6 col-md-4"><input type="file" name="file"><button type="button" class="btn btn-col btn-lg btn-block">${pagevo['buttonCert'] }</button></p>

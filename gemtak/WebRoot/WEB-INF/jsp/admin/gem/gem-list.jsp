@@ -12,7 +12,7 @@
 <meta name="description" content="bavlo">
 <meta name="keywords" content="bavlo">
 <meta name="author" content="bavlo">
-<title>bavlo</title>
+<title>Gemtak</title>
 <link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
 <link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
 <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script>
@@ -20,124 +20,91 @@
 <body>
 
 <div class="nav col-xs-12">
-     <div class="container">
-		 <div class="nav_logo"><a href="./.html">Gemtak后台管理 </a></div>
-	 </div>
+	 <!-- 头部 -->
+     <jsp:include page="../head.jsp"></jsp:include>
 </div>  
 <div class="tit_all">
 	<div class="container">
-	  <div class="tit tit_p">	  
-			<a href="javascript:void(0);" id="typeid1"  onmouseover="javascript:show_menuone(1);">全部产品 </a>
-			<a href="javascript:void(0);" id="typeid2"  onmouseover="javascript:show_menuone(2);">入库宝石</a>
-			<a href="javascript:void(0);" id="typeid3"  onmouseover="javascript:show_menuone(3);">签收宝石</a>
-			<a href="javascript:void(0);" id="typeid4"  onmouseover="javascript:show_menuone(4);">新上传</a>
+	  <!-- 条件 -->
+	  <!--<div class="tit tit_p">	  
+			<a href="javascript:void(0);" id="typeid1"  onmouseover="javascript:show_menuone(1);">${pagevo['fltAllGem'] } </a>
+			<a href="javascript:void(0);" id="typeid2"  onmouseover="javascript:show_menuone(2);">${pagevo['fltStorageGem'] }</a>
+			<a href="javascript:void(0);" id="typeid3"  onmouseover="javascript:show_menuone(3);">${pagevo['fltSignGem'] }</a>
+			<a href="javascript:void(0);" id="typeid4"  onmouseover="javascript:show_menuone(4);">${pagevo['fltNewGem'] }</a>
 		  <span class="fbgb">
-			<a href="javascript:void(0);" id="typeid5"  onmouseover="javascript:show_menuone(5);">已发布 </a>
-			<a href="javascript:void(0);" id="typeid6"  onmouseover="javascript:show_menuone(6);">已关闭</a>
+			<a href="javascript:void(0);" id="typeid5"  onmouseover="javascript:show_menuone(5);">${pagevo['fltReleaseGem'] }</a>
+			<a href="javascript:void(0);" id="typeid6"  onmouseover="javascript:show_menuone(6);">${pagevo['fltCloseGem'] }</a>
 		  </span>
-	  </div>
+	  </div>-->
 	  <div class="tit ">
+	  <!-- 筛选条件 -->
 	    <ul class="tit_ul">
-			<li class="col-sm-3 col-xs-6"><select class="form-control input-lg"><option>宝石类型</option><option></option><option></option><option></option></select></li>
-			<li class="col-sm-3 col-xs-6"><select class="form-control input-lg"><option>宝石形状</option><option></option><option></option><option></option></select></li>
-			<li class="col-sm-3 col-xs-6"><select class="form-control input-lg"><option>宝石形状</option><option></option><option></option><option></option></select></li>
-			<li class="col-sm-3 col-xs-6"><p><input class="sear_ch_input" type="text" value="巴黎之吻"><input class="sear_ch_sub" type="submit" value=""></p></li>
+	    	<li class="col-sm-3 col-xs-6">
+			<select class="form-control input-lg">
+			 <option value="A">${pagevo['fltAllGem'] }</option>
+			 <option value="S">${pagevo['fltStorageGem'] }</option>
+			 <option value="E">${pagevo['fltNewGem'] }</option>
+			 <option value="Y">${pagevo['fltReleaseGem'] }</option>
+			 <option value="C">${pagevo['fltCloseGem'] }</option>
+			</select>
+			</li>
+			<li class="col-sm-3 col-xs-6">
+			<!-- 宝石类型 -->
+			<select class="form-control input-lg">
+			<option value="-1">${pagevo['fltGemType'] }</option>
+			 <c:forEach var="bean" items="${listGemType}">
+			  <option value="${bean.pKey}">${bean.pValue}</option>
+			 </c:forEach>
+			</select>
+			</li>
+			<li class="col-sm-3 col-xs-6">
+			<!-- 宝石形状 -->
+			<select class="form-control input-lg">
+			<option value="-1">${pagevo['fltGemShape'] }</option>
+			 <c:forEach var="bean" items="${listGemShape}">
+			  <option value="${bean.pKey}">${bean.pValue}</option>
+			 </c:forEach>
+			</select>
+			</li>
+			<!-- 搜索 -->
+			<li class="col-sm-3 col-xs-6"><p><input class="sear_ch_input" type="text" placeholder="${pagevo['fltGemSearch'] }" value=""><input class="sear_ch_sub" type="submit" value=""></p></li>
 		</ul>
 	  
 	  </div>
 	  <div class="tit_table col-md-12 ">
+	  	 <!-- 菜单标题 -->
 		 <div class="nr_tit">
-			 <p class="col-md-1 col-xs-3" style="text-align:center">图片</p>
+			 <p class="col-md-1 col-xs-3" style="text-align:center">${pagevo['tlGemPic'] }</p>
 			 <p class="col-md-11 col-xs-9">
-				 <span class="col-md-5 hidden-xs hidden-sm" style="text-align:center">概览</span>
-				 <span class="col-md-5 hidden-xs hidden-sm">编辑选项</span>
-				 <span class="col-md-2 hidden-xs hidden-sm">操作</span>
-				 <span class="col-xs-12 hidden-md hidden-lg" style="text-align:center">信息与操作</span>
+				 <span class="col-md-5 hidden-xs hidden-sm" style="text-align:center">${pagevo['tlGemInfo'] }</span>
+				 <span class="col-md-5 hidden-xs hidden-sm">${pagevo['tlGemEditOption'] }</span>
+				 <span class="col-md-2 hidden-xs hidden-sm">${pagevo['tlGemOperation'] }</span>
+				 <span class="col-xs-12 hidden-md hidden-lg" style="text-align:center">${pagevo['tlGemInfoAndOpr'] }</span>
 			</p>
 		 </div>  
+		 <!-- 宝石列表 -->
 		 <dl class="nr_con col-md-12">
 		     <dt class="col-md-1 col-xs-3">
 				 <img src="${ctx }/resources/admin/images/cp8.jpg" style="width:100%"/>
-				 <p class=" hidden-md hidden-lg"><a href="" class="col-md-6 col-xs-6">删除</a><a href="" class="col-md-6 col-xs-6">发布</a></p>
+				 <p class=" hidden-md hidden-lg"><a href="" class="col-md-6 col-xs-6">${pagevo['ltGemDel'] }</a><a href="" class="col-md-6 col-xs-6">${pagevo['ltGemRelease'] }</a></p>
 			 </dt>
 			 <dd class="col-md-11 col-xs-9">
 				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>碧玺</font><font>心形</font><font>NGTC</font></span><span  class="col-md-6 col-xs-12"><font>8.50ct</font><font>1颗</font><font class="fc_001">¥168000</font></span></p>
-				 <p class="col-md-5 col-xs-12"><span class="col-xs-12 col-md-6" >宝石：<a href="./game.html">入库</a><a href="">签收</a></span><span  class="col-xs-12 col-md-6 pad_0">成品：<a href="">入库</a><a href="">签收</a></span></p>
-				 <p class="col-md-2 hidden-xs hidden-sm"><a href="">删除</a><a href="">发布</a></p>
+				 <p class="col-md-5 col-xs-12"><span class="col-xs-12 col-md-6" >${pagevo['ltTypeGem'] }：<a href="./game.html">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a></span><span  class="col-xs-12 col-md-6 pad_0">${pagevo['ltTypeProduct'] }：<a href="">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a></span></p>
+				 <p class="col-md-2 hidden-xs hidden-sm"><a href="">${pagevo['ltGemDel'] }</a><a href="">${pagevo['ltGemRelease'] }</a></p>
 			 </dd>
 		  
 		  </dl>
-		  <dl class="nr_con col-md-12">
-		     <dt class="col-md-1 col-xs-3">
-				 <img src="${ctx }/resources/admin/images/cp8.jpg" style="width:100%"/>
-				 <p class=" hidden-md hidden-lg"><a href="" class="col-md-6 col-xs-6">删除</a><a href="" class="col-md-6 col-xs-6">发布</a></p>
-			 </dt>
-			 <dd class="col-md-11 col-xs-9">
-				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>碧玺</font><font>心形</font><font>NGTC</font></span><span  class="col-md-6 col-xs-12"><font>8.50ct</font><font>1颗</font><font class="fc_001">¥168000</font></span></p>
-				 <p class="col-md-5 col-xs-12"><span class="col-xs-12 col-md-6" >宝石：<a href="./game.html">入库</a><a href="">签收</a></span><span  class="col-xs-12 col-md-6 pad_0">成品：<a href="">入库</a><a href="">签收</a></span></p>
-				 <p class="col-md-2 hidden-xs hidden-sm"><a href="">删除</a><a href="">发布</a></p>
-			 </dd>
-		  
-		  </dl>
-		  <dl class="nr_con col-md-12">
-		     <dt class="col-md-1 col-xs-3">
-				 <img src="${ctx }/resources/admin/images/cp8.jpg" style="width:100%"/>
-				 <p class=" hidden-md hidden-lg"><a href="" class="col-md-6 col-xs-6">删除</a><a href="" class="col-md-6 col-xs-6">发布</a></p>
-			 </dt>
-			 <dd class="col-md-11 col-xs-9">
-				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>碧玺</font><font>心形</font><font>NGTC</font></span><span  class="col-md-6 col-xs-12"><font>8.50ct</font><font>1颗</font><font class="fc_001">¥168000</font></span></p>
-				 <p class="col-md-5 col-xs-12"><span class="col-xs-12 col-md-6" >宝石：<a href="./game.html">入库</a><a href="">签收</a></span><span  class="col-xs-12 col-md-6 pad_0">成品：<a href="">入库</a><a href="">签收</a></span></p>
-				 <p class="col-md-2 hidden-xs hidden-sm"><a href="">删除</a><a href="">发布</a></p>
-			 </dd>
-		  
-		  </dl>
-		  <dl class="nr_con col-md-12">
-		     <dt class="col-md-1 col-xs-3">
-				 <img src="${ctx }/resources/admin/images/cp8.jpg" style="width:100%"/>
-				 <p class=" hidden-md hidden-lg"><a href="" class="col-md-6 col-xs-6">删除</a><a href="" class="col-md-6 col-xs-6">发布</a></p>
-			 </dt>
-			 <dd class="col-md-11 col-xs-9">
-				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>碧玺</font><font>心形</font><font>NGTC</font></span><span  class="col-md-6 col-xs-12"><font>8.50ct</font><font>1颗</font><font class="fc_001">¥168000</font></span></p>
-				 <p class="col-md-5 col-xs-12"><span class="col-xs-12 col-md-6" >宝石：<a href="./game.html">入库</a><a href="">签收</a></span><span  class="col-xs-12 col-md-6 pad_0">成品：<a href="">入库</a><a href="">签收</a></span></p>
-				 <p class="col-md-2 hidden-xs hidden-sm"><a href="">删除</a><a href="">发布</a></p>
-			 </dd>
-		  
-		  </dl>
-		  <dl class="nr_con col-md-12">
-		     <dt class="col-md-1 col-xs-3">
-				 <img src="${ctx }/resources/admin/images/cp8.jpg" style="width:100%"/>
-				 <p class=" hidden-md hidden-lg"><a href="" class="col-md-6 col-xs-6">删除</a><a href="" class="col-md-6 col-xs-6">发布</a></p>
-			 </dt>
-			 <dd class="col-md-11 col-xs-9">
-				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>碧玺</font><font>心形</font><font>NGTC</font></span><span  class="col-md-6 col-xs-12"><font>8.50ct</font><font>1颗</font><font class="fc_001">¥168000</font></span></p>
-				 <p class="col-md-5 col-xs-12"><span class="col-xs-12 col-md-6" >宝石：<a href="./game.html">入库</a><a href="">签收</a></span><span  class="col-xs-12 col-md-6 pad_0">成品：<a href="">入库</a><a href="">签收</a></span></p>
-				 <p class="col-md-2 hidden-xs hidden-sm"><a href="">删除</a><a href="">发布</a></p>
-			 </dd>
-		  
-		  </dl>
-		  <dl class="nr_con col-md-12">
-		     <dt class="col-md-1 col-xs-3">
-				 <img src="${ctx }/resources/admin/images/cp8.jpg" style="width:100%"/>
-				 <p class=" hidden-md hidden-lg"><a href="" class="col-md-6 col-xs-6">删除</a><a href="" class="col-md-6 col-xs-6">发布</a></p>
-			 </dt>
-			 <dd class="col-md-11 col-xs-9">
-				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>碧玺</font><font>心形</font><font>NGTC</font></span><span  class="col-md-6 col-xs-12"><font>8.50ct</font><font>1颗</font><font class="fc_001">¥168000</font></span></p>
-				 <p class="col-md-5 col-xs-12"><span class="col-xs-12 col-md-6" >宝石：<a href="./game.html">入库</a><a href="">签收</a></span><span  class="col-xs-12 col-md-6 pad_0">成品：<a href="">入库</a><a href="">签收</a></span></p>
-				 <p class="col-md-2 hidden-xs hidden-sm"><a href="">删除</a><a href="">发布</a></p>
-			 </dd>
-		  
-		  </dl>
-           <div class="more hidden-md hidden-lg"><p><a href="" >更多</a></p></div>
+		  <!-- “更多”按钮 -->
+          <div class="more hidden-md hidden-lg"><p><a href="" >${pagevo['btnMore'] }</a></p></div>
 		  
 	  </div>
 	
   </div>
 </div>
 <div class="footer hidden-xs hidden-sm">
-    <div class="foot"> 
-	   <p><a href="">关于Gemtak</a><font>|</font><a href="">隐私条款</a><font>|</font><a href="">版权声明</a><font>|</font><a href="">质量承诺</a><font>|</font><a href="">加入我们</a><font>|</font><a href="">京ICP备11048465号</a><font>|</font> 恭候致电 010-82830789</p>
-	   <p>Copyright © 2016 Gemtak.com All Right Reserved。</p>
-	</div>
+	<!-- 尾部 -->
+    <jsp:include page="../foot.jsp"></jsp:include>
 </div>	
 	  
  <script language="Javascript">
