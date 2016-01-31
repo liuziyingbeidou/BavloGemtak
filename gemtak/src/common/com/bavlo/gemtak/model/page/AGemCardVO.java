@@ -3,11 +3,11 @@ package com.bavlo.gemtak.model.page;
 /**
  * @Title: 宝珑Gemtak
  * @ClassName: AGemCardVO 
- * @Description: 页面VO  A- 后台
+ * @Description: 页面CardVO  A- 后台
  * @author liuzy
  * @date 2016-1-27 下午02:19:07
  */
-public class AGemCardVO {
+public class AGemCardVO{
 
 	//编辑宝石数据
 	private String titleEdit ;
@@ -65,6 +65,9 @@ public class AGemCardVO {
 	private String tableRetailPrice;
 	//零售价单位	
 	private String tableRetailUnit;
+	//价格单位
+	private String tablePriceUnitGL;
+	private String tablePriceUnitCT;
 	//宝石证书类型	
 	private String tableLabType;
 	//证书编号
@@ -356,6 +359,18 @@ public class AGemCardVO {
 	}
 	public void setTablePairsPL(String tablePairsPL) {
 		this.tablePairsPL = tablePairsPL;
+	}
+	public String getTablePriceUnitGL() {
+		return tablePriceUnitGL;
+	}
+	public void setTablePriceUnitGL(String tablePriceUnitGL) {
+		this.tablePriceUnitGL = tablePriceUnitGL;
+	}
+	public String getTablePriceUnitCT() {
+		return tablePriceUnitCT;
+	}
+	public void setTablePriceUnitCT(String tablePriceUnitCT) {
+		this.tablePriceUnitCT = tablePriceUnitCT;
 	}
 	
 }

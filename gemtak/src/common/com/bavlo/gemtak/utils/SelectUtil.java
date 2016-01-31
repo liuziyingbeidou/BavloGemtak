@@ -7,6 +7,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.bavlo.gemtak.constant.IConstant;
+import com.bavlo.gemtak.httpclient.HttpTools;
 import com.bavlo.gemtak.model.page.KeyValueVO;
 
 /**
@@ -17,6 +18,97 @@ import com.bavlo.gemtak.model.page.KeyValueVO;
  * @date 2016-1-27 下午05:05:52
  */
 public class SelectUtil {
+	
+	/**
+	 * @Description: 宝石类型
+	 * @param @param lang
+	 * @param @return
+	 * @return List<KeyValueVO>
+	 */
+	public static List<KeyValueVO> getListGemType(String lang){
+		//宝石类型
+		String rmGemTypeJson = HttpTools.getDataByURL(IConstant.URL_GEMTYPE);
+		List<KeyValueVO> listGemType = getGemType(lang,rmGemTypeJson);
+		return listGemType;
+	}
+	
+	/**
+	 * @Description:  宝石形状
+	 * @param @param lang
+	 * @param @return
+	 * @return List<KeyValueVO>
+	 */
+	public static List<KeyValueVO> getListGemShape(String lang){
+		//宝石形状
+		String rmGemShapeJson = HttpTools.getDataByURL(IConstant.URL_GEMSHAPE);
+		List<KeyValueVO> listGemShape = getGemShape(lang,rmGemShapeJson);
+		return listGemShape;
+	}
+	
+	/**
+	 * @Description: 宝石切工
+	 * @param @param lang
+	 * @param @return
+	 * @return List<KeyValueVO>
+	 */
+	public static List<KeyValueVO> getListGemCut(String lang){
+		//宝石切工
+		String rmGemCutJson = HttpTools.getDataByURL(IConstant.URL_GEMCUT);
+		List<KeyValueVO> listGemCut = getGemCut(lang,rmGemCutJson);
+		return listGemCut;
+	}
+	
+	/**
+	 * @Description: 宝石净度
+	 * @param @param lang
+	 * @param @return
+	 * @return List<KeyValueVO>
+	 */
+	public static List<KeyValueVO> getListGemClarity(String lang){
+		//宝石净度
+		String rmGemClarityJson = HttpTools.getDataByURL(IConstant.URL_GEMCLARITY);
+		List<KeyValueVO> listGemClarity = getGemClarity(lang,rmGemClarityJson);
+		return listGemClarity;
+	}
+	
+	/**
+	 * @Description: 宝石产地
+	 * @param @param lang
+	 * @param @return
+	 * @return List<KeyValueVO>
+	 */
+	public static List<KeyValueVO> getListGemOrigin(String lang){
+		//宝石产地
+		String rmGemOriginJson = HttpTools.getDataByURL(IConstant.URL_GEMORIGIN);
+		List<KeyValueVO> listGemOrigin = getGemOrigin(lang,rmGemOriginJson);
+		return listGemOrigin;
+	}
+	
+	/**
+	 * @Description: 宝石处理工艺
+	 * @param @param lang
+	 * @param @return
+	 * @return List<KeyValueVO>
+	 */
+	public static List<KeyValueVO> getListGemTreatment(String lang){
+		//宝石处理工艺
+		String rmGemTreatmentJson = HttpTools.getDataByURL(IConstant.URL_GEMTREATMENT);
+		List<KeyValueVO> listGemTreatment = getGemTreatment(lang,rmGemTreatmentJson);
+		return listGemTreatment;
+	}
+	
+	/**
+	 * @Description: 宝石证书
+	 * @param @param lang
+	 * @param @return
+	 * @return List<KeyValueVO>
+	 */
+	public static List<KeyValueVO> getListGemLab(String lang){
+		//宝石证书
+		String rmGemLabJson = HttpTools.getDataByURL(IConstant.URL_GEMLAB);
+		List<KeyValueVO> listGemLab = getGemLab(lang,rmGemLabJson);
+		return listGemLab;
+	}
 	
 	/**
 	 * @Description: 宝石类型
