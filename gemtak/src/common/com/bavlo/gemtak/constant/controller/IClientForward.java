@@ -18,5 +18,13 @@ public interface IClientForward {
 	public static final String viewGemShoppingCar = "/client/gem/shopping-car";
 	//订单
 	public static final String gemOrder = "/client/gem/order";
+	//订单完成
+	public static final String gemOrderSuccess = "/client/gem/order-finish";
+	//订单支付
+	public static final String gemOrderPay = "/client/gem/order-pay";
+	//登录
+	public static final String gemLogin = "/client/gem/login";
+	//用户中心
+	public static final String gemUser = "/client/gem/user";
 	
 }

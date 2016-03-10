@@ -23,6 +23,14 @@ import com.bavlo.gemtak.web.BaseController;
 @RequestMapping(value="gemAdmin")
 public class GemController extends BaseController {
 	
+	/**
+	 * @Description: 管理首页
+	 * @param @param model
+	 * @param @param request
+	 * @param @param response
+	 * @param @return
+	 * @return String
+	 */
 	@RequestMapping(value="viewGemList")
 	public String viewGemList(Model model,HttpServletRequest request,HttpServletResponse response){
 		//当前本地化语言
@@ -34,7 +42,14 @@ public class GemController extends BaseController {
 		return "/admin/gem/gem-list";
 	}
 	
-
+	/**
+	 * @Description: 新增宝石
+	 * @param @param model
+	 * @param @param request
+	 * @param @param response
+	 * @param @return
+	 * @return String
+	 */
 	@RequestMapping(value="addGem")
 	public String insertGem(Model model,HttpServletRequest request,HttpServletResponse response){
 		//当前本地化语言
