@@ -89,12 +89,12 @@ em, i{ font-style:normal; }
 .swiper-container{margin:0px 30px}
 .list_ul2 .swiper-slide{width:90px;text-align:center;line-height:25px;color:#777;margin-right:0px;}
 .list_ul2 .swiper-slide:hover{color:#8c0000}
-.list_ul2 .swiper-slide a{color:#eee;display:block;width:100%;margin:0 auto;height:60px}
+.list_ul2 .swiper-slide a{color:#eee;display:block;width:70%;margin:0 auto;height:65px}
 .list_ul2 .swiper-slide span{float:left;display:block;width:100%;text-align:center;}
 
 .lt_ul2 .swiper-slide{width:90px;text-align:center;line-height:25px;color:#777;margin-right:0px;}
 .lt_ul2 .swiper-slide:hover{color:#8c0000}
-.lt_ul2 .swiper-slide a{color:#eee;display:block;width:100%;margin:0 auto;height:57px}
+.lt_ul2 .swiper-slide a{color:#eee;display:block;width:60%;margin:0 auto;height:56px}
 .lt_ul2 .swiper-slide span{float:left;display:block;width:100%;text-align:center;}
 
 
@@ -178,6 +178,7 @@ em, i{ font-style:normal; }
 .nav_0:hover{background: url(../images/mot/a1a.png) no-repeat top center;}
 .nav_0:active,.nav_00{background: url(../images/mot/a1a.png) no-repeat top center;display:block;}
 
+.nav_default{background: url(../images/mot/a2.png) no-repeat top center;width:54px;height:52px;display:block;}
 
 .nav_1{background: url(../images/mot/a2.png) no-repeat top center;width:54px;height:52px;display:block;}
 .nav_1:hover{background: url(../images/mot/a2a.png) no-repeat top center;}

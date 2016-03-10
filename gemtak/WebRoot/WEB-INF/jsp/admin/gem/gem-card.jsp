@@ -16,6 +16,16 @@
 <link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
 <link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
 <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-card.js"></script>
+<script type="text/javascript">
+
+</script>
+
+<style type="text/css">
+.input-shape{
+	display: none;
+}
+</style>
 </head>
 <body>
 
@@ -45,17 +55,18 @@
 			       	 </select>
 			       	 </li>
 					 <li>
-					 <select class="form-control input-lg">
+					 <select class="form-control input-lg select-st">
 					 <option value="sst">${pagevo['tableSTSPNCB'] }</option>
 					 <option value="cst">${pagevo['tableNSPNCB'] }</option>
 					 </select>
 					 </li> 
 					 <li>
-					 <select class="form-control input-lg">
+					 <select class="form-control input-lg select-shape">
 					 <c:forEach var="bean" items="${listGemShape}">
 					  <option value="${bean.pKey}">${bean.pValue}</option>
 					 </c:forEach>
 					 </select>
+					 <input name="shape_str" type="text" class="form-control input-shape" placeholder="${pagevo['tableGemShape'] }">
 					 </li> 
 				     <li>
 						  <div class="li_inp_p0 col-xs-4"><input type="text" class="form-control" placeholder="${pagevo['tableGemCalibratedL'] }"></div>
@@ -64,14 +75,14 @@
 					</li>
 					<li>
 					     <div class="li_inp_pl col-xs-6">
-					     <select class="form-control input-lg fc_a1">
+					     <select class="form-control input-lg">
 					     <c:forEach var="bean" items="${listGemCut}">
 						  <option value="${bean.pKey}">${pagevo['tableGemCut'] } ${bean.pValue}</option>
 						 </c:forEach>
 					     </select>
 					     </div>
 					     <div class="li_inp_pr col-xs-6">
-					     <select class="form-control input-lg fc_a1">
+					     <select class="form-control input-lg">
 					      <c:forEach var="bean" items="${listGemClarity}">
 						  <option value="${bean.pKey}">${pagevo['tableGemClarity'] } ${bean.pValue}</option>
 						  </c:forEach>
@@ -158,7 +169,7 @@
 								 <label class="li_inp_pl col-xs-12"><input type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">${pagevo['tableAllPower'] } </label>
 								 <label class="li_inp_pl col-xs-12"><input type="radio" name="blankRadio" id="blankRadio2" value="option2" aria-label="...">${pagevo['tableSupplierPower'] } </label>
 								 <label class="li_inp_pl col-xs-12"><input type="radio" name="blankRadio" id="blankRadio3" value="option3" aria-label="...">${pagevo['tableSelfPower'] }</label>
-							</div>
+						   </div>
 						 </div>
 						 <div class=" col-xs-2"><p class="s_xian"></p></div>
 					     <div class="li_inp_pr col-xs-5">
