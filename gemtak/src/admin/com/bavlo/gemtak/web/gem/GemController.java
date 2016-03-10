@@ -20,7 +20,7 @@ import com.bavlo.gemtak.web.BaseController;
  * @date 2016-1-26 обнГ02:59:13
  */
 @Controller("gemController")
-@RequestMapping(value="gem")
+@RequestMapping(value="gemAdmin")
 public class GemController extends BaseController {
 	
 	@RequestMapping(value="viewGemList")

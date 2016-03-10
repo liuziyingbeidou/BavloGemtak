@@ -29,6 +29,8 @@ public class PageLangUtil {
 		if(IConstant.EN_UK.equals(lang)){
 			//头部
 			aGemHeadFootVO.sethTitle(AGemHeadFootLang.H_Title_EN);
+			aGemHeadFootVO.sethLanguage(AGemHeadFootLang.H_Language_EN);
+			
 			
 			//尾部
 			aGemHeadFootVO.setfAboutGemtak(AGemHeadFootLang.f_AboutGemtak_EN);
@@ -41,6 +43,7 @@ public class PageLangUtil {
 		}else{//中文
 			//头部
 			aGemHeadFootVO.sethTitle(AGemHeadFootLang.H_Title_CN);
+			aGemHeadFootVO.sethLanguage(AGemHeadFootLang.H_Language_CN);
 			
 			//尾部
 			aGemHeadFootVO.setfAboutGemtak(AGemHeadFootLang.f_AboutGemtak_CN);
@@ -71,6 +74,7 @@ public class PageLangUtil {
 			aGemCardVO.setTablePageviews(AGemCardLang.TABLE_PAGEVIEWS_EN);
 			aGemCardVO.setTablePageviewsTime(AGemCardLang.TABLE_PAGEVIEWS_TIMES_EN);
 			
+			aGemCardVO.setTableGemShape(AGemCardLang.table_GemShape_EN);
 			aGemCardVO.setTableSTSPNCB(AGemCardLang.table_STSPNCB_EN);
 			aGemCardVO.setTableNSPNCB(AGemCardLang.table_NSPNCB_EN);
 			aGemCardVO.setTableGemCalibratedL(AGemCardLang.table_GemCalibratedL_EN);
@@ -114,6 +118,7 @@ public class PageLangUtil {
 			aGemCardVO.setTablePageviews(AGemCardLang.TABLE_PAGEVIEWS_CN);
 			aGemCardVO.setTablePageviewsTime(AGemCardLang.TABLE_PAGEVIEWS_TIMES_CN);
 			
+			aGemCardVO.setTableGemShape(AGemCardLang.table_GemShape_CN);
 			aGemCardVO.setTableSTSPNCB(AGemCardLang.table_STSPNCB_CN);
 			aGemCardVO.setTableNSPNCB(AGemCardLang.table_NSPNCB_CN);
 			aGemCardVO.setTableGemCalibratedL(AGemCardLang.table_GemCalibratedL_CN);

@@ -135,10 +135,10 @@ public interface AGemCardLang {
 	
 	//按钮
 	public static final String BUTTON_CERT_CN = "上传证书";
-	public static final String BUTTON_CERT_EN = "UPLOAD CERT";
+	public static final String BUTTON_CERT_EN = "UPLOAD";//UPLOAD CERT
 	
-	public static final String BUTTON_DELETE_CN = "删除";
-	public static final String BUTTON_DELETE_EN = "DELETE";
+	public static final String BUTTON_DELETE_CN = "删证书";
+	public static final String BUTTON_DELETE_EN = "DEL";// CERT
 	
 	public static final String BUTTON_CLOSE_CN = "退出编辑";
 	public static final String BUTTON_CLOSE_EN = "EXIT EDIT";

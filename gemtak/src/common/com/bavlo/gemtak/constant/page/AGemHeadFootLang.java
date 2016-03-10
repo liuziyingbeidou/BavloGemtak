@@ -14,6 +14,8 @@ public class AGemHeadFootLang {
 	 */
 	public static final String H_Title_CN = "Gemtak后台管理";
 	public static final String H_Title_EN = "Gemtak Management";
+	public static final String H_Language_CN = "英文";//中文
+	public static final String H_Language_EN = "Chinese";//英文
 	
 	/**
 	 * 尾部
