@@ -14,6 +14,8 @@ public class AGemHeadFootVO {
 	 */
 	//标题
 	private String hTitle;
+	//中英文切换
+	private String hLanguage;
 	
 	/**
 	 * 尾部
@@ -95,6 +97,14 @@ public class AGemHeadFootVO {
 
 	public void setfWeCal(String fWeCal) {
 		this.fWeCal = fWeCal;
+	}
+
+	public String gethLanguage() {
+		return hLanguage;
+	}
+
+	public void sethLanguage(String hLanguage) {
+		this.hLanguage = hLanguage;
 	}
 	
 }

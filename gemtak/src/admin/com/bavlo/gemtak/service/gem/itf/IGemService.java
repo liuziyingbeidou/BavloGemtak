@@ -9,5 +9,26 @@ package com.bavlo.gemtak.service.gem.itf;
  */
 public interface IGemService {
 
+	/**
+	 * @Description: 保存宝石信息并返回ID
+	 * @param @return
+	 * @param @throws Exception
+	 * @return Integer
+	 */
+	public Integer saveGemInfo() throws Exception;
 	
+	/**
+	 * @Description: 保存宝石信息
+	 * @param @throws Exception
+	 * @return void
+	 */
+	public void saveGemInfoRID() throws Exception;
+	
+	/**
+	 * @Description: 根据ID更新数据
+	 * @param @param id
+	 * @param @throws Exception
+	 * @return void
+	 */
+	public void updateGemInfo(Integer id) throws Exception;
 }
