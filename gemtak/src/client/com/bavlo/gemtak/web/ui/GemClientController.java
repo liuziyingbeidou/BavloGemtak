@@ -14,7 +14,7 @@ import com.bavlo.gemtak.web.BaseController;
 /**
  * @Title: ±¦ççGemtak
  * @ClassName: GemClientController 
- * @Description: 
+ * @Description: GemClient
  * @author liuzy
  * @date 2016-3-8 ÏÂÎç04:42:31
  */
