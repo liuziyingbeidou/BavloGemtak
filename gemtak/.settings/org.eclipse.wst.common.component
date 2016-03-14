@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="gemtak">
+        <wb-resource deploy-path="/" source-path="/WebRoot"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/common"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/conf"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/manage"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/admin"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/client"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/weixin"/>
+        <property name="java-output-path" value="/counter/WebRoot/WEB-INF/classes"/>
+        <property name="context-root" value="/gemtak"/>
+    </wb-module>
+</project-modules>
