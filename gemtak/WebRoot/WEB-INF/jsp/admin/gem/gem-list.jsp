@@ -16,6 +16,14 @@
 <link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
 <link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
 <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script>
+<script type="text/javascript">
+ function updeIs_release(id){
+	 location.href = "${ctx}/gemAdmin/findGemVOByID.do&id=+"id;
+	  
+	 
+ }
+
+</script>
 </head>
 <body>
 
@@ -36,21 +44,22 @@
 			<a href="javascript:void(0);" id="typeid6"  onmouseover="javascript:show_menuone(6);">${pagevo['fltCloseGem'] }</a>
 		  </span>
 	  </div>-->
+	 <form action="" method="post">
 	  <div class="tit ">
 	  <!-- 筛选条件 -->
 	    <ul class="tit_ul">
 	    	<li class="col-sm-3 col-xs-6">
-			<select class="form-control input-lg">
-			 <option value="A">${pagevo['fltAllGem'] }</option>
-			 <option value="S">${pagevo['fltStorageGem'] }</option>
-			 <option value="E">${pagevo['fltNewGem'] }</option>
-			 <option value="Y">${pagevo['fltReleaseGem'] }</option>
-			 <option value="C">${pagevo['fltCloseGem'] }</option>
-			</select>
+				<select class="form-control input-lg" name="">
+				 <option value="A">${pagevo['fltAllGem'] }</option>
+				 <option value="S">${pagevo['fltStorageGem'] }</option>
+				 <option value="E">${pagevo['fltNewGem'] }</option>
+				 <option value="Y">${pagevo['fltReleaseGem'] }</option>
+				 <option value="C">${pagevo['fltCloseGem'] }</option>
+				</select>
 			</li>
 			<li class="col-sm-3 col-xs-6">
 			<!-- 宝石类型 -->
-			<select class="form-control input-lg">
+			<select class="form-control input-lg" name="type_id">
 			<option value="-1">${pagevo['fltGemType'] }</option>
 			 <c:forEach var="bean" items="${listGemType}">
 			  <option value="${bean.pKey}">${bean.pValue}</option>
@@ -59,7 +68,7 @@
 			</li>
 			<li class="col-sm-3 col-xs-6">
 			<!-- 宝石形状 -->
-			<select class="form-control input-lg">
+			<select class="form-control input-lg" name="shape_id">
 			<option value="-1">${pagevo['fltGemShape'] }</option>
 			 <c:forEach var="bean" items="${listGemShape}">
 			  <option value="${bean.pKey}">${bean.pValue}</option>
@@ -71,6 +80,8 @@
 		</ul>
 	  
 	  </div>
+	 </form>
+	  
 	  <div class="tit_table col-md-12 ">
 	  	 <!-- 菜单标题 -->
 		 <div class="nr_tit">
@@ -83,18 +94,26 @@
 			</p>
 		 </div>  
 		 <!-- 宝石列表 -->
+		 <c:forEach items="${gems}" var="gem">
 		 <dl class="nr_con col-md-12">
+		   
 		     <dt class="col-md-1 col-xs-3">
 				 <img src="${ctx }/resources/admin/images/cp8.jpg" style="width:100%"/>
 				 <p class=" hidden-md hidden-lg"><a href="" class="col-md-6 col-xs-6">${pagevo['ltGemDel'] }</a><a href="" class="col-md-6 col-xs-6">${pagevo['ltGemRelease'] }</a></p>
 			 </dt>
 			 <dd class="col-md-11 col-xs-9">
-				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>碧玺</font><font>心形</font><font>NGTC</font></span><span  class="col-md-6 col-xs-12"><font>8.50ct</font><font>1颗</font><font class="fc_001">¥168000</font></span></p>
+			   
+				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>${gem.type_cn}</font><font>${gem.shape_cn}</font><font>${gem.lab_cn}</font></span><span  class="col-md-6 col-xs-12"><font>${gem.weight}ct</font><font>${gem.stock_qty}${gem.pairs}</font><font class="fc_001">¥${gem.purchase_price}</font></span></p>
 				 <p class="col-md-5 col-xs-12"><span class="col-xs-12 col-md-6" >${pagevo['ltTypeGem'] }：<a href="./game.html">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a></span><span  class="col-xs-12 col-md-6 pad_0">${pagevo['ltTypeProduct'] }：<a href="">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a></span></p>
-				 <p class="col-md-2 hidden-xs hidden-sm"><a href="">${pagevo['ltGemDel'] }</a><a href="">${pagevo['ltGemRelease'] }</a></p>
+				 <p class="col-md-2 hidden-xs hidden-sm">
+				   <a href="javascript:del()">${pagevo['ltGemDel'] }</a>
+				   <a href="javascript:updeIs_release(${gem.supplier_id})">${pagevo['ltGemRelease'] }</a>
+				 </p>
+			  
 			 </dd>
-		  
+		    
 		  </dl>
+		  </c:forEach>
 		  <!-- “更多”按钮 -->
           <div class="more hidden-md hidden-lg"><p><a href="" >${pagevo['btnMore'] }</a></p></div>
 		  
