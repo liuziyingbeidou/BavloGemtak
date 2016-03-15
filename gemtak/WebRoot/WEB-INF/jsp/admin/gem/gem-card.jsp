@@ -109,7 +109,7 @@ $(function(){
 		   </div>
 		   <!-- Body域 -->
 		  <form id="gemVO">
-		  <input type="hidden" name="id">
+		  <input type="hidden" name="supplier_id">
 		   <div class="game_ul">
 		       <ul class="col-sm-5">
 
