@@ -1,5 +1,7 @@
 package com.bavlo.gemtak.service.gem.itf;
 
+import com.bavlo.gemtak.model.gem.GemVO;
+
 /**
  * @Title: ±¦ççGemtak
  * @ClassName: IGemService 
@@ -31,4 +33,15 @@ public interface IGemService {
 	 * @return void
 	 */
 	public void updateGemInfo(Integer id) throws Exception;
+	
+	/**
+	 * @Description: ÐÂÔöGemVO
+	 * @param @param gemVO
+	 * @param @throws Exception
+	 * @return void
+	 */
+	public void saveOrupdateGemVO(GemVO gemVO) throws Exception;
+	
+	
+	
 }
