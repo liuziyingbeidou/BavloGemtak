@@ -1,5 +1,7 @@
 package com.bavlo.gemtak.service.gem.itf;
 
+import java.util.List;
+
 import com.bavlo.gemtak.model.gem.GemVO;
 
 /**
@@ -41,6 +43,23 @@ public interface IGemService {
 	 * @return void
 	 */
 	public void saveOrupdateGemVO(GemVO gemVO) throws Exception;
+	
+	/**
+	 * lisuike 3.15
+	 * @return 查询所有的GemVO list集合
+	 * @throws Exception
+	 */
+	public List<GemVO> findAllGemVO();
+	
+	/**
+	 * lisuike 3.15
+	 * 给据id查询 一个 GemVO
+	 */
+	public GemVO findGemVOByID(Integer id);
+	
+	
+	
+	
 	
 	
 	

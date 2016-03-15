@@ -1,5 +1,7 @@
 package com.bavlo.gemtak.web.gem;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +47,9 @@ public class GemController extends BaseController {
 		//根据本地语言更新页面数据
 		getListPageModel(model,lang);
 		
+		List<GemVO> gems = gemService.findAllGemVO();
+		model.addAttribute("gems", gems);
+		
 		return "/admin/gem/gem-list";
 	}
 	
@@ -74,15 +79,45 @@ public class GemController extends BaseController {
 	 * @return void
 	 */
 	@RequestMapping(value="saveOrUpdate")
-	private String saveOrupdateGemVO(Model model,HttpServletRequest request,HttpServletResponse response,GemVO gemVO) {
+	public String saveOrupdateGemVO(Model model,HttpServletRequest request,HttpServletResponse response,GemVO gemVO) {
 		try {
 			gemService.saveOrupdateGemVO(gemVO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "/client/gem/list.jsp";
+		return "/admin/gem/gem-list.jsp";
 	}
+	
+	/**
+	 * @Description: 查询出所有gemVO
+	 * @param @param List<GemVO>
+	 * @param @param lisuike
+	 * @return void
+	 */
+	@RequestMapping(value="findAllGemVO")
+	public String findAllGemVO(Model model) {
+		
+		List<GemVO> gems = gemService.findAllGemVO();
+		model.addAttribute("gems", gems);
+		return "/admin/gem/gem-list";
+	}
+	
+	/**
+	 * @Description: 给据id查询出一条gemVO
+	 * @param @param GemVO
+	 * @param @param lisuike
+	 * @return void
+	 */
+	@RequestMapping(value="findGemVOByID")
+	public String findGemVOByID(Model model) {
+		
+		GemVO gemVO = gemService.findGemVOByID(id);
+		gemVO.setIs_release("Y");
+		model.addAttribute("gemVO", gemVO);
+		return "/admin/gem/gem-card";
+	}
+	
 	
 	
 	
