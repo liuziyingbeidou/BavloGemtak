@@ -29,9 +29,37 @@ $(function(){
 
 	
   function saveOrupdate(){
+	  
 	  //宝石类型-隐藏域
 	  $(".h-type-cn").val($(".sel-type").find("option:selected").attr("lab-cn"));
 	  $(".h-type-en").val($(".sel-type").find("option:selected").attr("lab-en"));
+	  
+	  //宝石形状 -隐藏域
+	  $(".h-shape-cn").val($(".select-shape").find("option:selected").attr("lab-cn"));
+	  $(".h-shape-en").val($(".select-shape").find("option:selected").attr("lab-en"));
+	  
+	  //宝石切工 -隐藏域
+	  $(".h-cut-cn").val($(".sel-cut").find("option:selected").attr("lab-cn"));
+	  $(".h-cut-en").val($(".sel-cut").find("option:selected").attr("lab-en"));
+	  
+	  //宝石净度-隐藏域
+	  $(".h-clarity-cn").val($(".sel-clarity").find("option:selected").attr("lab-cn"));
+	  $(".h-clarity-en").val($(".sel-clarity").find("option:selected").attr("lab-en"));
+	  
+	  //宝石产地-隐藏域
+	  $(".h-origin-cn").val($(".sel-origin").find("option:selected").attr("lab-cn"));
+	  $(".h-origin-en").val($(".sel-origin").find("option:selected").attr("lab-en"));
+	  
+	  //宝石处理 -隐藏域
+	  $(".h-treatment-cn").val($(".sel-treatment").find("option:selected").attr("lab-cn"));
+	  $(".h-treatment-en").val($(".sel-treatment").find("option:selected").attr("lab-en"));
+	  
+	  //宝石证书 -隐藏域
+	  $(".h-lab-cn").val($(".sel-lab").find("option:selected").attr("lab-cn"));
+	  $(".h-lab-en").val($(".sel-lab").find("option:selected").attr("lab-en"));
+	  
+	  
+	  
 	  
 	  var url = "${ctx}/gemAdmin/saveOrUpdate.do";
 	  $.post(url,$('#gemVO').serialize(),function(data){
@@ -101,11 +129,13 @@ $(function(){
 						 </select>
 					 </li> 
 					 <li>
-						 <select class="form-control input-lg select-shape" name="shape_id">
+						 <select class="form-control input-lg select-shape " name="shape_id">
 							 <c:forEach var="bean" items="${listGemShape}">
-							  <option value="${bean.pKey}" xingzhuang-en="${bean.pValueEN}" xingzhuang-cn="${bean.pValueCN}">${bean.pValue}</option>
+							  <option value="${bean.pKey}" lab-en="${bean.pValueEN}" lab-cn="${bean.pValueCN}">${bean.pValue}</option>
 							 </c:forEach>
 						 </select>
+						 <input type="hidden" name="shape_cn" class="h-shape-cn">
+						 <input type="hidden" name="shape_en" class="h-shape-en">
 					 <input name="shape_str" type="text" class="form-control input-shape" placeholder="${pagevo['tableGemShape'] }">
 					 </li> 
 				     <li>
@@ -115,18 +145,22 @@ $(function(){
 					</li>
 					<li>
 					     <div class="li_inp_pl col-xs-6">
-					      <select class="form-control input-lg" name="cut_id">
+					      <select class="form-control input-lg sel-cut" name="cut_id">
 					       <c:forEach var="bean" items="${listGemCut}">
-						     <option value="${bean.pKey}" qiegong-en="${bean.pValueEN}" qiegong-cn="${bean.pValueCN}">${pagevo['tableGemCut'] } ${bean.pValue}</option>
+						     <option value="${bean.pKey}" lab-en="${bean.pValueEN}" lab-cn="${bean.pValueCN}">${pagevo['tableGemCut'] } ${bean.pValue}</option>
 						   </c:forEach>
 					     </select>
+					      <input type="hidden" name="cut_cn" class="h-cut-cn">
+					      <input type="hidden" name="cut_en" class="h-cut-en">
 					     </div>
 					     <div class="li_inp_pr col-xs-6">
-					      <select class="form-control input-lg" name="clarity_id">
+					      <select class="form-control input-lg sel-clarity" name="clarity_id">
 					        <c:forEach var="bean" items="${listGemClarity}">
-						      <option value="${bean.pKey}" jingdu-en="${bean.pValueEN}" jingdu-cn="${bean.pValueCN}" >${pagevo['tableGemClarity'] } ${bean.pValue}</option>
+						      <option value="${bean.pKey}" lab-en="${bean.pValueEN}" lab-cn="${bean.pValueCN}" >${pagevo['tableGemClarity'] } ${bean.pValue}</option>
 						    </c:forEach>
 					      </select>
+					      <input type="hidden" name="clarity_cn" class="h-clarity-cn">
+					      <input type="hidden" name="clarity_en" class="h-clarity-en">
 					     </div>
 					</li> 
                     <li>
@@ -135,21 +169,25 @@ $(function(){
 					</li> 						
 					<li>
 					     <div class="li_inp_pl col-xs-6">
-					     <select class="form-control input-lg" name="origin_id">
-					      <c:forEach var="bean" items="${listGemOrigin}">
-						  <option value="${bean.pKey}" chandi-en="${bean.pValueEN}" chandi-cn="${bean.pValueCN}">${pagevo['tableOrigin'] } ${bean.pValue}</option>
-						  </c:forEach>
-					     </select>
+					       <select class="form-control input-lg sel-origin" name="origin_id">
+					         <c:forEach var="bean" items="${listGemOrigin}">
+						       <option value="${bean.pKey}" lab-en="${bean.pValueEN}" lab-cn="${bean.pValueCN}">${pagevo['tableOrigin'] } ${bean.pValue}</option>
+						     </c:forEach>
+					       </select>
+					       <input type="hidden" name="origin_cn" class="h-origin-cn">
+					       <input type="hidden" name="origin_en" class="h-origin-en">
 					     </div>
 					     <div class="li_inp_pr col-xs-6">
-					     <select class="form-control input-lg" name="treatment_id">
-					      <c:forEach var="bean" items="${listGemTreatment}">
-						  <option value="${bean.pKey}" chuli-en="${bean.pValueEN}" chuli-cn="${bean.pValueCN}">${pagevo['tableTreatment'] } ${bean.pValue}</option>
-						  </c:forEach>
-					     </select>
+						     <select class="form-control input-lg sel-treatment" name="treatment_id">
+						      <c:forEach var="bean" items="${listGemTreatment}">
+							  <option value="${bean.pKey}" lab-en="${bean.pValueEN}" lab-cn="${bean.pValueCN}">${pagevo['tableTreatment'] } ${bean.pValue}</option>
+							  </c:forEach>
+						     </select>
+						     <input type="hidden" name="treatment_cn" class="h-treatment-cn">
+					         <input type="hidden" name="treatment_en" class="h-treatment-en">
 					     </div>
 					 </li>
-					 <li><textarea class="form-control" rows="5"></textarea><li>					
+					 <li><textarea name="lab_url" class="form-control" rows="5"></textarea><li>					
 			   </ul>
 			   <ul class="col-sm-1 col-md-2 hidden-xs"></ul>
 		       <ul class="mt_0 col-sm-6 col-md-5">
@@ -191,11 +229,13 @@ $(function(){
 					</li>
 					 <li>
 					    <div class="li_inp_pl col-xs-6">
-						    <select class="form-control input-lg" name="lab_id">
+						    <select class="form-control input-lg sel-lab" name="lab_id">
 						      <c:forEach var="bean" items="${listGemLab}">
-							    <option value="${bean.pKey}" zhengshu-en="${bean.pValueEN}" zhengshu-cn="${bean.pValueCN}">${pagevo['tableLabType'] } ${bean.pValue}</option>
+							    <option value="${bean.pKey}" lab-en="${bean.pValueEN}" lab-cn="${bean.pValueCN}">${pagevo['tableLabType'] } ${bean.pValue}</option>
 							  </c:forEach>
 						    </select>
+						    <input type="hidden" name="lab_cn" class="h-lab-cn">
+					        <input type="hidden" name="lab_en" class="h-lab-en">
 					    </div>
 					    <div class="li_inp_pr col-xs-6"><input type="text" name="lab_no" class="form-control" placeholder="${pagevo['tableLabNo'] }"></div>
 					 </li>
@@ -207,9 +247,9 @@ $(function(){
 			         <li>
 					     <div class="li_inp_pl col-xs-5">
 							   <div class="radio">
-									 <label class="li_inp_pl col-xs-12"><input type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">${pagevo['tableAllPower'] } </label>
-									 <label class="li_inp_pl col-xs-12"><input type="radio" name="blankRadio" id="blankRadio2" value="option2" aria-label="...">${pagevo['tableSupplierPower'] } </label>
-									 <label class="li_inp_pl col-xs-12"><input type="radio" name="blankRadio" id="blankRadio3" value="option3" aria-label="...">${pagevo['tableSelfPower'] }</label>
+									 <label class="li_inp_pl col-xs-12"><input type="radio" name="power" id="blankRadio1" value="所有人A" aria-label="...">${pagevo['tableAllPower'] } </label>
+									 <label class="li_inp_pl col-xs-12"><input type="radio" name="power" id="blankRadio2" value="商家B" aria-label="...">${pagevo['tableSupplierPower'] } </label>
+									 <label class="li_inp_pl col-xs-12"><input type="radio" name="power" id="blankRadio3" value="只自己M" aria-label="...">${pagevo['tableSelfPower'] }</label>
 							   </div>
 						 </div>
 						 <div class=" col-xs-2"><p class="s_xian"></p></div>
