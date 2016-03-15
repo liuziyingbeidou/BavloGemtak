@@ -1,5 +1,6 @@
 package com.bavlo.gemtak.web.gem;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bavlo.gemtak.model.gem.GemVO;
+import com.bavlo.gemtak.service.gem.itf.IGemService;
 import com.bavlo.gemtak.utils.PageLangUtil;
 import com.bavlo.gemtak.utils.SelectUtil;
 import com.bavlo.gemtak.utils.WebUtils;
@@ -22,6 +25,9 @@ import com.bavlo.gemtak.web.BaseController;
 @Controller("gemController")
 @RequestMapping(value="gemAdmin")
 public class GemController extends BaseController {
+	
+	@Resource
+	IGemService gemService;
 	
 	/**
 	 * @Description: 管理首页
@@ -60,6 +66,28 @@ public class GemController extends BaseController {
 		
 		return "/admin/gem/gem-card";
 	}
+	
+	/**
+	 * @Description: 新增gemVO
+	 * @param @param model
+	 * @param @param lang
+	 * @return void
+	 */
+	@RequestMapping(value="saveOrUpdate")
+	private String saveOrupdateGemVO(Model model,HttpServletRequest request,HttpServletResponse response,GemVO gemVO) {
+		try {
+			gemService.saveOrupdateGemVO(gemVO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "/client/gem/list.jsp";
+	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * @Description: 根据本地语言获取Card页面数据
@@ -107,4 +135,8 @@ public class GemController extends BaseController {
 		//宝石形状
 		model.addAttribute("listGemShape", SelectUtil.getListGemShape(lang));
 	}
+	
+	
+	
+	
 }
