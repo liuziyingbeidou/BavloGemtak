@@ -69,8 +69,8 @@ public class GemController extends BaseController {
 	
 	/**
 	 * @Description: ÐÂÔögemVO
-	 * @param @param model
-	 * @param @param lang
+	 * @param @param GemVO 
+	 * @param @param lisuike
 	 * @return void
 	 */
 	@RequestMapping(value="saveOrUpdate")
