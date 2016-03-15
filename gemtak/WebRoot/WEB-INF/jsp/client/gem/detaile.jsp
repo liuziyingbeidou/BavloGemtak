@@ -56,12 +56,12 @@ $("#ex8").slider('setValue',++num);
 			 <ul class="tit_ul">
 			    <li  class="tit_lie col-md-6 col-xs-12">
 				   <p><span>颜色/方位</span><image src="${ctx }/resources/client/images/ad2.png" /></p>
-				   <p><span>视角</span><image src="${ctx }/resources/client/images/ad3.png" /></p>
+				   <p><span>视角</span><img src="${ctx }/resources/client/images/ad3.png" /></p>
 				</li>
 				<li class="tit_lir col-md-6 col-xs-12">
 				   	<div class="para">
 					  <span onclick="javascript:jian();" style="text-align:right"><img src="${ctx }/resources/client/images/j.png">
-					   <font>X4.5<font>
+					   <font>X4.5</font>
 					  </span>
 					  <input id="ex8"  type="text" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="14"/>
 					  <span style="float:right" onclick="javascript:jia();"><img src="${ctx }/resources/client/images/ja.png">
