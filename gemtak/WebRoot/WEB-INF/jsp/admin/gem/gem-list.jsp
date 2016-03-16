@@ -14,12 +14,52 @@
 <meta name="author" content="bavlo">
 <title>Gemtak</title>
 <link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
+
 <link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
 <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script>
+
+
+
+<link rel="stylesheet" href="${ctx }WebRoot/resources/common/pagination/pagination.css" />
+<style type="text/css">
+body{font-size:84%; color:#333333; line-height:1.4;}
+a{color:#34538b;}
+#Searchresult{width:300px; height:100px; padding:20px; background:#f0f3f9;}
+</style>
+<script type="text/javascript" src="${ctx }WebRoot/resources/common/pagination/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx }WebRoot/resources/common/pagination/jquery.pagination.js"></script>
+<script type="text/javascript">
+$(function(){
+	//此demo通过Ajax加载分页元素
+	var initPagination = function() {
+		var num_entries = $("#hiddenresult div.result").length;
+		// 创建分页
+		$("#Pagination").pagination(num_entries, {
+			num_edge_entries: 1, //边缘页数
+			num_display_entries: 4, //主体页数
+			callback: pageselectCallback,
+			items_per_page: 1, //每页显示1项
+			prev_text: "前一页",
+			next_text: "后一页"
+		});
+	 };
+	 
+	function pageselectCallback(page_index, jq){
+		var new_content = $("#hiddenresult div.result:eq("+page_index+")").clone();
+		$("#Searchresult").empty().append(new_content); //装载对应分页的内容
+		return false;
+	}
+	//ajax加载
+	$("#hiddenresult").load("load.html", null, initPagination);
+});
+</script>
+
+
+
 <script type="text/javascript">
  function updeIs_release(id){
 	 location.href = "${ctx}/gemAdmin/findGemVOByID.do&id=+"id;
-	  
+	  alert(id);
 	 
  }
 
@@ -103,7 +143,7 @@
 			 </dt>
 			 <dd class="col-md-11 col-xs-9">
 			   
-				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>${gem.type_cn}</font><font>${gem.shape_cn}</font><font>${gem.lab_cn}</font></span><span  class="col-md-6 col-xs-12"><font>${gem.weight}ct</font><font>${gem.stock_qty}${gem.pairs}</font><font class="fc_001">¥${gem.purchase_price}</font></span></p>
+				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>${gem.type_cn}</font><font>${gem.shape_cn}</font><font>${gem.lab_cn}</font></span><span  class="col-md-6 col-xs-12"><font>${gem.weight}</font><font>${gem.stock_qty}${gem.pairs}</font><font class="fc_001">¥${gem.purchase_price}</font></span></p>
 				 <p class="col-md-5 col-xs-12"><span class="col-xs-12 col-md-6" >${pagevo['ltTypeGem'] }：<a href="./game.html">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a></span><span  class="col-xs-12 col-md-6 pad_0">${pagevo['ltTypeProduct'] }：<a href="">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a></span></p>
 				 <p class="col-md-2 hidden-xs hidden-sm">
 				   <a href="javascript:del()">${pagevo['ltGemDel'] }</a>
