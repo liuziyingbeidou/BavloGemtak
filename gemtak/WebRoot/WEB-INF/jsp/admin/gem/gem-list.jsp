@@ -14,55 +14,32 @@
 <meta name="author" content="bavlo">
 <title>Gemtak</title>
 <link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
-
+<link rel="stylesheet" href="${ctx }/resources/common/css/css.page.css" />
 <link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
-<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script>
-
-
-
-<link rel="stylesheet" href="${ctx }WebRoot/resources/common/pagination/pagination.css" />
-<style type="text/css">
-body{font-size:84%; color:#333333; line-height:1.4;}
-a{color:#34538b;}
-#Searchresult{width:300px; height:100px; padding:20px; background:#f0f3f9;}
-</style>
-<script type="text/javascript" src="${ctx }WebRoot/resources/common/pagination/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx }WebRoot/resources/common/pagination/jquery.pagination.js"></script>
-<script type="text/javascript">
-$(function(){
-	//此demo通过Ajax加载分页元素
-	var initPagination = function() {
-		var num_entries = $("#hiddenresult div.result").length;
-		// 创建分页
-		$("#Pagination").pagination(num_entries, {
-			num_edge_entries: 1, //边缘页数
-			num_display_entries: 4, //主体页数
-			callback: pageselectCallback,
-			items_per_page: 1, //每页显示1项
-			prev_text: "前一页",
-			next_text: "后一页"
-		});
-	 };
-	 
-	function pageselectCallback(page_index, jq){
-		var new_content = $("#hiddenresult div.result:eq("+page_index+")").clone();
-		$("#Searchresult").empty().append(new_content); //装载对应分页的内容
-		return false;
-	}
-	//ajax加载
-	$("#hiddenresult").load("load.html", null, initPagination);
-});
-</script>
-
-
+<%-- <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script> --%>
+<script src="${ctx }/resources/common/js/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-list.js"></script>
 
 <script type="text/javascript">
  function updeIs_release(id){
-	 location.href = "${ctx}/gemAdmin/findGemVOByID.do&id=+"id;
-	  alert(id);
+	 
+	 var url = "/gemtak/gemAdmin/findGemVOByID.do";
+	  $.post(url,{id:id},function(data){
+	    console.log(data);
+	    //将数据显示到UI
+		
+	    var flg = data.msg;
+	    if(flg==Y){
+	    	alert("发布成功！");
+	    	$(".btn-rele-'"+data.id+"").text(data.btnNm);
+	    }else{
+	    	alert("发布失败！");
+	    	$(".btn-del-'"+data.id+"").text(data.btnNm);
+	    }
+	  
+	  });
 	 
  }
-
 </script>
 </head>
 <body>
@@ -99,7 +76,7 @@ $(function(){
 			</li>
 			<li class="col-sm-3 col-xs-6">
 			<!-- 宝石类型 -->
-			<select class="form-control input-lg" name="type_id">
+			<select class="form-control input-lg sel-gem-type" name="type_id">
 			<option value="-1">${pagevo['fltGemType'] }</option>
 			 <c:forEach var="bean" items="${listGemType}">
 			  <option value="${bean.pKey}">${bean.pValue}</option>
@@ -134,31 +111,30 @@ $(function(){
 			</p>
 		 </div>  
 		 <!-- 宝石列表 -->
-		 <c:forEach items="${gems}" var="gem">
+		 <span class="list-gem">
+		 
+		 </span>
+		 <%-- <c:forEach items="${gems}" var="gem">
 		 <dl class="nr_con col-md-12">
-		   
 		     <dt class="col-md-1 col-xs-3">
 				 <img src="${ctx }/resources/admin/images/cp8.jpg" style="width:100%"/>
 				 <p class=" hidden-md hidden-lg"><a href="" class="col-md-6 col-xs-6">${pagevo['ltGemDel'] }</a><a href="" class="col-md-6 col-xs-6">${pagevo['ltGemRelease'] }</a></p>
 			 </dt>
 			 <dd class="col-md-11 col-xs-9">
-			   
 				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>${gem.type_cn}</font><font>${gem.shape_cn}</font><font>${gem.lab_cn}</font></span><span  class="col-md-6 col-xs-12"><font>${gem.weight}</font><font>${gem.stock_qty}${gem.pairs}</font><font class="fc_001">¥${gem.purchase_price}</font></span></p>
 				 <p class="col-md-5 col-xs-12"><span class="col-xs-12 col-md-6" >${pagevo['ltTypeGem'] }：<a href="./game.html">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a></span><span  class="col-xs-12 col-md-6 pad_0">${pagevo['ltTypeProduct'] }：<a href="">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a></span></p>
 				 <p class="col-md-2 hidden-xs hidden-sm">
 				   <a href="javascript:del()">${pagevo['ltGemDel'] }</a>
 				   <a href="javascript:updeIs_release(${gem.supplier_id})">${pagevo['ltGemRelease'] }</a>
 				 </p>
-			  
 			 </dd>
-		    
 		  </dl>
-		  </c:forEach>
+		  </c:forEach> --%>
 		  <!-- “更多”按钮 -->
           <div class="more hidden-md hidden-lg"><p><a href="" >${pagevo['btnMore'] }</a></p></div>
 		  
 	  </div>
-	
+	  <div class="tcdPageCode"></div>
   </div>
 </div>
 <div class="footer hidden-xs hidden-sm">
@@ -168,12 +144,31 @@ $(function(){
 	  
  <script language="Javascript">
   $(function(){
-  $(".tit_table table tr").hover(function(){
-		$(this).css("background","#eeeeee");
-	},function(){
-		$(this).css("background","#FFF");
-	})
-})
- </script>
+	  $(".tit_table table tr").hover(function(){
+			$(this).css("background","#eeeeee");
+		},function(){
+			$(this).css("background","#FFF");
+		});
+	});
+</script>
+<!-- 宝石列表中中英文 -->
+<input type="hidden" class="btn-del" value="${pagevo['ltGemDel'] }">
+<input type="hidden" class="btn-relf" value="${pagevo['ltGemRelease'] }">
+<input type="hidden" class="nm-gem" value="${pagevo['ltTypeGem'] }">
+<input type="hidden" class="nm-prod" value="${pagevo['ltTypeProduct'] }">
+<input type="hidden" class="cv-insert" value="${pagevo['ltStorage'] }">
+<input type="hidden" class="cv-sign" value="${pagevo['ltSign'] }">
+<input type="hidden" class="btn-close" value="${pagevo['ltGemClose'] }">
 </body>
+<script src="${ctx }/resources/common/js/jquery.page.js"></script>
+<script type="text/javascript">
+    $(".tcdPageCode").createPage({
+        pageCount:"${total}",
+        current:1,
+        backFn:function(p){
+            console.log(p);
+            loadGemList(p);
+        }
+    });
+</script>
 </html>
