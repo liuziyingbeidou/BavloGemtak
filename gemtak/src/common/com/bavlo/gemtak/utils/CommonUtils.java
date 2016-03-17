@@ -5,11 +5,11 @@ import java.util.Date;
 import java.util.Random;
 
 /**
- * @Title: 瀹濈彂Counter
+ * @Title: 宝珑Gemtak
  * @ClassName: CommonUtils 
- * @Description: 宸ュ叿
+ * @Description: 工具
  * @author liuzy
- * @date 2015-11-2 涓嬪崍07:14:41
+ * @date 2015-11-2 下午07:14:41
  */
 public class CommonUtils {
 	
@@ -17,7 +17,7 @@ public class CommonUtils {
 		System.out.println(getBillCode("CM"));
 	}
 
-	//鑾峰彇灏忓浘鍚嶇О
+	//获取小图名称
 	public static String getMinPicName(String uploadFileName){
 		String minFileName = null;
 		int index = uploadFileName.lastIndexOf(".");
@@ -28,14 +28,14 @@ public class CommonUtils {
 	}
 	
 	/**
-	 * @Description: 鑷姩缂栧彿
+	 * @Description: 自动编号
 	 * @param @return
 	 * @return String
 	 */
 	public static String getBillCode(String prefix){
         SimpleDateFormat fmt = new SimpleDateFormat("yyMMdd");//yyyyMMddHHmmssSSS
         if(StringUtil.isEmpty(prefix)){
-        	prefix = "BL";
+        	prefix = "GM";
         }
         Random random = new Random();
     	String randomCode = "";
@@ -47,7 +47,7 @@ public class CommonUtils {
     }
 	
 	/**
-	 * 鍒ゆ柇鍙傛暟涓簄ull/""/"null"/"  " [],
+	 * 判断参数为null/""/"null"/"  " [],
 	 * 
 	 * @param obj
 	 * @return
