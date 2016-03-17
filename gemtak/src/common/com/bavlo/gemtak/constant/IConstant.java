@@ -36,4 +36,7 @@ public interface IConstant {
 	//	宝石证书类型接口				
 	public static final String URL_GEMLAB = "http://www.bavlo.com/getAllGemLab";
 	
+	
+	//已发布
+	public static final String RELEASE_Y = "Y";
 }
