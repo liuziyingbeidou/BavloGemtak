@@ -40,7 +40,7 @@
 					<div class="scdd scdd1">
 						 <p  class="fc_0">订单号为：<span>2336984875</span></p>
 						 <p>总金额为：<span>￥3850元</span></p>
-						 <div class="qzf"><a href="./Pay_page.html">去支付</a></div>
+						 <div class="qzf"><a href="javascript:jsPayFee();">去支付</a></div>
 					</div>
 				 </div>
 		   </div>   	  
@@ -50,4 +50,36 @@
     <jsp:include page="../../admin/foot.jsp"></jsp:include>
 </div>
 </body>
+<script>
+	var ua = navigator.userAgent.toLowerCase();
+		    if(ua.match(/MicroMessenger/i)=="micromessenger") {
+		    } else {
+		    	alert("支付!请在微信端打开!");
+		    }
+			function jsPayFee() {
+				var str = window.navigator.userAgent;
+				var version = str.substring(8, 11);
+				if (version != "5.0") {
+					alert("请将微信升级至5.0以上");
+				} else {
+						WeixinJSBridge.invoke('getBrandWCPayRequest', {
+							"appId" :'${map.pr.appId}', //公众号名称，由商户传入
+							"timeStamp" :'${map.pr.timeStamp}' , //戳
+							"nonceStr" : '${map.pr.nonceStr}', //随机串
+							"package" :'${map.pr.packageurl}' ,//统一支付接口返回的prepay_id 参数值，提交格式如：prepay_id=***
+							"signType" : "MD5", //微信签名方式:sha1
+							"paySign" : '${map.pr.paySign}'//微信签名
+							
+						}, function(res) {
+								if (res.err_msg == "get_brand_wcpay_request:ok") {
+									alert("付款成功！");
+								} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+									//alert("取消支付");
+								} else if (res.err_msg == "get_brand_wcpay_request:fail") {
+									alert("支付失败");
+								}
+							});
+					}
+			}
+</script>
 </html>
