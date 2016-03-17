@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bavlo.gemtak.constant.IConstant;
+import com.bavlo.gemtak.constant.page.AGemListLang;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.service.gem.itf.IGemService;
 import com.bavlo.gemtak.utils.PageLangUtil;
@@ -47,10 +49,31 @@ public class GemController extends BaseController {
 		//根据本地语言更新页面数据
 		getListPageModel(model,lang);
 		
-		List<GemVO> gems = gemService.findAllGemVO();
-		model.addAttribute("gems", gems);
+		/**数据查询-start**/
+		//过滤条件
+		StringBuffer cts = new StringBuffer();
+		//逻辑处理
+		List<GemVO> gems = gemService.findListGem(cts+"",dgpage,rows);
+		Integer total  = 0;
+		if(gems != null){
+			total = gems.size();
+		}
+		model.addAttribute("total",total);
+		/**数据查询-end**/
 		
 		return "/admin/gem/gem-list";
+	}
+	
+	/**
+	 * 根据条件获取宝石列表数据
+	 */
+	@RequestMapping(value="getGemListByWh")
+	public void getGemListByWh(Model model,HttpServletRequest request,HttpServletResponse response,Integer dgpage){
+		
+		StringBuffer cts = new StringBuffer();
+		//逻辑处理
+		List<GemVO> gems = gemService.findListGem(cts+"",dgpage,rows);
+		renderJson(gems);
 	}
 	
 	/**
@@ -73,7 +96,7 @@ public class GemController extends BaseController {
 	}
 	
 	/**
-	 * @Description: 新增gemVO
+	 * @Description: 新增gemVO的方法
 	 * @param @param GemVO 
 	 * @param @param lisuike
 	 * @return void
@@ -86,7 +109,7 @@ public class GemController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "/admin/gem/gem-list.jsp";
+		return "/admin/gem/gem-list";
 	}
 	
 	/**
@@ -110,12 +133,27 @@ public class GemController extends BaseController {
 	 * @return void
 	 */
 	@RequestMapping(value="findGemVOByID")
-	public String findGemVOByID(Model model) {
+	public void findGemVOByID(HttpServletRequest request,Model model,Integer id) {
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		String btnName = AGemListLang.LT_GEM_CLOSE_CN;//关闭
+		if(IConstant.EN_UK.equals(lang)){
+			btnName = AGemListLang.LT_GEM_CLOSE_EN;//关闭
+		}
 		
-		GemVO gemVO = gemService.findGemVOByID(id);
-		gemVO.setIs_release("Y");
-		model.addAttribute("gemVO", gemVO);
-		return "/admin/gem/gem-card";
+		try {
+			gemService.updateGemById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			if(IConstant.ZH_CN.equals(lang)){
+				btnName = AGemListLang.LT_GEM_RELEASE_CN;//发布
+			}else{
+				btnName = AGemListLang.LT_GEM_RELEASE_EN;
+			}
+			renderText("{\"msg\":\"N\",\"id\":\""+id+"\",\" btnNm\":\""+btnName+"\"}");
+		}
+		renderText("{\"msg\":\"Y\",\"id\":\""+id+"\",\" btnNm\":\""+btnName+"\"}");
 	}
 	
 	
@@ -161,9 +199,9 @@ public class GemController extends BaseController {
 	 * @return void
 	 */
 	private void getListPageModel(Model model, String lang) {
-		//页面BodyVO
+		//页面中间BodyVO
 		model.addAttribute("pagevo", PageLangUtil.getAGemListBodyPageVO(lang));
-		//页面HeadFootVO
+		//页面表头、表尾HeadFootVO
 		model.addAttribute("pagehfvo", PageLangUtil.getAGemCardHeadFootPageVO(lang));
 		//宝石类型
 		model.addAttribute("listGemType", SelectUtil.getListGemType(lang));
