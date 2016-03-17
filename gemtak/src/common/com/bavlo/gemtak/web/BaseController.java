@@ -46,7 +46,7 @@ public class BaseController{
 	
 	//·ÖÒ³-start
 	protected Integer dgpage=1;
-	protected Integer rows;
+	protected Integer rows=2;
 	//·ÖÒ³-end
 	
 	protected HttpServletResponse response;  
@@ -62,8 +62,10 @@ public class BaseController{
     
     @ModelAttribute
     public void setDgpageAndRows(Integer dgpage,Integer rows){
-    	this.dgpage = dgpage;
-    	this.rows = rows;
+    	if(dgpage != null){
+    		this.dgpage = dgpage;
+    	}
+    	//this.rows = rows;
     }
     
 	protected void renderJson(Object object, JsonConfig config) {
