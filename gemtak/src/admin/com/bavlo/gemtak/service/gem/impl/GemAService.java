@@ -1,15 +1,14 @@
 package com.bavlo.gemtak.service.gem.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.service.gem.itf.IGemService;
 import com.bavlo.gemtak.service.impl.CommonService;
 import com.bavlo.gemtak.utils.DateUtil;
-import com.bavlo.gemtak.utils.DateUtils;
 
 /**
  * @Title: 宝珑Gemtak
@@ -36,8 +35,7 @@ public class GemAService extends CommonService implements IGemService {
 	@Override
 	public void updateGemInfo(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-
-	
+		
 	}
 
 	/*
@@ -69,6 +67,36 @@ public class GemAService extends CommonService implements IGemService {
 	public GemVO findGemVOByID(Integer id) {
 		// TODO Auto-generated method stub
 		return findFirst(GemVO.class, id.toString());
+	}
+
+	@Override
+	public List<GemVO> findAllGemVO(String sql, Integer pageNo, Integer pageSize) {
+		return null;
+	}
+
+	
+	/**
+	 * 分页查询
+	 * select * from tableName where 条件 limit 当前页码*页面容量-1 , 页面容量
+	 */
+	@Override
+	public List<GemVO> findListGem(String conditions,Integer dgpage, Integer rows) {
+		
+		if(conditions != null && conditions != ""){
+			
+		}
+		List<GemVO> listvo = findPage(GemVO.class, dgpage, rows, conditions);
+		return listvo;
+	}
+
+	@Override
+	public void updateGemById(Integer id) throws Exception {
+		String[] attrname = new String[]{"is_release"};
+		String[] attrval = new String[]{IConstant.RELEASE_Y};
+		if(id != null){
+			updateAttrs(GemVO.class, attrname, attrval, " id="+id);
+		}
+		
 	}
 
 	
