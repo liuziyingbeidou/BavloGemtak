@@ -21,25 +21,73 @@
 <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-list.js"></script>
 
 <script type="text/javascript">
+ //点击发布按钮
  function updeIs_release(id){
-	 
+	 var st = $(".btn-rele-"+id+"").attr("ms-state");
 	 var url = "/gemtak/gemAdmin/findGemVOByID.do";
-	  $.post(url,{id:id},function(data){
-	    console.log(data);
-	    //将数据显示到UI
-		
+	  $.post(url,{id:id,st:st},function(data){
+		data = $.parseJSON(data);
+	    //根据返回值做相应处理
 	    var flg = data.msg;
-	    if(flg==Y){
-	    	alert("发布成功！");
-	    	$(".btn-rele-'"+data.id+"").text(data.btnNm);
+	    if(flg=="Y"){
+	    	alert(data.warName+"成功！");
+	    	$(".btn-rele-"+id+"").text(data.btnNm);
+	    	$(".btn-rele-"+id+"").attr("ms-state",data.bkst);
 	    }else{
-	    	alert("发布失败！");
-	    	$(".btn-del-'"+data.id+"").text(data.btnNm);
+	    	alert(data.warName+"失败！");
 	    }
-	  
 	  });
 	 
  }
+ 
+  //根据条件查询
+  $(function(){
+	  $(".sear_ch_sub").click(function(){
+		 //中英文
+		  var ltGemDel = $(".btn-del").val();
+		  var ltGemRelease = $(".btn-relf").val();
+		  var ltGemClose = $(".btn-close").val();
+		  var	ltTypeGem = $(".nm-gem").val();
+		  var	ltTypeProduct = $(".nm-prod").val();
+		  var	ltStorage = $(".cv-insert").val();
+		  var	ltSign = $(".cv-sign").val();
+		  
+		  var url = "/gemtak/gemAdmin/getGemListByWh.do";
+		  var allgem = $(".all-gem").val();
+		  var shapegem = $(".shape-gem").val();
+		  var typegem = $(".type-gem").val();
+		  var inputgem = $(".input-gem").val();
+		  $.post(url,{allgem:allgem,shapegem:shapegem,typegem:typegem,inputgem:inputgem},function(data){
+			  $(".list-gem").empty();
+				if(data != null){
+					for(var i=0;i<data.length;i++){
+						var btnRefAndClose = ltGemRelease;
+						if(data[i].is_release == "Y"){
+							btnRefAndClose = ltGemClose;
+						}
+						$(".list-gem").append("<dl class='nr_con col-md-12'>"+
+					     "<dt class='col-md-1 col-xs-3'>"+
+							"<img src='/gemtak/resources/admin/images/cp8.jpg' style='width:100%'/>"+
+							 "<p class='hidden-md hidden-lg'><a href='' class='col-md-6 col-xs-6'>"+ltGemDel+"</a><a href='' class='col-md-6 col-xs-6'>"+btnRefAndClose+"</a></p>"+
+						 "</dt>"+
+						 "<dd class='col-md-11 col-xs-9'>"+
+							 "<p class='col-md-5 col-xs-12'><span class='col-md-6 col-xs-12'><font>"+data[i].type_cn+"</font><font>"+data[i].shape_cn+"</font><font>"+data[i].lab_cn+"</font></span><span class='col-md-6 col-xs-12'><font>"+data[i].weight+"</font><font>"+data[i].stock_qty+""+data[i].pairs+"</font><font class='fc_001'>¥"+data[i].purchase_price+"</font></span></p>"+
+							 "<p class='col-md-5 col-xs-12'><span class='col-xs-12 col-md-6'>"+ltTypeGem+"：<a href='./game.html'>"+ltStorage+"</a><a href=''>"+ltSign+"</a></span><span class='col-xs-12 col-md-6 pad_0'>"+ltTypeProduct+"：<a href=''>"+ltStorage+"</a><a href=''>"+ltSign+"</a></span></p>"+
+							 "<p class='col-md-2 hidden-xs hidden-sm'>"+
+							   "<a href='javascript:updeIs_del("+data[i].id+")' class='btn-del-"+data[i].id+"' ms-state='"+data[i].is_release+"'>"+ltGemDel+"</a>"+
+							   "<a href='javascript:updeIs_release("+data[i].id+")' class='btn-rele-"+data[i].id+"' ms-state='"+data[i].is_release+"'>"+btnRefAndClose+"</a>"+
+							 "</p>"+
+						 "</dd>"+
+					  "</dl>");
+					}
+				}
+		  });
+	  });
+  });
+ 
+ 
+ 
+ 
 </script>
 </head>
 <body>
@@ -61,12 +109,11 @@
 			<a href="javascript:void(0);" id="typeid6"  onmouseover="javascript:show_menuone(6);">${pagevo['fltCloseGem'] }</a>
 		  </span>
 	  </div>-->
-	 <form action="" method="post">
 	  <div class="tit ">
 	  <!-- 筛选条件 -->
 	    <ul class="tit_ul">
 	    	<li class="col-sm-3 col-xs-6">
-				<select class="form-control input-lg" name="">
+				<select class="form-control input-lg all-gem" name="">
 				 <option value="A">${pagevo['fltAllGem'] }</option>
 				 <option value="S">${pagevo['fltStorageGem'] }</option>
 				 <option value="E">${pagevo['fltNewGem'] }</option>
@@ -76,7 +123,7 @@
 			</li>
 			<li class="col-sm-3 col-xs-6">
 			<!-- 宝石类型 -->
-			<select class="form-control input-lg sel-gem-type" name="type_id">
+			<select class="form-control input-lg sel-gem-type type-gem" name="type_id">
 			<option value="-1">${pagevo['fltGemType'] }</option>
 			 <c:forEach var="bean" items="${listGemType}">
 			  <option value="${bean.pKey}">${bean.pValue}</option>
@@ -85,7 +132,7 @@
 			</li>
 			<li class="col-sm-3 col-xs-6">
 			<!-- 宝石形状 -->
-			<select class="form-control input-lg" name="shape_id">
+			<select class="form-control input-lg shape-gem" name="shape_id">
 			<option value="-1">${pagevo['fltGemShape'] }</option>
 			 <c:forEach var="bean" items="${listGemShape}">
 			  <option value="${bean.pKey}">${bean.pValue}</option>
@@ -93,11 +140,11 @@
 			</select>
 			</li>
 			<!-- 搜索 -->
-			<li class="col-sm-3 col-xs-6"><p><input class="sear_ch_input" type="text" placeholder="${pagevo['fltGemSearch'] }" value=""><input class="sear_ch_sub" type="submit" value=""></p></li>
+			<li class="col-sm-3 col-xs-6"><p><input class="sear_ch_input input-gem" type="text" placeholder="${pagevo['fltGemSearch'] }" value=""><input class="sear_ch_sub" type="submit" value=""></p></li>
 		</ul>
 	  
 	  </div>
-	 </form>
+	
 	  
 	  <div class="tit_table col-md-12 ">
 	  	 <!-- 菜单标题 -->
@@ -154,6 +201,7 @@
 <!-- 宝石列表中中英文 -->
 <input type="hidden" class="btn-del" value="${pagevo['ltGemDel'] }">
 <input type="hidden" class="btn-relf" value="${pagevo['ltGemRelease'] }">
+<input type="hidden" class="btn-close" value="${pagevo['ltGemClose'] }">
 <input type="hidden" class="nm-gem" value="${pagevo['ltTypeGem'] }">
 <input type="hidden" class="nm-prod" value="${pagevo['ltTypeProduct'] }">
 <input type="hidden" class="cv-insert" value="${pagevo['ltStorage'] }">
