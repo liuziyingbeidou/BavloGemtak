@@ -39,4 +39,10 @@ public interface IConstant {
 	
 	//已发布
 	public static final String RELEASE_Y = "Y";
+	//新上传（E）
+	public static final String RELEASE_E = "E";
+	//入库（S）
+	public static final String RELEASE_S = "S";
+	//已关闭（C）
+	public static final String RELEASE_C = "C";
 }
