@@ -247,9 +247,9 @@ $(function(){
 			         <li>
 					     <div class="li_inp_pl col-xs-5">
 							   <div class="radio">
-									 <label class="li_inp_pl col-xs-12"><input type="radio" name="power" id="blankRadio1" value="所有人A" aria-label="...">${pagevo['tableAllPower'] } </label>
-									 <label class="li_inp_pl col-xs-12"><input type="radio" name="power" id="blankRadio2" value="商家B" aria-label="...">${pagevo['tableSupplierPower'] } </label>
-									 <label class="li_inp_pl col-xs-12"><input type="radio" name="power" id="blankRadio3" value="只自己M" aria-label="...">${pagevo['tableSelfPower'] }</label>
+									 <label class="li_inp_pl col-xs-12"><input type="radio" name="power" id="blankRadio1" value="A" aria-label="...">${pagevo['tableAllPower'] } </label>
+									 <label class="li_inp_pl col-xs-12"><input type="radio" name="power" id="blankRadio2" value="B" aria-label="...">${pagevo['tableSupplierPower'] } </label>
+									 <label class="li_inp_pl col-xs-12"><input type="radio" name="power" id="blankRadio3" value="M" aria-label="...">${pagevo['tableSelfPower'] }</label>
 							   </div>
 						 </div>
 						 <div class=" col-xs-2"><p class="s_xian"></p></div>
