@@ -1,5 +1,8 @@
 package com.bavlo.gemtak.web.ui;
 
+import java.util.Map;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,8 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bavlo.gemtak.constant.controller.IClientForward;
+import com.bavlo.gemtak.service.weixin.itf.IWXZFService;
+import com.bavlo.gemtak.util.weixin.WXPayUtil;
+import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.WebUtils;
 import com.bavlo.gemtak.web.BaseController;
+import com.bavlo.gemtak.web.weixin.GetWeiXinCode;
 
 /**
  * @Title: 宝珑Gemtak
@@ -21,6 +28,9 @@ import com.bavlo.gemtak.web.BaseController;
 @Controller(value="GemClientController")
 @RequestMapping(value="gemClient")
 public class GemClientController extends BaseController {
+	
+	@Resource
+	IWXZFService wXZFService;
 
 	/**
 	 * @Description: 首页-宝石列表
@@ -112,15 +122,38 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="orderSuccess")
 	public String orderSuccess(Model model,HttpServletResponse response,HttpServletRequest request){
-		
+		String code = request.getParameter("code");
+		System.out.println("Code:-----"+code);
+		String openId = WXPayUtil.getopendid(code);
+		System.out.println("opendId:"+openId);
+		String forword = IClientForward.gemOrderSuccess;
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCOrderSuccessPageModel(model,lang);
+		//微信支付
+		String orderId = CommonUtils.getBillCode("GM");
+		System.out.println(orderId);
+		Map pr=wXZFService.createOrder(request,orderId, openId);
+		model.addAttribute("map", pr);
 		
-		return IClientForward.gemOrderSuccess;
+		return forword;
 	}
+	
+	/**
+	 * @Description: 获取微信用户code
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="balancePay")
+	public String testPay(HttpServletResponse response,HttpServletRequest request){
+		String code = GetWeiXinCode.getCodeRequest();
+		return "redirect:"+code;
+	}
+	
 	
 	/**
 	 * @Description: 订单支付

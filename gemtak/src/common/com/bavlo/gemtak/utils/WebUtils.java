@@ -3,6 +3,8 @@ package com.bavlo.gemtak.utils;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -354,6 +356,44 @@ public class WebUtils {
     		}
     	}
     	return StrLang;
+    }
+    
+    /**
+     * @Description: 获取客户端IP
+     * @param @param request
+     * @param @return
+     * @return String
+     */
+    public static String getIpAddr(HttpServletRequest request) { 
+        String ip = request.getHeader("x-forwarded-for"); 
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+            ip = request.getHeader("Proxy-Client-IP"); 
+        } 
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+            ip = request.getHeader("WL-Proxy-Client-IP"); 
+        } 
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+            ip = request.getRemoteAddr(); 
+        } 
+        return ip; 
+    } 
+    
+    /**
+     * @Description: jdk获取客户端IP
+     * @param @param request
+     * @param @return
+     * @return String
+     */
+    public static String getIpJdkAddr(){
+    	InetAddress address;
+    	String IP = "";
+		try {
+			address = InetAddress.getLocalHost();
+			IP = address.getHostAddress();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} 
+    	return IP;
     }
 
 }
