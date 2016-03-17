@@ -155,7 +155,7 @@
 				 <span class="col-md-5 hidden-xs hidden-sm">${pagevo['tlGemEditOption'] }</span>
 				 <span class="col-md-2 hidden-xs hidden-sm">${pagevo['tlGemOperation'] }</span>
 				 <span class="col-xs-12 hidden-md hidden-lg" style="text-align:center">${pagevo['tlGemInfoAndOpr'] }</span>
-			</p>
+			 </p>
 		 </div>  
 		 <!-- 宝石列表 -->
 		 <span class="list-gem">
