@@ -68,7 +68,7 @@ public class GemVO extends IdEntity implements Serializable {
 	private String treatment_cn;
 	private String treatment_en;
 	//		重量			
-	private Double weight;
+	private String weight;
 	//		库存量			
 	private Integer stock_qty;
 	//		形态			单粒、配对、多粒
@@ -292,10 +292,10 @@ public class GemVO extends IdEntity implements Serializable {
 	public void setTreatment_en(String treatment_en) {
 		this.treatment_en = treatment_en;
 	}
-	public Double getWeight() {
+	public String getWeight() {
 		return weight;
 	}
-	public void setWeight(Double weight) {
+	public void setWeight(String weight) {
 		this.weight = weight;
 	}
 	public Integer getStock_qty() {

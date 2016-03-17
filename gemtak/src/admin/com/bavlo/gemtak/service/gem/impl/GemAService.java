@@ -90,9 +90,16 @@ public class GemAService extends CommonService implements IGemService {
 	}
 
 	@Override
-	public void updateGemById(Integer id) throws Exception {
+	public void updateGemById(Integer id,String st) throws Exception {
+		String vrel = IConstant.RELEASE_S;
+		if(!IConstant.RELEASE_Y.equals(st)){
+			vrel = IConstant.RELEASE_Y;
+		}else if(IConstant.RELEASE_Y.equals(st)){
+			vrel = IConstant.RELEASE_C;
+		}
+		
 		String[] attrname = new String[]{"is_release"};
-		String[] attrval = new String[]{IConstant.RELEASE_Y};
+		String[] attrval = new String[]{vrel};
 		if(id != null){
 			updateAttrs(GemVO.class, attrname, attrval, " id="+id);
 		}

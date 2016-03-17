@@ -57,10 +57,25 @@ public interface IGemService {
 	 */
 	public GemVO findGemVOByID(Integer id);
 	
+	/**
+	 * lisuike 3.16
+	 * @return 查询所有的GemVO list集合
+	 * @throws Exception
+	 */
+	public List<GemVO> findAllGemVO(String sql,Integer pageNo,Integer pageSize);
 	
-	
-	
-	
-	
+	/**
+	 * @param sql
+	 * @param dgpage
+	 * @param rows
+	 * @return
+	 */
+	public List<GemVO> findListGem(String contions,Integer dgpage,Integer rows);
+
+	/**
+	 * 根据id更新
+	 * @param id
+	 */
+	public void updateGemById(Integer id,String st) throws Exception;
 	
 }
