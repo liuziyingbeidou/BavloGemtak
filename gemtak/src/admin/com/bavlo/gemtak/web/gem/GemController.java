@@ -68,9 +68,13 @@ public class GemController extends BaseController {
 	 * 根据条件获取宝石列表数据
 	 */
 	@RequestMapping(value="getGemListByWh")
-	public void getGemListByWh(Model model,HttpServletRequest request,HttpServletResponse response,Integer dgpage){
-		
+	public void getGemListByWh(Model model,HttpServletRequest request,HttpServletResponse response,Integer dgpage,String allgem,String typegem,String shapegem,String inputgem){
+		allgem = request.getParameter("allgem");
+		typegem = request.getParameter("typegem");
+		shapegem = request.getParameter("shapegem");
+		inputgem = request.getParameter("inputgem");
 		StringBuffer cts = new StringBuffer();
+		
 		//逻辑处理
 		List<GemVO> gems = gemService.findListGem(cts+"",dgpage,rows);
 		renderJson(gems);
@@ -133,35 +137,44 @@ public class GemController extends BaseController {
 	 * @return void
 	 */
 	@RequestMapping(value="findGemVOByID")
-	public void findGemVOByID(HttpServletRequest request,Model model,Integer id) {
+	public void findGemVOByID(HttpServletRequest request,Model model,Integer id,String st) {
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("Loc Lang："+lang);
+		//按钮显示
 		String btnName = AGemListLang.LT_GEM_CLOSE_CN;//关闭
-		if(IConstant.EN_UK.equals(lang)){
-			btnName = AGemListLang.LT_GEM_CLOSE_EN;//关闭
+		//操作提示
+		String warName = AGemListLang.LT_GEM_RELEASE_CN;//发布
+		//返回状态
+		String bkst = st;
+		if(!IConstant.RELEASE_C.equals(st)){
+			bkst = IConstant.RELEASE_C;
+			if(IConstant.EN_UK.equals(lang)){
+				btnName = AGemListLang.LT_GEM_RELEASE_EN;//发布
+				warName = AGemListLang.LT_GEM_CLOSE_EN;//关闭
+			}else{
+				btnName = AGemListLang.LT_GEM_RELEASE_CN;//发布
+				warName = AGemListLang.LT_GEM_CLOSE_CN;//关闭
+			}
+		}else{
+			bkst = IConstant.RELEASE_Y;
+			if(IConstant.EN_UK.equals(lang)){
+				btnName = AGemListLang.LT_GEM_CLOSE_EN;//关闭
+				warName = AGemListLang.LT_GEM_RELEASE_EN;//发布
+			}else{
+				btnName = AGemListLang.LT_GEM_CLOSE_CN;//关闭
+				warName = AGemListLang.LT_GEM_RELEASE_CN;//发布
+			}
 		}
-		
 		try {
-			gemService.updateGemById(id);
+			gemService.updateGemById(id,st);
 		} catch (Exception e) {
 			e.printStackTrace();
-			if(IConstant.ZH_CN.equals(lang)){
-				btnName = AGemListLang.LT_GEM_RELEASE_CN;//发布
-			}else{
-				btnName = AGemListLang.LT_GEM_RELEASE_EN;
-			}
-			renderText("{\"msg\":\"N\",\"id\":\""+id+"\",\" btnNm\":\""+btnName+"\"}");
+			renderText("{\"msg\":\"N\",\"id\":\""+id+"\",\"warName\":\""+warName+"\"}");
 		}
-		renderText("{\"msg\":\"Y\",\"id\":\""+id+"\",\" btnNm\":\""+btnName+"\"}");
+		renderText("{\"msg\":\"Y\",\"id\":\""+id+"\",\"btnNm\":\""+btnName+"\",\"warName\":\""+warName+"\",\"bkst\":\""+bkst+"\"}");
 	}
-	
-	
-	
-	
-	
-	
-	
+		
 	/**
 	 * @Description: 根据本地语言获取Card页面数据
 	 * @param @param model
