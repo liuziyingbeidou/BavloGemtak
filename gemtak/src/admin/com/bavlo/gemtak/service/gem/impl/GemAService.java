@@ -112,15 +112,14 @@ public class GemAService extends CommonService implements IGemService {
 
 	//µã»÷É¾³ý°´Å¥£¬ÐÞ¸ÄÊý¾Ý¿â×Ö¶Î
 	
-	public void updateDrGemById(Model model,Integer id) throws Exception {
+	public void updateDrGemById(Integer id) throws Exception {
 		if(id != null){
 			String[] attrname = new String[]{"dr"};
 			Short[] attrval = new Short[]{1};
 			if(id != null){
 				updateAttrs(GemVO.class, attrname, attrval, " id="+id);
 			}
-			String msg = "Y";
-			model.addAttribute("msg", msg);
+			
 		}
 		
 	}

@@ -83,6 +83,6 @@ public interface IGemService {
 	/**
 	 * É¾³ý°´Å¥
 	 */
-	public void updateDrGemById(Model model,Integer id) throws Exception;
+	public void updateDrGemById(Integer id) throws Exception;
 	
 }
