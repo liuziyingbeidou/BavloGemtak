@@ -16,6 +16,7 @@ import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.service.gem.itf.IGemService;
 import com.bavlo.gemtak.utils.PageLangUtil;
 import com.bavlo.gemtak.utils.SelectUtil;
+import com.bavlo.gemtak.utils.StringUtil;
 import com.bavlo.gemtak.utils.WebUtils;
 import com.bavlo.gemtak.web.BaseController;
 
@@ -73,10 +74,20 @@ public class GemController extends BaseController {
 		typegem = request.getParameter("typegem");
 		shapegem = request.getParameter("shapegem");
 		inputgem = request.getParameter("inputgem");
-		StringBuffer cts = new StringBuffer();
-		
+		String sql = "";
+		if(StringUtil.isNotEmpty(allgem)){
+			sql = " is_release = '"+allgem+"'";
+		}else if(StringUtil.isNotEmpty(typegem)){
+			sql = sql+ " and type_id = '"+typegem+"'";
+		}else if(StringUtil.isNotEmpty(shapegem)){
+			sql = sql+" and shape_id = '"+shapegem+"'";
+		}else if(StringUtil.isNotEmpty(inputgem)){
+			sql = sql+" is_release like '%"+inputgem+"%' or type_id like '%"+inputgem+"%' or shape_id like '%"+inputgem+"%'";
+		}else{
+			sql = " 1=1 ";
+		}
 		//Âß¼­´¦Àí
-		List<GemVO> gems = gemService.findListGem(cts+"",dgpage,rows);
+		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows);
 		renderJson(gems);
 	}
 	
