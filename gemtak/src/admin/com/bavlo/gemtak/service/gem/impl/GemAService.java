@@ -3,8 +3,11 @@ package com.bavlo.gemtak.service.gem.impl;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import com.alibaba.druid.sql.dialect.sqlserver.ast.SQLServerColumnDefinition.Identity;
 import com.bavlo.gemtak.constant.IConstant;
+import com.bavlo.gemtak.model.IdEntity;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.service.gem.itf.IGemService;
 import com.bavlo.gemtak.service.impl.CommonService;
@@ -83,12 +86,13 @@ public class GemAService extends CommonService implements IGemService {
 	public List<GemVO> findListGem(String conditions,Integer dgpage, Integer rows) {
 		
 		if(conditions != null && conditions != ""){
-			
+			findPage(GemVO.class, dgpage, rows, conditions);
 		}
 		List<GemVO> listvo = findPage(GemVO.class, dgpage, rows, conditions);
 		return listvo;
 	}
 
+	//点击发布按钮，修改数据库字段
 	@Override
 	public void updateGemById(Integer id,String st) throws Exception {
 		String vrel = IConstant.RELEASE_S;
@@ -98,15 +102,28 @@ public class GemAService extends CommonService implements IGemService {
 			vrel = IConstant.RELEASE_C;
 		}
 		
-		String[] attrname = new String[]{"is_release"};
-		String[] attrval = new String[]{vrel};
+		String[] attrname = new String[]{"is_release"};//要更新的字段
+		String[] attrval = new String[]{vrel};        //更新的值
 		if(id != null){
 			updateAttrs(GemVO.class, attrname, attrval, " id="+id);
 		}
 		
 	}
 
+	//点击删除按钮，修改数据库字段
 	
+	public void updateDrGemById(Model model,Integer id) throws Exception {
+		if(id != null){
+			String[] attrname = new String[]{"dr"};
+			Short[] attrval = new Short[]{1};
+			if(id != null){
+				updateAttrs(GemVO.class, attrname, attrval, " id="+id);
+			}
+			String msg = "Y";
+			model.addAttribute("msg", msg);
+		}
+		
+	}
 	
 	
 	
