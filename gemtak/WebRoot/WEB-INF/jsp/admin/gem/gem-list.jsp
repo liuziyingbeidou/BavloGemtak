@@ -58,37 +58,7 @@
 	  });
 	 
  }
- 
- 
- 
- 
- 
- 
-  //根据条件查询
-  $(function(){
-	  $(".sear_ch_sub").click(function(){
-		 //中英文
-		  var ltGemDel = $(".btn-del").val();
-		  var ltGemRelease = $(".btn-relf").val();
-		  var ltGemClose = $(".btn-close").val();
-		  var	ltTypeGem = $(".nm-gem").val();
-		  var	ltTypeProduct = $(".nm-prod").val();
-		  var	ltStorage = $(".cv-insert").val();
-		  var	ltSign = $(".cv-sign").val();
-		  
-		  var url = "/gemtak/gemAdmin/getGemListByWh.do";
-		  var allgem = $(".all-gem").val();
-		  var shapegem = $(".shape-gem").val();
-		  var typegem = $(".type-gem").val();
-		  var inputgem = $(".input-gem").val();
-		  $.post(url,{allgem:allgem,shapegem:shapegem,typegem:typegem,inputgem:inputgem},function(data){
-			 
-		  });
-	  });
-  });
- 
- 
- 
+
  
 </script>
 </head>
