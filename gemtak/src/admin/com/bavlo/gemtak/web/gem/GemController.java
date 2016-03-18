@@ -265,6 +265,4 @@ public class GemController extends BaseController {
 	}
 	
 	
-	
-	
 }
