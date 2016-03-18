@@ -48,9 +48,12 @@
 	  $.post(url,{id:id,st:st},function(data){
 		
 	    //根据返回值做相应处理
-	   
+	    var flg = data.msg;
+	     if(flg=="Y"){
 	       $(".btn-del-"+id+"").parent().parent().parent().remove();
-	   
+	    }else{
+	    	alert("删除失败！");
+	    }
 	  });
 	 
 	 
