@@ -2,6 +2,8 @@ package com.bavlo.gemtak.service.gem.itf;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import com.bavlo.gemtak.model.gem.GemVO;
 
 /**
@@ -77,5 +79,10 @@ public interface IGemService {
 	 * @param id
 	 */
 	public void updateGemById(Integer id,String st) throws Exception;
+	
+	/**
+	 * É¾³ý°´Å¥
+	 */
+	public void updateDrGemById(Model model,Integer id) throws Exception;
 	
 }
