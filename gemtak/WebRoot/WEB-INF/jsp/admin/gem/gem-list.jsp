@@ -43,7 +43,17 @@
   //2.点击删除按钮
   function updeIs_del(id){
 	 if(confirm("您确定要删除吗？")){
-	   $(".btn-del-"+id+"").parent().parent().parent().remove();
+	  var st = $(".btn-del-"+id+"").attr("ms-state");
+	  var url = "/gemtak/gemAdmin/updateDrGemById.do";
+	  $.post(url,{id:id,st:st},function(data){
+		
+	    //根据返回值做相应处理
+	   
+	       $(".btn-del-"+id+"").parent().parent().parent().remove();
+	   
+	  });
+	 
+	 
      }
  }
  
