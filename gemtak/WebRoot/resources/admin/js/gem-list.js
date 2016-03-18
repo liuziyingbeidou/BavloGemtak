@@ -4,6 +4,9 @@
 $(function(){
 	
 	loadGemList(1);
+	$(".sear_ch_sub").click(function(){
+		  loadGemList(1);
+	  });
 });
 //ajax加载Gem数据
 function loadGemList(p){
@@ -17,14 +20,19 @@ function loadGemList(p){
 	var	ltTypeProduct = $(".nm-prod").val();
 	var	ltStorage = $(".cv-insert").val();
 	var	ltSign = $(".cv-sign").val();
-	
-	$.post(url,{dgpage:p,gemType:gemType},function(data){
+	//查询条件
+	var allgem = $(".all-gem").val();
+	  var shapegem = $(".shape-gem").val();
+	  var typegem = $(".type-gem").val();
+	  var inputgem = $(".input-gem").val();
+	$.post(url,{dgpage:p,gemType:gemType,allgem:allgem,shapegem:shapegem,typegem:typegem,inputgem:inputgem},function(data){
 		//console.log(data);
 		//将数据显示到UI  发布成功后
 		$(".list-gem").empty();
 		if(data != null){
 			for(var i=0;i<data.length;i++){
 				var btnRefAndClose = ltGemRelease;
+				var total = data.length;
 				if(data[i].is_release == "Y"){
 					btnRefAndClose = ltGemClose;
 				}
