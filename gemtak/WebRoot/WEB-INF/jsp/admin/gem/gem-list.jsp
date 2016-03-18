@@ -40,6 +40,30 @@
 	 
  }
  
+ //点击删除按钮
+  function updeIs_del(id){
+	 var st = $(".btn-del-"+id+"").attr("ms-state");
+	 var url = "/gemtak/gemAdmin/findGemVOByID.do";
+	  $.post(url,{id:id,st:st},function(data){
+		data = $.parseJSON(data);
+	    //根据返回值做相应处理
+	    var flg = data.msg;
+	    if(flg=="Y"){
+	    	alert(data.warName+"成功！");
+	    	$(".btn-rele-"+id+"").text(data.btnNm);
+	    	$(".btn-rele-"+id+"").attr("ms-state",data.bkst);
+	    }else{
+	    	alert(data.warName+"失败！");
+	    }
+	  });
+	 
+ }
+ 
+ 
+ 
+ 
+ 
+ 
   //根据条件查询
   $(function(){
 	  $(".sear_ch_sub").click(function(){
