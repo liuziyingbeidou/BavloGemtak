@@ -51,10 +51,24 @@ public class GemController extends BaseController {
 		getListPageModel(model,lang);
 		
 		/**数据查询-start**/
+		
 		//过滤条件
-		StringBuffer cts = new StringBuffer();
+		allgem = request.getParameter("allgem");
+		typegem = request.getParameter("typegem");
+		shapegem = request.getParameter("shapegem");
+		inputgem = request.getParameter("inputgem");
+		StringBuilder sql = new StringBuilder(" 1=1");
+		if(!"A".equals(allgem)){
+			sql.append( "  and  is_release = '"+allgem+"'");
+		}else if(!"-1".equals(typegem)){
+			sql.append( " and type_id = '"+typegem+"'");
+		}else if(!"-1".equals(shapegem)){
+			sql.append(" and shape_id = '"+shapegem+"'");
+		}else if(StringUtil.isNotEmpty(inputgem)){
+			sql.append(" and ( is_release like '%"+inputgem+"%' or type_id like '%"+inputgem+"%' or shape_id like '%"+inputgem+"%')");
+		}
 		//逻辑处理
-		List<GemVO> gems = gemService.findListGem(cts+"",dgpage,rows);
+		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows);
 		Integer total  = 0;
 		if(gems != null){
 			total = gems.size();
@@ -140,7 +154,26 @@ public class GemController extends BaseController {
 	}
 	
 	/**
-	 * @Description: 给据id查询出一条gemVO
+	 * 
+	 * @Description: TODO(点击删除按钮，更新DR字段为1) 
+	 * @param @param id
+	 * @param @param dr
+	 * @return void
+	 */
+	@RequestMapping(value="updateDrGemById")
+	public void updateDrGemById(Integer id){
+		try {
+			gemService.updateDrGemById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			renderText("{\"msg\":\"N\",\"id\":\""+id+"\"}");
+		}
+		renderText("{\"msg\":\"Y\",\"id\":\""+id+"\"}");
+	}
+	
+	
+	/**
+	 * @Description: 给据id查询出一条gemVO 点击发布按钮 将其改为关闭
 	 * @param @param GemVO
 	 * @param @param lisuike
 	 * @return void
@@ -183,7 +216,7 @@ public class GemController extends BaseController {
 		}
 		renderText("{\"msg\":\"Y\",\"id\":\""+id+"\",\"btnNm\":\""+btnName+"\",\"warName\":\""+warName+"\",\"bkst\":\""+bkst+"\"}");
 	}
-		
+	
 	/**
 	 * @Description: 根据本地语言获取Card页面数据
 	 * @param @param model
