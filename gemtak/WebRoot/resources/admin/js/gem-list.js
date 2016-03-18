@@ -22,9 +22,9 @@ function loadGemList(p){
 	var	ltSign = $(".cv-sign").val();
 	//查询条件
 	var allgem = $(".all-gem").val();
-	  var shapegem = $(".shape-gem").val();
-	  var typegem = $(".type-gem").val();
-	  var inputgem = $(".input-gem").val();
+	var shapegem = $(".shape-gem").val();
+	var typegem = $(".type-gem").val();
+	var inputgem = $(".input-gem").val();
 	$.post(url,{dgpage:p,gemType:gemType,allgem:allgem,shapegem:shapegem,typegem:typegem,inputgem:inputgem},function(data){
 		//console.log(data);
 		//将数据显示到UI  发布成功后
@@ -32,7 +32,7 @@ function loadGemList(p){
 		if(data != null){
 			for(var i=0;i<data.length;i++){
 				var btnRefAndClose = ltGemRelease;
-				var total = data.length;
+				
 				if(data[i].is_release == "Y"){
 					btnRefAndClose = ltGemClose;
 				}
