@@ -43,7 +43,7 @@ public class GemController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value="viewGemList")
-	public String viewGemList(Model model,HttpServletRequest request,HttpServletResponse response){
+	public String viewGemList(Model model,HttpServletRequest request,HttpServletResponse response,Integer dgpage,String allgem,String typegem,String shapegem,String inputgem){
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("本地语言："+lang);
@@ -74,17 +74,15 @@ public class GemController extends BaseController {
 		typegem = request.getParameter("typegem");
 		shapegem = request.getParameter("shapegem");
 		inputgem = request.getParameter("inputgem");
-		String sql = "";
-		if(StringUtil.isNotEmpty(allgem)){
-			sql = " is_release = '"+allgem+"'";
-		}else if(StringUtil.isNotEmpty(typegem)){
-			sql = sql+ " and type_id = '"+typegem+"'";
-		}else if(StringUtil.isNotEmpty(shapegem)){
-			sql = sql+" and shape_id = '"+shapegem+"'";
+		StringBuilder sql = new StringBuilder(" 1=1");
+		if(!"A".equals(allgem)){
+			sql.append( "  and  is_release = '"+allgem+"'");
+		}else if(!"-1".equals(typegem)){
+			sql.append( " and type_id = '"+typegem+"'");
+		}else if(!"-1".equals(shapegem)){
+			sql.append(" and shape_id = '"+shapegem+"'");
 		}else if(StringUtil.isNotEmpty(inputgem)){
-			sql = sql+" is_release like '%"+inputgem+"%' or type_id like '%"+inputgem+"%' or shape_id like '%"+inputgem+"%'";
-		}else{
-			sql = " 1=1 ";
+			sql.append(" and ( is_release like '%"+inputgem+"%' or type_id like '%"+inputgem+"%' or shape_id like '%"+inputgem+"%')");
 		}
 		//逻辑处理
 		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows);
