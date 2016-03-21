@@ -4,92 +4,88 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="bavlo">
-<meta name="keywords" content="bavlo">
-<meta name="author" content="bavlo">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="bavlo">
+	<meta name="keywords" content="bavlo">
+	<meta name="author" content="bavlo">
 <title>Gemtak</title>
-<link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
-<link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
-<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-card.js"></script>
-<script type="text/javascript">
-
-$(function(){
-	//保存
-	$(".btn-save").click(function(){
-		
-		saveOrupdate();
-	});
-});
-
+	<link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
+	<link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
+	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-card.js"></script>
+	<script type="text/javascript">
 	
-  function saveOrupdate(){
-	  
-	  //宝石类型-隐藏域
-	  $(".h-type-cn").val($(".sel-type").find("option:selected").attr("lab-cn"));
-	  $(".h-type-en").val($(".sel-type").find("option:selected").attr("lab-en"));
-	  
-	  //宝石形状 -隐藏域
-	  $(".h-shape-cn").val($(".select-shape").find("option:selected").attr("lab-cn"));
-	  $(".h-shape-en").val($(".select-shape").find("option:selected").attr("lab-en"));
-	  
-	  //宝石切工 -隐藏域
-	  $(".h-cut-cn").val($(".sel-cut").find("option:selected").attr("lab-cn"));
-	  $(".h-cut-en").val($(".sel-cut").find("option:selected").attr("lab-en"));
-	  
-	  //宝石净度-隐藏域
-	  $(".h-clarity-cn").val($(".sel-clarity").find("option:selected").attr("lab-cn"));
-	  $(".h-clarity-en").val($(".sel-clarity").find("option:selected").attr("lab-en"));
-	  
-	  //宝石产地-隐藏域
-	  $(".h-origin-cn").val($(".sel-origin").find("option:selected").attr("lab-cn"));
-	  $(".h-origin-en").val($(".sel-origin").find("option:selected").attr("lab-en"));
-	  
-	  //宝石处理 -隐藏域
-	  $(".h-treatment-cn").val($(".sel-treatment").find("option:selected").attr("lab-cn"));
-	  $(".h-treatment-en").val($(".sel-treatment").find("option:selected").attr("lab-en"));
-	  
-	  //宝石证书 -隐藏域
-	  $(".h-lab-cn").val($(".sel-lab").find("option:selected").attr("lab-cn"));
-	  $(".h-lab-en").val($(".sel-lab").find("option:selected").attr("lab-en"));
-	  
-	  
-	  
-	  
-	  var url = "${ctx}/gemAdmin/saveOrUpdate.do";
-	  $.post(url,$('#gemVO').serialize(),function(data){
+	$(function(){
+		//保存
+		$(".btn-save").click(function(){	
+			saveOrupdate();
+		});
+	});
+	
+		
+	  function saveOrupdate(){
 		  
-		  alert("保存成功！");
-	  });
-	 /*  $.ajax({
-		  url:"${ctx}/gemAdmin/saveOrUpdate.do",
-		  type:"post",
-		  data:$('#gemVO').serialize(),// formid
-		  dataType:"",
-		  success:function(){
+		  //宝石类型-隐藏域
+		  $(".h-type-cn").val($(".sel-type").find("option:selected").attr("lab-cn"));
+		  $(".h-type-en").val($(".sel-type").find("option:selected").attr("lab-en"));
+		  
+		  //宝石形状 -隐藏域
+		  $(".h-shape-cn").val($(".select-shape").find("option:selected").attr("lab-cn"));
+		  $(".h-shape-en").val($(".select-shape").find("option:selected").attr("lab-en"));
+		  
+		  //宝石切工 -隐藏域
+		  $(".h-cut-cn").val($(".sel-cut").find("option:selected").attr("lab-cn"));
+		  $(".h-cut-en").val($(".sel-cut").find("option:selected").attr("lab-en"));
+		  
+		  //宝石净度-隐藏域
+		  $(".h-clarity-cn").val($(".sel-clarity").find("option:selected").attr("lab-cn"));
+		  $(".h-clarity-en").val($(".sel-clarity").find("option:selected").attr("lab-en"));
+		  
+		  //宝石产地-隐藏域
+		  $(".h-origin-cn").val($(".sel-origin").find("option:selected").attr("lab-cn"));
+		  $(".h-origin-en").val($(".sel-origin").find("option:selected").attr("lab-en"));
+		  
+		  //宝石处理 -隐藏域
+		  $(".h-treatment-cn").val($(".sel-treatment").find("option:selected").attr("lab-cn"));
+		  $(".h-treatment-en").val($(".sel-treatment").find("option:selected").attr("lab-en"));
+		  
+		  //宝石证书 -隐藏域
+		  $(".h-lab-cn").val($(".sel-lab").find("option:selected").attr("lab-cn"));
+		  $(".h-lab-en").val($(".sel-lab").find("option:selected").attr("lab-en"));
+		  
+		  var url = "${ctx}/gemAdmin/saveOrUpdate.do";
+		  $.post(url,$('#gemVO').serialize(),function(data){
+			  
 			  alert("保存成功！");
-		  },
-	      error:function(){
-	    	  alert("保存失败!");
-	      }
-	  }); */
-  }
-
-
-
-
-</script>
-
-<style type="text/css">
-.input-shape{
-	display: none;
-}
-</style>
+		  });
+		 /*  $.ajax({
+			  url:"${ctx}/gemAdmin/saveOrUpdate.do",
+			  type:"post",
+			  data:$('#gemVO').serialize(),// formid
+			  dataType:"",
+			  success:function(){
+				  alert("保存成功！");
+			  },
+		      error:function(){
+		    	  alert("保存失败!");
+		      }
+		  }); */
+	  }
+	
+	
+	
+	
+	</script>
+	
+	<style type="text/css">
+		.input-shape{
+			display: none;
+		}
+	</style>
 </head>
 <body>
 
@@ -108,7 +104,7 @@ $(function(){
 			  <div class="line col-sm-12 hidden-xs hidden-sm"></div>
 		   </div>
 		   <!-- Body域 -->
-		  <form id="gemVO">
+		 <form id="gemVO">
 		  <input type="hidden" name="supplier_id">
 		   <div class="game_ul">
 		       <ul class="col-sm-5">
