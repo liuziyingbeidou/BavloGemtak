@@ -4,65 +4,65 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="bavlo">
-<meta name="keywords" content="bavlo">
-<meta name="author" content="bavlo">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="bavlo">
+	<meta name="keywords" content="bavlo">
+	<meta name="author" content="bavlo">
 <title>Gemtak</title>
-<link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
-<link rel="stylesheet" href="${ctx }/resources/common/css/css.page.css" />
-<link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
-<%-- <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script> --%>
-<script src="${ctx }/resources/common/js/jquery.min.js"></script>
-<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-list.js"></script>
+	<link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
+	<link rel="stylesheet" href="${ctx }/resources/common/css/css.page.css" />
+	<link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
+	<%-- <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script> --%>
+	<script src="${ctx }/resources/common/js/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-list.js"></script>
 
-<script type="text/javascript">
- //1.点击发布按钮
- function updeIs_release(id){
-	 var st = $(".btn-rele-"+id+"").attr("ms-state");
-	 var url = "/gemtak/gemAdmin/findGemVOByID.do";
-	  $.post(url,{id:id,st:st},function(data){
-		data = $.parseJSON(data);
-	    //根据返回值做相应处理
-	    var flg = data.msg;
-	    if(flg=="Y"){
-	    	alert(data.warName+"成功！");
-	    	$(".btn-rele-"+id+"").text(data.btnNm);
-	    	$(".btn-rele-"+id+"").attr("ms-state",data.bkst);
-	    }else{
-	    	alert(data.warName+"失败！");
-	    }
-	  });
+	<script type="text/javascript">
+	 //1.点击发布按钮
+	 function updeIs_release(id){
+		 var st = $(".btn-rele-"+id+"").attr("ms-state");
+		 var url = "/gemtak/gemAdmin/findGemVOByID.do";
+		  $.post(url,{id:id,st:st},function(data){
+			data = $.parseJSON(data);
+		    //根据返回值做相应处理
+		    var flg = data.msg;
+		    if(flg=="Y"){
+		    	alert(data.warName+"成功！");
+		    	$(".btn-rele-"+id+"").text(data.btnNm);
+		    	$(".btn-rele-"+id+"").attr("ms-state",data.bkst);
+		    }else{
+		    	alert(data.warName+"失败！");
+		    }
+		  });
+		 
+	 }
 	 
- }
- 
-  //2.点击删除按钮
-  function updeIs_del(id){
-	 if(confirm("您确定要删除吗？")){
-	  var st = $(".btn-del-"+id+"").attr("ms-state");
-	  var url = "/gemtak/gemAdmin/updateDrGemById.do";
-	  $.post(url,{id:id,st:st},function(data){
-		
-	    //根据返回值做相应处理
-	    var flg = data.msg;
-	     if(flg=="Y"){
-	       $(".btn-del-"+id+"").parent().parent().parent().remove();
-	    }else{
-	    	alert("删除失败！");
-	    }
-	  });
+	  //2.点击删除按钮
+	  function updeIs_del(id){
+		 if(confirm("您确定要删除吗？")){
+		  var st = $(".btn-del-"+id+"").attr("ms-state");
+		  var url = "/gemtak/gemAdmin/updateDrGemById.do";
+		  $.post(url,{id:id,st:st},function(data){
+			
+		    //根据返回值做相应处理
+		    var flg = data.msg;
+		     if(flg=="Y"){
+		       $(".btn-del-"+id+"").parent().parent().parent().remove();
+		    }else{
+		    	alert("删除失败！");
+		    }
+		  });
+		 
+		 
+	     }
+	 }
 	 
+	  
 	 
-     }
- }
- 
-  
- 
-</script>
+	</script>
 </head>
 <body>
 
