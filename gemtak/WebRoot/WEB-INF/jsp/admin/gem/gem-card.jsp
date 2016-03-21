@@ -15,10 +15,14 @@
 <title>Gemtak</title>
 	<link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
 	<link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
+	<link rel="stylesheet" href="${ctx }/resources/uploadify/uploadify.css" type="text/css"></link>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-card.js"></script>
+    <script type="text/javascript" src="${ctx }/resources/common/js/jquery.min.js"></script>
+    
+    
 	<script type="text/javascript">
-	
+	//宝石保存
 	$(function(){
 		//保存
 		$(".btn-save").click(function(){	
@@ -75,8 +79,37 @@
 		      }
 		  }); */
 	  }
+	  
+	//上传证书
+	$(function (){
+	 $(".signlefile").bind("click",function (){
+	   upfile();
+	 });
+	});
 	
+	function upfile(){
+	 var formData = new FormData($("#sgform") [0]);
+	 $.ajax({
+	   url:"${ctx}/upload/uploadSGFile.do",
+	   type:"post",
+	   data:formData,
+	   async:false,
+	   cache:false,
+	   contentType:false,
+	   processData:false,
+	   success:function (data){
+	     alert("上传成功！");
+	   }
+	 });
+	}
 	
+	//获取当前图片的名字
+	function setFileName(){
+	  var index = $("#sfile").val().lastIndexOf('\\');
+	  var len = $("#sfile").val().length;
+	  var name = $("#sfile").val().substring(index+1,len);
+	  $(".sfile-name").attr("src",name);
+	}
 	
 	
 	</script>
@@ -265,9 +298,15 @@
 	  <!-- 按钮域 -->
 	  <div class="tit tit_bnt col-sm-12 col-md-12">
 	     <div class="col-xs-6 col-md-5">
-		    <p class=" sc_file col-xs-6 col-md-4"><input type="file" name="file"><button type="button" class="btn btn-col btn-lg btn-block">${pagevo['buttonCert'] }</button></p>
-			<p class="zhizhao col-xs-2 col-md-4"><img src="${ctx }/resources/admin/images/zhizhao.jpg"  /></p>
+		    <p class=" sc_file col-xs-6 col-md-4">
+		    　　　<input type="file" name="file" id="sfile" onchange="setFileName()"/>
+		    　　　<button type="button" class="btn btn-col btn-lg btn-block signlefile">${pagevo['buttonCert'] }</button>
+		    </p>
+			<p class="zhizhao col-xs-2 col-md-4"><img src="${ctx }/resources/admin/images/zhizhao.jpg" class="sfile-name" /></p>
 			<p class="col-xs-4 col-md-4"><a href="#" class="btn btn-col btn-lg btn-block" role="button">${pagevo['buttonDelete'] }</a></p>
+		  <form id="sgform" action="" method="post" enctype="multipart/pormm-data">
+		    　　　<input type="hidden" name="filevalue" id="filevalue" />
+		   </form>
 		 </div>
 		 <div class="col-xs-1 col-md-2"></div>
 		 <div class="col-xs-5 col-md-5">
