@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.constant.page.AGemListLang;
@@ -33,6 +35,7 @@ public class GemController extends BaseController {
 	
 	@Resource
 	IGemService gemService;
+	
 	
 	/**
 	 * @Description: 管理首页
@@ -138,6 +141,8 @@ public class GemController extends BaseController {
 		}
 		return "/admin/gem/gem-list";
 	}
+	
+	
 	
 	/**
 	 * @Description: 查询出所有gemVO
