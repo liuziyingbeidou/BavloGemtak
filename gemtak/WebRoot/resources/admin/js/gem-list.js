@@ -43,7 +43,7 @@ function loadGemList(p){
 				 "</dt>"+
 				 "<dd class='col-md-11 col-xs-9'>"+
 					 "<p class='col-md-5 col-xs-12'><span class='col-md-6 col-xs-12'><font>"+data[i].type_cn+"</font><font>"+data[i].shape_cn+"</font><font>"+data[i].lab_cn+"</font></span><span class='col-md-6 col-xs-12'><font>"+data[i].weight+"</font><font>"+data[i].stock_qty+""+data[i].pairs+"</font><font class='fc_001'>¥"+data[i].retail_price+"</font></span></p>"+
-					 "<p class='col-md-5 col-xs-12'><span class='col-xs-12 col-md-6'>"+ltTypeGem+"：<a href='./game.html'>"+ltStorage+"</a><a href=''>"+ltSign+"</a></span><span class='col-xs-12 col-md-6 pad_0'>"+ltTypeProduct+"：<a href=''>"+ltStorage+"</a><a href=''>"+ltSign+"</a></span></p>"+
+					 "<p class='col-md-5 col-xs-12'><span class='col-xs-12 col-md-6'>"+ltTypeGem+"：<a href='./addGem.do'>"+ltStorage+"</a><a href=''>"+ltSign+"</a></span><span class='col-xs-12 col-md-6 pad_0'>"+ltTypeProduct+"：<a href=''>"+ltStorage+"</a><a href=''>"+ltSign+"</a></span></p>"+
 					 "<p class='col-md-2 hidden-xs hidden-sm'>"+
 					   "<a href='javascript:updeIs_del("+data[i].id+")' class='btn-del-"+data[i].id+"' ms-state='"+data[i].is_release+"'>"+ltGemDel+"</a>"+
 					   "<a href='javascript:updeIs_release("+data[i].id+")' class='btn-rele-"+data[i].id+"' ms-state='"+data[i].is_release+"'>"+btnRefAndClose+"</a>"+
