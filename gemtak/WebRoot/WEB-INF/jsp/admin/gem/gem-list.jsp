@@ -185,7 +185,7 @@
 <script src="${ctx }/resources/common/js/jquery.page.js"></script>
 <script type="text/javascript">
     $(".tcdPageCode").createPage({
-        pageCount:"${total}",
+        pageCount:5,
         current:1,
         backFn:function(p){
             console.log(p);
