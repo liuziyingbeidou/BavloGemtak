@@ -3,10 +3,10 @@
  */
 $(function(){
 	
-	loadGemList(1);
+	/*loadGemList(1);
 	$(".sear_ch_sub").click(function(){
 		  loadGemList(1);
-	  });
+	});*/
 });
 //ajax加载Gem数据
 function loadGemList(p){
@@ -29,10 +29,9 @@ function loadGemList(p){
 		//console.log(data);
 		//将数据显示到UI  发布成功后
 		$(".list-gem").empty();
-		var data = rows.items;
+		var data = rows;
 		if(data != null){
 			var len = data.length;
-			//setPageSize(rows.total);
 			for(var i=0;i<len;i++){
 				var btnRefAndClose = ltGemRelease;
 				
@@ -55,13 +54,16 @@ function loadGemList(p){
 			  "</dl>");
 			}
 		}
+		
+		//pagesize
+		setPageSize(rows);
 	});
 }
 
 //设置分页页数
 function setPageSize(pageSize){
 	$(".tcdPageCode").createPage({
-        pageCount:pageSize/2,
+        pageCount:6/2,
         current:1,
         backFn:function(p){
             loadGemList(p);
