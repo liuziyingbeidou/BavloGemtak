@@ -1,6 +1,8 @@
 package com.bavlo.gemtak.web.gem;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.constant.page.AGemListLang;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.service.gem.itf.IGemService;
+import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.PageLangUtil;
 import com.bavlo.gemtak.utils.SelectUtil;
 import com.bavlo.gemtak.utils.StringUtil;
@@ -56,12 +59,8 @@ public class GemController extends BaseController {
 		/**数据查询-start**/
 		
 		//过滤条件
-		allgem = request.getParameter("allgem");
-		typegem = request.getParameter("typegem");
-		shapegem = request.getParameter("shapegem");
-		inputgem = request.getParameter("inputgem");
-		StringBuilder sql = new StringBuilder(" 1=1");
-		if(!"A".equals(allgem)){
+		/*StringBuilder sql = new StringBuilder(" 1=1");
+		if(!("A".equals(allgem))){
 			sql.append( "  and  is_release = '"+allgem+"'");
 		}else if(!"-1".equals(typegem)){
 			sql.append( " and type_id = '"+typegem+"'");
@@ -76,7 +75,7 @@ public class GemController extends BaseController {
 		if(gems != null){
 			total = gems.size();
 		}
-		model.addAttribute("total",total);
+		model.addAttribute("total",total);*/
 		/**数据查询-end**/
 		
 		return "/admin/gem/gem-list";
@@ -87,23 +86,25 @@ public class GemController extends BaseController {
 	 */
 	@RequestMapping(value="getGemListByWh")
 	public void getGemListByWh(Model model,HttpServletRequest request,HttpServletResponse response,Integer dgpage,String allgem,String typegem,String shapegem,String inputgem){
-		allgem = request.getParameter("allgem");
-		typegem = request.getParameter("typegem");
-		shapegem = request.getParameter("shapegem");
-		inputgem = request.getParameter("inputgem");
+		
 		StringBuilder sql = new StringBuilder(" 1=1");
-		if(!"A".equals(allgem)){
+		if(!("A".equals(allgem) || CommonUtils.isNull(allgem))){
 			sql.append( "  and  is_release = '"+allgem+"'");
-		}else if(!"-1".equals(typegem)){
+		}else if(!("-1".equals(typegem) || CommonUtils.isNull(allgem))){
 			sql.append( " and type_id = '"+typegem+"'");
-		}else if(!"-1".equals(shapegem)){
+		}else if(!("-1".equals(shapegem) || CommonUtils.isNull(allgem))){
 			sql.append(" and shape_id = '"+shapegem+"'");
 		}else if(StringUtil.isNotEmpty(inputgem)){
 			sql.append(" and ( is_release like '%"+inputgem+"%' or type_id like '%"+inputgem+"%' or shape_id like '%"+inputgem+"%')");
 		}
 		//逻辑处理
+		Integer total = gemService.getListSizeGem(sql+"");
 		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows);
-		renderJson(gems);
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		jsonMap.put("items", gems);
+		jsonMap.put("total", total);
+		renderJson(jsonMap);
 	}
 	
 	/**
