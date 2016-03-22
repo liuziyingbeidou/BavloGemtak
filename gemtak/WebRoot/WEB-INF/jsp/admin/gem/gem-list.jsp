@@ -56,12 +56,11 @@
 		    	alert("删除失败！");
 		    }
 		  });
-		 
-		 
+	 
 	     }
 	 }
 	 
-	  
+	 
 	 
 	</script>
 </head>
@@ -88,7 +87,7 @@
 	  <!-- 筛选条件 -->
 	    <ul class="tit_ul">
 	    	<li class="col-sm-3 col-xs-6">
-				<select class="form-control input-lg all-gem" name="">
+				<select class="form-control input-lg all-gem" name="" onchange="show_allgem(this.options[this.options.selectedIndex].value)">
 				 <option value="A">${pagevo['fltAllGem'] }</option>
 				 <option value="S">${pagevo['fltStorageGem'] }</option>
 				 <option value="E">${pagevo['fltNewGem'] }</option>
@@ -98,16 +97,16 @@
 			</li>
 			<li class="col-sm-3 col-xs-6">
 			<!-- 宝石类型 -->
-			<select class="form-control input-lg sel-gem-type type-gem" name="type_id">
-			<option value="-1">${pagevo['fltGemType'] }</option>
-			 <c:forEach var="bean" items="${listGemType}">
-			  <option value="${bean.pKey}">${bean.pValue}</option>
-			 </c:forEach>
-			</select>
+				<select class="form-control input-lg sel-gem-type type-gem" name="type_id" onchange="show_typegem(this.options[this.options.selectedIndex].value)">
+				 <option value="-1">${pagevo['fltGemType'] }</option>
+				  <c:forEach var="bean" items="${listGemType}">
+				   <option value="${bean.pKey}">${bean.pValue}</option>
+				  </c:forEach>
+				</select>
 			</li>
 			<li class="col-sm-3 col-xs-6">
 			<!-- 宝石形状 -->
-			<select class="form-control input-lg shape-gem" name="shape_id">
+			<select class="form-control input-lg shape-gem" name="shape_id" onchange="show_shapegem(this.options[this.options.selectedIndex].value)">
 			<option value="-1">${pagevo['fltGemShape'] }</option>
 			 <c:forEach var="bean" items="${listGemShape}">
 			  <option value="${bean.pKey}">${bean.pValue}</option>
@@ -187,6 +186,25 @@
 	if(pg == undefined){
 		pg = 1;
 	}
+	//设置当前条件
+	var allgem =  getParam("allgem");
+	 if(allgem != undefined){
+		$(".all-gem").val(allgem);
+	 }else{
+		$(".all-gem").val("A");
+	 }
+	var gemtype =  getParam("typegem");
+	 if(gemtype != undefined){
+		$(".type-gem").val(gemtype);
+	 }else{
+		$(".type-gem").val("-1");
+	 }
+	 var shapegem =  getParam("shapegem");
+	 if(shapegem != undefined){
+		$(".shape-gem").val(shapegem);
+	 }else{
+		$(".shape-gem").val("-1");
+	 }  
     $(".tcdPageCode").createPage({
         pageCount:"${total}",
         current:pg,
@@ -194,5 +212,20 @@
             window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+p;
         }
     }); 
+    
+    //-----------------------条件查询-------------------------
+    //全部产品
+    function show_allgem(v){     
+         window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+pg+"&allgem="+v; 
+    };
+    //宝石类型
+    function show_typegem(v){     
+         window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+pg+"&typegem="+v; 
+    };
+    //宝石形状
+    function show_shapegem(v){     
+        window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+pg+"&shapegem="+v; 
+    };
+    
 </script>
 </html>
