@@ -108,7 +108,7 @@
 	  var index = $("#sfile").val().lastIndexOf('\\');
 	  var len = $("#sfile").val().length;
 	  var name = $("#sfile").val().substring(index+1,len);
-	  $(".sfile-name").attr("src",name);
+	  $(".sfile-name").attr("src","gemtak/resources/admin/images/"+name);
 	}
 	
 	
@@ -137,7 +137,7 @@
 			  <div class="line col-sm-12 hidden-xs hidden-sm"></div>
 		   </div>
 		   <!-- Body域 -->
-		 <form id="gemVO">
+		 <form id="gemVO" >
 		  <input type="hidden" name="supplier_id">
 		   <div class="game_ul">
 		       <ul class="col-sm-5">
