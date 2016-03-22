@@ -84,11 +84,11 @@ public class GemAService extends CommonService implements IGemService {
 	 */
 	@Override
 	public List<GemVO> findListGem(String conditions,Integer dgpage, Integer rows) {
-		
+		List<GemVO> listvo = null;
 		if(conditions != null && conditions != ""){
-			findPage(GemVO.class, dgpage, rows, conditions);
+			listvo = findPage(GemVO.class, dgpage, rows, conditions);
 		}
-		List<GemVO> listvo = findPage(GemVO.class, dgpage, rows, conditions);
+		
 		return listvo;
 	}
 
@@ -122,6 +122,11 @@ public class GemAService extends CommonService implements IGemService {
 			
 		}
 		
+	}
+
+	@Override
+	public Integer getListSizeGem(String contions) {
+		return getCountByHQLByDr(GemVO.class, contions);
 	}
 	
 	
