@@ -89,6 +89,8 @@ public class AGemCardVO{
 	private String buttonViewGem ;
 	//上传证书
 	private String buttonCert ;
+	//选择证书
+	private String buttonSelCert ;
 	//删除按钮
 	private String buttonDelete ;
 	//退出编辑按钮
@@ -371,6 +373,12 @@ public class AGemCardVO{
 	}
 	public void setTablePriceUnitCT(String tablePriceUnitCT) {
 		this.tablePriceUnitCT = tablePriceUnitCT;
+	}
+	public String getButtonSelCert() {
+		return buttonSelCert;
+	}
+	public void setButtonSelCert(String buttonSelCert) {
+		this.buttonSelCert = buttonSelCert;
 	}
 	
 }
