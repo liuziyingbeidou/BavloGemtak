@@ -15,7 +15,6 @@
 <title>Gemtak</title>
 	<link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
 	<link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
-	<link rel="stylesheet" href="${ctx }/resources/uploadify/uploadify.css" type="text/css"></link>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-card.js"></script>
     <script type="text/javascript" src="${ctx }/resources/common/js/jquery.min.js"></script>
@@ -82,7 +81,7 @@
 	  
 	//上传证书
 	$(function (){
-	 $(".signlefile").bind("click",function (){
+	 $(".btn-upload-cert").bind("click",function (){
 	   upfile();
 	 });
 	});
@@ -116,6 +115,9 @@
 	
 	<style type="text/css">
 		.input-shape{
+			display: none;
+		}
+		.btn-upload-cert{
 			display: none;
 		}
 	</style>
@@ -299,14 +301,11 @@
 	  <div class="tit tit_bnt col-sm-12 col-md-12">
 	     <div class="col-xs-6 col-md-5">
 		    <p class=" sc_file col-xs-6 col-md-4">
-		    　　　<input type="file" name="file" id="sfile" onchange="setFileName()"/>
-		    　　　<button type="button" class="btn btn-col btn-lg btn-block signlefile">${pagevo['buttonCert'] }</button>
+		      <input type="file">
+		    　　　<button type="button" class="btn btn-col btn-lg btn-block signlefile btn-select-cert">${pagevo['buttonSelCert'] }</button>
 		    </p>
 			<p class="zhizhao col-xs-2 col-md-4"><img src="${ctx }/resources/admin/images/zhizhao.jpg" class="sfile-name" /></p>
 			<p class="col-xs-4 col-md-4"><a href="#" class="btn btn-col btn-lg btn-block" role="button">${pagevo['buttonDelete'] }</a></p>
-		  <form id="sgform" action="" method="post" enctype="multipart/pormm-data">
-		    　　　<input type="hidden" name="filevalue" id="filevalue" />
-		   </form>
 		 </div>
 		 <div class="col-xs-1 col-md-2"></div>
 		 <div class="col-xs-5 col-md-5">
@@ -315,7 +314,6 @@
 			 <p class="col-xs-5 col-md-5"><button type="button" class="btn btn-col btn-lg btn-block btn-save">${pagevo['buttonSave'] }</button></p>
 		 </div>
 	  </div>
-	
   </div>
 </div>
 <div class="footer hidden-xs hidden-sm">
