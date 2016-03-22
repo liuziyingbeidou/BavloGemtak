@@ -85,4 +85,9 @@ public interface IGemService {
 	 */
 	public void updateDrGemById(Integer id) throws Exception;
 	
+	/**
+	 * ИљОн
+	 * @param sql
+	 */
+	public Integer getListSizeGem(String contions);
 }
