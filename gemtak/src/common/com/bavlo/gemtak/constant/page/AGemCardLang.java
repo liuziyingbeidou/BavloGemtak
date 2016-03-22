@@ -137,6 +137,9 @@ public interface AGemCardLang {
 	public static final String BUTTON_CERT_CN = "上传证书";
 	public static final String BUTTON_CERT_EN = "UPLOAD";//UPLOAD CERT
 	
+	public static final String BUTTON_SELCERT_CN = "选择证书";
+	public static final String BUTTON_SELCERT_EN = "SELECT";//UPLOAD CERT
+	
 	public static final String BUTTON_DELETE_CN = "删证书";
 	public static final String BUTTON_DELETE_EN = "DEL";// CERT
 	
