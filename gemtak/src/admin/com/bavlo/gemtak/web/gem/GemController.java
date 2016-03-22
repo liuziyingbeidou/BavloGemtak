@@ -62,11 +62,14 @@ public class GemController extends BaseController {
 		StringBuilder sql = new StringBuilder(" 1=1");
 		if(!("A".equals(allgem) || CommonUtils.isNull(allgem))){
 			sql.append( "  and  is_release = '"+allgem+"'");
-		}else if(!("-1".equals(typegem) || CommonUtils.isNull(typegem))){
+		}
+		if(!("-1".equals(typegem) || CommonUtils.isNull(typegem))){
 			sql.append( " and type_id = '"+typegem+"'");
-		}else if(!("-1".equals(shapegem) || CommonUtils.isNull(shapegem))){
+		}
+		if(!("-1".equals(shapegem) || CommonUtils.isNull(shapegem))){
 			sql.append(" and shape_id = '"+shapegem+"'");
-		}else if(StringUtil.isNotEmpty(inputgem)){
+		}
+		if(StringUtil.isNotEmpty(inputgem)){
 			sql.append(" and ( is_release like '%"+inputgem+"%' or type_id like '%"+inputgem+"%' or shape_id like '%"+inputgem+"%')");
 		}
 		//Âß¼­´¦Àí
