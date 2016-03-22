@@ -59,23 +59,25 @@ public class GemController extends BaseController {
 		/**数据查询-start**/
 		
 		//过滤条件
-		/*StringBuilder sql = new StringBuilder(" 1=1");
-		if(!("A".equals(allgem))){
+		StringBuilder sql = new StringBuilder(" 1=1");
+		if(!("A".equals(allgem) || CommonUtils.isNull(allgem))){
 			sql.append( "  and  is_release = '"+allgem+"'");
-		}else if(!"-1".equals(typegem)){
+		}else if(!("-1".equals(typegem) || CommonUtils.isNull(typegem))){
 			sql.append( " and type_id = '"+typegem+"'");
-		}else if(!"-1".equals(shapegem)){
+		}else if(!("-1".equals(shapegem) || CommonUtils.isNull(shapegem))){
 			sql.append(" and shape_id = '"+shapegem+"'");
 		}else if(StringUtil.isNotEmpty(inputgem)){
 			sql.append(" and ( is_release like '%"+inputgem+"%' or type_id like '%"+inputgem+"%' or shape_id like '%"+inputgem+"%')");
 		}
 		//逻辑处理
-		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows);
-		Integer total  = 0;
-		if(gems != null){
-			total = gems.size();
+		Integer total = gemService.getListSizeGem(sql+"");
+		if(dgpage == null){
+			dgpage = this.dgpage;
 		}
-		model.addAttribute("total",total);*/
+		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows);
+		
+		model.addAttribute("gems",gems);
+		model.addAttribute("total",total/rows);
 		/**数据查询-end**/
 		
 		return "/admin/gem/gem-list";
@@ -84,6 +86,7 @@ public class GemController extends BaseController {
 	/**
 	 * 根据条件获取宝石列表数据
 	 */
+	@Deprecated
 	@RequestMapping(value="getGemListByWh")
 	public void getGemListByWh(Model model,HttpServletRequest request,HttpServletResponse response,Integer dgpage,String allgem,String typegem,String shapegem,String inputgem){
 		
@@ -101,10 +104,11 @@ public class GemController extends BaseController {
 		Integer total = gemService.getListSizeGem(sql+"");
 		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows);
 		
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		renderJson(gems);
+		/*Map<String, Object> jsonMap = new HashMap<String, Object>();
 		jsonMap.put("items", gems);
 		jsonMap.put("total", total);
-		renderJson(jsonMap);
+		renderJson(jsonMap);*/
 	}
 	
 	/**
