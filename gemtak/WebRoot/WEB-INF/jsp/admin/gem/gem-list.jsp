@@ -87,7 +87,7 @@
 	  <!-- 筛选条件 -->
 	    <ul class="tit_ul">
 	    	<li class="col-sm-3 col-xs-6">
-				<select class="form-control input-lg all-gem" name="" onchange="show_allgem(this.options[this.options.selectedIndex].value)">
+				<select class="form-control input-lg all-gem" name="" onchange="searchResult()">
 				 <option value="A">${pagevo['fltAllGem'] }</option>
 				 <option value="S">${pagevo['fltStorageGem'] }</option>
 				 <option value="E">${pagevo['fltNewGem'] }</option>
@@ -97,7 +97,7 @@
 			</li>
 			<li class="col-sm-3 col-xs-6">
 			<!-- 宝石类型 -->
-				<select class="form-control input-lg sel-gem-type type-gem" name="type_id" onchange="show_typegem(this.options[this.options.selectedIndex].value)">
+				<select class="form-control input-lg sel-gem-type type-gem" name="type_id" onchange="searchResult()">
 				 <option value="-1">${pagevo['fltGemType'] }</option>
 				  <c:forEach var="bean" items="${listGemType}">
 				   <option value="${bean.pKey}">${bean.pValue}</option>
@@ -106,7 +106,7 @@
 			</li>
 			<li class="col-sm-3 col-xs-6">
 			<!-- 宝石形状 -->
-			<select class="form-control input-lg shape-gem" name="shape_id" onchange="show_shapegem(this.options[this.options.selectedIndex].value)">
+			<select class="form-control input-lg shape-gem" name="shape_id" onchange="searchResult()">
 			<option value="-1">${pagevo['fltGemShape'] }</option>
 			 <c:forEach var="bean" items="${listGemShape}">
 			  <option value="${bean.pKey}">${bean.pValue}</option>
@@ -114,7 +114,7 @@
 			</select>
 			</li>
 			<!-- 搜索 -->
-			<li class="col-sm-3 col-xs-6"><p><input class="sear_ch_input input-gem" type="text" placeholder="${pagevo['fltGemSearch'] }" value=""><input class="sear_ch_sub" type="submit" value=""></p></li>
+			<li class="col-sm-3 col-xs-6"><p><input class="sear_ch_input input-gem" type="text" placeholder="${pagevo['fltGemSearch'] } " value=""><input class="sear_ch_sub" type="button" value="" onclick="searchResult()"></p></li>
 		</ul>
 	  
 	  </div>
@@ -205,6 +205,12 @@
 	 }else{
 		$(".shape-gem").val("-1");
 	 }  
+	 var itgem =  getParam("inputgem");
+	 if(itgem != undefined){
+		$(".input-gem").val(itgem);
+	 }else{
+		$(".input-gem").val("");
+	 }  
     $(".tcdPageCode").createPage({
         pageCount:"${total}",
         current:pg,
@@ -214,6 +220,26 @@
     }); 
     
     //-----------------------条件查询-------------------------
+    function searchResult(){
+    	var gemType = $(".type-gem").find("option:selected").val();
+    	var gemShape =  $(".shape-gem").find("option:selected").val();
+    	var gemStatus =  $(".all-gem").find("option:selected").val();
+    	var gemInput =  $(".input-gem").val();
+    	var url = "${ctx}/gemAdmin/viewGemList.do?dgpage="+pg;
+    	if(gemType != null && gemType != ""){
+    		url += "&typegem="+gemType;
+    	}
+		if(gemShape != null && gemShape != ""){
+    		url += "&shapegem="+gemShape;
+    	}
+		if(gemStatus != null && gemStatus != ""){
+    		url += "&allgem="+gemStatus;
+    	}
+		if(gemInput != null && gemInput != ""){
+    		url += "&inputgem="+gemInput;
+    	}
+    	window.location.href= url;
+    }
     //全部产品
     function show_allgem(v){     
          window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+pg+"&allgem="+v; 
@@ -226,6 +252,9 @@
     function show_shapegem(v){     
         window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+pg+"&shapegem="+v; 
     };
-    
+    //模糊搜索
+    function show_inputgem(v){     
+        window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+pg+"&inputgem="+v; 
+    };
 </script>
 </html>
