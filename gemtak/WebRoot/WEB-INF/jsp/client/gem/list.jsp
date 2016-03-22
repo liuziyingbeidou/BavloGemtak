@@ -141,10 +141,10 @@
       <div class="line "></div>
       <div class="tit_all col-md-12">	  
           <div class="so_item col-md-12 hidden-xs hidden-sm">
-          	 <span class="selects-type"></span>
-		     <span class="selects-shape"></span>
-		     <span class="selects-weight"></span>
-		     <span class="selects-price"></span>
+          	 <span class="selects-type ms-sel"></span>
+		     <span class="selects-shape ms-sel"></span>
+		     <span class="selects-weight ms-sel"></span>
+		     <span class="selects-price ms-sel"></span>
 			 <span class="span_item" ><input type="checkbox"  name="renamed" value="1">单粒</span>
 			 <span class="span_item"><input type="checkbox"  name="renamed" value="1">配对</span>
 			 <span class="span_item"><input type="checkbox"  name="renamed" value="1">多粒</span>
