@@ -25,12 +25,15 @@ function loadGemList(p){
 	var shapegem = $(".shape-gem").val();
 	var typegem = $(".type-gem").val();
 	var inputgem = $(".input-gem").val();
-	$.post(url,{dgpage:p,gemType:gemType,allgem:allgem,shapegem:shapegem,typegem:typegem,inputgem:inputgem},function(data){
+	$.post(url,{dgpage:p,gemType:gemType,allgem:allgem,shapegem:shapegem,typegem:typegem,inputgem:inputgem},function(rows){
 		//console.log(data);
 		//将数据显示到UI  发布成功后
 		$(".list-gem").empty();
+		var data = rows.items;
 		if(data != null){
-			for(var i=0;i<data.length;i++){
+			var len = data.length;
+			//setPageSize(rows.total);
+			for(var i=0;i<len;i++){
 				var btnRefAndClose = ltGemRelease;
 				
 				if(data[i].is_release == "Y"){
@@ -53,4 +56,15 @@ function loadGemList(p){
 			}
 		}
 	});
+}
+
+//设置分页页数
+function setPageSize(pageSize){
+	$(".tcdPageCode").createPage({
+        pageCount:pageSize/2,
+        current:1,
+        backFn:function(p){
+            loadGemList(p);
+        }
+    });
 }
