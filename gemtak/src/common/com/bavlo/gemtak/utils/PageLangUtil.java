@@ -105,6 +105,7 @@ public class PageLangUtil {
 			aGemCardVO.setTableLocation(AGemCardLang.table_Location_EN);
 			//°´Å¥
 			aGemCardVO.setButtonCert(AGemCardLang.BUTTON_CERT_EN);
+			aGemCardVO.setButtonSelCert(AGemCardLang.BUTTON_SELCERT_EN);
 			aGemCardVO.setButtonClose(AGemCardLang.BUTTON_CLOSE_EN);
 			aGemCardVO.setButtonDelete(AGemCardLang.BUTTON_DELETE_EN);
 			aGemCardVO.setButtonSave(AGemCardLang.BUTTON_SAVE_EN);
@@ -149,6 +150,7 @@ public class PageLangUtil {
 			aGemCardVO.setTableLocation(AGemCardLang.table_Location_CN);
 			//°´Å¥
 			aGemCardVO.setButtonCert(AGemCardLang.BUTTON_CERT_CN);
+			aGemCardVO.setButtonSelCert(AGemCardLang.BUTTON_SELCERT_CN);
 			aGemCardVO.setButtonClose(AGemCardLang.BUTTON_CLOSE_CN);
 			aGemCardVO.setButtonDelete(AGemCardLang.BUTTON_DELETE_CN);
 			aGemCardVO.setButtonSave(AGemCardLang.BUTTON_SAVE_CN);
