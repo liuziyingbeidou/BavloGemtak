@@ -17,8 +17,9 @@
 	<link rel="stylesheet" href="${ctx }/resources/common/css/css.page.css" />
 	<link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
 	<%-- <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script> --%>
-	<script src="${ctx }/resources/common/js/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript" src="${ctx }/resources/common/js/jquery.min.js"></script>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-list.js"></script>
+	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-common.js"></script>
 
 	<script type="text/javascript">
 	 //1.点击发布按钮
@@ -131,11 +132,9 @@
 				 <span class="col-xs-12 hidden-md hidden-lg" style="text-align:center">${pagevo['tlGemInfoAndOpr'] }</span>
 			 </p>
 		 </div>  
-		 <!-- 宝石列表 -->
-		 <span class="list-gem">
-		 
-		 </span>
-		 <%-- <c:forEach items="${gems}" var="gem">
+		 <!-- 宝石列表 -后续完善-->
+		 <!-- <span class="list-gem"></span> -->
+		 <c:forEach items="${gems}" var="gem">
 		 <dl class="nr_con col-md-12">
 		     <dt class="col-md-1 col-xs-3">
 				 <img src="${ctx }/resources/admin/images/cp8.jpg" style="width:100%"/>
@@ -150,7 +149,7 @@
 				 </p>
 			 </dd>
 		  </dl>
-		  </c:forEach> --%>
+		  </c:forEach> 
 		  <!-- “更多”按钮 -->
           <div class="more hidden-md hidden-lg"><p><a href="" >${pagevo['btnMore'] }</a></p></div>
 		  
@@ -184,13 +183,16 @@
 </body>
 <script src="${ctx }/resources/common/js/jquery.page.js"></script>
 <script type="text/javascript">
+	var pg = getParam("dgpage");
+	if(pg == undefined){
+		pg = 1;
+	}
     $(".tcdPageCode").createPage({
-        pageCount:5,
-        current:1,
+        pageCount:"${total}",
+        current:pg,
         backFn:function(p){
-            console.log(p);
-            loadGemList(p);
+            window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+p;
         }
-    });
+    }); 
 </script>
 </html>
