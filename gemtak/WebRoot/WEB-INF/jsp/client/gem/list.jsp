@@ -94,7 +94,9 @@
 			<a href="javascript:void(0);" id="typeid3"  onclick="javascript:show_menuone(3);">重量<b class="hidden-xs hidden-sm">Weight</b></a>
 			<a href="javascript:void(0);" id="typeid4"  onclick="javascript:show_menuone(4);">价格<b class="hidden-xs hidden-sm">Price</b></a>
 		</p>
-		<div class="sou col-md-4 hidden-xs hidden-sm"><input class="sear_ch_input" type="text" value="巴黎之吻"><input class="sear_ch_sub" type="submit" value=""></div>
+		<div class="sou col-md-4 hidden-xs hidden-sm">
+		  <input class="sear_ch_input" type="text" value="巴黎之吻"><input class="sear_ch_sub" type="submit" value="">
+		</div>
 	  </div>
 	  <div class="line "></div>
 	  <div class="tit_all">	
@@ -104,7 +106,7 @@
 					   <div class="swiper-slide"><a class="p_default " id="gemid" vid="a" vn="全部" style="background: url('/gemtak/resources/client/images/game/g0.png') top center no-repeat;"></a><span >全部</span></div>
 					   <c:forEach var="bean" items="${listGemType}" varStatus="status">
 						  <div class="swiper-slide">
-						  <a id="gemid${status.index+1}" class="p_default "  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/g1.png') top center no-repeat;"></a>
+						  <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/g1.png') top center no-repeat;"></a>
 						  <span>${bean.pValue}</span>
 						  </div>
 					   </c:forEach>
@@ -119,7 +121,7 @@
 				 <div class="swiper-wrapper lt_ul2">
 				 	<div class="swiper-slide"><a class="nav_default" id="metalid0" vid="a" vn="全部" style="background: url('/gemtak/resources/client/images/mot/a1.png') top center no-repeat;"></a><span>全部</span></div>	
 				 	<c:forEach var="bean" items="${listGemShape}" varStatus="status">
-					  <div class="swiper-slide"><a id="metalid${status.index+1}" class="nav_default " vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/mot/Round.png') top center no-repeat;"></a>
+					  <div class="swiper-slide"><a id="metalid${status.index+1}" class="nav_default  shape-gem" vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/mot/Round.png') top center no-repeat;"></a>
 					  <span>${bean.pValue}</span></div>
 					</c:forEach>
                  </div>
@@ -141,13 +143,13 @@
       <div class="line "></div>
       <div class="tit_all col-md-12">	  
           <div class="so_item col-md-12 hidden-xs hidden-sm">
-          	 <span class="selects-type ms-sel"></span>
-		     <span class="selects-shape ms-sel"></span>
-		     <span class="selects-weight ms-sel"></span>
-		     <span class="selects-price ms-sel"></span>
-			 <span class="span_item" ><input type="checkbox"  name="renamed" value="1">单粒</span>
-			 <span class="span_item"><input type="checkbox"  name="renamed" value="1">配对</span>
-			 <span class="span_item"><input type="checkbox"  name="renamed" value="1">多粒</span>
+          	 <span class="selects-type ms-sel" ms-key=""></span>
+		     <span class="selects-shape ms-sel" ms-key=""></span>
+		     <span class="selects-weight ms-sel" ></span>
+		     <span class="selects-price ms-sel" ></span>
+			 <span class="span_item" ><input type="checkbox"  name="renamed" value="sl">单粒</span>
+			 <span class="span_item"><input type="checkbox"  name="renamed" value="pl">配对</span>
+			 <span class="span_item"><input type="checkbox"  name="renamed" value="ml">多粒</span>
 			 <span class="span_item"><input type="checkbox"  name="renamed" value="1">弧面</span>
 			 <span class="span_item"><input type="checkbox"  name="renamed" value="1">刻面</span>
 		  </div>
@@ -168,12 +170,14 @@
 		  
 		  </div>
           <div class="job_xq col-md-12"  id="cont1">
-		      <ul>
-			    <li class="col-md-3 col-xs-6">		
+		      <ul class="appendClientList">
+		      <c:forEach items="${gems}" var="gem">		
+			    <li class="col-md-3 col-xs-6">
 				  <span><a href="./detail.html"><image src="${ctx }/resources/client/images/cp1.png" /></a></span>
-				  <h6><b>紫晶<font class="hidden-xs hidden-sm">（Amethyst）</font></b><i>¥168000</i></h6>
-				  <p><b>2.27ct VS1 VG</b><i><image src="${ctx }/resources/client/images/tu3.png" /></i></p>
+				  <h6><b>${gem.type_cn}<font class="hidden-xs hidden-sm">（${gem.type_en}）</font></b><i>¥${gem.retail_price}</i></h6>
+				  <p><b>${gem.weight} ${gem.clarity_en} ${gem.cut_en}</b><i><image src="${ctx }/resources/client/images/tu3.png" /></i></p>
 				</li>
+				</c:forEach>
 			  </ul>
 		      <div class="jzgd hidden-md hidden-lg" ><a href="">更多</a></div>
           </div>
@@ -181,8 +185,8 @@
 		      <ul>
 			    <li class="col-md-3 col-xs-6">		
 				  <span><a href="./detail.html"><image src="${ctx }/resources/client/images/cp2.jpg" /></a></span>
-				  <h6><b>紫晶<font class="hidden-xs hidden-sm">（Amethyst）<font></b><i>¥168000</i></h6>
-				  <p><b>2.27ct VS1 VG</b><i><image src="${ctx }/resources/client/images/tu3.png" /></i></p>
+				  <h6><b>${gem.type_cn}<font class="hidden-xs hidden-sm">（${gem.type_en}）<font></b><i>¥${gem.retail_price}</i></h6>
+				  <p><b>${gem.weight} ${gem.clarity_en} ${gem.cut_en}</b><i><image src="${ctx }/resources/client/images/tu3.png" /></i></p>
 				</li>
 			  </ul>
           </div>
