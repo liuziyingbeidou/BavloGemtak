@@ -1,5 +1,6 @@
 package com.bavlo.gemtak.web.ui;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -11,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bavlo.gemtak.constant.controller.IClientForward;
+import com.bavlo.gemtak.model.gem.GemVO;
+import com.bavlo.gemtak.service.gem.itf.IGemService;
 import com.bavlo.gemtak.service.weixin.itf.IWXZFService;
 import com.bavlo.gemtak.util.weixin.WXPayUtil;
 import com.bavlo.gemtak.utils.CommonUtils;
@@ -31,7 +34,9 @@ public class GemClientController extends BaseController {
 	
 	@Resource
 	IWXZFService wXZFService;
-
+	@Resource
+	IGemService gemService;
+	
 	/**
 	 * @Description: 首页-宝石列表
 	 * @param @param model
@@ -41,7 +46,9 @@ public class GemClientController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value="viewGemList")
-	public String viewGemList(Model model,HttpServletResponse response,HttpServletRequest request){
+	public String viewGemList(Model model,HttpServletRequest request,HttpServletResponse response,
+			Integer dgpage,String typegem,String shapegem,String fromWeight,String toWeight,
+			String fromPrice,String toPrice){
 		
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
@@ -49,7 +56,24 @@ public class GemClientController extends BaseController {
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCListPageModel(model,lang);
 		
-		return IClientForward.viewGemList;
+		StringBuilder sql = new StringBuilder(" 1=1");
+		if(!CommonUtils.isNull(typegem)){
+			sql.append( " and type_id = '"+typegem+"'");
+		}
+		if(!CommonUtils.isNull(shapegem)){
+			sql.append(" and shape_id = '"+shapegem+"'");
+		}
+		if(!CommonUtils.isNull(fromWeight) && !CommonUtils.isNull(toWeight)){
+			sql.append(" and weight between"+fromWeight+"and"+toWeight+"");
+		}
+		if(!CommonUtils.isNull(fromPrice) && !CommonUtils.isNull(toPrice)){
+			sql.append(" and retail_price between"+fromPrice+"and"+toPrice+"");
+		}
+        List<GemVO> gems = gemService.findListGem(sql+"", dgpage, rows);
+		
+		model.addAttribute("gems",gems);
+		/*return IClientForward.viewGemList;*/
+		return "/client/gem/list";
 	}
 	
 	/**
