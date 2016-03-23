@@ -221,40 +221,26 @@
     
     //-----------------------条件查询-------------------------
     function searchResult(){
-    	var gemType = $(".type-gem").find("option:selected").val();
+    	var gemType = $(".type-gem").find("option:selected").val(); //取宝石类型下拉框中的值
     	var gemShape =  $(".shape-gem").find("option:selected").val();
     	var gemStatus =  $(".all-gem").find("option:selected").val();
     	var gemInput =  $(".input-gem").val();
     	var url = "${ctx}/gemAdmin/viewGemList.do?dgpage="+pg;
-    	if(gemType != null && gemType != ""){
+    	if(gemType != null && gemType != ""){     //宝石类型
     		url += "&typegem="+gemType;
     	}
-		if(gemShape != null && gemShape != ""){
+		if(gemShape != null && gemShape != ""){   //宝石形状
     		url += "&shapegem="+gemShape;
     	}
-		if(gemStatus != null && gemStatus != ""){
+		if(gemStatus != null && gemStatus != ""){  //全部产品
     		url += "&allgem="+gemStatus;
     	}
-		if(gemInput != null && gemInput != ""){
+		if(gemInput != null && gemInput != ""){    //模糊搜索
     		url += "&inputgem="+gemInput;
     	}
     	window.location.href= url;
     }
-    //全部产品
-    function show_allgem(v){     
-         window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+pg+"&allgem="+v; 
-    };
-    //宝石类型
-    function show_typegem(v){     
-         window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+pg+"&typegem="+v; 
-    };
-    //宝石形状
-    function show_shapegem(v){     
-        window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+pg+"&shapegem="+v; 
-    };
-    //模糊搜索
-    function show_inputgem(v){     
-        window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+pg+"&inputgem="+v; 
-    };
+    
+    
 </script>
 </html>
