@@ -34,8 +34,10 @@
 		    	alert(data.warName+"成功！");
 		    	$(".btn-rele-"+id+"").text(data.btnNm);
 		    	$(".btn-rele-"+id+"").attr("ms-state",data.bkst);
+		        location.reload();
 		    }else{
 		    	alert(data.warName+"失败！");
+		    	location.reload();
 		    }
 		  });
 		 
@@ -44,16 +46,17 @@
 	  //2.点击删除按钮
 	  function updeIs_del(id){
 		 if(confirm("您确定要删除吗？")){
-		  var st = $(".btn-del-"+id+"").attr("ms-state");
 		  var url = "/gemtak/gemAdmin/updateDrGemById.do";
-		  $.post(url,{id:id,st:st},function(data){
+		  $.post(url,{id:id},function(data){
 			
 		    //根据返回值做相应处理
-		    var flg = data.msg;
-		     if(flg=="Y"){
-		       $(".btn-del-"+id+"").parent().parent().parent().remove();
+		    var back = $.parseJSON(data).mess;
+		     if(back=="Y"){
+		       alert("删除成功！");
+		       location.reload();
 		    }else{
 		    	alert("删除失败！");
+		    	location.reload();
 		    }
 		  });
 	 
@@ -143,8 +146,8 @@
 				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>${gem.type_cn}</font><font>${gem.shape_cn}</font><font>${gem.lab_cn}</font></span><span  class="col-md-6 col-xs-12"><font>${gem.weight}</font><font>${gem.stock_qty}${gem.pairs}</font><font class="fc_001">¥${gem.purchase_price}</font></span></p>
 				 <p class="col-md-5 col-xs-12"><span class="col-xs-12 col-md-6" >${pagevo['ltTypeGem'] }：<a href="./game.html">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a></span><span  class="col-xs-12 col-md-6 pad_0">${pagevo['ltTypeProduct'] }：<a href="">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a></span></p>
 				 <p class="col-md-2 hidden-xs hidden-sm">
-				   <a href="javascript:del()">${pagevo['ltGemDel'] }</a>
-				   <a href="javascript:updeIs_release(${gem.supplier_id})">${pagevo['ltGemRelease'] }</a>
+				   <a href="javascript:updeIs_del(${gem.id})" class="btn-del-${gem.id}" ms-state="${gem.is_release}">${pagevo['ltGemDel'] }</a>
+				   <a href="javascript:updeIs_release(${gem.id})" class="btn-rele-${gem.id}" ms-state="${gem.is_release}">${pagevo['ltGemRelease'] }</a>
 				 </p>
 			 </dd>
 		  </dl>
@@ -215,17 +218,18 @@
         pageCount:"${total}",
         current:pg,
         backFn:function(p){
-            window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+p;
+            //window.location.href="${ctx}/gemAdmin/viewGemList.do?dgpage="+p;
+            searchResult(p);
         }
     }); 
     
     //-----------------------条件查询-------------------------
-    function searchResult(){
+    function searchResult(p){
     	var gemType = $(".type-gem").find("option:selected").val(); //取宝石类型下拉框中的值
     	var gemShape =  $(".shape-gem").find("option:selected").val();
     	var gemStatus =  $(".all-gem").find("option:selected").val();
     	var gemInput =  $(".input-gem").val();
-    	var url = "${ctx}/gemAdmin/viewGemList.do?dgpage="+pg;
+    	var url = "${ctx}/gemAdmin/viewGemList.do?";
     	if(gemType != null && gemType != ""){     //宝石类型
     		url += "&typegem="+gemType;
     	}
@@ -237,6 +241,11 @@
     	}
 		if(gemInput != null && gemInput != ""){    //模糊搜索
     		url += "&inputgem="+gemInput;
+    	}
+    	if(p != undefined && p != null && p != ""){
+    		url += "&dgpage="+p;
+    	}else{
+    		url += "&dgpage=1";
     	}
     	window.location.href= url;
     }
