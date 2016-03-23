@@ -5,19 +5,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="bavlo">
-<meta name="keywords" content="bavlo">
-<meta name="author" content="bavlo">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="bavlo">
+	<meta name="keywords" content="bavlo">
+	<meta name="author" content="bavlo">
 <title>bavlo</title>
-<link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
-<link rel="stylesheet" href="${ctx }/resources/client/css/swiper.css">
-<link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
-<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/gemClient.js"></script>
+	<link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
+	<link rel="stylesheet" href="${ctx }/resources/client/css/swiper.css">
+	<link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
+	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/gemClient.js"></script>
 <script language=javaScript>
 	 $(document).ready(function(){
 	 	// show_menuone(1);//显示哪个分类        
@@ -122,10 +122,10 @@
 					  <div class="swiper-slide"><a id="metalid${status.index+1}" class="nav_default " vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/mot/Round.png') top center no-repeat;"></a>
 					  <span>${bean.pValue}</span></div>
 					</c:forEach>
-                  </div>
-			  </div> 
-			  <div id="btn1"  class="hidden-xs hidden-sm swiper-button-prev2"></div>
-			  <div id="btn2" class="hidden-xs hidden-sm swiper-button-next2"></div>
+                 </div>
+			</div> 
+			<div id="btn1"  class="hidden-xs hidden-sm swiper-button-prev2"></div>
+			<div id="btn2" class="hidden-xs hidden-sm swiper-button-next2"></div>
 			</div>
 			<div class="tab_cont " id="contid3" style="display:none">
 			      <div class="wpxz">
@@ -156,13 +156,15 @@
 			    <li><a class="a_sel" id="type1"  onclick="javascript:show_menu(1);" href="javascript:void(0);" >结果（Resault 166）</a></li>
 			    <li><a  id="type2"  onclick="javascript:show_menu(2);" href="javascript:void(0);" >比较（Comparsion 5）</a></li>
 			 </ul>
-			 <p class="col-xs-12 col-md-4"><b class="visible-xs-inline-block visible-sm-inline-block ">找到266颗宝石</b><select>
+			 <p class="col-xs-12 col-md-4"><b class="visible-xs-inline-block visible-sm-inline-block ">找到266颗宝石</b>
+			    <select>
 						<option>按上架时间</option>
 						<option>2013-5-4</option>
 						<option>2013-5-4</option>
 						<option>2013-5-4</option>
 				</select>
-				<span class="hidden-xs hidden-sm"><a href="./list1.html"><image src="${ctx }/resources/client/images/tu1.png" /></a><a href="./list.html"><image src="${ctx }/resources/client/images/tu2.png" /></a></span></p>
+				<span class="hidden-xs hidden-sm"><a href="./list1.html"><image src="${ctx }/resources/client/images/tu1.png" /></a><a href="./list.html"><image src="${ctx }/resources/client/images/tu2.png" /></a></span>
+			</p>
 		  
 		  </div>
           <div class="job_xq col-md-12"  id="cont1">
