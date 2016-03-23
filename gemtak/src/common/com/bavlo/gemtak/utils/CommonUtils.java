@@ -16,6 +16,18 @@ public class CommonUtils {
 	public static void main(String[] args){
 		System.out.println(getBillCode("CM"));
 	}
+	
+	/**
+	 * @param bnum分页 获得共几页
+	 * @param pnum
+	 */
+	public static Integer roundByNum(Integer bnum,Integer pnum){
+		if(bnum % pnum == 0){
+			return bnum/pnum;
+		}else{
+			return (bnum/pnum)+1;
+		}
+	}
 
 	//获取小图名称
 	public static String getMinPicName(String uploadFileName){
