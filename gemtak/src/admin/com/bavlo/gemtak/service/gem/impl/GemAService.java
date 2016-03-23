@@ -126,7 +126,7 @@ public class GemAService extends CommonService implements IGemService {
 
 	@Override
 	public Integer getListSizeGem(String contions) {
-		return getCountByHQLByDr(GemVO.class, contions);
+		return getCountByHQL(GemVO.class, contions);
 	}
 	
 	
