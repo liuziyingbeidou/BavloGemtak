@@ -80,7 +80,7 @@ public class GemController extends BaseController {
 		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows);
 		
 		model.addAttribute("gems",gems);
-		model.addAttribute("total",total/rows);
+		model.addAttribute("total",CommonUtils.roundByNum(total,rows)); //CommonUtils类中 根据总数 当前页面大小获取总页数
 		/**数据查询-end**/
 		
 		return "/admin/gem/gem-list";
@@ -174,14 +174,13 @@ public class GemController extends BaseController {
 	 * @return void
 	 */
 	@RequestMapping(value="updateDrGemById")
-	public void updateDrGemById(Integer id){
+	public void updateDrGemById(HttpServletRequest request,Model model,Integer id,String st){
 		try {
 			gemService.updateDrGemById(id);
 		} catch (Exception e) {
 			e.printStackTrace();
-			renderText("{\"msg\":\"N\",\"id\":\""+id+"\"}");
 		}
-		renderText("{\"msg\":\"Y\",\"id\":\""+id+"\"}");
+		renderText("{\"mess\":\"Y\",\"id\":\""+id+"\"}");
 	}
 	
 	
