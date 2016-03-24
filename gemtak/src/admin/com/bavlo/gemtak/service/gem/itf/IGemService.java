@@ -72,7 +72,7 @@ public interface IGemService {
 	 * @param rows
 	 * @return
 	 */
-	public List<GemVO> findListGem(String contions,Integer dgpage,Integer rows);
+	public List<GemVO> findListGem(String contions,Integer dgpage,Integer rows,String order,String orderType);
 
 	/**
 	 * 根据id更新
