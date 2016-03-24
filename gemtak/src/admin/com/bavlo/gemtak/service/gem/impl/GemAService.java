@@ -102,8 +102,8 @@ public class GemAService extends CommonService implements IGemService {
 			vrel = IConstant.RELEASE_C;
 		}
 		
-		String[] attrname = new String[]{"is_release"};//要更新的字段
-		String[] attrval = new String[]{vrel};        //更新的值
+		String[] attrname = new String[]{"is_release","releasedate"};//要更新的字段
+		Object[] attrval = new Object[]{vrel,DateUtil.getStrTimestamp(DateUtil.getCurDateTime())};        //更新的值
 		if(id != null){
 			updateAttrs(GemVO.class, attrname, attrval, " id="+id);
 		}
