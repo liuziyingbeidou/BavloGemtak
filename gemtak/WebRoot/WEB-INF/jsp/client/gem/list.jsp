@@ -94,6 +94,19 @@
            });
          });
          
+         //3.横排展示界面
+         $(function(){    
+           $(".show-line").change(function(){
+            selectClientList();
+           });
+         });
+         
+         //4.宫格展示界面
+         $(function(){    
+           $(".show-speed").change(function(){
+            selectClientList();
+           });
+         });
 </script>
  
 </head>
@@ -180,7 +193,10 @@
 						<option value="htol">高到低</option>
 						<option value="ltoh">低到高</option>
 				</select>
-				<span class="hidden-xs hidden-sm"><a href="./list1.html"><image src="${ctx }/resources/client/images/tu1.png" /></a><a href="./list.html"><image src="${ctx }/resources/client/images/tu2.png" /></a></span>
+				<span class="hidden-xs hidden-sm">
+				 <a href="#" class="show-line"><image src="${ctx }/resources/client/images/tu1.png" /></a>
+				 <a href="#" class="show-speed"><image src="${ctx }/resources/client/images/tu2.png" /></a>
+				</span>
 			</p>
 		  
 		  </div>
