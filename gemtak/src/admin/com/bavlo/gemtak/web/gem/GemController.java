@@ -77,7 +77,7 @@ public class GemController extends BaseController {
 		if(dgpage == null){
 			dgpage = this.dgpage;
 		}
-		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows);
+		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows,null,null);
 		
 		model.addAttribute("gems",gems);
 		model.addAttribute("total",CommonUtils.roundByNum(total,rows)); //CommonUtils类中 根据总数 当前页面大小获取总页数
@@ -105,7 +105,7 @@ public class GemController extends BaseController {
 		}
 		//逻辑处理
 		Integer total = gemService.getListSizeGem(sql+"");
-		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows);
+		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows,null,null);
 		
 		renderJson(gems);
 		/*Map<String, Object> jsonMap = new HashMap<String, Object>();
@@ -115,7 +115,7 @@ public class GemController extends BaseController {
 	}
 	
 	/**
-	 * @Description: 新增宝石
+	 * @Description:新增宝石
 	 * @param @param model
 	 * @param @param request
 	 * @param @param response
@@ -134,7 +134,7 @@ public class GemController extends BaseController {
 	}
 	
 	/**
-	 * @Description: 新增gemVO的方法
+	 * @Description: 1.新增gemVO的方法
 	 * @param @param GemVO 
 	 * @param @param lisuike
 	 * @return void
@@ -153,7 +153,7 @@ public class GemController extends BaseController {
 	
 	
 	/**
-	 * @Description: 查询出所有gemVO
+	 * @Description: 2.查询出所有gemVO
 	 * @param @param List<GemVO>
 	 * @param @param lisuike
 	 * @return void
@@ -167,7 +167,7 @@ public class GemController extends BaseController {
 	}
 	
 	/**
-	 * 
+	 * 3.点击删除按钮，更新DR字段为1
 	 * @Description: TODO(点击删除按钮，更新DR字段为1) 
 	 * @param @param id
 	 * @param @param dr
