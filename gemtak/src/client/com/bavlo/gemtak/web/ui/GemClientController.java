@@ -1,5 +1,7 @@
 package com.bavlo.gemtak.web.ui;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
@@ -47,15 +49,14 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="viewGemList")
 	public String viewGemList(Model model,HttpServletRequest request,HttpServletResponse response,
-			Integer dgpage,String typegem,String shapegem,String fromWeight,String toWeight,
-			String fromPrice,String toPrice){
+			Integer dgpage,String typegem,String shapegem,String fromWeight,String toWeight,String fromPrice,String toPrice,
+			String inwhere,String inwheres){
 		
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCListPageModel(model,lang);
-		
 		StringBuilder sql = new StringBuilder(" 1=1");
 		if(!CommonUtils.isNull(typegem)){
 			sql.append( " and type_id = '"+typegem+"'");
@@ -64,17 +65,107 @@ public class GemClientController extends BaseController {
 			sql.append(" and shape_id = '"+shapegem+"'");
 		}
 		if(!CommonUtils.isNull(fromWeight) && !CommonUtils.isNull(toWeight)){
-			sql.append(" and weight between"+fromWeight+"and"+toWeight+"");
+			sql.append(" and weight between "+fromWeight+" and "+toWeight+"");
 		}
 		if(!CommonUtils.isNull(fromPrice) && !CommonUtils.isNull(toPrice)){
-			sql.append(" and retail_price between"+fromPrice+"and"+toPrice+"");
+			sql.append(" and retail_price between "+fromPrice+" and "+toPrice+"");
 		}
-        List<GemVO> gems = gemService.findListGem(sql+"", dgpage, rows);
+		if(!CommonUtils.isNull(inwhere)){
+			sql.append(" and pairs in ("+inwhere+")");
+		}
+		//形状 弧度、切面
+		if(!CommonUtils.isNull(inwheres)){
+			sql.append(" and pairs in ("+inwheres+")");
+		}
 		
-		model.addAttribute("gems",gems);
+        List<GemVO> gems = gemService.findListGem(sql+"", dgpage, rows,null,null);
+		model.addAttribute("gems", gems);
 		/*return IClientForward.viewGemList;*/
 		return "/client/gem/list";
 	}
+	
+	/**
+	 * 2.ajax根据条件查询
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param dgpage
+	 * @param typegem
+	 * @param shapegem
+	 * @param fromWeight
+	 * @param toWeight
+	 * @param fromPrice
+	 * @param toPrice
+	 */
+	@RequestMapping(value="getGemClientListBy")
+	public void getGemClientListBy(Model model,HttpServletRequest request,HttpServletResponse response,
+			Integer dgpage,String typegem,String shapegem,String fromWeight,String toWeight,
+			String fromPrice,String toPrice,String selDate,String inwhere,String inwheres){
+		String reldate = "desc";
+		StringBuilder sql = new StringBuilder(" 1=1");
+		if(!CommonUtils.isNull(typegem)){
+			sql.append( " and type_id = '"+typegem+"'");
+		}
+		if(!CommonUtils.isNull(shapegem)){
+			sql.append(" and shape_id = '"+shapegem+"'");
+		}
+		if(!CommonUtils.isNull(fromWeight) && !CommonUtils.isNull(toWeight)){
+			sql.append(" and weight between "+fromWeight+" and "+toWeight+"");
+		}
+		if(!CommonUtils.isNull(fromPrice) && !CommonUtils.isNull(toPrice)){
+			sql.append(" and retail_price between "+fromPrice+" and "+toPrice+"");
+		}
+		
+		if(!CommonUtils.isNull(inwhere)){
+			sql.append(" and pairs in ("+inwhere+")");
+		}
+		//形状 弧度、切面
+		if(!CommonUtils.isNull(inwheres)){
+			sql.append(" and pairs in ("+inwheres+")");
+		}
+		
+		if("htol".equals(selDate)){
+			reldate = "desc";
+		}
+		if("ltoh".equals(selDate)){
+			reldate = "asc";
+		}
+        List<GemVO> gems = gemService.findListGem(sql+"", dgpage, rows,"releasedate",reldate);
+		renderJson(gems);
+		
+	}
+	
+	/**
+	 * 3.按类型名称或类型id模糊 查询
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param dgpage
+	 * @param typegem
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 */
+	@RequestMapping(value="selectClientByType")
+	public String selectClientByType(Model model,HttpServletRequest request,HttpServletResponse response,
+			Integer dgpage,String typegem) throws UnsupportedEncodingException{
+		
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCListPageModel(model,lang);
+		String tgem = new String( typegem.getBytes("ISO-8859-1") , "utf-8");
+		StringBuilder sql = new StringBuilder(" 1=1");
+		if(!CommonUtils.isNull(typegem)){
+			sql.append( " and (type_id like '%"+tgem+"%' or type_cn like '%"+tgem+"%')");
+		}
+		
+        List<GemVO> gems = gemService.findListGem(sql+"", dgpage, rows,null,null);
+		model.addAttribute("gems", gems);
+		/*return IClientForward.viewGemList;*/
+		return "/client/gem/list";
+	}
+	
 	
 	/**
 	 * @Description: 宝石详细页
