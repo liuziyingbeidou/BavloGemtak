@@ -76,7 +76,23 @@
          	          
              }
            }
-         }	
+         }
+         
+         
+         //1.根据类型名称或id模糊查询 
+         $(function(){    
+           $(".select-type").click(function(){
+            var typeval = $(".input-type-sel").val();
+            location.href = "selectClientByType.do?&typegem="+typeval;
+           });
+         });
+         
+         //2.按时间排序
+         $(function(){    
+           $(".select-createdate").change(function(){
+            selectClientList();
+           });
+         });
          
 </script>
  
@@ -95,7 +111,7 @@
 			<a href="javascript:void(0);" id="typeid4"  onclick="javascript:show_menuone(4);">价格<b class="hidden-xs hidden-sm">Price</b></a>
 		</p>
 		<div class="sou col-md-4 hidden-xs hidden-sm">
-		  <input class="sear_ch_input" type="text" value="巴黎之吻"><input class="sear_ch_sub" type="submit" value="">
+		  <input class="sear_ch_input input-type-sel" type="text" value="巴黎之吻"><input class="sear_ch_sub select-type" type="button"  value="">
 		</div>
 	  </div>
 	  <div class="line "></div>
@@ -147,11 +163,11 @@
 		     <span class="selects-shape ms-sel" ms-key=""></span>
 		     <span class="selects-weight ms-sel" ></span>
 		     <span class="selects-price ms-sel" ></span>
-			 <span class="span_item" ><input type="checkbox"  name="renamed" value="sl">单粒</span>
-			 <span class="span_item"><input type="checkbox"  name="renamed" value="pl">配对</span>
-			 <span class="span_item"><input type="checkbox"  name="renamed" value="ml">多粒</span>
-			 <span class="span_item"><input type="checkbox"  name="renamed" value="1">弧面</span>
-			 <span class="span_item"><input type="checkbox"  name="renamed" value="1">刻面</span>
+			 <span class="span_item" ><input type="checkbox" class="pairs-sl" name="renamed" value="sl">单粒</span>
+			 <span class="span_item"><input type="checkbox"  class="pairs-pl" name="renamed" value="pl">配对</span>
+			 <span class="span_item"><input type="checkbox" class="pairs-ml" name="renamed" value="ml">多粒</span>
+			 <span class="span_item"><input type="checkbox" class="pairs-h" name="renamed" value="1">弧面</span>
+			 <span class="span_item"><input type="checkbox" class="pairs-k" name="renamed" value="1">刻面</span>
 		  </div>
           <div class="cup_nav col-md-12">
 		     <ul class="hidden-xs hidden-sm">
@@ -159,11 +175,10 @@
 			    <li><a  id="type2"  onclick="javascript:show_menu(2);" href="javascript:void(0);" >比较（Comparsion 5）</a></li>
 			 </ul>
 			 <p class="col-xs-12 col-md-4"><b class="visible-xs-inline-block visible-sm-inline-block ">找到266颗宝石</b>
-			    <select>
-						<option>按上架时间</option>
-						<option>2013-5-4</option>
-						<option>2013-5-4</option>
-						<option>2013-5-4</option>
+			    <select class="select-createdate">
+						<option value="-1">按上架时间</option>
+						<option value="htol">高到低</option>
+						<option value="ltoh">低到高</option>
 				</select>
 				<span class="hidden-xs hidden-sm"><a href="./list1.html"><image src="${ctx }/resources/client/images/tu1.png" /></a><a href="./list.html"><image src="${ctx }/resources/client/images/tu2.png" /></a></span>
 			</p>
