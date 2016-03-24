@@ -111,6 +111,8 @@ public class GemVO extends IdEntity implements Serializable {
 	private String is_release;
 	//		创建日期			
 	private Timestamp createdate;
+	//发布日期
+	private Timestamp releasedate;
 	public Integer getSupplier_id() {
 		return supplier_id;
 	}
@@ -435,6 +437,12 @@ public class GemVO extends IdEntity implements Serializable {
 	}
 	public void setIsstand(String isstand) {
 		this.isstand = isstand;
+	}
+	public Timestamp getReleasedate() {
+		return releasedate;
+	}
+	public void setReleasedate(Timestamp releasedate) {
+		this.releasedate = releasedate;
 	}
 
 }
