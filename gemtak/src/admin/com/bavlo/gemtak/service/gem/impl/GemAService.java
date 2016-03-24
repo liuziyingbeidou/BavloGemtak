@@ -83,10 +83,10 @@ public class GemAService extends CommonService implements IGemService {
 	 * select * from tableName where 条件 limit 当前页码*页面容量-1 , 页面容量
 	 */
 	@Override
-	public List<GemVO> findListGem(String conditions,Integer dgpage, Integer rows) {
+	public List<GemVO> findListGem(String conditions,Integer dgpage, Integer rows,String order,String orderType) {
 		List<GemVO> listvo = null;
 		if(conditions != null && conditions != ""){
-			listvo = findPage(GemVO.class, dgpage, rows, conditions);
+			listvo = findPage(GemVO.class, dgpage, rows, conditions,order, orderType);
 		}
 		
 		return listvo;
