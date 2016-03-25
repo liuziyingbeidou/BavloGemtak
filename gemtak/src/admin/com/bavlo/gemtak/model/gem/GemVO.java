@@ -97,6 +97,8 @@ public class GemVO extends IdEntity implements Serializable {
 	private String supplier;
 	//		卖家编码（供应商）			
 	private String supplier_code;
+	//      卖家电话
+	private String supplier_tel;
 	//		货址			
 	private String location;
 	//		可见性			所有人(A)、商家(B)、只自己(M)
@@ -389,6 +391,12 @@ public class GemVO extends IdEntity implements Serializable {
 	}
 	public void setSupplier_code(String supplier_code) {
 		this.supplier_code = supplier_code;
+	}
+	public String getSupplier_tel() {
+		return supplier_tel;
+	}
+	public void setSupplier_tel(String supplier_tel) {
+		this.supplier_tel = supplier_tel;
 	}
 	public String getLocation() {
 		return location;
