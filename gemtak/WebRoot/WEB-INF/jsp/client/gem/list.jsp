@@ -107,6 +107,14 @@
             selectClientList(1);
            });
          });
+         
+         //5.展示详情界面
+        /*  $(function(){    
+           $(".select-detaile").click(function(){
+            var id = $(".gem-id").val();
+            location.href = "viewGemDetaile.do?&id="+id;
+           });
+         }); */
 </script>
  
 </head>
@@ -200,17 +208,19 @@
 			</p>
 		  
 		  </div>
-          <div class="job_xq col-md-12 appendLineClientList"  id="cont1">
-		      <ul class="appendClientList">
-		      <c:forEach items="${gems}" var="gem">		
-			    <li class="col-md-3 col-xs-6">
-				  <span><a href="./detail.html"><image src="${ctx }/resources/client/images/cp1.png" /></a></span>
-				  <h6><b>${gem.type_cn}<font class="hidden-xs hidden-sm">（${gem.type_en}）</font></b><i>¥${gem.retail_price}</i></h6>
-				  <p><b>${gem.weight} ${gem.clarity_en} ${gem.cut_en}</b><i><image src="${ctx }/resources/client/images/tu3.png" /></i></p>
-				</li>
-				</c:forEach>
-			  </ul>
-		      <div class="jzgd hidden-md hidden-lg" ><a href="">更多</a></div>
+		  <div class="appendClientList">
+	          <%-- <div class="job_xq col-md-12 "  id="cont1">
+			      <ul class="">
+			      <c:forEach items="${gems}" var="gem">		
+				    <li class="col-md-3 col-xs-6">
+					  <span><a class="select-detaile"><image src="${ctx }/resources/client/images/cp1.png" /></a></span>
+					  <h6><b>${gem.type_cn}<font class="hidden-xs hidden-sm">（${gem.type_en}）</font></b><i>¥${gem.retail_price}</i></h6>
+					  <p><b>${gem.weight} ${gem.clarity_en} ${gem.cut_en}</b><i><image src="${ctx }/resources/client/images/tu3.png" /></i></p>
+					</li>
+					</c:forEach>
+				  </ul>
+			      <div class="jzgd hidden-md hidden-lg" ><a href="">更多</a></div>
+	          </div> --%>
           </div>
 		  <%-- <div class="job_xq  col-md-12"  id="cont2" style="display:none">
 		      <ul>
@@ -240,7 +250,16 @@
 
 <!-- Swiper JS -->
     <script src="${ctx }/resources/client/js/swiper.js"></script>
-
+ <script language="Javascript">
+  $(function(){
+  $(".appendClientList .tit_table table tr").on("hover",function(){
+		$(this).css("background","#eeeeee");
+	},function(){
+		$(this).css("background","#FFF");
+	});
+	
+});
+</script>
     <!-- Initialize Swiper -->
    
 	  <script>
