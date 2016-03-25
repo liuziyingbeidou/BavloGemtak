@@ -109,7 +109,7 @@ $(function(){
 
 });
 
-  function selectClientList(){
+  function selectClientList(switchover){
 	/*var url = "viewGemList.do?";
 	var gemType = $(".selects-type").attr("ms-key"); 
 	if(gemType != null && gemType != ""){
@@ -140,6 +140,10 @@ $(function(){
 	 	 var seldate = $(".select-createdate").find("option:selected").val();
 	 	 var inwhere = "'";//单粒、多粒、配对
 	 	 var inwheres = "'";//弧度、切面
+	 	 //切换宫格显示、横行显示 1为宫格 2为横
+	 	 if(switchover == undefined){
+	 		switchover = 1; 
+	 	 }
 	 	 if($(".pairs-sl").prop("checked")){
 	 	  var pairssl = $(".pairs-sl").val(); 
 	 	  inwhere += pairssl + "','";
@@ -169,11 +173,37 @@ $(function(){
 				if(data != null){
 					var len = data.length;
 					for(var i=0;i<len;i++){
-						$(".appendClientList").append("<li class='col-md-3 col-xs-6'>"+
-								  "<span><a href='./detail.html'><image src='/gemtak/resources/client/images/cp1.png' /></a></span>"+
-								  "<h6><b>"+data[i].type_cn+"<font class='hidden-xs hidden-sm'>"+data[i].type_en+"</font></b><i>¥"+data[i].retail_price+"</i></h6>"+
-								  "<p><b>"+data[i].weight+" "+data[i].clarity_en+" "+data[i].cut_en+"</b><i><image src='/gemtak/resources/client/images/tu3.png' /></i></p>"+
-								"</li>");
+						if(switchover == 1){
+							$(".appendClientList").append("<li class='col-md-3 col-xs-6'>"+
+									  "<span><a href='./detail.html'><image src='/gemtak/resources/client/images/cp1.png' /></a></span>"+
+									  "<h6><b>"+data[i].type_cn+"<font class='hidden-xs hidden-sm'>"+data[i].type_en+"</font></b><i>¥"+data[i].retail_price+"</i></h6>"+
+									  "<p><b>"+data[i].weight+" "+data[i].clarity_en+" "+data[i].cut_en+"</b><i><image src='/gemtak/resources/client/images/tu3.png' /></i></p>"+
+									"</li>");
+						}else{
+							$(".appendLineClientList").append(" <table>"+
+					"<tr height='40'>"+
+						"<th bgcolor='eeeeee' width='10%' style='text-align:center'>图片</th>"+
+						"<th bgcolor='eeeeee'>种型</th>"+
+						"<th bgcolor='eeeeee'>净度</th>"+
+						"<th bgcolor='eeeeee'>切工</th>"+
+						"<th bgcolor='eeeeee'>重量</th>"+
+						"<th bgcolor='eeeeee'>证书</th>"+
+						"<th bgcolor='eeeeee'>价格</th>"+
+						"<th bgcolor='eeeeee' width='10%'>360°展示</th>"+
+					"</tr>"+
+					"<tr>"+
+						"<td><image src='/gemtak/resources/client/images/cp1.png' width='120px'/></td>"+
+						"<td><b>"+data[i].type_cn+"</b> <br />"+data[i].type_en+"</td>"+
+						"<td><b class='fon1'>"+data[i].clarity_cn+"</b><br /> "+data[i].clarity_en+"</td>"+
+						"<td><b class='fon1'>"+data[i].cut_cn+"</b><br />"+data[i].cut_en+"</td>"+
+						"<td>"+data[i].weight+"</td>"+
+						"<td>"+data[i].lab_en+"</td>"+
+						"<td><font class='fc_0a'>¥"+data[i].retail_price+"</font></td>"+
+						"<td><a href=''><image src='./images/tu4.png' /></a></td>"+
+					"</tr>"+		   
+		     "</table>");
+						}
+						
 					}
 				}
 		  });
