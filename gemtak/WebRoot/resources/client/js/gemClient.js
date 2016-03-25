@@ -3,6 +3,7 @@
  */
 
 $(function(){
+	selectClientList(1);
 	/**查询域**/
 	//宝石种类
 	$(".p_default").click(function(){
@@ -109,6 +110,11 @@ $(function(){
 
 });
 
+//调至详情页
+function goDetail(id){
+	location.href = "viewGemDetaile.do?id="+id;
+}
+
   function selectClientList(switchover){
 	/*var url = "viewGemList.do?";
 	var gemType = $(".selects-type").attr("ms-key"); 
@@ -170,17 +176,38 @@ $(function(){
 			  fromPrice:fromPri,toPrice:toPri,inwhere:inwhere,inwheres:inwheres,
 			  selDate:seldate},function(data){
 			  $(".appendClientList").empty();
+			  appendToHead(switchover);
 				if(data != null){
 					var len = data.length;
 					for(var i=0;i<len;i++){
 						if(switchover == 1){
-							$(".appendClientList").append("<li class='col-md-3 col-xs-6'>"+
-									  "<span><a class='select-detaile'><image src='/gemtak/resources/client/images/cp1.png' /></a></span>"+
-									  "<h6><b>"+data[i].type_cn+"<font class='hidden-xs hidden-sm'>"+data[i].type_en+"</font></b><i>¥"+data[i].retail_price+"</i></h6>"+
-									  "<p><b>"+data[i].weight+" "+data[i].clarity_en+" "+data[i].cut_en+"</b><i><image src='/gemtak/resources/client/images/tu3.png' /></i></p>"+
-									"</li>");
-						}else{
-							$(".appendLineClientList").append(" <table>"+
+							$(".appendClientList .cCard").append(
+							    "<li class='col-md-3 col-xs-6'>"+		
+								  "<span><a href='javascript:void(0)' onclick='goDetail("+data[i].id+")'><image src='/gemtak/resources/client/images/cp1.png' /></a></span>"+
+								  "<h6><b>"+data[i].type_cn+"<font class='hidden-xs hidden-sm'>（"+data[i].type_en+"）</font></b><i>¥"+data[i].retail_price+"</i></h6>"+
+								  "<p><b>"+data[i].weight+" "+data[i].clarity_en+" "+data[i].cut_en+"</b><i><image src='/gemtak/resources/client/images/tu3.png' /></i></p>"+
+								"</li>");
+						}else if(switchover == 2){
+							$(".appendClientList .cList").append("<tr>"+
+								"<td><image src='/gemtak/resources/client/images/cp1.png' width='120px'/></td>"+
+								"<td><b>"+data[i].type_cn+"</b> <br />"+data[i].type_en+"</td>"+
+								"<td><b class='fon1'>"+data[i].clarity_cn+"</b><br /> "+data[i].clarity_en+"</td>"+
+								"<td><b class='fon1'>"+data[i].cut_cn+"</b><br />"+data[i].cut_en+"</td>"+
+								"<td>"+data[i].weight+"</td>"+
+								"<td>"+data[i].lab_en+"</td>"+
+								"<td><font class='fc_0a'>¥"+data[i].retail_price+"</font></td>"+
+								"<td><a href='javascript:void(0)' onclick='goDetail("+data[i].id+")'><image src='/gemtak/resources/client/images/tu4.png' /></a></td>"+
+							"</tr>");
+						}
+					}
+					appendToFoot(switchover);
+				}
+		  });
+  }
+
+  function appendToHead(switchover){
+	  if(switchover == 2){
+			$(".appendClientList").append("<div class='tit_table col-md-12' id='cont1'><table class='cList'>"+
 					"<tr height='40'>"+
 						"<th bgcolor='eeeeee' width='10%' style='text-align:center'>图片</th>"+
 						"<th bgcolor='eeeeee'>种型</th>"+
@@ -189,26 +216,25 @@ $(function(){
 						"<th bgcolor='eeeeee'>重量</th>"+
 						"<th bgcolor='eeeeee'>证书</th>"+
 						"<th bgcolor='eeeeee'>价格</th>"+
-						"<th bgcolor='eeeeee' width='10%'>360°展示</th>"+
-					"</tr>"+
-					"<tr>"+
-						"<td><image src='/gemtak/resources/client/images/cp1.png' width='120px'/></td>"+
-						"<td><b>"+data[i].type_cn+"</b> <br />"+data[i].type_en+"</td>"+
-						"<td><b class='fon1'>"+data[i].clarity_cn+"</b><br /> "+data[i].clarity_en+"</td>"+
-						"<td><b class='fon1'>"+data[i].cut_cn+"</b><br />"+data[i].cut_en+"</td>"+
-						"<td>"+data[i].weight+"</td>"+
-						"<td>"+data[i].lab_en+"</td>"+
-						"<td><font class='fc_0a'>¥"+data[i].retail_price+"</font></td>"+
-						"<td><a href=''><image src='./images/tu4.png' /></a></td>"+
-					"</tr>"+		   
-		     "</table>");
-						}
-						
-					}
-				}
-		  });
+						"<th bgcolor='eeeeee' width='10%'>360°展示</th></tr>");
+		}else if(switchover == 1){
+			$(".appendClientList").append("<div class='job_xq col-md-12'  id='cont1'><ul class='cCard'>");
+		}
   }
-
+  
+  function appendToFoot(switchover){
+	  if(switchover == 2){
+			$(".appendClientList").append(   
+		     "</table>"+
+            "</div>");
+	    }else if(switchover == 1){
+	    	$(".appendClientList").append(
+			  "</ul>"+
+		      "<div class='jzgd hidden-md hidden-lg' ><a href=''>更多</a></div>"+
+        "</div>");
+	    }
+  }
+  
   //宝石详情
   function selectClientDetaile(id){
 	  var url = "viewGemDetaile.do?";
