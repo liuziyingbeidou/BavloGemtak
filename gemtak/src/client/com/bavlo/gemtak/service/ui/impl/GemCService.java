@@ -68,8 +68,10 @@ public class GemCService extends CommonService implements IGemService {
 	 */
 	@Override
 	public GemVO findGemVOByID(Integer id) {
-		// TODO Auto-generated method stub
-		return findFirst(GemVO.class, id.toString());
+		if(id != null){
+			return findFirst(GemVO.class, " id="+id);
+		}
+		return null;
 	}
 
 	@Override
