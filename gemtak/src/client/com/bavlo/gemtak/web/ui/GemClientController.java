@@ -57,7 +57,7 @@ public class GemClientController extends BaseController {
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCListPageModel(model,lang);
-		StringBuilder sql = new StringBuilder(" 1=1");
+		/*StringBuilder sql = new StringBuilder(" 1=1");
 		if(!CommonUtils.isNull(typegem)){
 			sql.append( " and type_id = '"+typegem+"'");
 		}
@@ -79,7 +79,7 @@ public class GemClientController extends BaseController {
 		}
 		
         List<GemVO> gems = gemService.findListGem(sql+"", dgpage, rows,null,null);
-		model.addAttribute("gems", gems);
+		model.addAttribute("gems", gems);*/
 		/*return IClientForward.viewGemList;*/
 		return "/client/gem/list";
 	}
@@ -176,15 +176,17 @@ public class GemClientController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value="viewGemDetaile")
-	public String viewGemDetaile(Model model,HttpServletResponse response,HttpServletRequest request){
+	public String viewGemDetaile(Model model,HttpServletResponse response,HttpServletRequest request,Integer id){
 		
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCDetailePageModel(model,lang);
-		
-		return IClientForward.viewGemDetaile;
+		GemVO gem = gemService.findGemVOByID(id);
+		model.addAttribute("gem", gem);
+		/*return IClientForward.viewGemDetaile;*/
+		return "/client/gem/detaile";
 	}
 	
 	/**
