@@ -96,15 +96,15 @@
          
          //3.横排展示界面
          $(function(){    
-           $(".show-line").change(function(){
-            selectClientList();
+           $(".show-line").click(function(){
+            selectClientList(2);
            });
          });
          
          //4.宫格展示界面
          $(function(){    
-           $(".show-speed").change(function(){
-            selectClientList();
+           $(".show-speed").click(function(){
+            selectClientList(1);
            });
          });
 </script>
@@ -200,7 +200,7 @@
 			</p>
 		  
 		  </div>
-          <div class="job_xq col-md-12"  id="cont1">
+          <div class="job_xq col-md-12 appendLineClientList"  id="cont1">
 		      <ul class="appendClientList">
 		      <c:forEach items="${gems}" var="gem">		
 			    <li class="col-md-3 col-xs-6">
@@ -212,7 +212,7 @@
 			  </ul>
 		      <div class="jzgd hidden-md hidden-lg" ><a href="">更多</a></div>
           </div>
-		  <div class="job_xq  col-md-12"  id="cont2" style="display:none">
+		  <%-- <div class="job_xq  col-md-12"  id="cont2" style="display:none">
 		      <ul>
 			    <li class="col-md-3 col-xs-6">		
 				  <span><a href="./detail.html"><image src="${ctx }/resources/client/images/cp2.jpg" /></a></span>
@@ -220,7 +220,7 @@
 				  <p><b>${gem.weight} ${gem.clarity_en} ${gem.cut_en}</b><i><image src="${ctx }/resources/client/images/tu3.png" /></i></p>
 				</li>
 			  </ul>
-          </div>
+          </div> --%>
 	  </div>
 	</div>
 </div>
