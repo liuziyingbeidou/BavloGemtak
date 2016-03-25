@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bavlo.gemtak.constant.controller.IClientForward;
 import com.bavlo.gemtak.model.gem.GemVO;
-import com.bavlo.gemtak.service.gem.itf.IGemService;
+import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.service.weixin.itf.IWXZFService;
 import com.bavlo.gemtak.util.weixin.WXPayUtil;
 import com.bavlo.gemtak.utils.CommonUtils;
