@@ -175,7 +175,7 @@ $(function(){
 					for(var i=0;i<len;i++){
 						if(switchover == 1){
 							$(".appendClientList").append("<li class='col-md-3 col-xs-6'>"+
-									  "<span><a href='./detail.html'><image src='/gemtak/resources/client/images/cp1.png' /></a></span>"+
+									  "<span><a class='select-detaile'><image src='/gemtak/resources/client/images/cp1.png' /></a></span>"+
 									  "<h6><b>"+data[i].type_cn+"<font class='hidden-xs hidden-sm'>"+data[i].type_en+"</font></b><i>¥"+data[i].retail_price+"</i></h6>"+
 									  "<p><b>"+data[i].weight+" "+data[i].clarity_en+" "+data[i].cut_en+"</b><i><image src='/gemtak/resources/client/images/tu3.png' /></i></p>"+
 									"</li>");
@@ -209,6 +209,13 @@ $(function(){
 		  });
   }
 
+  //宝石详情
+  function selectClientDetaile(id){
+	  var url = "viewGemDetaile.do?";
+	  $.post(url,{id:id},function(data){
+			  
+		  });
+  }
 
 
 //ajax
