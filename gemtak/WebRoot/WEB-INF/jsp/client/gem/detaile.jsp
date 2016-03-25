@@ -74,20 +74,20 @@ $("#ex8").slider('setValue',++num);
 			  <div class="tit_sm  col-sm-12 col-md-5">
 				<h6>2.35ct 黄水晶 （Citrine）</h6>
 				<ul>
-					<li><span>广州番禺铭盛宝石有限公司</span> </li><li>TEL：021-55698821
-					</li><li>形状（Shalie）：<slian>梨形（liear）</span>
-					</li><li>尺寸（Measurement）：<span>12.03×11.35×7.88</span>
-					</li><li>颜色（Average color）：<span> </span>
-					</li><li>净度（Clarity）：<span>细小瑕疵（VVS）</span>
-					</li><li>切工（Cut）：<span>很好（VG）</span>
-					</li><li>产地（Origin）：<span>斯里兰卡（Sri Lanka）</span>
-					</li><li>处理（Treatment）：<span>加热（Heated）</span>
-					</li><li>证书（Cert.）：<span>国检（NGTC） 11358879902</span>
-					</li><li>数量（Quantity）:  <span>1</span>
-					</li><li>编号（ID）：<span>2037558</span>
-					</li><li>卖家（Seller）：<span>惠兴宝石 （HuiXing Gemstone）</span></li>
+					<li><span>${gem.supplier}</span> </li><li>TEL：${gem.supplier_tel}
+					</li><li>形状（Shalie）：<slian>${gem.shape_cn}（liear）</span>
+					</li><li>尺寸（Measurement）：<span>${gem.size_l}×${gem.size_w}×${gem.size_h}</span>
+					</li><li>颜色（Average color）：<span> ${gem.average_color}</span>
+					</li><li>净度（Clarity）：<span>${gem.clarity_cn}（VVS）</span>
+					</li><li>切工（Cut）：<span>${gem.cut_cn}（VG）</span>
+					</li><li>产地（Origin）：<span>${gem.origin_cn}（Sri Lanka）</span>
+					</li><li>处理（Treatment）：<span>${gem.treatment_cn}（Heated）</span>
+					</li><li>证书（Cert.）：<span>国检（NGTC） ${gem.supplier_code}</span>
+					</li><li>数量（Quantity）:  <span>${gem.stock_qty}</span>
+					</li><li>编号（ID）：<span>${gem.stock_qty}</span>
+					</li><li>卖家（Seller）：<span>${gem.supplier}（HuiXing Gemstone）</span></li>
 				</ul>
-				<p>价格（Price）：<span>¥ 1380.00 <em>/颗</em></span></p>
+				<p>价格（Price）：<span>¥${gem.retail_price} <em>/${gem.pairs}</em></span></p>
 				<div class="add_gu"><a href="./shopping_car.html" class="gw_a">+ 购物车</a><a href="">订购款式 ></a></div>		  
 		  </div>
 	  </div>	  
