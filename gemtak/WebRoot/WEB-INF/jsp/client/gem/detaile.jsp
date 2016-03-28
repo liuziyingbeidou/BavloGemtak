@@ -72,17 +72,17 @@ $("#ex8").slider('setValue',++num);
 			 </ul>      		    
 			  </div>
 			  <div class="tit_sm  col-sm-12 col-md-5">
-				<h6>2.35ct 黄水晶 （Citrine）</h6>
+				<h6>${gem.weight} ${gem.type_cn} （${gem.type_en}）</h6>
 				<ul>
 					<li><span>${gem.supplier}</span> </li><li>TEL：${gem.supplier_tel}
-					</li><li>形状（Shalie）：<slian>${gem.shape_cn}（liear）</span>
+					</li><li>形状（Shalie）：<slian>${gem.shape_cn}（${gem.shape_en}）</span>
 					</li><li>尺寸（Measurement）：<span>${gem.size_l}×${gem.size_w}×${gem.size_h}</span>
 					</li><li>颜色（Average color）：<span> ${gem.average_color}</span>
-					</li><li>净度（Clarity）：<span>${gem.clarity_cn}（VVS）</span>
-					</li><li>切工（Cut）：<span>${gem.cut_cn}（VG）</span>
-					</li><li>产地（Origin）：<span>${gem.origin_cn}（Sri Lanka）</span>
-					</li><li>处理（Treatment）：<span>${gem.treatment_cn}（Heated）</span>
-					</li><li>证书（Cert.）：<span>国检（NGTC） ${gem.supplier_code}</span>
+					</li><li>净度（Clarity）：<span>${gem.clarity_cn}（${gem.clarity_en}）</span>
+					</li><li>切工（Cut）：<span>${gem.cut_cn}（${gem.cut_en}）</span>
+					</li><li>产地（Origin）：<span>${gem.origin_cn}（${gem.origin_en）</span>
+					</li><li>处理（Treatment）：<span>${gem.treatment_cn}（${gem.treatment_en}）</span>
+					</li><li>证书（Cert.）：<span>国检（${gem.lab_en}） ${gem.supplier_code}</span>
 					</li><li>数量（Quantity）:  <span>${gem.stock_qty}</span>
 					</li><li>编号（ID）：<span>${gem.stock_qty}</span>
 					</li><li>卖家（Seller）：<span>${gem.supplier}（HuiXing Gemstone）</span></li>
