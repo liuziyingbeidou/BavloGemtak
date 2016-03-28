@@ -147,6 +147,14 @@ public class GemCService extends CommonService implements IGemService {
 		carVO.setQuantity(quantity);
 		save(carVO);
 	}
+    
+	/**
+	 * 根据用户id查询 查询当前用户的购物车商品数量
+	 */
+	@Override
+	public Integer getShoppingCarNumByUseid(Integer userId) throws Exception {
+		return getCountByHQL(ShoppingCarVO.class, "user_id="+userId);
+	}
 	
 	
 	
