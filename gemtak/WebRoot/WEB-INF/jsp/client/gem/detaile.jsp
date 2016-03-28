@@ -21,24 +21,41 @@
 
 <script>
 $(document).ready(function() {
-$("#ex8").slider({
-	tooltip: 'always'
-});
+	$("#ex8").slider({
+		tooltip: 'always'
+	});
 })
 function jian(){
-var mySlider = $("#ex8").slider();
-var num = $("#ex8").slider('getValue');
-if(num>1){
-$("#ex8").slider('setValue',--num);
-}
+	var mySlider = $("#ex8").slider();
+	var num = $("#ex8").slider('getValue');
+	if(num>1){
+	$("#ex8").slider('setValue',--num);
+	}
 }
 function jia(){
-var mySlider = $("#ex8").slider();
-var num = $("#ex8").slider('getValue');
-if(num<30){
-$("#ex8").slider('setValue',++num);
+	var mySlider = $("#ex8").slider();
+	var num = $("#ex8").slider('getValue');
+	if(num<30){
+	$("#ex8").slider('setValue',++num);
+	}
 }
-}
+
+//添加到购物车
+function addShoppCar(id){
+  var quantity =  $(".selquantity").text();
+  var url = "/gemtak/gemClient/addShoppingCar.do";
+  $.post(url,{gemId:id,quantity:quantity},function(data){
+    data = $.parseJSON(data);
+    var flag = data.mess;
+    var Num = data.carNum;
+    if(flag=="Y"){
+      alert("恭喜你，宝物添加成功！");
+      $(".selCarNO").text(Num);
+    }
+  });
+} 
+
+
 </script>
 </head>
 <body>
@@ -85,12 +102,12 @@ $("#ex8").slider('setValue',++num);
 					</li><li>产地（Origin）：<span>${gem.origin_cn}（Sri Lanka）</span>
 					</li><li>处理（Treatment）：<span>${gem.treatment_cn}（${gem.treatment_en}）</span>
 					</li><li>证书（Cert.）：<span>国检（${gem.lab_en}） ${gem.supplier_code}</span>
-					</li><li>数量（Quantity）:  <span>${gem.stock_qty}</span>
+					</li><li>数量（Quantity）:  <span class="selquantity">1</span>
 					</li><li>编号（ID）：<span>${gem.stock_qty}</span>
 					</li><li>卖家（Seller）：<span>${gem.supplier}（HuiXing Gemstone）</span></li>
 				</ul>
 				<p>价格（Price）：<span>¥${gem.retail_price} <em>/${gem.pairs}</em></span></p>
-				<div class="add_gu"><a href="./shopping_car.html" class="gw_a">+ 购物车</a><a href="">订购款式 ></a></div>		  
+				<div class="add_gu"><a href="javascript:void(0)" onclick="addShoppCar(${gem.id})" class="gw_a">+ 购物车</a><a href="">订购款式 ></a></div>		  
 		  </div>
 	  </div>	  
 </div>
