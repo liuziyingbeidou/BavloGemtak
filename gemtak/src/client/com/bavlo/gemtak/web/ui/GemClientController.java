@@ -1,7 +1,6 @@
 package com.bavlo.gemtak.web.ui;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
@@ -185,6 +184,7 @@ public class GemClientController extends BaseController {
 		GemClientPageModel.getCDetailePageModel(model,lang);
 		GemVO gem = gemService.findGemVOByID(id);
 		model.addAttribute("gem", gem);
+		model.addAttribute("model", "hbx");
 		/*return IClientForward.viewGemDetaile;*/
 		return "/client/gem/detaile";
 	}
