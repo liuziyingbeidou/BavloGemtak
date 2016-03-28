@@ -1,7 +1,5 @@
 package com.bavlo.gemtak.model.ui;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -17,8 +15,10 @@ import com.bavlo.gemtak.model.IdEntity;
 @Entity
 @Table(name="gt_shopping")
 public class ShoppingCarVO extends IdEntity{
-    //购物车主键
-	private Integer id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//用户id
 	private Integer user_id;
 	//宝石
@@ -29,16 +29,7 @@ public class ShoppingCarVO extends IdEntity{
 	private Double price;
 	//数量
 	private Integer quantity;
-	//时间
-	private Timestamp ts;
-	//DR
-	private Short dr;
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+
 	public Integer getUser_id() {
 		return user_id;
 	}
@@ -69,18 +60,5 @@ public class ShoppingCarVO extends IdEntity{
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	public Timestamp getTs() {
-		return ts;
-	}
-	public void setTs(Timestamp ts) {
-		this.ts = ts;
-	}
-	public Short getDr() {
-		return dr;
-	}
-	public void setDr(Short dr) {
-		this.dr = dr;
-	}
-	
 	
 }
