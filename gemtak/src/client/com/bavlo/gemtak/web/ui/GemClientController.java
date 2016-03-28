@@ -332,4 +332,11 @@ public class GemClientController extends BaseController {
 		return IClientForward.gemUser;
 	}
 	
+	@RequestMapping(value="loadImg")
+	public String loadImg(Model model,HttpServletResponse response,HttpServletRequest request){
+		
+		model.addAttribute("model", "hbx");
+		return "/client/gem/load-img";
+	}
+	
 }
