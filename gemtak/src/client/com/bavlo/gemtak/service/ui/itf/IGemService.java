@@ -57,6 +57,15 @@ public interface IGemService {
 	public void saveOrupdateShoppingCarVO(Integer gemId,Integer userId,Integer quantity) throws Exception;
 	
 	/**
+	 * 根据用户id查询购物车 的商品数量
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer getShoppingCarNumByUseid(Integer userId) throws Exception;
+	
+	
+	/**
 	 * 
 	 * @return 查询所有的GemVO list集合
 	 * @throws Exception
