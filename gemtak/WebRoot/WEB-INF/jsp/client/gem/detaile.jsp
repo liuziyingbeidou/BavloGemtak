@@ -50,7 +50,7 @@ function addShoppCar(id){
     var Num = data.carNum;
     if(flag=="Y"){
       alert("恭喜你，宝物添加成功！");
-      $(".selCarNO").text(Num);
+      $(".selCarNO").text("("+Num+")");
     }
   });
 } 
