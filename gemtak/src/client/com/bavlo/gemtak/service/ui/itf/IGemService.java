@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.ui.Model;
 
 import com.bavlo.gemtak.model.gem.GemVO;
+import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 
 /**
  * @Title: 宝珑Gemtak
@@ -47,7 +48,16 @@ public interface IGemService {
 	public void saveOrupdateGemVO(GemVO gemVO) throws Exception;
 	
 	/**
-	 * lisuike 3.15
+	 * 添加到购物车
+	 * @param gemId
+	 * @param userId
+	 * @throws Exception
+	 * lisuike 2016-3-28 上午 11:13:45
+	 */
+	public void saveOrupdateShoppingCarVO(Integer gemId,Integer userId,Integer quantity) throws Exception;
+	
+	/**
+	 * 
 	 * @return 查询所有的GemVO list集合
 	 * @throws Exception
 	 */
@@ -90,4 +100,6 @@ public interface IGemService {
 	 * @param sql
 	 */
 	public Integer getListSizeGem(String contions);
+	
+	
 }
