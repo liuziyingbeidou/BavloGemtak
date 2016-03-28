@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.druid.sql.dialect.sqlserver.ast.SQLServerColumnDefinition.Identity;
 import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.model.IdEntity;
 import com.bavlo.gemtak.model.gem.GemVO;
+import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.service.impl.CommonService;
 import com.bavlo.gemtak.utils.DateUtil;
@@ -112,7 +114,9 @@ public class GemCService extends CommonService implements IGemService {
 		
 	}
 
-	//点击删除按钮，修改数据库字段
+	/**
+	 * 点击删除按钮，修改数据库字段
+	 */
 	
 	public void updateDrGemById(Integer id) throws Exception {
 		if(id != null){
@@ -129,6 +133,19 @@ public class GemCService extends CommonService implements IGemService {
 	@Override
 	public Integer getListSizeGem(String contions) {
 		return getCountByHQL(GemVO.class, contions);
+	}
+
+	/**
+	 * 新增到购物车
+	 */
+	@Override
+	public void saveOrupdateShoppingCarVO(Integer gemId, Integer userId,Integer quantity)
+			throws Exception {
+		ShoppingCarVO carVO = new ShoppingCarVO();
+		carVO.setGem_id(gemId);
+		carVO.setUser_id(userId);
+		carVO.setQuantity(quantity);
+		save(carVO);
 	}
 	
 	
