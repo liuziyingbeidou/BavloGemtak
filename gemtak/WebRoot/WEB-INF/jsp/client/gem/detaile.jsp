@@ -24,7 +24,7 @@ $(document).ready(function() {
 	$("#ex8").slider({
 		tooltip: 'always'
 	});
-})
+});
 function jian(){
 	var mySlider = $("#ex8").slider();
 	var num = $("#ex8").slider('getValue');
@@ -69,6 +69,7 @@ function addShoppCar(id){
 			   <!--<image src="${ctx }/resources/client/images/ad.jpg" style="width:100%"/>-->
 			   <!--<iframe id="iframe" src="${ctx }/gemClient/loadImg.do" frameborder="no" width="100%"></iframe>-->
 			   <jsp:include page="load-img.jsp"></jsp:include>
+			   
 			   <span><a href=""><image src="${ctx }/resources/client/images/360.png" /></a></span>
 			   <p>Gemtak</p>
 			 </div>
