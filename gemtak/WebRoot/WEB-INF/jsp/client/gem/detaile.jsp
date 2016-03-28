@@ -49,7 +49,22 @@ $("#ex8").slider('setValue',++num);
 	  <div class="container">
 		  <div class="tit_all_left col-sm-12 col-md-7">
 		     <div class="tit_img">
-			   <image src="${ctx }/resources/client/images/ad.jpg" style="width:100%"/>
+			   <!--<image src="${ctx }/resources/client/images/ad.jpg" style="width:100%"/>-->
+			   <img src="${ctx }/resources/1024/hbx/001.jpg" width="100%" height="100%" 
+				class="reel"
+			   	id="image"
+			  	data-images="${ctx }/resources/1024/hbx/###.jpg"
+			 	data-frames="200"
+			  	data-footage="50"
+			  	data-cw="true"
+			  	data-orbital="0"
+			  	data-inversed="true"
+			  	data-speed="0.1"
+				data-revolution="800"
+				data-scrollable="true"
+				data-cursor="hand"
+				data-delay="1"
+				data-timeout="1"/>
 			   <span><a href=""><image src="${ctx }/resources/client/images/360.png" /></a></span>
 			   <p>Gemtak</p>
 			 </div>
@@ -96,4 +111,18 @@ $("#ex8").slider('setValue',++num);
     <jsp:include page="../../admin/foot.jsp"></jsp:include>
 </div>
 </body>
+    
+	<script type="text/javascript">
+	$(function(){
+		GetArgsFromHref();
+	});
+
+	 function GetArgsFromHref() 
+	 { 
+		$("#image").prop("src","${ctx }/resources/1024/${model}/001.jpg");
+		$("#image").attr("data-images","${ctx }/resources/1024/${model}/###.jpg");
+	 } 
+ 		
+</script>
+<script src='${ctx }/resources/reel/js/jquery.bavlo.js' type='text/javascript'></script>
 </html>
