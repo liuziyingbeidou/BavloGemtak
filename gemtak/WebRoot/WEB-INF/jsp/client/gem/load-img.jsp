@@ -28,7 +28,7 @@
 					data-cursor="hand"
 					data-delay="1"
 					data-timeout="1"/>
-    
+    <script language="javascript" type="text/javascript" src="${ctx }/resources/reel/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 	$(function(){
 		GetArgsFromHref();
@@ -36,8 +36,8 @@
 
 	 function GetArgsFromHref() 
 	 { 
-		$("#image").prop("src","${ctx }/resources/1024/${model}/001.jpg");
-		$("#image").attr("data-images","${ctx }/resources/1024/${model}/###.jpg");
+		$("#image").prop("src","${ctx }/resources/1024/${model-d}/001.jpg");
+		$("#image").attr("data-images","${ctx }/resources/1024/${model-d}/###.jpg");
 	 } 
  		
 	</script>
