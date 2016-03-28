@@ -7,15 +7,19 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.constant.controller.IClientForward;
 import com.bavlo.gemtak.model.gem.GemVO;
+import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.service.weixin.itf.IWXZFService;
+import com.bavlo.gemtak.util.weixin.IContant;
 import com.bavlo.gemtak.util.weixin.WXPayUtil;
 import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.WebUtils;
@@ -184,11 +188,38 @@ public class GemClientController extends BaseController {
 		GemClientPageModel.getCDetailePageModel(model,lang);
 		GemVO gem = gemService.findGemVOByID(id);
 		model.addAttribute("gem", gem);
-		model.addAttribute("model", "hbx");
+		model.addAttribute("model-d", "hbx");
 		/*return IClientForward.viewGemDetaile;*/
 		return "/client/gem/detaile";
 	}
 	
+	/**
+	 * 添加到购物车
+	 * @param model
+	 * @param response
+	 * @param request
+	 * @param carVO
+	 * lisuike 2016-3-28 上午10:44:50
+	 * @throws Exception 
+	 * @throws NumberFormatException 
+	 */
+	@RequestMapping(value="addShoppingCar")
+	public void insertShoppingCar(Model model,HttpServletResponse response,HttpServletRequest request,ShoppingCarVO carVO,Integer gemId,
+			Integer userId,Integer quantity) {
+	   Object user = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+	   Integer num = 0;
+	   if(!CommonUtils.isNull(user)){
+		   userId = 1;
+	   }
+	    try {
+			gemService.saveOrupdateShoppingCarVO(gemId, userId,quantity);
+			num = gemService.getShoppingCarNumByUseid(1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		   renderText("{\"mess\":\"Y\",\"carNum\":\""+num+"\"}");
+	}
 	/**
 	 * @Description: 购物车
 	 * @param @param model
@@ -198,13 +229,14 @@ public class GemClientController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value="viewShoppingCar")
-	public String viewGemShoppingCar(Model model,HttpServletResponse response,HttpServletRequest request){
+	public String viewGemShoppingCar(Model model,HttpServletResponse response,HttpServletRequest request,Integer gemId){
 		
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCShoppingCarPageModel(model,lang);
+		Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
 		
 		return IClientForward.viewGemShoppingCar;
 	}
