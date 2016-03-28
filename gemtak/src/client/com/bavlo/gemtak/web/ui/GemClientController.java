@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +18,6 @@ import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.service.weixin.itf.IWXZFService;
-import com.bavlo.gemtak.util.weixin.IContant;
 import com.bavlo.gemtak.util.weixin.WXPayUtil;
 import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.WebUtils;
@@ -188,7 +186,7 @@ public class GemClientController extends BaseController {
 		GemClientPageModel.getCDetailePageModel(model,lang);
 		GemVO gem = gemService.findGemVOByID(id);
 		model.addAttribute("gem", gem);
-		model.addAttribute("model-d", "hbx");
+		model.addAttribute("model", "hbx");
 		/*return IClientForward.viewGemDetaile;*/
 		return "/client/gem/detaile";
 	}
