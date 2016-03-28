@@ -110,7 +110,9 @@ $(function(){
 
 });
 
-//调至详情页
+/**
+ * 跳转详情页
+ */
 function goDetail(id){
 	location.href = "viewGemDetaile.do?id="+id;
 }
@@ -235,13 +237,13 @@ function goDetail(id){
 	    }
   }
   
-  //宝石详情
+  /*//宝石详情
   function selectClientDetaile(id){
 	  var url = "viewGemDetaile.do?";
 	  $.post(url,{id:id},function(data){
 			  
 		  });
-  }
+  }*/
 
 
 //ajax
