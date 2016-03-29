@@ -13,7 +13,7 @@ public interface IConstant {
 	public static final String NO = "N";
 	public static final String SESSIONUSERNAEM = "sessionusername";
 	public static final String loginURL = "http://www.bavlo.com/gemtak-invoke/tologin";
-	public static final String registerURL = "htttp://www.bavlo.com/gemtak-invoke/register";
+	public static final String registerURL = "http://www.bavlo.com/gemtak-invoke/register";
 	//±æµÿ”Ô—‘ªØ
 	public static final String COOKIE_LANG = "lang";
 	public static final String ZH_CN = "cn";
