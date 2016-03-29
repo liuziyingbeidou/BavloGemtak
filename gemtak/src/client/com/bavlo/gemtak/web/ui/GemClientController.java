@@ -366,11 +366,13 @@ public class GemClientController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value="loginSuccess")
+	@ResponseBody
 	public String loginSuccess(Model model,HttpServletRequest request,HttpServletResponse response,String uname,String upwd){
 		String msg = HttpTools.submitPost(IConstant.loginURL,"uname="+uname+"&upwd="+upwd)+"";
 		//登录成功后将用户名存在session中
 		request.getSession().setAttribute(IConstant.SESSIONUSERNAEM, uname);
 		return msg;
+		//renderText(msg);
 	}
 	
 	/**
@@ -382,8 +384,19 @@ public class GemClientController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value="registerSuccess")
-	public String registerSuccess(Model model,HttpServletRequest request,HttpServletResponse response,String uname,String upwd){
-		String msg = HttpTools.submitPost(IConstant.registerURL,"uname="+uname+"&upwd="+upwd)+"";
+	@ResponseBody
+	public String registerSuccess(Model model,HttpServletRequest request,HttpServletResponse response,
+			String uname,String upwd,String regauthcode){
+		String msg = "";
+		String authcode = (String) request.getSession().getAttribute("validateCode");
+		if(authcode != null && authcode != ""){
+			if(authcode.equalsIgnoreCase(regauthcode)){
+				msg = HttpTools.submitPost(IConstant.registerURL,"uname="+uname+"&upwd="+upwd)+"";
+			}else{
+				msg = "error2";
+			}
+		}
+		
 		
 		return msg;
 	}
