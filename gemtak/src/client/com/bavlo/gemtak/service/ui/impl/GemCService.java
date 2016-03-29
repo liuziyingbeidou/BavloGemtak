@@ -153,7 +153,7 @@ public class GemCService extends CommonService implements IGemService {
 	 */
 	@Override
 	public Integer getShoppingCarNumByUname(String username) throws Exception {
-		return getCountByHQL(ShoppingCarVO.class, "user_name="+username);
+		return getCountByHQL(ShoppingCarVO.class, "user_name='"+username+"'");
 	}
 	
 	
