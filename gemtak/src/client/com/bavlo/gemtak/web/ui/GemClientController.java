@@ -384,8 +384,7 @@ public class GemClientController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value="goToList")
-	@ResponseBody
-	public void goToList(Model model,HttpServletRequest request,HttpServletResponse response,String uname){
+	public String goToList(Model model,HttpServletRequest request,HttpServletResponse response,String uname){
 		Integer num = 0;
 		try {
 			num = gemService.getShoppingCarNumByUname(uname);
@@ -393,8 +392,9 @@ public class GemClientController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		 renderText("{\"mess\":\"Y\",\"carNum\":\""+num+"\",\"username\":\""+uname+"\"}");
+		model.addAttribute("carNum",num);
+		model.addAttribute("uname",uname);
+		return "/client/gem/list";
 		//renderText(msg);
 	}
 	
