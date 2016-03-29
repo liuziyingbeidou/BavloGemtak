@@ -16,29 +16,62 @@
 <link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
 <link href="${ctx }/resources/client/css/login.css" rel="stylesheet">
-<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="${ctx }/resources/client/jquery.js"></script>
 
 <script type="text/javascript">
  $(function (){
   //用户登录
+  
   $(".login").click(function(){
     var uname = $(".input-username").val();
     var pwd = $(".input-pwd").val();
-    var url = "www.bavlo.com/gemtak-invoke/register?";
+    var url = "${ctx }/gemClient/loginSuccess.do";
     if(uname != "" && uname != null && pwd != "" && pwd != null ){
       $.post(url,{uname:uname,upwd:pwd},function(data){
-       if(data == "用户没找到"){
+        //data = $.parseJSON(data);
+        var flag = data.msg;
+       if(flag == "用户没找到"){
          alert("你输入的用户名错误！");
        }
-       if(data == "密码错误"){
+       if(flag == "密码错误"){
          alert("你输入的密码错误！");
        }
-       if(data == "true"){
-         location.href = "gemClient/login.do?username="+uname;
-       }
+       
       });
     }
   });
+ });
+ 
+ //用户注册
+ $(function(){
+   $(".register").click(function(){
+   var reguname = $(".reg-uname").val();
+   if(reguname == ""|| reguname == null){
+     $(".errorname").text("E-mail不能为空！");
+   }
+   var regpwd = $(".reg-pwd").val();
+   if(regpwd == ""|| regpwd == null){
+     $(".errorpwd").text("密码不能为空！");
+   }
+   var regrpwd = $(".reg-rpwd").val();
+   if(regrpwd == ""|| regrpwd == null){
+     $(".errorcpwd").text("请确认密码！");
+   }
+   var regauthcode = $(".reg-authcode").val();
+   if(regauthcode == ""|| regauthcode == null){
+     $(".errorauthcode").text("请输入验证码！");
+   }
+   var url = "${ctx }/gemClient/registerSuccess.do";
+   $.post(url,{uname:reguname,upwd:regpwd},function(data){
+       var flag = data.msg;
+       if(flag == "error1"){
+         alert("该用户名已被注册！");
+       }
+       if(flag == "true"){
+         alert("恭喜您，注册成功！");
+       }
+   });
+   });
  });
 </script>
 
@@ -55,7 +88,7 @@
 				<h3><span>会员登录</span></h3>
 				<div class="side">
 					<ul class="word">
-						<li><label>E-mail：</label><div class="s_te"><input class="inp_text input-username" type="text" value="" /><b class="error">输入有误</b></div></li>
+						<li><label>E-mail：</label><div class="s_te"><input class="inp_text input-username" type="text" value="" /><b class="errorn1"></b></div></li>
 						<li><label>密码：</label><div class="s_te"><input class="inp_text input-pwd" type="password" value="" /></div></li>
 						<li><label>&nbsp;</label><div class="s_te"><span><input class="inp_che" type="checkbox" value=""/>记住密码</span><input class="inp_sub login" type="button" value="登录" /></div></li>
 					</ul>
@@ -70,17 +103,18 @@
 			</div>
 			<div class="w_442 col-sm-12 col-md-6">
 				<h3><span>新用户注册</span></h3>
+				
 				<div class="pass">
 					<ul class="word">
-						<li><label>E-mail：</label><div class="s_te"><input class="inp_text" type="text" value="" /><b class="error">输入有误</b></div></li>
-						<li><label>密码：</label><div class="s_te"><input class="inp_text" type="password" value="" /></div></li>
+						<li><label>E-mail：</label><div class="s_te"><input class="inp_text reg-uname" type="text" value="" /><b class="errorname"></b></div></li>
+						<li><label>密码：</label><div class="s_te"><input class="inp_text reg-pwd" type="password" value="" /><b class="errorpwd"></b></div></li>
 						<li style="margin:0px auto;line-height:20px"><label>&nbsp;</label><div class="s_te">密码最少六个字符</li>
-						<li><label>确认密码：</label><div class="s_te"><input class="inp_text" type="password" value="" /></div></li>
-						<li><label>验证码：</label><div class="s_te"><input class="inp_text" type="password" style="width:50%" value="" /><img src="" /></div></li>
+						<li><label>确认密码：</label><div class="s_te"><input class="inp_text reg-rpwd" type="password" value="" /><b class="errorcpwd"></b></div></li>
+						<li><label>验证码：</label><div class="s_te"><input class="inp_text reg-authcode" type="password" style="width:50%" value="" /><img src="" /><b class="errorauthcode"></b></div></li>
 					</ul>
 					
 					<ul class="word redo">
-						<li class="once"><input class="inp_sub  register" type="submit" value="立即注册" /></li>
+						<li class="once"><input class="inp_sub  register" type="button" value="立即注册" /></li>
 					</ul>
 				</div>
 				
