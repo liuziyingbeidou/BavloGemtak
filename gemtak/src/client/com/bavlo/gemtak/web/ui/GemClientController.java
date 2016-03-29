@@ -344,6 +344,7 @@ public class GemClientController extends BaseController {
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCLoginPageModel(model,lang);
 		String username = request.getParameter("username");
+		//登录成功后将用户名存在session中
 		request.getSession().setAttribute(IConstant.SESSIONUSERNAEM, username);
 		return IClientForward.gemLogin;
 	}
