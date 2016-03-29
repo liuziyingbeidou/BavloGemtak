@@ -4,7 +4,7 @@
 <div class="top_nav hidden-xs hidden-sm">
   <div class="top container">
 <span><image src="${ctx }/resources/client/images/call.png" />0086-010-82830789&nbsp;</span><span class="h-lang">[${pagehfvo['hLanguage'] }]</span>
-<div class="top_a">Hi, ${username}<a href="${ctx }/gemClient/login.do">登录</a>|<a href="${ctx }/gemClient/login.do">注册</a>|<a href="">收藏夹</a>|<a  href="./shopping_car.html">购物车 <t class="cart-num">(0)</t></a><a href="" class="jesuan">去结算</a></div>
+<div class="top_a">Hi, ${uname}<a href="${ctx }/gemClient/login.do">登录</a>|<a href="${ctx }/gemClient/login.do">注册</a>|<a href="">收藏夹</a>|<a  href="./shopping_car.html">购物车 <t class="cart-num">(${carNum})</t></a><a href="" class="jesuan">去结算</a></div>
   </div>
 </div>
 <div class="nav col-xs-12">
