@@ -88,7 +88,7 @@
 				<h3><span>会员登录</span></h3>
 				<div class="side">
 					<ul class="word">
-						<li><label>E-mail：</label><div class="s_te"><input class="inp_text input-username" type="text" value="" /><b class="errorn1"></b></div></li>
+						<li><label>E-mail：</label><div class="s_te"><input class="inp_text input-username" type="text" value="" /><b class="error"></b></div></li>
 						<li><label>密码：</label><div class="s_te"><input class="inp_text input-pwd" type="password" value="" /></div></li>
 						<li><label>&nbsp;</label><div class="s_te"><span><input class="inp_che" type="checkbox" value=""/>记住密码</span><input class="inp_sub login" type="button" value="登录" /></div></li>
 					</ul>
@@ -106,11 +106,11 @@
 				
 				<div class="pass">
 					<ul class="word">
-						<li><label>E-mail：</label><div class="s_te"><input class="inp_text reg-uname" type="text" value="" /><b class="errorname"></b></div></li>
-						<li><label>密码：</label><div class="s_te"><input class="inp_text reg-pwd" type="password" value="" /><b class="errorpwd"></b></div></li>
+						<li><label>E-mail：</label><div class="s_te"><input class="inp_text reg-uname" type="text" value="" /><b class="error errorname"></b></div></li>
+						<li><label>密码：</label><div class="s_te"><input class="inp_text reg-pwd" type="password" value="" /><b class="error errorpwd"></b></div></li>
 						<li style="margin:0px auto;line-height:20px"><label>&nbsp;</label><div class="s_te">密码最少六个字符</li>
-						<li><label>确认密码：</label><div class="s_te"><input class="inp_text reg-rpwd" type="password" value="" /><b class="errorcpwd"></b></div></li>
-						<li><label>验证码：</label><div class="s_te"><input class="inp_text reg-authcode" type="password" style="width:50%" value="" /><img src="" /><b class="errorauthcode"></b></div></li>
+						<li><label>确认密码：</label><div class="s_te"><input class="inp_text reg-rpwd" type="password" value="" /><b class="error errorcpwd"></b></div></li>
+						<li><label>验证码：</label><div class="s_te"><input class="inp_text reg-authcode" type="password" style="width:50%" value="" /><img src="" /><b class="error errorauthcode"></b></div></li>
 					</ul>
 					
 					<ul class="word redo">
