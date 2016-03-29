@@ -203,21 +203,22 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="addShoppingCar")
 	public void insertShoppingCar(Model model,HttpServletResponse response,HttpServletRequest request,ShoppingCarVO carVO,Integer gemId,
-			Integer userId,Integer quantity) {
-	   Object user = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+			String username,Integer quantity) {
+	    Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+	    if(CommonUtils.isNull(uname)){
+	    	username = (String) uname;
+	    }
 	   Integer num = 0;
 	   
 	   //用户注册、登录功能还没实现，待完善
-	   
-	   if(!CommonUtils.isNull(user)){
+	   /*if(!CommonUtils.isNull(uname)){
 		   userId = 1;
 	   }
-	   userId = 1;
+	   userId = 1;*/
 	    try {
-			gemService.saveOrupdateShoppingCarVO(gemId, userId,quantity);
-			num = gemService.getShoppingCarNumByUseid(1);
+			gemService.saveOrupdateShoppingCarVO(gemId, username,quantity);
+			num = gemService.getShoppingCarNumByUname(username);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		   renderText("{\"mess\":\"Y\",\"carNum\":\""+num+"\"}");
@@ -342,7 +343,8 @@ public class GemClientController extends BaseController {
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCLoginPageModel(model,lang);
-		
+		String username = request.getParameter("username");
+		request.getSession().setAttribute(IConstant.SESSIONUSERNAEM, username);
 		return IClientForward.gemLogin;
 	}
 	
