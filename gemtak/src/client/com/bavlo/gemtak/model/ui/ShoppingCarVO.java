@@ -21,6 +21,8 @@ public class ShoppingCarVO extends IdEntity{
 	private static final long serialVersionUID = 1L;
 	//用户id
 	private Integer user_id;
+	//用户名
+	private String user_name;
 	//宝石
 	private Integer gem_id;
 	//封面图
@@ -59,6 +61,12 @@ public class ShoppingCarVO extends IdEntity{
 	}
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 	
 }
