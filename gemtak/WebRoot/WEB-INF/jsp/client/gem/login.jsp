@@ -21,7 +21,7 @@
 <script type="text/javascript">
  $(function (){
   //用户登录
-  
+  refush('authcodeimg');
   $(".login").click(function(){
     var uname = $(".input-username").val();
     var pwd = $(".input-pwd").val();
@@ -29,14 +29,12 @@
     if(uname != "" && uname != null && pwd != "" && pwd != null ){
       $.post(url,{uname:uname,upwd:pwd},function(data){
         //data = $.parseJSON(data);
-        var flag = data.msg;
-       if(flag == "用户没找到"){
-         alert("你输入的用户名错误！");
-       }
-       if(flag == "密码错误"){
-         alert("你输入的密码错误！");
-       }
-       
+        if(data == "true"){
+        	//登录成功处理...
+        	location.href = "${ctx}/gemClient/viewGemList.do";
+        }else{
+        	alert(data);
+        }
       });
     }
   });
@@ -69,17 +67,24 @@
      return;
    }
    var url = "${ctx }/gemClient/registerSuccess.do";
-   $.post(url,{uname:reguname,upwd:regpwd},function(data){
-       var flag = data.msg;
+   $.post(url,{uname:reguname,upwd:regpwd,regauthcode:regauthcode},function(data){
+       var flag = data;
        if(flag == "error1"){
          alert("该用户名已被注册！");
-       }
-       if(flag == "true"){
+       }else if(flag == "error2"){
+         alert("该用户名已被注册！");
+       }else if(flag == "true"){
          alert("恭喜您，注册成功！");
        }
    });
    });
  });
+ 
+ function refush(obj){
+ $("."+obj).attr('src','${ctx}/gemClient/imgValidate.do?'+Math.random());
+ 
+ };
+ 
 </script>
 
 </head>
@@ -117,7 +122,7 @@
 						<li><label>密码：</label><div class="s_te"><input class="inp_text reg-pwd" type="password" value="" /><b class="error errorpwd"></b></div></li>
 						<li style="margin:0px auto;line-height:20px"><label>&nbsp;</label><div class="s_te">密码最少六个字符</li>
 						<li><label>确认密码：</label><div class="s_te"><input class="inp_text reg-rpwd" type="password" value="" /><b class="error errorcpwd"></b></div></li>
-						<li><label>验证码：</label><div class="s_te"><input class="inp_text reg-authcode" type="password" style="width:50%" value="" /><img src="" /><b class="error errorauthcode"></b></div></li>
+						<li><label>验证码：</label><div class="s_te"><input class="inp_text reg-authcode" type="password" style="width:50%" value="" />&nbsp;<img src="" class="authcodeimg" onclick="refush('authcodeimg')"/><b class="error errorauthcode"></b></div></li>
 					</ul>
 					
 					<ul class="word redo">
