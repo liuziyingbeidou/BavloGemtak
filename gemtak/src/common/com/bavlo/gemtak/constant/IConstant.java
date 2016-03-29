@@ -11,7 +11,8 @@ public interface IConstant {
 	
 	public static final String YES = "Y";
 	public static final String NO = "N";
-	public static final String SESSIONUSERNAEM = "UserVO";
+	public static final String SESSIONUSERNAEM = "sessionusername";
+	public static final String loginURL = "www.bavlo.com/gemtak-invoke/tologin?";
 	//±æµÿ”Ô—‘ªØ
 	public static final String COOKIE_LANG = "lang";
 	public static final String ZH_CN = "cn";
