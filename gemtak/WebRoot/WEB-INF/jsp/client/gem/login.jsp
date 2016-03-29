@@ -31,7 +31,7 @@
         //data = $.parseJSON(data);
         if(data == "true"){
         	//登录成功处理...
-        	location.href = "${ctx}/gemClient/viewGemList.do";
+        	location.href = "${ctx}/gemClient/goToList.do?uname="+uname;
         }else{
         	alert(data);
         }
@@ -80,6 +80,7 @@
    });
  });
  
+ //生成验证码
  function refush(obj){
  $("."+obj).attr('src','${ctx}/gemClient/imgValidate.do?'+Math.random());
  
