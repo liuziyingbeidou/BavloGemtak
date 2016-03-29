@@ -139,11 +139,11 @@ public class GemCService extends CommonService implements IGemService {
 	 * 新增到购物车
 	 */
 	@Override
-	public void saveOrupdateShoppingCarVO(Integer gemId, Integer userId,Integer quantity)
+	public void saveOrupdateShoppingCarVO(Integer gemId, String username,Integer quantity)
 			throws Exception {
 		ShoppingCarVO carVO = new ShoppingCarVO();
 		carVO.setGem_id(gemId);
-		carVO.setUser_id(userId);
+		carVO.setUser_name(username);
 		carVO.setQuantity(quantity);
 		save(carVO);
 	}
@@ -152,8 +152,8 @@ public class GemCService extends CommonService implements IGemService {
 	 * 根据用户id查询 查询当前用户的购物车商品数量
 	 */
 	@Override
-	public Integer getShoppingCarNumByUseid(Integer userId) throws Exception {
-		return getCountByHQL(ShoppingCarVO.class, "user_id="+userId);
+	public Integer getShoppingCarNumByUname(String username) throws Exception {
+		return getCountByHQL(ShoppingCarVO.class, "user_name="+username);
 	}
 	
 	
