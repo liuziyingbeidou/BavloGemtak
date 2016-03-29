@@ -206,9 +206,13 @@ public class GemClientController extends BaseController {
 			Integer userId,Integer quantity) {
 	   Object user = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
 	   Integer num = 0;
+	   
+	   //用户注册、登录功能还没实现，待完善
+	   
 	   if(!CommonUtils.isNull(user)){
 		   userId = 1;
 	   }
+	   userId = 1;
 	    try {
 			gemService.saveOrupdateShoppingCarVO(gemId, userId,quantity);
 			num = gemService.getShoppingCarNumByUseid(1);
