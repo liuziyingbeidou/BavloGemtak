@@ -376,6 +376,29 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
+	 * @Description: 登录成功后显示首页，并查询该用户的购物车
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="goToList")
+	@ResponseBody
+	public void goToList(Model model,HttpServletRequest request,HttpServletResponse response,String uname){
+		Integer num = 0;
+		try {
+			num = gemService.getShoppingCarNumByUname(uname);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		 renderText("{\"mess\":\"Y\",\"carNum\":\""+num+"\",\"username\":\""+uname+"\"}");
+		//renderText(msg);
+	}
+	
+	/**
 	 * @Description: 注册成功
 	 * @param @param model
 	 * @param @param response
