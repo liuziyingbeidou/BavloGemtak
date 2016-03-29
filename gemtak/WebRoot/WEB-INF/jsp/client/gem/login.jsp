@@ -52,14 +52,21 @@
    var regpwd = $(".reg-pwd").val();
    if(regpwd == ""|| regpwd == null){
      $(".errorpwd").text("密码不能为空！");
+     return;
    }
    var regrpwd = $(".reg-rpwd").val();
    if(regrpwd == ""|| regrpwd == null){
      $(".errorcpwd").text("请确认密码！");
+     return;
+   }
+   if(regrpwd != regrpwd){
+     $(".errorcpwd").text("两次输入的密码不相同！");
+     return;
    }
    var regauthcode = $(".reg-authcode").val();
    if(regauthcode == ""|| regauthcode == null){
      $(".errorauthcode").text("请输入验证码！");
+     return;
    }
    var url = "${ctx }/gemClient/registerSuccess.do";
    $.post(url,{uname:reguname,upwd:regpwd},function(data){
