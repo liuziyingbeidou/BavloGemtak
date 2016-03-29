@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.constant.controller.IClientForward;
+import com.bavlo.gemtak.httpclient.HttpTools;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 import com.bavlo.gemtak.service.ui.itf.IGemService;
@@ -343,10 +344,39 @@ public class GemClientController extends BaseController {
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCLoginPageModel(model,lang);
-		String username = request.getParameter("username");
-		//登录成功后将用户名存在session中
-		request.getSession().setAttribute(IConstant.SESSIONUSERNAEM, username);
+		
 		return IClientForward.gemLogin;
+	}
+	
+	/**
+	 * @Description: 登录成功
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="loginSuccess")
+	public String loginSuccess(Model model,HttpServletRequest request,HttpServletResponse response,String uname,String upwd){
+		String msg = HttpTools.submitPost(IConstant.loginURL,"uname="+uname+"&upwd="+upwd)+"";
+		//登录成功后将用户名存在session中
+		request.getSession().setAttribute(IConstant.SESSIONUSERNAEM, uname);
+		return msg;
+	}
+	
+	/**
+	 * @Description: 注册成功
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="registerSuccess")
+	public String registerSuccess(Model model,HttpServletRequest request,HttpServletResponse response,String uname,String upwd){
+		String msg = HttpTools.submitPost(IConstant.registerURL,"uname="+uname+"&upwd="+upwd)+"";
+		
+		return msg;
 	}
 	
 	/**
