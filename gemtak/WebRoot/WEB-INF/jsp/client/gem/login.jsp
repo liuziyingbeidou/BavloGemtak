@@ -18,6 +18,30 @@
 <link href="${ctx }/resources/client/css/login.css" rel="stylesheet">
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
 
+<script type="text/javascript">
+ $(function (){
+  //用户登录
+  $(".login").click(function(){
+    var uname = $(".input-username").val();
+    var pwd = $(".input-pwd").val();
+    var url = "www.bavlo.com/gemtak-invoke/register?";
+    if(uname != "" && uname != null && pwd != "" && pwd != null ){
+      $.post(url,{uname:uname,upwd:pwd},function(data){
+       if(data == "用户没找到"){
+         alert("你输入的用户名错误！");
+       }
+       if(data == "密码错误"){
+         alert("你输入的密码错误！");
+       }
+       if(data == "true"){
+         location.href = "gemClient/login.do?username="+uname;
+       }
+      });
+    }
+  });
+ });
+</script>
+
 </head>
 <body>
 <div>
@@ -31,11 +55,11 @@
 				<h3><span>会员登录</span></h3>
 				<div class="side">
 					<ul class="word">
-						<li><label>E-mail：</label><div class="s_te"><input class="inp_text" type="text" value="" /><b class="error">输入有误</b></div></li>
-						<li><label>密码：</label><div class="s_te"><input class="inp_text" type="password" value="" /></div></li>
-						<li><label>&nbsp;</label><div class="s_te"><span><input class="inp_che" type="checkbox" value=""/>记住密码</span><input class="inp_sub" type="submit" value="登录" /></div></li>
+						<li><label>E-mail：</label><div class="s_te"><input class="inp_text input-username" type="text" value="" /><b class="error">输入有误</b></div></li>
+						<li><label>密码：</label><div class="s_te"><input class="inp_text input-pwd" type="password" value="" /></div></li>
+						<li><label>&nbsp;</label><div class="s_te"><span><input class="inp_che" type="checkbox" value=""/>记住密码</span><input class="inp_sub login" type="button" value="登录" /></div></li>
 					</ul>
-					</form>
+				</form>
 					<p class="forget">忘记密码？</p>
 					<p>请在下面输入您的Email地址，然后点击“发送”按钮，我们立即把新密码发送到您的邮箱！</p>
 					<ul class="word redo">
