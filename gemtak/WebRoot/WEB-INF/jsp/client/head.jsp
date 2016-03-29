@@ -4,7 +4,7 @@
 <div class="top_nav hidden-xs hidden-sm">
   <div class="top container">
 <span><image src="${ctx }/resources/client/images/call.png" />0086-010-82830789&nbsp;</span><span class="h-lang">[${pagehfvo['hLanguage'] }]</span>
-<div class="top_a">Hi, mtvdb<a href="./login.html">登录</a>|<a href="./login.html">注册</a>|<a href="">收藏夹</a>|<a  href="./shopping_car.html">购物车 <t class="cart-num">(0)</t></a><a href="" class="jesuan">去结算</a></div>
+<div class="top_a">Hi, mtvdb<a href="${ctx }/gemClient/login.do">登录</a>|<a href="${ctx }/gemClient/login.do">注册</a>|<a href="">收藏夹</a>|<a  href="./shopping_car.html">购物车 <t class="cart-num">(0)</t></a><a href="" class="jesuan">去结算</a></div>
   </div>
 </div>
 <div class="nav col-xs-12">
@@ -20,7 +20,9 @@
 <link rel="stylesheet" href="${ctx }/resources/admin/css/gem-common.css" />
 
 <script>
+  //加载购物车中 商品数量
   function selCarNO(num){
    $(".cart-num").text("("+num+")");
   }
+  
 </script>
