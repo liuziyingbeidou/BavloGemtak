@@ -54,7 +54,7 @@ public interface IGemService {
 	 * @throws Exception
 	 * lisuike 2016-3-28 上午 11:13:45
 	 */
-	public void saveOrupdateShoppingCarVO(Integer gemId,Integer userId,Integer quantity) throws Exception;
+	public void saveOrupdateShoppingCarVO(Integer gemId,String username,Integer quantity) throws Exception;
 	
 	/**
 	 * 根据用户id查询购物车 的商品数量
@@ -62,7 +62,7 @@ public interface IGemService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Integer getShoppingCarNumByUseid(Integer userId) throws Exception;
+	public Integer getShoppingCarNumByUname(String username) throws Exception;
 	
 	
 	/**
