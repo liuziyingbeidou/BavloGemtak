@@ -21,7 +21,7 @@
 	  </c:if>
 		
 		<a href="${ctx }/gemClient/showCookies.do">收藏夹</a>|
-		<a  href="./shopping_car.html">购物车 <t class="cart-num">(${carNum})</t></a>
+		<a  href="${ctx }/gemClient/viewShoppingCar.do">购物车 <t class="cart-num">(${carNum})</t></a>
 		<a href="" class="jesuan">去结算</a>
 	</div>
   </div>
