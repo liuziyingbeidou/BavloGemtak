@@ -1,5 +1,9 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.bavlo.gemtak.constant.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% 
+  Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+ %>
+ <c:set var="uname" value="<%=uname %>"/>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -42,17 +46,20 @@ function jia(){
 
 //添加到购物车
 function addShoppCar(id){
-  var quantity =  $(".selquantity").text();
-  var url = "/gemtak/gemClient/addShoppingCar.do";
-  $.post(url,{gemId:id,quantity:quantity},function(data){
-    data = $.parseJSON(data);
-    var flag = data.mess;
-    var Num = data.carNum;
-    if(flag=="Y"){
-      alert("恭喜你，宝物添加成功！");
-      selCarNO(Num);   
-    }
-  });
+      var quantity =  $(".selquantity").text();
+	  var url = "/gemtak/gemClient/addShoppingCar.do";
+	  $.post(url,{gemId:id,quantity:quantity},function(data){
+	    data = $.parseJSON(data);
+	    var flag = data.mess;
+	    var Num = data.carNum;
+	    if(flag=="Y"){
+	      alert("恭喜你，宝物添加成功！");
+	      selCarNO(Num);  //方法在head.jsp 
+	    }else if(flag=="N"){  //返回N跳转到登录
+	      location.href = "/gemtak/gemClient/login.do";
+	    }
+	  });
+  
 } 
 
 
