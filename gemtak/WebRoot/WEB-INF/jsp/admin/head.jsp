@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="${ctx }/resources/admin/css/gem-common.css" />
 <!-- amazeui -->
 <link rel="stylesheet" href="${ctx }/resources/amazeui/css/amazeui.min.css"/>
-<script type="text/javascript" src="${ctx }/resources/amazeui/js/handlebars.min.js"></script>	
+<script type="text/javascript" src="${ctx }/resources/amazeui/js/handlebars.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/amazeui/js/amazeui.min.js"></script>	
   <nav data-am-widget="menu" class="am-menu  am-menu-offcanvas1" data-am-menu-offcanvas> 
     <a href="javascript: void(0)" class="am-menu-toggle">
