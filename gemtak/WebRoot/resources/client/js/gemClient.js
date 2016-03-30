@@ -187,7 +187,7 @@ function goDetail(id){
 							    "<li class='col-md-3 col-xs-6'>"+		
 								  "<span><a href='javascript:void(0)' onclick='goDetail("+data[i].id+")'><image src='/gemtak/resources/client/images/cp1.png' /></a></span>"+
 								  "<h6><b>"+data[i].type_cn+"<font class='hidden-xs hidden-sm'>（"+data[i].type_en+"）</font></b><i>¥"+data[i].retail_price+"</i></h6>"+
-								  "<p><b>"+data[i].weight+" "+data[i].clarity_en+" "+data[i].cut_en+"</b><i><image src='/gemtak/resources/client/images/tu3.png' /></i></p>"+
+								  "<p><b>"+data[i].weight+" "+data[i].clarity_en+" "+data[i].cut_en+"</b><i onclick='addFavorite("+data[i].id+")'><image class='changimg-"+data[i].id+"' src='/gemtak/resources/client/images/tu3.png' /></i></p>"+
 								"</li>");
 						}else if(switchover == 2){
 							$(".appendClientList .cList").append("<tr>"+
@@ -198,7 +198,7 @@ function goDetail(id){
 								"<td>"+data[i].weight+"</td>"+
 								"<td>"+data[i].lab_en+"</td>"+
 								"<td><font class='fc_0a'>¥"+data[i].retail_price+"</font></td>"+
-								"<td><a href='javascript:void(0)' onclick='goDetail("+data[i].id+")'><image src='/gemtak/resources/client/images/tu4.png' /></a></td>"+
+								"<td><a href='javascript:void(0)' onclick='goDetail("+data[i].id+")'><image  src='/gemtak/resources/client/images/tu4.png' /></a></td>"+
 							"</tr>");
 						}
 					}
@@ -207,8 +207,9 @@ function goDetail(id){
 		  });
   }
 
+  
   function appendToHead(switchover){
-	  if(switchover == 2){
+	  if(switchover == 2){//横行展示时，添加第一行
 			$(".appendClientList").append("<div class='tit_table col-md-12' id='cont1'><table class='cList'>"+
 					"<tr height='40'>"+
 						"<th bgcolor='eeeeee' width='10%' style='text-align:center'>图片</th>"+
@@ -245,6 +246,19 @@ function goDetail(id){
 		  });
   }*/
 
+  //添加到收藏夹
+  function addFavorite(id){
+	  var url = "favorite.do";
+	  $.post(url,{gemid:id},function(data){
+		  data = $.parseJSON(data);
+		  var flag = data.msg;
+		  if(flag=="Y"){
+			  alert("您已成功收藏该宝贝！");
+			  $(".changimg-"+id).prop("src",'/gemtak/resources/client/images/tu5.png');
+		  }
+	  });
+	  
+  }
 
 //ajax
 function remoteApi(){
