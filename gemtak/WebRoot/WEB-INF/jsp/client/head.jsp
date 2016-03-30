@@ -1,10 +1,29 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.bavlo.gemtak.constant.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+ %>
+<c:set var="uname" value="<%=username %>"/>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <div class="top_nav hidden-xs hidden-sm">
   <div class="top container">
-<span><image src="${ctx }/resources/client/images/call.png" />0086-010-82830789&nbsp;</span><span class="h-lang">[${pagehfvo['hLanguage'] }]</span>
-<div class="top_a">Hi, ${uname}<a href="${ctx }/gemClient/login.do">登录</a>|<a href="${ctx }/gemClient/login.do">注册</a>|<a href="">收藏夹</a>|<a  href="./shopping_car.html">购物车 <t class="cart-num">(${carNum})</t></a><a href="" class="jesuan">去结算</a></div>
+	<span><image src="${ctx }/resources/client/images/call.png" />0086-010-82830789&nbsp;</span>
+	<span class="h-lang">[${pagehfvo['hLanguage'] }]</span>
+	<div class="top_a">
+	  <c:if test="${uname != null}">
+	    Hi, ${uname}
+	    <a href="${ctx }/gemClient/logout.do">注销</a>|
+		<a href="">我的订单</a>|
+	  </c:if>
+	  <c:if test="${uname == null}">
+	    <a href="${ctx }/gemClient/login.do">登录</a>|
+		<a href="${ctx }/gemClient/login.do">注册</a>|
+	  </c:if>
+		
+		<a href="">收藏夹</a>|
+		<a  href="./shopping_car.html">购物车 <t class="cart-num">(${carNum})</t></a>
+		<a href="" class="jesuan">去结算</a>
+	</div>
   </div>
 </div>
 <div class="nav col-xs-12">
