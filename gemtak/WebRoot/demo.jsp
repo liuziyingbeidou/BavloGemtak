@@ -16,7 +16,7 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="${ctx }/resources/reel/js/jquery-1.9.1.min.js"></script>
 	<!-- amazeui -->
 	<link rel="stylesheet" href="${ctx }/resources/amazeui/css/amazeui.min.css"/>
 	<script type="text/javascript" src="${ctx }/resources/amazeui/js/handlebars.min.js"></script>
@@ -38,5 +38,36 @@
 	    </div>
 	  </div>
 	</div>
+	<br><br><br>
+	<!-- 以下是下拉框 -->
+	<span class="am-btn am-btn-secondary" id="doc-dropdown-toggle">下拉域</span>
+	<div class="am-dropdown" id="doc-dropdown-js">
+	    <button class="am-btn am-btn-danger am-dropdown-toggle">通过 JS 调用 <span class="am-icon-caret-down"></span></button>
+	    <div class="am-dropdown-content">
+	   	 填充内容
+	    </div>
+	</div>
+	<script>
+	  $(function() {
+	  	var $dropdown = $('#doc-dropdown-js');
+	    $('.am-dropdown-toggle').on("click", function(e) {
+	      if($("#doc-dropdown-js").hasClass("am-active")){
+              $("#doc-dropdown-js").removeClass('am-active');
+          }else{
+          	  $("#doc-dropdown-js").addClass('am-active');
+          }
+	      return false;
+	    });
+	    
+	    $('#doc-dropdown-toggle').on('click', function(e) {
+	      if($("#doc-dropdown-js").hasClass("am-active")){
+              $("#doc-dropdown-js").removeClass('am-active');
+          }else{
+          	  $("#doc-dropdown-js").addClass('am-active');
+          }
+	      return false;
+	    });
+	  });
+	</script>
   </body>
 </html>
