@@ -368,6 +368,11 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="loginSuccess")
 	@ResponseBody
 	public String loginSuccess(Model model,HttpServletRequest request,HttpServletResponse response,String uname,String upwd){
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCListPageModel(model,lang);	
 		String msg = HttpTools.submitPost(IConstant.loginURL,"uname="+uname+"&upwd="+upwd)+"";
 		//登录成功后将用户名存在session中
 		request.getSession().setAttribute(IConstant.SESSIONUSERNAEM, uname);
@@ -385,6 +390,11 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="logout")
 	public String logout(Model model,HttpServletRequest request,HttpServletResponse response,String uname){
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCListPageModel(model,lang);		
 		request.getSession().removeAttribute(IConstant.SESSIONUSERNAEM);
 		return "/client/gem/list";
 		//renderText(msg);
@@ -400,6 +410,11 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="goToList")
 	public String goToList(Model model,HttpServletRequest request,HttpServletResponse response,String uname){
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCListPageModel(model,lang);	
 		Integer num = 0;
 		try {
 			num = gemService.getShoppingCarNumByUname(uname);
@@ -408,9 +423,7 @@ public class GemClientController extends BaseController {
 			e.printStackTrace();
 		}
 		model.addAttribute("carNum",num);
-		/*model.addAttribute("uname",uname);*/
 		return "/client/gem/list";
-		//renderText(msg);
 	}
 	
 	/**
