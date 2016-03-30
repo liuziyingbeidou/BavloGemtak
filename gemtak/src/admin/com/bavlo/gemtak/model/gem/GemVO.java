@@ -22,7 +22,7 @@ public class GemVO extends IdEntity implements Serializable {
 	private static final long serialVersionUID = 2183301910494622850L;
 
 	//		主表ID			
-	private Integer supplier_id;
+	private Integer equipment_id;
 	//		编码		varchar(10)	
 	private String gid;
 	//		宝石类型			接口
@@ -115,11 +115,12 @@ public class GemVO extends IdEntity implements Serializable {
 	private Timestamp createdate;
 	//发布日期
 	private Timestamp releasedate;
-	public Integer getSupplier_id() {
-		return supplier_id;
+	
+	public Integer getEquipment_id() {
+		return equipment_id;
 	}
-	public void setSupplier_id(Integer supplier_id) {
-		this.supplier_id = supplier_id;
+	public void setEquipment_id(Integer equipment_id) {
+		this.equipment_id = equipment_id;
 	}
 	public String getGid() {
 		return gid;
