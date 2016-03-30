@@ -217,23 +217,19 @@ public class GemClientController extends BaseController {
 	public void insertShoppingCar(Model model,HttpServletResponse response,HttpServletRequest request,ShoppingCarVO carVO,Integer gemId,
 			String username,Integer quantity) {
 	    Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
-	    if(CommonUtils.isNull(uname)){
+	    if(uname == ""|| uname == null){
+	    	 renderText("{\"mess\":\"N\"}"); //添加到购物车前判断session是否为空，为空返回N，让其登录
+	    }else {
 	    	username = (String) uname;
-	    }
-	   Integer num = 0;
-	   
-	   //用户注册、登录功能还没实现，待完善
-	   /*if(!CommonUtils.isNull(uname)){
-		   userId = 1;
-	   }
-	   userId = 1;*/
-	    try {
-			gemService.saveOrupdateShoppingCarVO(gemId, username,quantity);
-			num = gemService.getShoppingCarNumByUname(username);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		   renderText("{\"mess\":\"Y\",\"carNum\":\""+num+"\"}");
+	    	Integer num = 0;
+		    try {
+				gemService.saveOrupdateShoppingCarVO(gemId, username,quantity);
+				num = gemService.getShoppingCarNumByUname(username);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			   renderText("{\"mess\":\"Y\",\"carNum\":\""+num+"\"}");
+	    } 
 	}
 	/**
 	 * @Description: 购物车
