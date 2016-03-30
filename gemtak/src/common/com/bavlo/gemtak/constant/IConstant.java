@@ -12,7 +12,9 @@ public interface IConstant {
 	public static final String YES = "Y";
 	public static final String NO = "N";
 	public static final String SESSIONUSERNAEM = "sessionusername";
+	//登录接口
 	public static final String loginURL = "http://www.bavlo.com/gemtak-invoke/tologin";
+	//注册接口
 	public static final String registerURL = "http://www.bavlo.com/gemtak-invoke/register";
 	//本地语言化
 	public static final String COOKIE_LANG = "lang";
