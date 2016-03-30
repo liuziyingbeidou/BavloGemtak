@@ -376,6 +376,21 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
+	 * @Description: 注销
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="logout")
+	public String logout(Model model,HttpServletRequest request,HttpServletResponse response,String uname){
+		request.getSession().removeAttribute(IConstant.SESSIONUSERNAEM);
+		return "/client/gem/list";
+		//renderText(msg);
+	}
+	
+	/**
 	 * @Description: 登录成功后显示首页，并查询该用户的购物车
 	 * @param @param model
 	 * @param @param response
@@ -393,7 +408,7 @@ public class GemClientController extends BaseController {
 			e.printStackTrace();
 		}
 		model.addAttribute("carNum",num);
-		model.addAttribute("uname",uname);
+		/*model.addAttribute("uname",uname);*/
 		return "/client/gem/list";
 		//renderText(msg);
 	}
