@@ -12,6 +12,7 @@ import java.util.Random;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,6 +33,7 @@ import com.bavlo.gemtak.util.weixin.WXPayUtil;
 import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.WebUtils;
 import com.bavlo.gemtak.web.BaseController;
+import com.bavlo.gemtak.web.CookieController;
 import com.bavlo.gemtak.web.weixin.GetWeiXinCode;
 
 /**
@@ -398,6 +400,42 @@ public class GemClientController extends BaseController {
 		request.getSession().removeAttribute(IConstant.SESSIONUSERNAEM);
 		return "/client/gem/list";
 		//renderText(msg);
+	}
+	
+	/**
+	 * 添加到收藏夹
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="favorite")
+	public void favorite(Model model,HttpServletRequest request,HttpServletResponse response,Integer gemid){
+		Cookie cookie = new Cookie(gemid+"", gemid+"");
+        cookie.setMaxAge(-1);// 设置为30min
+        cookie.setPath("/");
+        System.out.println(gemid+""+"Cookie已添加===============");
+        response.addCookie(cookie);
+        renderText("{\"msg\":\"Y\"}");
+	}
+	
+	/**
+	 * 显示收藏夹
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="showCookies")
+	public void showCookies(Model model,HttpServletRequest request,HttpServletResponse response){
+		Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
+        if (null==cookies) {
+            System.out.println("没有cookie=========");
+        } else {
+            for(Cookie cookie : cookies){
+                System.out.println("name:"+cookie.getName()+",value:"+ cookie.getValue());
+            }
+        }
 	}
 	
 	/**
