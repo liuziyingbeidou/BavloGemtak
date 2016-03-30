@@ -90,4 +90,12 @@ public interface IGemService {
 	 * @param sql
 	 */
 	public Integer getListSizeGem(String contions);
+	
+	
+	/**invoke**/
+	/**
+	 * ÉÏ´«Í¼Æ¬
+	 */
+	public Boolean saveHeadAndBody(String vcode,String vfolder)throws Exception;
+	
 }
