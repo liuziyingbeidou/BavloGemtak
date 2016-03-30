@@ -55,4 +55,6 @@ public interface IConstant {
 	
 	//·âÃæÍ¼Ãû³Æ
 	public static final String PIC_COVER = "001.jpg";
+	
+	public static final Short SHORT_ZERO = 0;
 }

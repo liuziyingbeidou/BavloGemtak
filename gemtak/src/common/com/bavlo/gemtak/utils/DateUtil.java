@@ -123,6 +123,15 @@ public class DateUtil
     public static Timestamp getStrTimestamp(String str){
     	return Timestamp.valueOf(str);
     }
+    
+    /**
+     * @Description: 获取当前时间戳
+     * @param @return
+     * @return Timestamp
+     */
+    public static Timestamp getCurTimestamp(){
+        return getStrTimestamp(getCurDateTime());
+    }
           
     /**    
      * 按照默认formatStr的格式，转化dateTimeStr为Date类型    

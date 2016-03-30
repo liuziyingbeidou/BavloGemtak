@@ -19,7 +19,7 @@ import com.bavlo.gemtak.web.BaseController;
  * @date 2016-3-30 ионГ09:44:28
  */
 @Controller("invokeController")
-@RequestMapping(value="gemtak")
+@RequestMapping(value="invokeGemtak")
 public class InvokeController extends BaseController {
 
 	@Resource
