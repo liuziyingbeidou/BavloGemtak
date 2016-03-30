@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.alibaba.druid.sql.dialect.sqlserver.ast.SQLServerColumnDefinition.Identity;
@@ -131,6 +132,7 @@ public class GemAService extends CommonService implements IGemService {
 		return getCountByHQL(GemVO.class, contions);
 	}
 
+	@Transactional
 	@Override
 	public Boolean saveHeadAndBody(String vcode, String vfolder){
 		/**
@@ -148,8 +150,10 @@ public class GemAService extends CommonService implements IGemService {
 			gvo.setPower(IConstant.POWER_A);
 			gvo.setPage_views(0);
 			gvo.setIs_release(IConstant.RELEASE_E);
-			gvo.setCreatedate(DateUtil.getStrTimestamp(DateUtil.getCurDate()));
+			gvo.setCreatedate(DateUtil.getStrTimestamp(DateUtil.getCurDateTime()));
 			gvo.setIs_cover(IConstant.PIC_COVER);
+			gvo.setDr(IConstant.SHORT_ZERO);
+			gvo.setTs(DateUtil.getCurTimestamp());
 			try {
 				save(gvo);
 			} catch (Exception e) {
@@ -168,13 +172,15 @@ public class GemAService extends CommonService implements IGemService {
 	 */
 	public Integer getMidByCode(String vcode){
 		Integer mid = null;
-		String conts = " ifnull(bisClose,N)=N and vcode='"+vcode+"'";
+		String conts = " ifnull(bisClose,'N')='N' and vcode='"+vcode+"'";
 		EquipmentVO vo = findFirst(EquipmentVO.class, conts);
 		if(vo == null){
 			EquipmentVO evo = new EquipmentVO();
 			evo.setVcode(vcode);
-			evo.setCreatedate(DateUtil.getStrTimestamp(DateUtil.getCurDate()));
+			evo.setCreatedate(DateUtil.getCurTimestamp());
 			evo.setBisClose("N");
+			evo.setDr(IConstant.SHORT_ZERO);
+			evo.setTs(DateUtil.getCurTimestamp());
 			try {
 				mid = saveReID(evo);
 			} catch (Exception e) {
