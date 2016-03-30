@@ -24,13 +24,8 @@
   </head>
   
   <body>
-    <button
-	  type="button"
-	  class="am-btn am-btn-danger"
-	  data-am-modal="{target: '#my-popup'}">
-	  Popup
-	</button>
-	
+	<span class="am-btn am-btn-danger"
+	  data-am-modal="{target: '#my-popup'}">弹框</span>
 	<div class="am-popup" id="my-popup">
 	  <div class="am-popup-inner">
 	    <div class="am-popup-hd">
