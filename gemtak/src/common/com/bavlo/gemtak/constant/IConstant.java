@@ -47,4 +47,12 @@ public interface IConstant {
 	public static final String RELEASE_S = "S";
 	//已关闭（C）
 	public static final String RELEASE_C = "C";
+	
+	//所有人(A)、商家(B)、只自己(M)
+	public static final String POWER_A = "A";
+	public static final String POWER_B = "B";
+	public static final String POWER_M = "M";
+	
+	//封面图名称
+	public static final String PIC_COVER = "001.jpg";
 }

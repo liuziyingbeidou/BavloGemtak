@@ -1,5 +1,6 @@
 package com.bavlo.gemtak.service.gem.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import com.alibaba.druid.sql.dialect.sqlserver.ast.SQLServerColumnDefinition.Identity;
 import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.model.IdEntity;
+import com.bavlo.gemtak.model.gem.EquipmentVO;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.service.gem.itf.IGemService;
 import com.bavlo.gemtak.service.impl.CommonService;
@@ -128,7 +130,60 @@ public class GemAService extends CommonService implements IGemService {
 	public Integer getListSizeGem(String contions) {
 		return getCountByHQL(GemVO.class, contions);
 	}
+
+	@Override
+	public Boolean saveHeadAndBody(String vcode, String vfolder){
+		/**
+		 * 1、首先根据设备号判断是否已存在,非关闭态
+		 * 2、存在，返回主表ID；否则，保存返回ID
+		 */
+		Integer mid = getMidByCode(vcode);
+		/**
+		 * 3、根据主表ID和其他信息组织子表VO，保存
+		 */
+		if(mid != null){
+			GemVO gvo = new GemVO();
+			gvo.setEquipment_id(mid);
+			gvo.setUrl_360(vfolder);
+			gvo.setPower(IConstant.POWER_A);
+			gvo.setPage_views(0);
+			gvo.setIs_release(IConstant.RELEASE_E);
+			gvo.setCreatedate(DateUtil.getStrTimestamp(DateUtil.getCurDate()));
+			gvo.setIs_cover(IConstant.PIC_COVER);
+			try {
+				save(gvo);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
+	}
 	
-	
+	/**
+	 * @Description: 根据设备号vcode,获取主表主键id
+	 * @param @param vcode
+	 * @param @return
+	 * @return Integer
+	 */
+	public Integer getMidByCode(String vcode){
+		Integer mid = null;
+		String conts = " ifnull(bisClose,N)=N and vcode='"+vcode+"'";
+		EquipmentVO vo = findFirst(EquipmentVO.class, conts);
+		if(vo == null){
+			EquipmentVO evo = new EquipmentVO();
+			evo.setVcode(vcode);
+			evo.setCreatedate(DateUtil.getStrTimestamp(DateUtil.getCurDate()));
+			evo.setBisClose("N");
+			try {
+				mid = saveReID(evo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else{
+			mid = vo.getId();
+		}
+		return mid;
+	}
 	
 }
