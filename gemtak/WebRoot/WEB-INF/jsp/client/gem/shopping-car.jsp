@@ -27,6 +27,7 @@
 	      <div class="wrap">
 		     <div class="gw_tite">购物车</div>
 			 <div class="wrap_br">
+			  <c:forEach items="${shopList}" var="shop">
 				<div class="wrap_bj"><h3>幸福蓝海<b>戒指</b><b>女款</b></h3><a href=""></a></div>	 
 				<dl class="gwc1">
 					<dt class="col-xs-12 col-sm-5"><a href=""><img src="${ctx}/resources/client/images/gwc1.png"/></a></dt>
@@ -40,7 +41,8 @@
 					<p>手寸：12号</p>
 					<p>尺寸： 19.36×9.09×21.24 </p></dd>
 				</dl>
-				<div class="wrap_bj wrap_bj1"><span>数量<input  class="" type="text" name=""  value="1" /></span><span>总价：￥5780 元</span></div>  
+				<div class="wrap_bj wrap_bj1"><span>数量<input  class="" type="text" name=""  value="1" /></span><span>总价：￥5780 元</span></div>
+			  </c:forEach>  
 			 </div>
 			 
 		   </div>
