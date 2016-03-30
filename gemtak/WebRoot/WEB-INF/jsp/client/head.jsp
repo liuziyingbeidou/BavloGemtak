@@ -20,7 +20,7 @@
 		<a href="${ctx }/gemClient/login.do">注册</a>|
 	  </c:if>
 		
-		<a href="">收藏夹</a>|
+		<a href="${ctx }/gemClient/favorite.do">收藏夹</a>|
 		<a  href="./shopping_car.html">购物车 <t class="cart-num">(${carNum})</t></a>
 		<a href="" class="jesuan">去结算</a>
 	</div>
