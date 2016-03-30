@@ -18,10 +18,10 @@
       <div class="am-offcanvas-bar">
       <ul class="am-menu-nav am-avg-sm-1">
           <li class="am-parent">
-            <a href="##" class="" >宝石管理</a>
+            <a href="##" class="mn-mr-gem" >宝石管理</a>
           </li>
           <li class="am-parent">
-            <a href="##" class="" >订单管理</a>
+            <a href="##" class="mn-mr-order" >订单管理</a>
           </li>
       </ul>
       </div>
