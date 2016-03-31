@@ -51,10 +51,10 @@ function addShoppCar(id){
 	  $.post(url,{gemId:id,quantity:quantity},function(data){
 	    data = $.parseJSON(data);
 	    var flag = data.mess;
-	    var Num = data.carNum;
+	    var num = data.carNum;
 	    if(flag=="Y"){
 	      alert("恭喜你，宝物添加成功！");
-	      selCarNO(Num);  //方法在head.jsp 
+	      selCarNO(num);  //方法在head.jsp 
 	    }else if(flag=="N"){  //返回N跳转到登录
 	      location.href = "/gemtak/gemClient/login.do";
 	    }
