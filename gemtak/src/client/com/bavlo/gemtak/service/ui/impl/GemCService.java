@@ -1,6 +1,9 @@
 package com.bavlo.gemtak.service.ui.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -13,7 +16,9 @@ import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.service.impl.CommonService;
+import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.DateUtil;
+import com.bavlo.gemtak.utils.ObjectToJSON;
 
 /**
  * @Title: ±¦ççGemtak
@@ -164,7 +169,8 @@ public class GemCService extends CommonService implements IGemService {
 			throws Exception {
 		StringBuilder sql = new StringBuilder();
 	    sql.append("select ");
-	    sql.append(" g.type_cn,g.weight,g.color_cn,g.calibrated_id,g.size_l,g.size_w,g.size_h,g.clarity_cn,g.retail_price,g.is_cover,s.quantity as vdef1");
+	    sql.append(" g.id, g.type_cn,g.weight,g.company,g.shape_cn,g.size_l,g.size_w,g.size_h,g.average_color,g.clarity_cn,g.cut_cn," +
+	    		"g.origin_cn,g.treatment_cn,g.lab_cn,g.supplier,g.retail_price,g.trade_price, s.quantity as vdef1");
 	    sql.append(" from gt_shopping s");
 	    sql.append(" left join gt_gem g");
 	    sql.append(" on s.gem_id=g.id");
@@ -173,7 +179,37 @@ public class GemCService extends CommonService implements IGemService {
 	    sql.append(" order by s.id desc");
 	    Integer count = getCountBySQL(sql.toString());
 	    List<GemVO> list = (List<GemVO>) findListBySQL(sql.toString(), null, 0, count);
-		return list;
+	    List<GemVO> nlist = new ArrayList<GemVO>();
+	    if(list != null){
+	    	String jsonStr = ObjectToJSON.writeListJSON(list);
+	    	JSONArray jsonArr = JSONArray.fromObject(jsonStr);
+	    	int size = jsonArr.size();
+	    	for(int i = 0; i < size; i++){
+	    		GemVO gem = new GemVO();
+	    		Object [] arry = jsonArr.getJSONArray(i).toArray();
+	    		Integer id = CommonUtils.isNull(arry[0]) ? null:Integer.valueOf(arry[0]+"");
+	    		gem.setId(id);
+	    		gem.setType_cn(CommonUtils.isNull(arry[1]) ? null:arry[1]+"");
+	    		gem.setWeight(CommonUtils.isNull(arry[2]) ? null:arry[2]+"");
+	    		gem.setCompany(CommonUtils.isNull(arry[3]) ? null:arry[3]+"");
+	    		gem.setShape_cn(CommonUtils.isNull(arry[4]) ? null:arry[4]+"");
+	    		gem.setSize_l(CommonUtils.isNull(arry[5]) ? null:arry[5]+"");
+	    		gem.setSize_w(CommonUtils.isNull(arry[6]) ? null:arry[6]+"");
+	    		gem.setSize_h(CommonUtils.isNull(arry[7]) ? null:arry[7]+"");
+	    		gem.setAverage_color(CommonUtils.isNull(arry[8]) ? null:arry[8]+"");
+	    		gem.setClarity_cn(CommonUtils.isNull(arry[9]) ? null:arry[9]+"");
+	    		gem.setCut_cn(CommonUtils.isNull(arry[10]) ? null:arry[10]+"");
+	    		gem.setOrigin_cn(CommonUtils.isNull(arry[11]) ? null:arry[11]+"");
+	    		gem.setTreatment_cn(CommonUtils.isNull(arry[12]) ? null:arry[12]+"");
+	    		gem.setLab_cn(CommonUtils.isNull(arry[13]) ? null:arry[13]+"");
+	    		gem.setSupplier(CommonUtils.isNull(arry[14]) ? null:arry[14]+"");
+	    		gem.setRetail_price(CommonUtils.isNull(arry[15]) ? null:Double.valueOf(arry[15]+""));
+	    		gem.setTrade_price(CommonUtils.isNull(arry[16]) ? null:Double.valueOf(arry[16]+""));
+	    		gem.setVdef1(CommonUtils.isNull(arry[17]) ? null:arry[17]+"");
+	    		nlist.add(gem);
+	    	}
+	    }
+		return nlist;
 	}
 	
 	
