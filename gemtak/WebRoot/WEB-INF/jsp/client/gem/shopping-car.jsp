@@ -27,21 +27,24 @@
 	      <div class="wrap">
 		     <div class="gw_tite">购物车</div>
 			 <div class="wrap_br">
-			  <c:forEach items="${shopList}" var="shop">
-				<div class="wrap_bj"><h3>幸福蓝海<b>戒指</b><b>女款</b></h3><a href=""></a></div>	 
+			  <c:forEach items="${gemList}" var="gem">
+				<div class="wrap_bj"><h3>${gem.type_cn}<b>${gem.weight}</b></h3><a href=""></a></div>	 
 				<dl class="gwc1">
 					<dt class="col-xs-12 col-sm-5"><a href=""><img src="${ctx}/resources/client/images/gwc1.png"/></a></dt>
-					<dd class="col-xs-12 col-sm-7"><p>碧玺：1粒   约 0.28 ct</p>
-					<p>颜色： 153,22,131(RGB)</p>
-					<p>规格： 6.00,4.00,2.29 </p>
-					<p>钻石：14粒   共约 0.16 ct</p>
-					<p>颜色： H</p>
-					<p>规格： 1.40 x 1.40 x 0.84 </p>
-					<p>金属： 白18K金</p>
-					<p>手寸：12号</p>
-					<p>尺寸： 19.36×9.09×21.24 </p></dd>
+					<dd class="col-xs-12 col-sm-7"><p>${gem.company}</p>
+						<p>形状： ${gem.shape_cn}</p>
+						<p>尺寸：  ${gem.size_l}x${gem.size_w}x${gem.size_h} </p>
+						<p>颜色：${gem.average_color}</p>
+						<p>净度： ${gem.clarity_cn}</p>
+						<p>切工： ${gem.cut_cn} </p>
+						<p>产地： ${gem.origin_cn}</p>
+						<p>处理： ${gem.treatment_cn}</p>
+						<p>证书： 国检${gem.lab_cn} </p>
+						<p>卖家： ${gem.supplier} </p>
+						<p>价格： ${gem.retail_unit} </p>
+					</dd>
 				</dl>
-				<div class="wrap_bj wrap_bj1"><span>数量<input  class="" type="text" name=""  value="1" /></span><span>总价：￥5780 元</span></div>
+				<div class="wrap_bj wrap_bj1"><span>数量<input  class="" type="text" name=""  value="${gem.vdef1}" /></span><span>总价：￥${gem.retail_unit*gem.vdef1}元</span></div>
 			  </c:forEach>  
 			 </div>
 			 
