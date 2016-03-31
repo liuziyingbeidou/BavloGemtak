@@ -20,9 +20,12 @@
 <link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
 <link href="${ctx }/resources/client/css/bootstrap-slider.min.css" rel="stylesheet" type="text/css" />
-<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery-1.7.2.min.js"></script>
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/bootstrap-slider.min.js"></script>
-
+<!-- amazeui -->
+<link rel="stylesheet" href="${ctx }/resources/amazeui/css/amazeui.min.css"/>
+<script type="text/javascript" src="${ctx }/resources/amazeui/js/handlebars.min.js"></script>
+<script type="text/javascript" src="${ctx }/resources/amazeui/js/amazeui.min.js"></script>
 <script>
 $(document).ready(function() {
 	getCarNum();
@@ -57,7 +60,7 @@ function addShoppCar(id){
 	      alert("恭喜你，宝物添加成功！");
 	      selCarNO(num);  //方法在head.jsp 
 	    }else if(flag=="N"){  //返回N跳转到登录
-	      location.href = "/gemtak/gemClient/login.do";
+	      $("#my-popup").modal('toggle');
 	    }
 	  });
   
@@ -70,6 +73,17 @@ function addShoppCar(id){
 <div>
   <jsp:include page="../head.jsp"></jsp:include>
 </div>
+	<div class="am-popup" id="my-popup">
+	  <div class="am-popup-inner">
+	    <div class="am-popup-hd">
+	      <span data-am-modal-close
+	            class="am-close">&times;</span>
+	    </div>
+	    <div class="am-popup-bd">
+	      <iframe id="iframe" src="${ctx }/gemClient/login.do" frameborder="no" height="550" width="100%"></iframe>
+	    </div>
+	  </div>
+	</div>
 <div class="tit_all m_bottom_80 conbg">
 	  <div class="container">
 		  <div class="tit_all_left col-sm-12 col-md-7">
@@ -116,9 +130,9 @@ function addShoppCar(id){
 					</li><li>卖家（Seller）：<span>${gem.supplier}（HuiXing Gemstone）</span></li>
 				</ul>
 				<p>价格（Price）：<span>¥${gem.retail_price} <em>/${gem.pairs}</em></span></p>
-				<div class="add_gu"><a href="javascript:void(0)" onclick="addShoppCar(${gem.id})" class="gw_a">+ 购物车</a><a href="">订购款式 ></a></div>		  
+				<div class="add_gu"><a href="javascript:void(0)" class="gw_a" onclick="addShoppCar(${gem.id})">+ 购物车</a><a href="">订购款式 ></a></div>		  
 		  </div>
-	  </div>	  
+	  </div>
 </div>
 <div class="footer hidden-xs hidden-sm">
     <jsp:include page="../../admin/foot.jsp"></jsp:include>
