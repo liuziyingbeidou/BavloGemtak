@@ -25,6 +25,7 @@
 
 <script>
 $(document).ready(function() {
+	getCarNum();
 	$("#ex8").slider({
 		tooltip: 'always'
 	});
