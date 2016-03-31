@@ -231,6 +231,34 @@ public class GemClientController extends BaseController {
 			   renderText("{\"mess\":\"Y\",\"carNum\":\""+num+"\"}");
 	    } 
 	}
+	
+	/**
+	 * 删除购物车 中选中的商品
+	 * @param model
+	 * @param response
+	 * @param request
+	 * @param carVO
+	 * lisuike 2016-3-31 上午13:25:50
+	 * @throws Exception 
+	 * @throws NumberFormatException 
+	 */
+	@RequestMapping(value="delShoppingCar")
+	public void deleteShoppingCar(Model model,HttpServletResponse response,HttpServletRequest request,ShoppingCarVO carVO,Integer gemId,
+			String username) {
+	    Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+	    if(uname != ""|| uname != null){
+	    	username = (String) uname;
+	    	Integer num = 0;
+		    try {
+				gemService.delShoppingCarByGemId(username, gemId);
+				num = gemService.getShoppingCarNumByUname(username);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			   renderText("{\"mess\":\"Y\",\"carNum\":\""+num+"\"}");
+	    } 
+	}
+	
 	/**
 	 * @Description: 购物车
 	 * @param @param model
