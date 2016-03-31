@@ -42,7 +42,6 @@
 	<!-- 以下是下拉框 -->
 	<span class="am-btn am-btn-secondary" id="doc-dropdown-toggle">下拉域</span>
 	<div class="am-dropdown" id="doc-dropdown-js">
-	    <button class="am-btn am-btn-danger am-dropdown-toggle">通过 JS 调用 <span class="am-icon-caret-down"></span></button>
 	    <div class="am-dropdown-content">
 	   	 填充内容
 	    </div>
@@ -69,5 +68,16 @@
 	    });
 	  });
 	</script>
+	
+	<!-- 折叠下拉 -->
+	<button class="am-btn am-btn-primary" data-am-collapse="{target: '#collapse-nav'}">Menu <i class="am-icon-bars"></i></button>
+	<nav>
+	  <ul id="collapse-nav" class="am-nav am-collapse">
+	    <li><a href="">开始使用</a></li>
+	    <li><a href="">CSS 介绍</a></li>
+	    <li class="am-active"><a href="">JS 介绍</a></li>
+	    <li><a href="">功能定制</a></li>
+	  </ul>
+	</nav>
   </body>
 </html>
