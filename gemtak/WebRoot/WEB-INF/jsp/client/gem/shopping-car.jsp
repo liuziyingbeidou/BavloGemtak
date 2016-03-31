@@ -41,10 +41,10 @@
 						<p>处理： ${gem.treatment_cn}</p>
 						<p>证书： 国检${gem.lab_cn} </p>
 						<p>卖家： ${gem.supplier} </p>
-						<p>价格： ${gem.retail_unit} </p>
+						<p>价格： ${gem.retail_price} </p>
 					</dd>
 				</dl>
-				<div class="wrap_bj wrap_bj1"><span>数量<input  class="" type="text" name=""  value="${gem.vdef1}" /></span><span>总价：￥${gem.retail_unit*gem.vdef1}元</span></div>
+				<div class="wrap_bj wrap_bj1"><span>数量<input  class="" type="text" name=""  value="${gem.vdef1}" /></span><span>总价：￥${gem.retail_price*gem.vdef1}元</span></div>
 			  </c:forEach>  
 			 </div>
 			 
