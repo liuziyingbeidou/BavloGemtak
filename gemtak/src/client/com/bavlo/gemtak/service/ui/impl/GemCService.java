@@ -48,7 +48,7 @@ public class GemCService extends CommonService implements IGemService {
 		
 	}
 
-	/*
+	/**
 	 * 3.15 lisuike
 	 * @see com.bavlo.gemtak.service.gem.itf.IGemService#saveGemVO(com.bavlo.gemtak.model.gem.GemVO)
 	 */
@@ -59,7 +59,7 @@ public class GemCService extends CommonService implements IGemService {
 		saveReID(gemVO);
 	}
 
-	/*
+	/**
 	 * 3.15 lisuike
 	 * @see com.bavlo.gemtak.service.gem.itf.IGemService#findAllGemVO()
 	 */
@@ -101,7 +101,9 @@ public class GemCService extends CommonService implements IGemService {
 		return listvo;
 	}
 
-	//点击发布按钮，修改数据库字段
+	/**
+	 * 点击发布按钮，修改数据库字段
+	 */
 	@Override
 	public void updateGemById(Integer id,String st) throws Exception {
 		String vrel = IConstant.RELEASE_S;
@@ -210,6 +212,15 @@ public class GemCService extends CommonService implements IGemService {
 	    	}
 	    }
 		return nlist;
+	}
+
+	/**
+	 * 根据用户名 商品id 删除购物车中选中的 商品
+	 */
+	@Override
+	public void delShoppingCarByGemId(String username, Integer gemid)
+			throws Exception {
+		delete(ShoppingCarVO.class, gemid);
 	}
 	
 	
