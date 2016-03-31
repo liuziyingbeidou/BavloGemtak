@@ -77,7 +77,8 @@
    $(".cart-num").text("("+num+")");
   }
   $(function(){
-  	$('.myCollapse').on("click", function(e){
+     //点击触发收藏夹
+  	$(".myCollapse").on("click", function(e){
   		if(!$("#collapse-nav").hasClass('am-in')){
   			var cls = $(this).attr("cls");
 	  		if(cls == "cls-folder"){
