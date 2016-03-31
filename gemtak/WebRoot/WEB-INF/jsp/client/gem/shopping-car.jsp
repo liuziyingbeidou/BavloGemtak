@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<c:set var="TotalCartPices" value="0" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -17,15 +18,21 @@
 <link href="${ctx}/resources/client/css/index.css" rel="stylesheet">
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
 <script>
+$(function(){
+ getCarNum();
+});
  //删除购物车中 选中的商品
- function delShoppCar(gemid){
+ function delShoppCar(id){
   var url = "/gemtak/gemClient/delShoppingCar.do";
-  $.post(url,{gemId:gemid},function(data){
-    dataa = $.parseJSON(data);
+  $.post(url,{shoppingCarId:id},function(data){
+    data = $.parseJSON(data);
     var flag = data.mess;
-    var num = data.carNum;
     if(flag=="Y"){
-     selCarNO(num);  //方法在head.jsp 
+     var price = $(".price-"+id).text();
+     var totalprice = $(".total-price").text();
+     getCarNum();  //方法在head.jsp 
+     $(".del-car-"+id).remove();
+     $(".total-price").text(totalprice-price);
     }
   });
  }
@@ -41,9 +48,9 @@
 		     <div class="gw_tite">购物车</div>
 			 <div class="wrap_br">
 			  <c:forEach items="${gemList}" var="gem">
-				<div class="wrap_bj"><h3>${gem.type_cn}<b>${gem.weight}</b></h3><a href=""></a></div>	 
-				<dl class="gwc1">
-					<dt class="col-xs-12 col-sm-5"><a href="javascript:void(0)" onclick="delShoppCar(${gem.id})"><img src="${ctx}/resources/client/images/gwc1.png"/></a></dt>
+				<div class="wrap_bj del-car-${gem.vdef2}"><h3>${gem.type_cn}<b>${gem.weight}</b></h3><a href="javascript:void(0)" onclick="delShoppCar('${gem.vdef2}')"></a></div>	 
+				<dl class="gwc1 del-car-${gem.vdef2}">
+					<dt class="col-xs-12 col-sm-5"><a href="javascript:void(0)"><img src="${ctx}/resources/client/images/gwc1.png"/></a></dt>
 					<dd class="col-xs-12 col-sm-7"><p>${gem.company}</p>
 						<p>形状： ${gem.shape_cn}</p>
 						<p>尺寸：  ${gem.size_l}x${gem.size_w}x${gem.size_h} </p>
@@ -57,14 +64,14 @@
 						<p>价格： ${gem.retail_price} </p>
 					</dd>
 				</dl>
-				<div class="wrap_bj wrap_bj1"><span>数量<input  class="" type="text" name=""  value="${gem.vdef1}" /></span><span>总价：￥${gem.retail_price*gem.vdef1}元</span></div>
+				<div class="wrap_bj wrap_bj1 del-car-${gem.vdef2}"><span>数量<input  class="" type="text" name=""  value="${gem.vdef1}" /></span><span>总价：￥<m class="price-${gem.vdef2}">${gem.retail_price*gem.vdef1}</m>元</span></div>
+			  	<c:set var="TotalCartPices" value="${TotalCartPices + gem.retail_price*gem.vdef1}" />
 			  </c:forEach>  
 			 </div>
-			 
 		   </div>
    	 <div class="wrap_all">
-		   <p><span style="float:right">合计<b>￥8865.00</b>元</span></p>
-		   <p><a href="" class="zgg">再逛逛</a><a href="./order.html" class="qjz">去结账</a></p>
+		   <p><span style="float:right">合计<b class="total-price">￥${TotalCartPices}</b>元</span></p>
+		   <p><a href="${ctx }/gemClient/viewGemList.do" class="zgg">再逛逛</a><a href="./order.html" class="qjz">去结账</a></p>
 	 </div>   	  
 	</div>
 </div>
