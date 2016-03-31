@@ -31,14 +31,15 @@
 	    Hi, ${uname}
 	    <a href="${ctx }/gemClient/logout.do">注销</a>|
 		<a href="">我的订单</a>|
+		<a href="javascript:void(0)" class="myCollapse" cls="cls-folder">收藏夹</a>|
+		<a  href="${ctx }/gemClient/viewShoppingCar.do">购物车 <t class="cart-num">(${carNum})</t></a>
 	  </c:if>
 	  <c:if test="${uname == null}">
 	    <a href="${ctx }/gemClient/login.do">登录</a>|
 		<a href="${ctx }/gemClient/login.do">注册</a>|
-	  </c:if>
-		
 		<a href="javascript:void(0)" class="myCollapse" cls="cls-folder">收藏夹</a>|
-		<a  href="${ctx }/gemClient/viewShoppingCar.do">购物车 <t class="cart-num">(${carNum})</t></a>
+		<a  href="${ctx }/gemClient/viewShoppingCar.do">购物车 <t class="cart-num"></t></a>
+	  </c:if>
 		<a href="" class="jesuan">去结算</a>
 	</div>
   </div>
@@ -75,6 +76,13 @@
   //加载购物车中 商品数量
   function selCarNO(num){
    $(".cart-num").text("("+num+")");
+  }
+   //动态查询购物车数量
+  function getCarNum(){
+   var url = "/gemtak/gemClient/getCarNum.do";
+   $.post(url,function(data){
+    selCarNO(data);
+   });
   }
   $(function(){
      //点击触发收藏夹
