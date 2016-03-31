@@ -5,6 +5,23 @@
  %>
 <c:set var="uname" value="<%=username %>"/>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<style>
+#collapse-nav{
+	background-color:#fff;
+}
+.am-slides{
+	list-style:none;
+}
+.am-slides li{
+	list-style:none;
+	float:left;
+	padding-left:5px;
+}
+.am-slides li img{
+	width:80px;
+	height:100px;
+}
+</style>
 <div class="top_nav hidden-xs hidden-sm">
   <div class="top container">
 	<span><image src="${ctx }/resources/client/images/call.png" />0086-010-82830789&nbsp;</span>
@@ -20,11 +37,22 @@
 		<a href="${ctx }/gemClient/login.do">注册</a>|
 	  </c:if>
 		
-		<a href="${ctx }/gemClient/showCookies.do">收藏夹</a>|
+		<a href="javascript:void(0)" class="myCollapse" cls="cls-folder">收藏夹</a>|
 		<a  href="${ctx }/gemClient/viewShoppingCar.do">购物车 <t class="cart-num">(${carNum})</t></a>
 		<a href="" class="jesuan">去结算</a>
 	</div>
   </div>
+  <!-- 折叠下拉 -->
+	<nav>
+	  <ul id="collapse-nav" class="am-nav am-collapse">
+	    <li>
+		    <ul class="am-slides">
+			    <li><img src="http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640" /></li>
+			    <li><img src="http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640" /></li>
+			 </ul>
+	    </li>
+	  </ul>
+	</nav>
 </div>
 <div class="nav col-xs-12">
    <ul>
@@ -38,10 +66,26 @@
 <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-common.js"></script>
 <link rel="stylesheet" href="${ctx }/resources/admin/css/gem-common.css" />
 
+<!-- amazeui -->
+<link rel="stylesheet" href="${ctx }/resources/amazeui/css/amazeui.min.css"/>
+<script type="text/javascript" src="${ctx }/resources/amazeui/js/handlebars.min.js"></script>
+<script type="text/javascript" src="${ctx }/resources/amazeui/js/amazeui.min.js"></script>	
+
 <script>
   //加载购物车中 商品数量
   function selCarNO(num){
    $(".cart-num").text("("+num+")");
   }
-  
+  $(function(){
+  	$('.myCollapse').on("click", function(e){
+  		if(!$("#collapse-nav").hasClass('am-in')){
+  			var cls = $(this).attr("cls");
+	  		if(cls == "cls-folder"){
+	  			//收藏夹处理
+	  			alert("收藏夹处理");
+	  		}
+  		}
+	   $("#collapse-nav").collapse('toggle');
+	});
+  });
 </script>
