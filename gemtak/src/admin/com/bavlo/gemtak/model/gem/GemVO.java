@@ -95,6 +95,8 @@ public class GemVO extends IdEntity implements Serializable {
 	private String lab_url;
 	//		卖家（供应商）			微信企业号-供应商标签
 	private String supplier;
+	//      公司
+	private String company;
 	//		卖家编码（供应商）			
 	private String supplier_code;
 	//      卖家电话
@@ -453,5 +455,12 @@ public class GemVO extends IdEntity implements Serializable {
 	public void setReleasedate(Timestamp releasedate) {
 		this.releasedate = releasedate;
 	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	
 
 }
