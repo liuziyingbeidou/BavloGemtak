@@ -48,7 +48,7 @@ public interface IGemService {
 	public void saveOrupdateGemVO(GemVO gemVO) throws Exception;
 	
 	/**
-	 * 添加到购物车
+	 *1. 添加到购物车
 	 * @param gemId
 	 * @param userId
 	 * @throws Exception
@@ -57,13 +57,20 @@ public interface IGemService {
 	public void saveOrupdateShoppingCarVO(Integer gemId,String username,Integer quantity) throws Exception;
 	
 	/**
-	 * 根据用户id查询购物车 的商品数量
+	 *2. 根据用户名查询购物车 的商品数量
 	 * @param userId
 	 * @return
 	 * @throws Exception
 	 */
 	public Integer getShoppingCarNumByUname(String username) throws Exception;
 	
+	/**
+	 *3. 根据用户名查询购物车 的商品
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<GemVO> getShoppingCarListByUname(String username) throws Exception;
 	
 	/**
 	 * 

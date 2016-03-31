@@ -149,11 +149,31 @@ public class GemCService extends CommonService implements IGemService {
 	}
     
 	/**
-	 * 根据用户id查询 查询当前用户的购物车商品数量
+	 * 根据用户名查询 查询当前用户的购物车商品数量
 	 */
 	@Override
 	public Integer getShoppingCarNumByUname(String username) throws Exception {
 		return getCountByHQL(ShoppingCarVO.class, "user_name='"+username+"'");
+	}
+
+	/**
+	 * 根据用户名查询 查询当前用户的购物车
+	 */
+	@Override
+	public List<GemVO> getShoppingCarListByUname(String username)
+			throws Exception {
+		StringBuilder sql = new StringBuilder();
+	    sql.append("select ");
+	    sql.append(" g.type_cn,g.weight,g.color_cn,g.calibrated_id,g.size_l,g.size_w,g.size_h,g.clarity_cn,g.retail_price,g.is_cover,s.quantity as vdef1");
+	    sql.append(" from gt_shopping s");
+	    sql.append(" left join gt_gem g");
+	    sql.append(" on s.gem_id=g.id");
+	    sql.append("  where s.user_name='"+username+"'");
+	    sql.append("  and ifnull(g.dr,0)=0");
+	    sql.append(" order by s.id desc");
+	    Integer count = getCountBySQL(sql.toString());
+	    List<GemVO> list = (List<GemVO>) findListBySQL(sql.toString(), null, 0, count);
+		return list;
 	}
 	
 	
