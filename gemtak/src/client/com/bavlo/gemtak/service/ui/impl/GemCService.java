@@ -172,7 +172,7 @@ public class GemCService extends CommonService implements IGemService {
 		StringBuilder sql = new StringBuilder();
 	    sql.append("select ");
 	    sql.append(" g.id, g.type_cn,g.weight,g.company,g.shape_cn,g.size_l,g.size_w,g.size_h,g.average_color,g.clarity_cn,g.cut_cn," +
-	    		"g.origin_cn,g.treatment_cn,g.lab_cn,g.supplier,g.retail_price,g.trade_price, s.quantity as vdef1");
+	    		"g.origin_cn,g.treatment_cn,g.lab_cn,g.supplier,g.retail_price,g.trade_price, s.quantity as vdef1,s.id as vdef2");
 	    sql.append(" from gt_shopping s");
 	    sql.append(" left join gt_gem g");
 	    sql.append(" on s.gem_id=g.id");
@@ -208,6 +208,7 @@ public class GemCService extends CommonService implements IGemService {
 	    		gem.setRetail_price(CommonUtils.isNull(arry[15]) ? null:Double.valueOf(arry[15]+""));
 	    		gem.setTrade_price(CommonUtils.isNull(arry[16]) ? null:Double.valueOf(arry[16]+""));
 	    		gem.setVdef1(CommonUtils.isNull(arry[17]) ? null:arry[17]+"");
+	    		gem.setVdef2(CommonUtils.isNull(arry[18]) ? null:arry[18]+"");
 	    		nlist.add(gem);
 	    	}
 	    }
@@ -218,9 +219,9 @@ public class GemCService extends CommonService implements IGemService {
 	 * 根据用户名 商品id 删除购物车中选中的 商品
 	 */
 	@Override
-	public void delShoppingCarByGemId(String username, Integer gemid)
+	public void delShoppingCarByGemId(String username, Integer shoppingCarid)
 			throws Exception {
-		delete(ShoppingCarVO.class, gemid);
+		delete(ShoppingCarVO.class, shoppingCarid);
 	}
 	
 	
