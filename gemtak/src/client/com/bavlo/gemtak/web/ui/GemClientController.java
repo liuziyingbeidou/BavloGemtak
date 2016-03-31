@@ -243,20 +243,41 @@ public class GemClientController extends BaseController {
 	 * @throws NumberFormatException 
 	 */
 	@RequestMapping(value="delShoppingCar")
-	public void deleteShoppingCar(Model model,HttpServletResponse response,HttpServletRequest request,ShoppingCarVO carVO,Integer gemId,
-			String username) {
+	public void deleteShoppingCar(Model model,HttpServletResponse response,HttpServletRequest request,ShoppingCarVO carVO,Integer shoppingCarId) {
 	    Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
 	    if(uname != ""|| uname != null){
-	    	username = (String) uname;
-	    	Integer num = 0;
 		    try {
-				gemService.delShoppingCarByGemId(username, gemId);
-				num = gemService.getShoppingCarNumByUname(username);
+				gemService.delShoppingCarByGemId(uname+"", shoppingCarId);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			   renderText("{\"mess\":\"Y\",\"carNum\":\""+num+"\"}");
+			   renderText("{\"mess\":\"Y\"}");
 	    } 
+	}
+	
+	/**
+	 * @Description:查询该用户的购物车
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return 
+	 */
+	@RequestMapping(value="getCarNum")
+	public void getCarNum(HttpServletRequest request,HttpServletResponse response){
+	    Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+	    if(username == ""|| username == null){
+	    	renderText("0");
+	    }else{
+	    	Integer num = 0;
+			try {
+				num = gemService.getShoppingCarNumByUname(username.toString());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			renderText(num+"");
+	    }
 	}
 	
 	/**
@@ -492,8 +513,7 @@ public class GemClientController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*model.addAttribute("carNum",num);*/
-		request.getSession().setAttribute("carNum", num);
+		model.addAttribute("carNum",num);
 		return "/client/gem/list";
 	}
 	
