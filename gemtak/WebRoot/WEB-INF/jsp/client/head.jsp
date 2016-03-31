@@ -86,7 +86,7 @@
   }
   $(function(){
      //点击触发收藏夹
-  	$(".myCollapse").on("click", function(e){
+  	$(".myCollapse").on("click", function(){
   		if(!$("#collapse-nav").hasClass('am-in')){
   			var cls = $(this).attr("cls");
 	  		if(cls == "cls-folder"){
@@ -97,4 +97,5 @@
 	   $("#collapse-nav").collapse('toggle');
 	});
   });
+  
 </script>
