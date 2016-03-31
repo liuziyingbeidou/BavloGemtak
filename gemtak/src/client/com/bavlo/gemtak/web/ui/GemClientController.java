@@ -240,7 +240,7 @@ public class GemClientController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value="viewShoppingCar")
-	public String viewGemShoppingCar(Model model,HttpServletResponse response,HttpServletRequest request,Integer gemId){
+	public String viewGemShoppingCar(Model model,HttpServletResponse response,HttpServletRequest request,String uname,Integer gmeid){
 		
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
@@ -248,7 +248,15 @@ public class GemClientController extends BaseController {
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCShoppingCarPageModel(model,lang);
 		Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
-		
+		if(username != null|| username != ""){
+			try {
+				uname = (String) username;
+				List<GemVO> gemList = gemService.getShoppingCarListByUname(uname);
+				model.addAttribute("gemList",gemList);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return IClientForward.viewGemShoppingCar;
 	}
 	
@@ -456,7 +464,8 @@ public class GemClientController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		model.addAttribute("carNum",num);
+		/*model.addAttribute("carNum",num);*/
+		request.getSession().setAttribute("carNum", num);
 		return "/client/gem/list";
 	}
 	
