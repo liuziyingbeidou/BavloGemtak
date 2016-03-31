@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
 <link href="${ctx }/resources/client/css/login.css" rel="stylesheet">
-<script language="javascript" type="text/javascript" src="${ctx }/resources/client/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery-1.7.2.min.js"></script>
 
 <script type="text/javascript">
  $(function (){
