@@ -73,12 +73,12 @@ public interface IGemService {
 	public List<GemVO> getShoppingCarListByUname(String username) throws Exception;
 	
 	/**
-	 *4. 根据用户名 商品id删除购物车 选中的商品
+	 *4. 根据用户名 购物车id删除购物车 选中的商品
 	 * @param userId
 	 * @return
 	 * @throws Exception
 	 */
-	public void delShoppingCarByGemId(String username,Integer gemid) throws Exception;
+	public void delShoppingCarByGemId(String username,Integer shoppingCarid) throws Exception;
 	
 	/**
 	 * 
