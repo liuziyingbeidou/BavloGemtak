@@ -71,7 +71,7 @@ $(function(){
 			 </div>
 		   </div>
    	 <div class="wrap_all">
-		   <p><span style="float:right">合计:￥<b class="total-price">${TotalCartPices}</b>元</span></p>
+		   <p><span style="float:right">合计：￥<b class="total-price">${TotalCartPices}</b>元</span></p>
 		   <p><a href="${ctx }/gemClient/viewGemList.do" class="zgg">再逛逛</a><a href="./order.html" class="qjz">去结账</a></p>
 	 </div>   	  
 	</div>
