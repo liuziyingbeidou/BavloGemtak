@@ -17,7 +17,7 @@
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
 <link href="${ctx }/resources/client/css/login.css" rel="stylesheet">
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery-1.7.2.min.js"></script>
-
+<script type="text/javascript" src="${ctx }/resources/common/js/jquery_cookie.js"></script>
 <script type="text/javascript">
  $(function (){
   //用户登录
@@ -25,13 +25,28 @@
   $(".login").click(function(){
     var uname = $(".input-username").val();
     var pwd = $(".input-pwd").val();
+    var status = $(".addpwd").is(':checked');
     var url = "${ctx }/gemClient/loginSuccess.do";
     if(uname != "" && uname != null && pwd != "" && pwd != null ){
-      $.post(url,{uname:uname,upwd:pwd},function(data){
+      $.post(url,{uname:uname,upwd:pwd,status:status},function(data){
         //data = $.parseJSON(data);
         if(data == "true"){
         	//登录成功处理...
-        	location.href = "${ctx}/gemClient/goToList.do?uname="+uname;
+        	var number = "${dengluNo}";  //默认dengluNo为 1
+        	if(number == "1"){
+        	 location.href = "${ctx}/gemClient/goToList.do?uname="+uname;
+        	}else if(number == "2"){
+        	 /* window.parent.location.reload(); */
+        	 window.parent.closeMwin(uname);  //closeMwin()在detaile.jsp 将用户名作为参数
+        	} 
+        	//登录成功 将用户名和密码保存到cookie中
+        	if($("#remember").is(':checked')){
+        	 $.cookie('username',$(".input-username").val(),{path:'/',expires:30});
+        	 $.cookie('password',$(".input-pwd").val(),{path:'/',expires:30});
+        	}else{
+        	 $.cookie('username',null,{path:'/'});
+        	 $.cookie('password',null,{path:'/'});
+        	}
         }else{
         	alert(data);
         }
@@ -83,9 +98,30 @@
  //生成验证码
  function refush(obj){
  $("."+obj).attr('src','${ctx}/gemClient/imgValidate.do?'+Math.random());
- 
  };
  
+ //记住密码
+ $(function(){
+  if($.cookie('username')){
+   $(".input-username").val($.cookie('username'));
+  }
+  if($.cookie('password')){
+   $(".input-pwd").val($.cookie('password'));
+   $("#remember").attr('checked','checked');
+  }
+   //忘记密码
+ $(".forgetpassword").click(function(){
+  var email = $(".findPwd").val();
+  var url = "${ctx }/gemClient/forgetpwd.do";
+  $.post(url,{email:email},function(data){
+   if(data == "true"){
+    alert("新密码已发送至你的邮箱！");
+   }
+  });
+ });
+ });
+ 
+
 </script>
 
 </head>
@@ -103,14 +139,14 @@
 					<ul class="word">
 						<li><label>E-mail：</label><div class="s_te"><input class="inp_text input-username" type="text" value="" /><b class="error"></b></div></li>
 						<li><label>密码：</label><div class="s_te"><input class="inp_text input-pwd" type="password" value="" /></div></li>
-						<li><label>&nbsp;</label><div class="s_te"><span><input class="inp_che" type="checkbox" value=""/>记住密码</span><input class="inp_sub login" type="button" value="登录" /></div></li>
+						<li><label>&nbsp;</label><div class="s_te"><span><input class="inp_che " id="remember" type="checkbox" value=""/>记住密码</span><input class="inp_sub login" type="button" value="登录" /></div></li>
 					</ul>
 				</form>
 					<p class="forget">忘记密码？</p>
 					<p>请在下面输入您的Email地址，然后点击“发送”按钮，我们立即把新密码发送到您的邮箱！</p>
 					<ul class="word redo">
-						<li class="mail"><label>E-mail：</label><div class="s_te"><input class="inp_text" type="text" value="" /></div></li>
-						<li><input class="inp_sub" type="submit" value="发送" /></li>
+						<li class="mail"><label>E-mail：</label><div class="s_te"><input class="inp_text findPwd" type="text" value="" /></div></li>
+						<li><input class="inp_sub forgetpassword" type="button" value="发送" /></li>
 					</ul>
 				</div>
 			</div>
