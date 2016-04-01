@@ -28,15 +28,16 @@
 	<span class="h-lang">[${pagehfvo['hLanguage'] }]</span>
 	<div class="top_a">
 	  <c:if test="${uname != null}">
-	    Hi, ${uname}
-	    <a href="${ctx }/gemClient/logout.do">注销</a>|
-		<a href="">我的订单</a>|
+	    <t class="t-css"> Hi, ${uname}</t>
+	    <a class="replaceA" href="${ctx }/gemClient/logout.do">注销</a>|
+		<a class="replaceB" href="">我的订单</a>|
 		<a href="javascript:void(0)" class="myCollapse" cls="cls-folder">收藏夹</a>|
 		<a  href="${ctx }/gemClient/viewShoppingCar.do">购物车 <t class="cart-num">(${carNum})</t></a>
 	  </c:if>
 	  <c:if test="${uname == null}">
-	    <a href="${ctx }/gemClient/login.do">登录</a>|
-		<a href="${ctx }/gemClient/login.do">注册</a>|
+	    <t class="t-css"></t>
+	    <a class="replaceA" href="${ctx }/gemClient/login.do?dengluNUM=1">登录</a>|
+		<a class="replaceB" href="${ctx }/gemClient/login.do">注册</a>|
 		<a href="javascript:void(0)" class="myCollapse" cls="cls-folder">收藏夹</a>|
 		<a  href="${ctx }/gemClient/viewShoppingCar.do">购物车 <t class="cart-num"></t></a>
 	  </c:if>
@@ -47,10 +48,12 @@
 	<nav>
 	  <ul id="collapse-nav" class="am-nav am-collapse">
 	    <li>
-		    <ul class="am-slides">
-			    <li><img src="http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640" /></li>
-			    <li><img src="http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640" /></li>
+		    <ul class="am-slides show-cookies">
+		      <c:forEach items="${gemList}" var="gem">
+			    <li>${gem.is_cover }</li>
+			   </c:forEach>
 			 </ul>
+		 
 	    </li>
 	  </ul>
 	</nav>
@@ -92,6 +95,18 @@
 	  		if(cls == "cls-folder"){
 	  			//收藏夹处理
 	  			alert("收藏夹处理");
+	  			var url = "/gemtak/gemClient/showCookies.do";
+	  			$.post(url,function(data){
+	  			  $(".show-cookies").empty();
+	  			  if(data != null){
+	  			    var len = data.length;
+	  			    for(var i=0;i<len;i++){
+	  			    //未完成待续
+	  			     $(".show-cookies").append("");
+	  			    }
+	  			  }
+                  
+                });
 	  		}
   		}
 	   $("#collapse-nav").collapse('toggle');
