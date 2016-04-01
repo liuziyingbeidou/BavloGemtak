@@ -81,9 +81,17 @@ public interface IGemService {
 	public void delShoppingCarByGemId(String username,Integer shoppingCarid) throws Exception;
 	
 	/**
+	 * 5.查询存储到cookie中的商品信息
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<GemVO> getGemByCookie(String[] id) throws Exception;
+	
+	/**
 	 * 
 	 * @return 查询所有的GemVO list集合
-	 * @throws Exception
+	 * @throws Exceptionc
 	 */
 	public List<GemVO> findAllGemVO();
 	
