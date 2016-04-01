@@ -223,6 +223,19 @@ public class GemCService extends CommonService implements IGemService {
 			throws Exception {
 		delete(ShoppingCarVO.class, shoppingCarid);
 	}
+
+	/**
+	 * 5.查询存储到cookie中的商品信息
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public List<GemVO> getGemByCookie(String[] id) throws Exception {
+		// TODO Auto-generated method stub
+		List<GemVO>  gemList = findAll(GemVO.class, id);
+	    return gemList;
+	}
 	
 	
 	
