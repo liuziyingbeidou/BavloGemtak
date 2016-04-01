@@ -401,14 +401,14 @@ public class GemClientController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value="login")
-	public String login(Model model,HttpServletResponse response,HttpServletRequest request){
+	public String login(Model model,HttpServletResponse response,HttpServletRequest request,String dengluNUM){
 		
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCLoginPageModel(model,lang);
-		
+		model.addAttribute("dengluNo",dengluNUM);
 		return IClientForward.gemLogin;
 	}
 	
@@ -422,7 +422,7 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="loginSuccess")
 	@ResponseBody
-	public String loginSuccess(Model model,HttpServletRequest request,HttpServletResponse response,String uname,String upwd){
+	public String loginSuccess(Model model,HttpServletRequest request,HttpServletResponse response,String uname,String upwd,String status){
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("Loc Lang："+lang);
@@ -431,8 +431,38 @@ public class GemClientController extends BaseController {
 		String msg = HttpTools.submitPost(IConstant.loginURL,"uname="+uname+"&upwd="+upwd)+"";
 		//登录成功后将用户名存在session中
 		request.getSession().setAttribute(IConstant.SESSIONUSERNAEM, uname);
+		/*if("true".equals(msg)){
+			if("true".equals(status)){
+				//登录成功后，点击记住密码 将用户名和密码存在cookie中
+				Cookie cookie = new Cookie(uname+"", upwd+"");
+		        cookie.setMaxAge(-1);// 设置为30min
+		        cookie.setPath("/");
+		        System.out.println(uname+""+"Cookie已添加===============");
+		        response.addCookie(cookie);
+			}
+		}*/
 		return msg;
 		//renderText(msg);
+	}
+	
+	/**
+	 * @Description: 登录成功
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="forgetpwd")
+	@ResponseBody
+	public String forgetpassword(Model model,HttpServletRequest request,HttpServletResponse response,String email){
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCListPageModel(model,lang);	
+		String msg = HttpTools.submitPost(IConstant.forgetPwdURL,"email="+email)+"";
+		return msg;
 	}
 	
 	/**
@@ -485,8 +515,23 @@ public class GemClientController extends BaseController {
         if (null==cookies) {
             System.out.println("没有cookie=========");
         } else {
+        	String whIds = "";//in （1,2,3,4）
             for(Cookie cookie : cookies){
                 System.out.println("name:"+cookie.getName()+",value:"+ cookie.getValue());
+                whIds += cookie.getValue()+",";
+                
+            }
+            if(!"".equals(whIds)){
+            	/*whIds = whIds.substring(0, whIds.length()-1);
+            	String conts = " id in("+whIds+")";*/
+            	try {
+            		String [] id = new String[whIds.length()];
+					List<GemVO> gemList = gemService.getGemByCookie(id);
+					model.addAttribute("gemList", gemList);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         }
 	}
@@ -517,12 +562,14 @@ public class GemClientController extends BaseController {
 		return "/client/gem/list";
 	}
 	
+	
+	
 	/**
 	 * @Description: 注册成功
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
-	 * @param @return
+	 * @param @return regauthcode 后台生成的验证码
 	 * @return String
 	 */
 	@RequestMapping(value="registerSuccess")
@@ -534,6 +581,7 @@ public class GemClientController extends BaseController {
 		if(authcode != null && authcode != ""){
 			if(authcode.equalsIgnoreCase(regauthcode)){
 				msg = HttpTools.submitPost(IConstant.registerURL,"uname="+uname+"&upwd="+upwd)+"";
+				
 			}else{
 				msg = "error2";
 			}
