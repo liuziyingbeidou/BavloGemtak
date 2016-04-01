@@ -65,7 +65,16 @@ function addShoppCar(id){
 	  });
   
 } 
-
+ //登录成功 关闭登录弹窗
+ function closeMwin(name){ 
+  getCarNum();
+  $(".t-css").text("Hi,"+name);//登录成功后，将用户名传过来
+  $(".replaceA").text("注销");
+  $(".replaceA").attr("href","${ctx }/gemClient/logout.do");
+  $(".replaceB").text("我的订单");
+  $(".replaceB").attr("href","");
+  $("#my-popup").modal('close');
+ }
 
 </script>
 </head>
@@ -80,7 +89,7 @@ function addShoppCar(id){
 	            class="am-close">&times;</span>
 	    </div>
 	    <div class="am-popup-bd">
-	      <iframe id="iframe" src="${ctx }/gemClient/login.do" frameborder="no" height="550" width="100%"></iframe>
+	      <iframe id="iframe" src="${ctx }/gemClient/login.do?dengluNUM=2" frameborder="no" height="550" width="100%"></iframe>
 	    </div>
 	  </div>
 	</div>
