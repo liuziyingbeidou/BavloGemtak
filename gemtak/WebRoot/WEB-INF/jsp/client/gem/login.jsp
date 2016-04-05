@@ -48,7 +48,7 @@
         	 $.cookie('password',null,{path:'/'});
         	}
         }else{
-        	alert(data);
+        	alert("登录失败！！");
         }
       });
     }
