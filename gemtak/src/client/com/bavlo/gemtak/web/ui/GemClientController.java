@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.UnsupportedEncodingException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -33,7 +34,6 @@ import com.bavlo.gemtak.util.weixin.WXPayUtil;
 import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.WebUtils;
 import com.bavlo.gemtak.web.BaseController;
-import com.bavlo.gemtak.web.CookieController;
 import com.bavlo.gemtak.web.weixin.GetWeiXinCode;
 
 /**
@@ -144,6 +144,23 @@ public class GemClientController extends BaseController {
 			reldate = "asc";
 		}
         List<GemVO> gems = gemService.findListGem(sql+"", dgpage, rows,"releasedate",reldate);
+        
+        /****/
+        Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
+        for(Cookie cookie : cookies){
+            System.out.println("name:"+cookie.getName()+",value:"+ cookie.getValue());
+            if(!"".equals(cookie.getName())){
+            	if(cookie.getName().equals(cookie.getValue())){
+            		for(GemVO vo : gems){
+            			Integer id = vo.getId();
+            			if(cookie.getValue().equals(id)){
+            				vo.setVdef3("T");
+            			}
+            		}
+            	}
+            }
+        }
+        /****/
 		renderJson(gems);
 		
 	}
@@ -431,22 +448,12 @@ public class GemClientController extends BaseController {
 		String msg = HttpTools.submitPost(IConstant.loginURL,"uname="+uname+"&upwd="+upwd)+"";
 		//登录成功后将用户名存在session中
 		request.getSession().setAttribute(IConstant.SESSIONUSERNAEM, uname);
-		/*if("true".equals(msg)){
-			if("true".equals(status)){
-				//登录成功后，点击记住密码 将用户名和密码存在cookie中
-				Cookie cookie = new Cookie(uname+"", upwd+"");
-		        cookie.setMaxAge(-1);// 设置为30min
-		        cookie.setPath("/");
-		        System.out.println(uname+""+"Cookie已添加===============");
-		        response.addCookie(cookie);
-			}
-		}*/
 		return msg;
 		//renderText(msg);
 	}
 	
 	/**
-	 * @Description: 登录成功
+	 * @Description: 忘记密码
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -495,12 +502,40 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="favorite")
 	public void favorite(Model model,HttpServletRequest request,HttpServletResponse response,Integer gemid){
 		Cookie cookie = new Cookie(gemid+"", gemid+"");
-        cookie.setMaxAge(-1);// 设置为30min
+        cookie.setMaxAge(30000);// 设置为30min
         cookie.setPath("/");
         System.out.println(gemid+""+"Cookie已添加===============");
         response.addCookie(cookie);
         renderText("{\"msg\":\"Y\"}");
+       
 	}
+	
+    /**
+     * 点击删除收藏夹 中选中的商品
+     * @param request
+     * @param response
+     * @param gemid
+     */
+    @RequestMapping("removeCookie")
+    public void removeCookie(HttpServletRequest request,HttpServletResponse response,String gemid){
+        Cookie[] cookies = request.getCookies();
+        if (null==cookies) {
+            System.out.println("没有cookie==============");
+        } else {
+            for(Cookie cookie : cookies){
+            	if(!"".equals(cookie.getName())){
+                	if(cookie.getName().equals(gemid+"")){
+                    cookie.setValue(null);
+                    cookie.setMaxAge(0);// 立即销毁cookie
+                    cookie.setPath("/");
+                    System.out.println("被删除的cookie名字为:"+cookie.getName());
+                    response.addCookie(cookie);
+                }
+            }
+         }
+         renderText("{\"msg\":\"Y\"}");
+      }
+    }
 	
 	/**
 	 * 显示收藏夹
@@ -512,28 +547,29 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="showCookies")
 	public void showCookies(Model model,HttpServletRequest request,HttpServletResponse response){
 		Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
+		List<GemVO> listVo = null;
         if (null==cookies) {
             System.out.println("没有cookie=========");
         } else {
-        	String [] ids = new String[cookies.length];
-        	Integer n = 0;
+        	String ids = "";
             for(Cookie cookie : cookies){
                 System.out.println("name:"+cookie.getName()+",value:"+ cookie.getValue());
-                ids[n] = cookie.getValue();
-                n++;
+                if(!"".equals(cookie.getName())){
+                	if(cookie.getName().equals(cookie.getValue())){
+                		ids += cookie.getValue()+",";
+                	}
+                }
             }
-            if(ids != null){
+            if(!"".equals(ids)){
+            	ids = ids.substring(0, ids.length()-1);
             	try {
-					List<GemVO> gemList = gemService.getGemByCookie(ids);
-					if(gemList != null){	
-						renderJson(gemList);
-					}
+            		listVo = gemService.getGemByCookie(ids);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }
         }
+        renderJson(listVo);
 	}
 	
 	/**
