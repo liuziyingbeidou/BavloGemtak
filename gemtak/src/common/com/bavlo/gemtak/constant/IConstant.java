@@ -16,7 +16,7 @@ public interface IConstant {
 	public static final String loginURL = "http://www.bavlo.com/gemtak-invoke/tologin";
 	//注册接口
 	public static final String registerURL = "http://www.bavlo.com/gemtak-invoke/register";
-	
+	//找回密码
 	public static final String forgetPwdURL = "http://www.bavlo.com/web/forgetPwd";
 
 	//本地语言化
