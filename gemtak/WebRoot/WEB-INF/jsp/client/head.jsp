@@ -50,7 +50,7 @@
 	    <li>
 		    <ul class="am-slides show-cookies">
 		      <c:forEach items="${gemList}" var="gem">
-			    <li><img src="http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640" /></li>
+			    
 			   </c:forEach>
 			 </ul>
 		 
@@ -101,8 +101,7 @@
 	  			  if(data != null){
 	  			    var len = data.length;
 	  			    for(var i=0;i<len;i++){
-	  			    //未完成待续
-	  			     $(".show-cookies").append("<li><img src='http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640' /></li>"+data[i].retail_price+"");
+	  			     $(".show-cookies").append("<li><a onclick='goDetail("+data[i].id+")'><img src='http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640'  alt='"+data[i].retail_price+"'/></a><span onclick='delCookie("+data[i].id+")'>X</span></li>");
 	  			    }
 	  			  }
                   
@@ -113,4 +112,23 @@
 	});
   });
   
+  /**
+ * 跳转详情页
+ */
+function goDetail(id){
+	location.href = "viewGemDetaile.do?id="+id;
+}
+  /**
+ * 刪除cookie中選中的商品
+ */
+function delCookie(id){
+	 var url = "removeCookie.do";
+	  $.post(url,{gemid:id},function(data){
+		  data = $.parseJSON(data);
+		  var flag = data.msg;
+		  if(flag=="Y"){
+			  alert("您已成功删除该宝贝！");
+		  }
+	  });
+}
 </script>
