@@ -515,19 +515,19 @@ public class GemClientController extends BaseController {
         if (null==cookies) {
             System.out.println("Ã»ÓÐcookie=========");
         } else {
-        	String whIds = "";//in £¨1,2,3,4£©
+        	String [] ids = new String[cookies.length];
+        	Integer n = 0;
             for(Cookie cookie : cookies){
                 System.out.println("name:"+cookie.getName()+",value:"+ cookie.getValue());
-                whIds += cookie.getValue()+",";
-                
+                ids[n] = cookie.getValue();
+                n++;
             }
-            if(!"".equals(whIds)){
-            	/*whIds = whIds.substring(0, whIds.length()-1);
-            	String conts = " id in("+whIds+")";*/
+            if(ids != null){
             	try {
-            		String [] id = new String[whIds.length()];
-					List<GemVO> gemList = gemService.getGemByCookie(id);
-					model.addAttribute("gemList", gemList);
+					List<GemVO> gemList = gemService.getGemByCookie(ids);
+					if(gemList != null){	
+						renderJson(gemList);
+					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
