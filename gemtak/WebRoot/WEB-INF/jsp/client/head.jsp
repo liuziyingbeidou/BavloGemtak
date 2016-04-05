@@ -31,16 +31,14 @@
 	    <t class="t-css"> Hi, ${uname}</t>
 	    <a class="replaceA" href="${ctx }/gemClient/logout.do">注销</a>|
 		<a class="replaceB" href="">我的订单</a>|
-		<a href="javascript:void(0)" class="myCollapse" cls="cls-folder">收藏夹</a>|
-		<a  href="${ctx }/gemClient/viewShoppingCar.do">购物车 <t class="cart-num">(${carNum})</t></a>
 	  </c:if>
 	  <c:if test="${uname == null}">
 	    <t class="t-css"></t>
 	    <a class="replaceA" href="${ctx }/gemClient/login.do?dengluNUM=1">登录</a>|
 		<a class="replaceB" href="${ctx }/gemClient/login.do">注册</a>|
+	  </c:if>
 		<a href="javascript:void(0)" class="myCollapse" cls="cls-folder">收藏夹</a>|
 		<a  href="${ctx }/gemClient/viewShoppingCar.do">购物车 <t class="cart-num"></t></a>
-	  </c:if>
 		<a href="" class="jesuan">去结算</a>
 	</div>
   </div>
@@ -89,26 +87,28 @@
   }
   $(function(){
      //点击触发收藏夹
-  	$(".myCollapse").on("click", function(){
+  	$(".myCollapse").click(function(){
+		$("#collapse-nav").collapse('toggle');
   		if(!$("#collapse-nav").hasClass('am-in')){
   			var cls = $(this).attr("cls");
 	  		if(cls == "cls-folder"){
 	  			//收藏夹处理
-	  			alert("收藏夹处理");
 	  			var url = "/gemtak/gemClient/showCookies.do";
 	  			$.post(url,function(data){
 	  			  $(".show-cookies").empty();
 	  			  if(data != null){
 	  			    var len = data.length;
-	  			    for(var i=0;i<len;i++){
-	  			     $(".show-cookies").append("<li class='delectPic-"+data[i].id+"'><a onclick='goDetail("+data[i].id+")'><img src='http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640'  alt='"+data[i].retail_price+"'/></a><span onclick='delCookie("+data[i].id+")'>X</span></li>");
-	  			    }
+	  			    if(len > 0){
+		  			    for(var i=0;i<len;i++){
+		  			     $(".show-cookies").append("<li class='delectPic-"+data[i].id+"'><a onclick='goDetail("+data[i].id+")'><img src='http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640'  alt='"+data[i].retail_price+"'/></a><span onclick='delCookie("+data[i].id+")'>X</span></li>");
+		  			    }
+	  			    }else{
+	                   alert("您还没有收藏任何宝贝哟！");
+	                }
 	  			  }
-                  
                 });
 	  		}
   		}
-	   $("#collapse-nav").collapse('toggle');
 	});
   });
   
