@@ -231,9 +231,11 @@ public class GemCService extends CommonService implements IGemService {
 	 * @throws Exception
 	 */
 	@Override
-	public List<GemVO> getGemByCookie(String[] id) throws Exception {
-		// TODO Auto-generated method stub
-		List<GemVO>  gemList = findAll(GemVO.class, id);
+	public List<GemVO> getGemByCookie(String ids) throws Exception {
+		List<GemVO> gemList = null;
+		if(!"".equals(ids)){
+			gemList = findAll(GemVO.class, " id in("+ids+")");
+		}
 	    return gemList;
 	}
 	
