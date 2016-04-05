@@ -62,4 +62,8 @@ public interface IConstant {
 	public static final String PIC_COVER = "001.jpg";
 	
 	public static final Short SHORT_ZERO = 0;
+	
+	// ’≤ÿ
+	public static final String PCAT_FIV = "5";
+	public static final String PCAT_THR = "3";
 }
