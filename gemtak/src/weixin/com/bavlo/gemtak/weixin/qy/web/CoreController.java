@@ -1,4 +1,4 @@
-package com.bavlo.gemtak.web.weixin;
+package com.bavlo.gemtak.weixin.qy.web;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,8 +18,6 @@ import com.bavlo.gemtak.service.weixin.itf.ICoreService;
 import com.bavlo.gemtak.weixin.qy.aes.AesException;
 import com.bavlo.gemtak.weixin.qy.aes.WXBizMsgCrypt;
 import com.bavlo.gemtak.weixin.qy.util.Constants;
-
-
 
 /**
  * 注解方式打开链接

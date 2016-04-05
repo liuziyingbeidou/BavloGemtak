@@ -21,7 +21,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
     <!-- 所以配置了<context:component-scan base-package="">之后,便无需再配置<context:annotation-config> -->  
     <context:annotation-config />
     <!-- 对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
-	<context:component-scan base-package="com.bavlo.gemtak.web"/>
+	<context:component-scan base-package="com.bavlo.gemtak.web,com.bavlo.gemtak.weixin.qy"/>
     <!-- 静态资源访问 -->
     <mvc:resources location="/resources/" mapping="/resources/**"/> 
     <!-- 启用SpringMVC的注解功能,它会自动注册HandlerMapping、HandlerAdapter、ExceptionResolver的相关实例 --> 
@@ -41,7 +41,17 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
         <property name="maxUploadSize" value="5000000"></property>  
     </bean> 
-	
+	<!-- 微信***************开始 -->
+	<!-- OAuth2拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			 <!--对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/myPath/* -->
+			<mvc:mapping path="/**" />
+			<bean id="oauth2Interceptor" class="com.bavlo.gemtak.weixin.qy.interceptor.OAuth2Interceptor">
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	<!-- 微信*****************结束 -->
 	<!-- 远程服务 Spring Http Invoker -->
 	<!--<bean id="customerService"  class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
 		<property name="serviceUrl" 		value="http://localhost:8080/counter/remote/customerService.do" />

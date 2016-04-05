@@ -23,6 +23,8 @@ public class LoginVO {
 	private String mwxcode;
 	//客服工号
 	private String kfcode;
+	//设备号
+	private String ecode;
 	
 	public String getUserId() {
 		return userId;
@@ -59,6 +61,12 @@ public class LoginVO {
 	}
 	public void setKfcode(String kfcode) {
 		this.kfcode = kfcode;
+	}
+	public String getEcode() {
+		return ecode;
+	}
+	public void setEcode(String ecode) {
+		this.ecode = ecode;
 	}
 	
 }

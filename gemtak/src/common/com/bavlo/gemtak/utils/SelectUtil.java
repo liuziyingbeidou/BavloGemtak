@@ -121,7 +121,7 @@ public class SelectUtil {
 		//英文
 		if(IConstant.EN_UK.equals(lang)){
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
@@ -136,7 +136,7 @@ public class SelectUtil {
 		}else{
 			//中文
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
@@ -164,7 +164,7 @@ public class SelectUtil {
 		//英文
 		if(IConstant.EN_UK.equals(lang)){
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
@@ -181,7 +181,7 @@ public class SelectUtil {
 		}else{
 			//中文
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
@@ -210,7 +210,7 @@ public class SelectUtil {
 		//英文
 		if(IConstant.EN_UK.equals(lang)){
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
@@ -227,7 +227,7 @@ public class SelectUtil {
 		}else{
 			//中文
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
@@ -256,7 +256,7 @@ public class SelectUtil {
 		//英文
 		if(IConstant.EN_UK.equals(lang)){
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
@@ -273,7 +273,7 @@ public class SelectUtil {
 		}else{
 			//中文
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
@@ -302,7 +302,7 @@ public class SelectUtil {
 		//英文
 		if(IConstant.EN_UK.equals(lang)){
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
@@ -316,7 +316,7 @@ public class SelectUtil {
 		}else{
 			//中文
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
@@ -343,7 +343,7 @@ public class SelectUtil {
 		//英文
 		if(IConstant.EN_UK.equals(lang)){
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
@@ -360,7 +360,7 @@ public class SelectUtil {
 		}else{
 			//中文
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
@@ -389,7 +389,7 @@ public class SelectUtil {
 		//英文
 		if(IConstant.EN_UK.equals(lang)){
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
@@ -406,7 +406,7 @@ public class SelectUtil {
 		}else{
 			//中文
 			JSONArray array = JSONArray.fromObject(json);
-			if(array != null){
+			if(array != null && array.isExpandElements()){
 				for(int i = 0; i < array.size(); i++){
 					KeyValueVO kvo = new KeyValueVO();
 					JSONObject obj = array.getJSONObject(i);
