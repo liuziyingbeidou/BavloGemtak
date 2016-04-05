@@ -101,7 +101,7 @@
 	  			  if(data != null){
 	  			    var len = data.length;
 	  			    for(var i=0;i<len;i++){
-	  			     $(".show-cookies").append("<li><a onclick='goDetail("+data[i].id+")'><img src='http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640'  alt='"+data[i].retail_price+"'/></a><span onclick='delCookie("+data[i].id+")'>X</span></li>");
+	  			     $(".show-cookies").append("<li class='delectPic-"+data[i].id+"'><a onclick='goDetail("+data[i].id+")'><img src='http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640'  alt='"+data[i].retail_price+"'/></a><span onclick='delCookie("+data[i].id+")'>X</span></li>");
 	  			    }
 	  			  }
                   
@@ -128,6 +128,7 @@ function delCookie(id){
 		  var flag = data.msg;
 		  if(flag=="Y"){
 			  alert("您已成功删除该宝贝！");
+			  $(".delectPic-"+id+"").remove();
 		  }
 	  });
 }
