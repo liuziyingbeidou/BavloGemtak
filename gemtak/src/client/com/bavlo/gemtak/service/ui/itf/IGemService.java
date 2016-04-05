@@ -86,7 +86,7 @@ public interface IGemService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<GemVO> getGemByCookie(String[] id) throws Exception;
+	public List<GemVO> getGemByCookie(String ids) throws Exception;
 	
 	/**
 	 * 
