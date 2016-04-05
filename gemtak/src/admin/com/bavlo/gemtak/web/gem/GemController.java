@@ -1,18 +1,15 @@
 package com.bavlo.gemtak.web.gem;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.constant.page.AGemListLang;
@@ -24,6 +21,7 @@ import com.bavlo.gemtak.utils.SelectUtil;
 import com.bavlo.gemtak.utils.StringUtil;
 import com.bavlo.gemtak.utils.WebUtils;
 import com.bavlo.gemtak.web.BaseController;
+import com.bavlo.gemtak.weixin.qy.interceptor.OAuthRequired;
 
 /**
  * @Title: 宝珑Gemtak
@@ -39,6 +37,18 @@ public class GemController extends BaseController {
 	@Resource
 	IGemService gemService;
 	
+	/**
+	 * @Description: 校验有效用户
+	 * @param @return
+	 * @return Boolean
+	 */
+	public Boolean checkU(){
+		Object objUid = session.getAttribute("loginInfo");
+		if(objUid != null){
+			return false;
+		}
+		return true;
+	}
 	
 	/**
 	 * @Description: 管理首页
@@ -48,8 +58,14 @@ public class GemController extends BaseController {
 	 * @param @return
 	 * @return String
 	 */
+	//@OAuthRequired
 	@RequestMapping(value="viewGemList")
 	public String viewGemList(Model model,HttpServletRequest request,HttpServletResponse response,Integer dgpage,String allgem,String typegem,String shapegem,String inputgem){
+		//
+		/*if(checkU()){
+			return "/admin/warn";
+		}*/
+		
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("本地语言："+lang);
