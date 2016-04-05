@@ -50,7 +50,7 @@
 	    <li>
 		    <ul class="am-slides show-cookies">
 		      <c:forEach items="${gemList}" var="gem">
-			    <li>${gem.is_cover }</li>
+			    <li><img src="http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640" /></li>
 			   </c:forEach>
 			 </ul>
 		 
@@ -102,7 +102,7 @@
 	  			    var len = data.length;
 	  			    for(var i=0;i<len;i++){
 	  			    //未完成待续
-	  			     $(".show-cookies").append("");
+	  			     $(".show-cookies").append("<li><img src='http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640' /></li>"+data[i].retail_price+"");
 	  			    }
 	  			  }
                   
