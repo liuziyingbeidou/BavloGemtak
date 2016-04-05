@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -116,10 +116,10 @@ public class GemClientController extends BaseController {
 			String fromPrice,String toPrice,String selDate,String inwhere,String inwheres){
 		String reldate = "desc";
 		StringBuilder sql = new StringBuilder(" 1=1");
-		if(!CommonUtils.isNull(typegem)){
+		if((!CommonUtils.isNull(typegem)) && (!"a".equals(typegem))){
 			sql.append( " and type_id = '"+typegem+"'");
 		}
-		if(!CommonUtils.isNull(shapegem)){
+		if((!CommonUtils.isNull(shapegem)) && (!"a".equals(shapegem))){
 			sql.append(" and shape_id = '"+shapegem+"'");
 		}
 		if(!CommonUtils.isNull(fromWeight) && !CommonUtils.isNull(toWeight)){
@@ -153,7 +153,7 @@ public class GemClientController extends BaseController {
             	if(cookie.getName().equals(cookie.getValue())){
             		for(GemVO vo : gems){
             			Integer id = vo.getId();
-            			if(cookie.getValue().equals(id)){
+            			if(cookie.getValue().equals(id+"")){
             				vo.setVdef3("T");
             			}
             		}
@@ -547,7 +547,7 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="showCookies")
 	public void showCookies(Model model,HttpServletRequest request,HttpServletResponse response){
 		Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
-		List<GemVO> listVo = null;
+		List<GemVO> listVo = new ArrayList<GemVO>();
         if (null==cookies) {
             System.out.println("没有cookie=========");
         } else {
