@@ -342,9 +342,49 @@ public class GemClientController extends BaseController {
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCOrderPageModel(model,lang);
-		
+		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+		try {
+			List<GemVO> gemList = new ArrayList<GemVO>();
+			if(uname != null){
+				gemList = gemService.getShoppingCarListByUname(uname.toString());
+			}
+			if(gemList != null){
+				model.addAttribute("gemList",gemList);	
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return IClientForward.gemOrder;
 	}
+	
+	/**
+	 * 获取用户 收货地址
+	 * @param model
+	 * @param response
+	 * @param request
+	 */
+	@RequestMapping(value="getUserAddress")
+	public void getUserAddress(Model model,HttpServletResponse response,HttpServletRequest request){
+		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+		StringBuffer user = HttpTools.submitPost(IConstant.shoppingAddressURL, "uname="+uname+"");
+		renderJson(user+"");
+	}
+	
+	/**
+	 * 新增用户 收货地址
+	 * @param model
+	 * @param response
+	 * @param request
+	 */
+	@RequestMapping(value="addUserAddress")
+	public void addUserAddress(Model model,HttpServletResponse response,HttpServletRequest request,String cellphone,String tel,
+			String area,String detailAddress,String email,String zipCode,String realName){
+		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+		StringBuffer user = HttpTools.submitPost(IConstant.addShoppingAddressURL, "realName="+realName+"&cellphone="+cellphone+"&tel="+tel+"" +
+				"&area="+area+"&detailAddress="+detailAddress+"&email="+email+"&zipCode="+zipCode+"&uname="+uname+"");
+		renderText(user+"");
+	}
+	
 	
 	/**
 	 * @Description: 订单完成
