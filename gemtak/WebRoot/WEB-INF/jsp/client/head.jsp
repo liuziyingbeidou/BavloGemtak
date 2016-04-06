@@ -38,7 +38,12 @@
 		<a class="replaceB" href="${ctx }/gemClient/login.do">注册</a>|
 	  </c:if>
 		<a href="javascript:void(0)" class="myCollapse" cls="cls-folder">收藏夹</a>|
-		<a  href="${ctx }/gemClient/viewShoppingCar.do">购物车 <t class="cart-num"></t></a>
+	  <c:if test="${uname == null}">
+	    <a  href="${ctx }/gemClient/login.do">购物车 <t class="cart-num"></t></a>
+	  </c:if>
+	  <c:if test="${uname != null}">
+	    <a  href="${ctx }/gemClient/viewShoppingCar.do">购物车 <t class="cart-num"></t></a>
+	  </c:if>
 		<a href="" class="jesuan">去结算</a>
 	</div>
   </div>
