@@ -43,8 +43,8 @@
 	  </c:if>
 	  <c:if test="${uname != null}">
 	    <a  href="${ctx }/gemClient/viewShoppingCar.do">购物车 <t class="cart-num"></t></a>
+		<a href="${ctx }/gemClient/order.do" class="jesuan">去结算</a>
 	  </c:if>
-		<a href="" class="jesuan">去结算</a>
 	</div>
   </div>
   <!-- 折叠下拉 -->
