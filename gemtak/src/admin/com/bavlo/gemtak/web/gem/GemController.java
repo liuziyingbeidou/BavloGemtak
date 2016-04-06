@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,7 +57,7 @@ public class GemController extends BaseController {
 	 * @param @return
 	 * @return String
 	 */
-	//@OAuthRequired
+	@OAuthRequired
 	@RequestMapping(value="viewGemList")
 	public String viewGemList(Model model,HttpServletRequest request,HttpServletResponse response,Integer dgpage,String allgem,String typegem,String shapegem,String inputgem){
 		//
@@ -140,6 +139,9 @@ public class GemController extends BaseController {
 	 */
 	@RequestMapping(value="addGem")
 	public String insertGem(Model model,HttpServletRequest request,HttpServletResponse response){
+		if(checkU()){
+			return "/admin/warn";
+		}
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("Loc Lang："+lang);
@@ -157,6 +159,9 @@ public class GemController extends BaseController {
 	 */
 	@RequestMapping(value="saveOrUpdate")
 	public String saveOrupdateGemVO(Model model,HttpServletRequest request,HttpServletResponse response,GemVO gemVO) {
+		if(checkU()){
+			return "/admin/warn";
+		}
 		try {
 			gemService.saveOrupdateGemVO(gemVO);
 		} catch (Exception e) {
@@ -176,7 +181,9 @@ public class GemController extends BaseController {
 	 */
 	@RequestMapping(value="findAllGemVO")
 	public String findAllGemVO(Model model) {
-		
+		if(checkU()){
+			return "/admin/warn";
+		}
 		List<GemVO> gems = gemService.findAllGemVO();
 		model.addAttribute("gems", gems);
 		return "/admin/gem/gem-list";
