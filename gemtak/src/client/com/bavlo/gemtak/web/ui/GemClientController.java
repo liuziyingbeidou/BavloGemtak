@@ -617,13 +617,10 @@ public class GemClientController extends BaseController {
 		if(authcode != null && authcode != ""){
 			if(authcode.equalsIgnoreCase(regauthcode)){
 				msg = HttpTools.submitPost(IConstant.registerURL,"uname="+uname+"&upwd="+upwd)+"";
-				
 			}else{
 				msg = "error2";
 			}
 		}
-		
-		
 		return msg;
 	}
 	
