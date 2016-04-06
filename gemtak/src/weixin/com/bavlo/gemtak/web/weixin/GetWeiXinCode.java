@@ -15,8 +15,10 @@ public class GetWeiXinCode {
 
 	//public static String GetCodeRequest = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=gemtak#wechat_redirect";
 	//public static String GetCodeRequest = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect";
-	public static String GetCodeRequest = "http://lzy348860554.imwork.net/gemtak/get-weixin-code.html?appid=APPID&redirect_uri=REDIRECT_URI&scope=SCOPE&state=STATE";
+	//public static String GetCodeRequest = "http://lzy348860554.imwork.net/gemtak/get-weixin-code.html?appid=APPID&redirect_uri=REDIRECT_URI&scope=SCOPE&state=STATE";
 
+	public static String GetCodeRequest = "http://m.bavlo.com/get-weixin-code.html?appid=APPID&redirect_uri=REDIRECT_URI&scope=SCOPE&state=STATE";
+	
 	public static String getCodeRequest() {
 
 		String result = null;
