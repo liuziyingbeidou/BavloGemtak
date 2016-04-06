@@ -97,7 +97,6 @@ public class GemCService extends CommonService implements IGemService {
 		if(conditions != null && conditions != ""){
 			listvo = findPage(GemVO.class, dgpage, rows, conditions,order, orderType);
 		}
-		
 		return listvo;
 	}
 
