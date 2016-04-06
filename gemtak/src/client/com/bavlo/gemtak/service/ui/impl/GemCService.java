@@ -93,7 +93,7 @@ public class GemCService extends CommonService implements IGemService {
 	 */
 	@Override
 	public List<GemVO> findListGem(String conditions,Integer dgpage, Integer rows,String order,String orderType) {
-		List<GemVO> listvo = null;
+		List<GemVO> listvo = new ArrayList<GemVO>();
 		if(conditions != null && conditions != ""){
 			listvo = findPage(GemVO.class, dgpage, rows, conditions,order, orderType);
 		}
