@@ -16,9 +16,13 @@ public interface IConstant {
 	public static final String loginURL = "http://www.bavlo.com/gemtak-invoke/tologin";
 	//注册接口
 	public static final String registerURL = "http://www.bavlo.com/gemtak-invoke/register";
-	//找回密码
+	//找回密码接口
 	public static final String forgetPwdURL = "http://www.bavlo.com/web/forgetPwd";
-
+	//根据用户id获取收货地址接口
+	public static final String shoppingAddressURL = "http://192.168.1.115/gemtak-invoke/getCustomerAddrByUname";
+	//新增用户收货地址接口
+    public static final String  addShoppingAddressURL = "http://192.168.1.115/gemtak-invoke/updateAddress";
+	
 	//本地语言化
 	public static final String COOKIE_LANG = "lang";
 	public static final String ZH_CN = "cn";
