@@ -134,7 +134,7 @@ public interface AGemCardLang {
 	public static final String button_ViewGem_EN = "VIEW GEM" ;
 	
 	//按钮
-	public static final String BUTTON_CERT_CN = "上传证书";
+	public static final String BUTTON_CERT_CN = "上传";
 	public static final String BUTTON_CERT_EN = "UPLOAD";//UPLOAD CERT
 	
 	public static final String BUTTON_SELCERT_CN = "选择证书";
