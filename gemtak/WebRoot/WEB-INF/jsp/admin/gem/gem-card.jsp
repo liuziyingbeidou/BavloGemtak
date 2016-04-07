@@ -15,10 +15,8 @@
 <title>Gemtak</title>
 	<link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
 	<link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
-	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script>
-	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-card.js"></script>
     <script type="text/javascript" src="${ctx }/resources/common/js/jquery.min.js"></script>
-    
+    <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-card.js"></script>
     
 	<script type="text/javascript">
 	//宝石保存
@@ -26,6 +24,11 @@
 		//保存
 		$(".btn-save").click(function(){	
 			saveOrupdate();
+		});
+		
+		//删除证书
+		$(".btn-delete").click(function(){
+			deleteCert();
 		});
 	});
 	
@@ -81,7 +84,7 @@
 	  
 	//上传证书
 	$(function (){
-	 $(".btn-upload-cert").bind("click",function (){
+	 $(".btn-upload").bind("click",function (){
 	   upfile();
 	 });
 	});
@@ -97,19 +100,41 @@
 	   contentType:false,
 	   processData:false,
 	   success:function (data){
-	     alert("上传成功！");
+	   	 if(data == "false"){
+	   	 	alert("上传图片超过5M,请处理后上传！");
+	   	 }else{
+		   	alert("上传成功！");
+		    $(".input-lab_url").val(data);
+		    $(".sfile-name").prop("src","${ctx}/cert/"+data);
+		    $(".btn-upload").hide();
+		    $(".btn-delete").show();
+	   	 }
 	   }
 	 });
 	}
 	
 	//获取当前图片的名字
-	function setFileName(){
-	  var index = $("#sfile").val().lastIndexOf('\\');
-	  var len = $("#sfile").val().length;
-	  var name = $("#sfile").val().substring(index+1,len);
-	  $(".sfile-name").attr("src","gemtak/resources/admin/images/"+name);
-	}
+	 function setFileName(){
+   		var index = $("#sfile").val().lastIndexOf('\\');
+    	var len = $("#sfile").val().length;
+    	var name = $("#sfile").val().substring(index+1,len);
+	    $(".spic-name").text(name);
+	    $(".input-lab_url").val(name);
+	    $(".btn-delete").hide();
+	    $(".btn-upload").show();
+    }
 	
+	//删除证书
+	function deleteCert(){
+		var url = "${ctx}/upload/delSGFile.do";
+		$.post(url,{fileName:$(".input-lab_url").val()},function(data){
+			if(data == "true"){
+				$(".input-lab_url").val("");
+				$(".sfile-name").prop("src","");
+				$(".btn-delete").hide();
+			}
+		});
+	}
 	
 	</script>
 	
@@ -117,8 +142,14 @@
 		.input-shape{
 			display: none;
 		}
-		.btn-upload-cert{
+		.btn-upload{
 			display: none;
+		}
+		.btn-delete{
+			display: none;
+		}
+		.btn-select-cert{
+			margin-top: -20;
 		}
 	</style>
 </head>
@@ -218,7 +249,7 @@
 					         <input type="hidden" name="treatment_en" class="h-treatment-en">
 					     </div>
 					 </li>
-					 <li><textarea name="lab_url" class="form-control" rows="5"></textarea><li>					
+					 <li><textarea name="vmemo" class="form-control" rows="5"></textarea><li>					
 			   </ul>
 			   <ul class="col-sm-1 col-md-2 hidden-xs"></ul>
 		       <ul class="mt_0 col-sm-6 col-md-5">
@@ -291,21 +322,25 @@
 							</p>
 						 </div>
 					</li>
-			   
 			   </ul>
 		   </div>
 	  </div>
+	   <input type="hidden" class="input-lab_url" name="lab_url" value="">
 	</form>
+	<form id="sgform" action="" method="post" enctype="multipart/form-data">
+	  <input type="hidden" name="filemodel" id="filemodel" value="cert">
+	  <input type="hidden" name="filetype" id="filetype" value="pic">	
 	  <div class="line col-sm-12 col-md-12 "></div>
 	  <!-- 按钮域 -->
 	  <div class="tit tit_bnt col-sm-12 col-md-12">
 	     <div class="col-xs-6 col-md-5">
-		    <p class=" sc_file col-xs-6 col-md-4">
-		      <input type="file">
-		    　　　<button type="button" class="btn btn-col btn-lg btn-block signlefile btn-select-cert">${pagevo['buttonSelCert'] }</button>
+		    <p class=" sc_file col-xs-6 col-md-4"><input type="file" onchange="setFileName()" name="sfile" id="sfile">
+		    　　　<button type="button" class="btn btn-col btn-lg btn-block btn-select-cert">${pagevo['buttonSelCert'] }</button>
+		       <span class="spic-name"></span>
 		    </p>
 			<p class="zhizhao col-xs-2 col-md-4"><img src="${ctx }/resources/admin/images/zhizhao.jpg" class="sfile-name" /></p>
-			<p class="col-xs-4 col-md-4"><a href="#" class="btn btn-col btn-lg btn-block" role="button">${pagevo['buttonDelete'] }</a></p>
+			<p class="col-xs-4 col-md-4 btn-delete"><a href="javascript:void(0)" class="btn btn-col btn-lg btn-block" role="button">${pagevo['buttonDelete'] }</a></p>
+			<p class="col-xs-4 col-md-4 btn-upload"><a href="javascript:void(0)" class="btn btn-col btn-lg btn-block" role="button">${pagevo['buttonCert'] }</a></p>
 		 </div>
 		 <div class="col-xs-1 col-md-2"></div>
 		 <div class="col-xs-5 col-md-5">
@@ -314,6 +349,7 @@
 			 <p class="col-xs-5 col-md-5"><button type="button" class="btn btn-col btn-lg btn-block btn-save">${pagevo['buttonSave'] }</button></p>
 		 </div>
 	  </div>
+	</form>
   </div>
 </div>
 <div class="footer hidden-xs hidden-sm">
