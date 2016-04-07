@@ -139,9 +139,9 @@ public class GemController extends BaseController {
 	 */
 	@RequestMapping(value="addGem")
 	public String insertGem(Model model,HttpServletRequest request,HttpServletResponse response){
-		if(checkU()){
+		/*if(checkU()){
 			return "/admin/warn";
-		}
+		}*/
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("Loc Lang："+lang);
