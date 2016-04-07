@@ -371,6 +371,19 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
+	 * 获取用户 收货地址
+	 * @param model
+	 * @param response
+	 * @param request
+	 */
+	@RequestMapping(value="getUserAddressByAid")
+	public void getUserAddressByAid(Model model,HttpServletResponse response,HttpServletRequest request,Long aid){
+		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+		StringBuffer user = HttpTools.submitPost(IConstant.getShoppingAddressByAidURL, "asi="+aid+"");
+		renderJson(user+"");
+	}
+	
+	/**
 	 * 新增用户 收货地址
 	 * @param model
 	 * @param response
@@ -379,12 +392,12 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="addUserAddress")
 	public void addUserAddress(Model model,HttpServletResponse response,HttpServletRequest request,String cellphone,String tel,
-			String area,String detailAddress,String email,String zipCode,String realName) throws UnsupportedEncodingException{
+			String area,String detailAddress,String email,String zipCode,String realName,Long aid) throws UnsupportedEncodingException{
 		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
 //		StringBuffer user = HttpTools.submitPost(IConstant.addShoppingAddressURL, "realName="+realName+"&cellphone="+cellphone+"&tel="+tel+"" +
 //				"&area="+area+"&detailAddress="+detailAddress+"&email="+email+"&zipCode="+zipCode+"&uname="+uname+"");
 		String user = HttpTools.getDataByURL(IConstant.addShoppingAddressURL+"?realName="+realName+"&cellphone="+cellphone+"&tel="+tel+"" +
-				"&area="+area+"&detailAddress="+detailAddress+"&email="+email+"&zipCode="+zipCode+"&uname="+uname+"");
+				"&area="+area+"&detailAddress="+detailAddress+"&email="+email+"&zipCode="+zipCode+"&aid="+aid+"&uname="+uname+"");
 		renderText(user);
 	}
 	
