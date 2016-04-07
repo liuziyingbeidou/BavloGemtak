@@ -21,7 +21,29 @@
 <script>
 $(function(){
   selectUserAddress();
+  selchecked();
  });
+ function selchecked(){
+  $(".aaa").click(function(){
+   var aid = $(this).attr("nid");
+   var url = "/gemtak/gemClient/getUserAddressByAid.do";
+   $.post(url,{aid:aid},function(data){
+     $(".selUser").empty();
+     if(data != null){
+       for(var i=0;i<data.length;i++){
+        $(".selUser").append("<li class='urealname'>收货人姓名："+data[i].realName+"</li>"+
+			"<li class=''>地区： "+data[i].area+"</li>"+
+			"<li class='uaddress'>地址："+data[i].detailAddress+"</li>"+
+			"<li class='uzipcode'>邮编："+data[i].zipcode+" </li>"+
+			"<li class='utel'>座机："+data[i].tel+" </li>"+
+			"<li class='uphone'>手机："+data[i].cellphone+" </li>"+
+			"<li class='uemail'>E-mail："+data[i].email+"</li>");
+       }
+     }
+   });
+  });
+ }
+ 
  function selectUserAddress(){
  var url = "/gemtak/gemClient/getUserAddress.do";
  $.post(url,function(data){
@@ -32,14 +54,13 @@ $(function(){
     for(var i=0;i<data.length;i++){
         if(i == 0){
     	$(".addUser").append("<li class='sel' id='selChecked-"+data[i].id+"'><input nid='"+data[i].id+"' value='"+data[i].id+"'  class='s_input aaa' type='radio' name='month'  checked='checked'/><span>"+data[i].realName+"</span>"+data[i].detailAddress+"</li>");
-    	$(".selUser").append("<li class='urealname'>收货人姓名："+data[i].realName+"</li>"+
-    	                "<li class='optype-"+data[i].id+"' style='display:none'> "+data[i].id+"</li>"+
-						"<li class=''>地区： "+data[i].area+"</li>"+
-						"<li class='uaddress'>地址："+data[i].detailAddress+"</li>"+
-						"<li class='uzipcode'>邮编："+data[i].zipcode+" </li>"+
-						"<li class='utel'>座机："+data[i].tel+" </li>"+
-						"<li class='uphone'>手机："+data[i].cellphone+" </li>"+
-						"<li class='uemail'>E-mail："+data[i].email+"</li>");
+    	$(".selUser").append("<li class='urealname'>收货人姓名：<span>"+data[i].realName+"</span></li>"+
+						"<li class='area'>地区：<span>"+data[i].area+"</span> </li>"+
+						"<li class='uaddress'>地址：<span>"+data[i].detailAddress+"</span></li>"+
+						"<li class='uzipcode'>邮编：<span>"+data[i].zipcode+"</span> </li>"+
+						"<li class='utel'>座机：<span>"+data[i].tel+"</span> </li>"+
+						"<li class='uphone'>手机：<span>"+data[i].cellphone+"</span> </li>"+
+						"<li class='uemail'>E-mail：<span>"+data[i].email+"</span></li>");
         }else{
         	$(".addUser").append("<li class='sel' id='selChecked'><input nid='"+data[i].id+"' class='s_input aaa' type='radio' name='month'  value='"+data[i].id+"' /><span>"+data[i].realName+"</span>"+data[i].detailAddress+"</li>");
         }
@@ -50,17 +71,20 @@ $(function(){
 								 "<a href='javascript:void(0)' class='btn btn-default btn-lg active del-user' role='button'>删 除</a></li>");
 		 $(".insert-user").bind("click",function(){
 		   $(".show-addUser").show();
+		   $(".btn-save").attr("ntype","insert");
 		 });
 		 $(".update-user").bind("click",function(){
 		   $(".aaa").each(function(){
 		   	if ($(this).is(':checked')) {
                 updateAddress($(this).attr("nid"));//修改 用户收货地址
+                $(".btn-save").attr("ntype","update");
             }
 		   });
 		 });
 		 $(".del-user").bind("click",function(){
 		   $(".aaa").each(function(){
 		   	if ($(this).is(':checked')) {
+		   	    $(".selUser").remove();
                 deleteAddress($(this).attr("nid"));//删除用户收货地址
             }
 		   });
@@ -146,7 +170,7 @@ $(function(){
 				  <li><input  type="text" class="form-control email" placeholder="E-mail" /></li>
 				  </form>
 				  <li class="del_s">
-				     <a href="javascript:void(0)" class="btn btn-8c btn-lg active btn-save" role="button">保存</a>
+				     <a href="javascript:void(0)" class="btn btn-8c btn-lg active btn-save" ntype="insert" role="button">保存</a>
                      <a href="javascript:void(0)" class="btn btn-default btn-lg active btn-clean" role="button">取 消</a>
                   </li>
 			    </ul>		 
@@ -190,7 +214,7 @@ $(function(){
 </body>
 <script>
 $(function(){
-//新增时 点击取消按钮
+//新增时 保存
  $(".btn-save").click(function(){
   saveOrUpdate();
  });
@@ -203,17 +227,24 @@ $(function(){
   var tel = $(".tel").val();
   var cellphone = $(".cellphone").val();
   var email = $(".email").val();
-  
+  var aid = null;
+  if($(".btn-save").attr("ntype") == "update"){
+    $(".aaa").each(function(){
+   	if ($(this).is(':checked')) {
+           aid = $(this).attr("nid");
+          }
+   });
+  }
   $.ajax({ 
 	url:"/gemtak/gemClient/addUserAddress.do", 
 	type:"post", //数据发送方式 
-	data:{realName:realName,area:area,detailAddress:detailAddress,zipCode:zipcode,tel:tel,cellphone:cellphone,email:email}, //要传递的数据 
+	data:{aid:aid,realName:realName,area:area,detailAddress:detailAddress,zipCode:zipcode,tel:tel,cellphone:cellphone,email:email}, //要传递的数据 
 	contentType:"application/x-www-form-urlencoded;charset=UTF-8",
 	success: function(data){ //成功 
 	 if(data == "true"){
      alert("添加成功！");
-     $(".selUser").remove();
-     selectUserAddress();
+     /* $(".selUser").remove(); */
+     selchecked();
      } 
 	} 
   }); 
@@ -232,8 +263,25 @@ $(function(){
 });
 });
  
-
-
+   //修改用户收货地址
+ function updateAddress(id){
+   $(".show-addUser").show();
+    $(".username").val($(".urealname span").text());
+    $(".area1").find("option:selected").text()+","+$(".area2").find("option:selected").text()+","+$(".area3").find("option:selected").text(); 
+    $(".detailAddress").val($(".uaddress span").text());
+    $(".zipcode").val($(".uzipcode span").text());
+    $(".tel").val($(".utel span").text());
+    $(".cellphone").val($(".uphone span").text());
+    $(".email").val($(".uemail span").text());
+   /*var url = "/gemtak/gemClient/updateUserAddress.do";
+    $.post(url,{realName:realName,area:area,detailAddress:detailAddress,zipCode:zipcode,tel:tel,cellphone:cellphone,email:email,optype:id},function(data){
+	    if(data == "true"){
+	     alert("修改成功！");
+	     selectUserAddress();
+	    }
+	  }); */
+ }
+ 
  //删除用户收货地址
  function deleteAddress(id){
    var url = "/gemtak/gemClient/delUserAddress.do";
