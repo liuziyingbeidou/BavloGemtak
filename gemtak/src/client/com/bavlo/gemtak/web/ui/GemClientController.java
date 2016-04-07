@@ -375,16 +375,45 @@ public class GemClientController extends BaseController {
 	 * @param model
 	 * @param response
 	 * @param request
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value="addUserAddress")
 	public void addUserAddress(Model model,HttpServletResponse response,HttpServletRequest request,String cellphone,String tel,
-			String area,String detailAddress,String email,String zipCode,String realName){
+			String area,String detailAddress,String email,String zipCode,String realName) throws UnsupportedEncodingException{
 		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
-		StringBuffer user = HttpTools.submitPost(IConstant.addShoppingAddressURL, "realName="+realName+"&cellphone="+cellphone+"&tel="+tel+"" +
+//		StringBuffer user = HttpTools.submitPost(IConstant.addShoppingAddressURL, "realName="+realName+"&cellphone="+cellphone+"&tel="+tel+"" +
+//				"&area="+area+"&detailAddress="+detailAddress+"&email="+email+"&zipCode="+zipCode+"&uname="+uname+"");
+		String user = HttpTools.getDataByURL(IConstant.addShoppingAddressURL+"?realName="+realName+"&cellphone="+cellphone+"&tel="+tel+"" +
 				"&area="+area+"&detailAddress="+detailAddress+"&email="+email+"&zipCode="+zipCode+"&uname="+uname+"");
-		renderText(user+"");
+		renderText(user);
 	}
 	
+	/**
+	 * 修改用户 收货地址
+	 * @param model
+	 * @param response
+	 * @param request
+	 */
+	@RequestMapping(value="updateUserAddress")
+	public void updateUserAddress(Model model,HttpServletResponse response,HttpServletRequest request,String cellphone,String tel,
+			String area,String detailAddress,String email,String zipCode,String realName,String optype){
+		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+		String user = HttpTools.getDataByURL(IConstant.addShoppingAddressURL+"?realName="+realName+"&cellphone="+cellphone+"&tel="+tel+"" +
+				"&area="+area+"&detailAddress="+detailAddress+"&email="+email+"&zipCode="+zipCode+"&optype="+optype+"&uname="+uname+"");
+		renderText(user);
+	}
+	
+	/**
+	 * 删除用户 收货地址
+	 * @param model
+	 * @param response
+	 * @param request
+	 */
+	@RequestMapping(value="delUserAddress")
+	public void delUserAddress(Model model,HttpServletResponse response,HttpServletRequest request,String id){
+		StringBuffer user = HttpTools.submitPost(IConstant.delShoppingAddressURL, "id="+id);
+		renderText(user+"");
+	}
 	
 	/**
 	 * @Description: 订单完成
