@@ -22,6 +22,8 @@ public interface IConstant {
 	public static final String shoppingAddressURL = "http://192.168.1.115/gemtak-invoke/getCustomerAddrByUname";
 	//新增用户收货地址接口
     public static final String  addShoppingAddressURL = "http://192.168.1.115/gemtak-invoke/updateAddress";
+    //删除用户收货地址接口
+    public static final String delShoppingAddressURL = "http://192.168.1.115/gemtak-invoke/deleteAddress";
 	
 	//本地语言化
 	public static final String COOKIE_LANG = "lang";
