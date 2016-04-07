@@ -1,11 +1,14 @@
 package com.bavlo.gemtak.web;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,12 +16,15 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.service.ICommonService;
 import com.bavlo.gemtak.utils.ImageUtils;
+import com.bavlo.gemtak.utils.ReadFile;
 import com.bavlo.gemtak.utils.StringUtil;
 
 /**
@@ -30,10 +36,12 @@ import com.bavlo.gemtak.utils.StringUtil;
  */
 @Controller("uploadController")
 @RequestMapping(value = "/upload")
-public class UploadController extends BaseController {
+public class UploadController extends BaseController implements ServletContextAware{
 	
 	@Resource
 	ICommonService commonService;
+	
+	private ServletContext servletContext; 
 
 	Logger log = Logger.getLogger(UploadController.class);
 	
@@ -146,6 +154,71 @@ public class UploadController extends BaseController {
             System.out.println(picName);
         } catch (Exception e) {
             e.printStackTrace();
+            try {
+				response.getWriter().print("false");
+				response.getWriter().close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
         }
    }
+	
+	
+	@RequestMapping("/delSGFile")
+	public void delFileByName(HttpServletRequest request,String fileName){
+		//String filePath = "D:\\FTP\\apache-tomcat-6.0.32-counter\\webapps\\counter\\staticRes\\custom";
+		String basePath = servletContext.getRealPath("/");  
+        String filePath = basePath +"/cert";
+        Boolean isgo = false;
+		try {
+			isgo = ReadFile.deletefile(filePath+"\\"+fileName);
+			if(isgo){
+				response.getWriter().print("true");
+				response.getWriter().close();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * @Description: 删除已上传图片
+	 * @param @param request
+	 * @param @param fileModel 模块  eg： custom or custom
+	 * @param @param fileName 文件名称
+	 * @return void
+	 */
+	@RequestMapping("/delPic")
+	public void delPicByName(HttpServletRequest request,String fileModel,String fileName){
+		//String filePath = "D:\\FTP\\apache-tomcat-6.0.32-counter\\webapps\\counter\\staticRes";
+		String basePath = servletContext.getRealPath("/");  
+        String filePath = basePath +"/cert";
+		try {
+			ReadFile.deletefile(filePath+"/"+fileModel+"/"+fileName);//原图
+			
+			String minFileName = null;
+			if(fileName != null && fileName != ""){
+				
+				int index = fileName.lastIndexOf(".");
+		        if (index != -1) {
+		        	minFileName = fileName.substring(0, index) + "_min" + fileName.substring(index);
+		        } else {
+		        	minFileName = fileName+"_min.jpg";
+		        }
+				ReadFile.deletefile(filePath+"\\"+fileModel+"\\min\\"+minFileName);//小图
+			}
+	        
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override  
+    public void setServletContext(ServletContext servletContext) {  
+        this.servletContext = servletContext;  
+    }  
 }
