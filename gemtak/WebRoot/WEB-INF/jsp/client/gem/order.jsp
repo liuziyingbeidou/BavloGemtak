@@ -21,27 +21,24 @@
 <script>
 $(function(){
   selectUserAddress();
-  selchecked();
- });
- function selchecked(){
-  $(".aaa").click(function(){
-   var aid = $(this).attr("nid");
+});
+ function selchecked(em){
+  var aid = $(em).attr("nid");
    var url = "/gemtak/gemClient/getUserAddressByAid.do";
    $.post(url,{aid:aid},function(data){
      $(".selUser").empty();
      if(data != null){
        for(var i=0;i<data.length;i++){
-        $(".selUser").append("<li class='urealname'>收货人姓名："+data[i].realName+"</li>"+
-			"<li class=''>地区： "+data[i].area+"</li>"+
-			"<li class='uaddress'>地址："+data[i].detailAddress+"</li>"+
-			"<li class='uzipcode'>邮编："+data[i].zipcode+" </li>"+
-			"<li class='utel'>座机："+data[i].tel+" </li>"+
-			"<li class='uphone'>手机："+data[i].cellphone+" </li>"+
-			"<li class='uemail'>E-mail："+data[i].email+"</li>");
+        $(".selUser").append("<li class='urealname'>收货人姓名：<span>"+data[i].realName+"</span></li>"+
+			"<li class=''>地区： <span>"+data[i].area+"</span></li>"+
+			"<li class='uaddress'>地址：<span>"+data[i].detailAddress+"</span></li>"+
+			"<li class='uzipcode'>邮编：<span>"+data[i].zipcode+"</span> </li>"+
+			"<li class='utel'>座机：<span>"+data[i].tel+"</span> </li>"+
+			"<li class='uphone'>手机：<span>"+data[i].cellphone+"</span> </li>"+
+			"<li class='uemail'>E-mail：<span>"+data[i].email+"</span></li>");
        }
      }
    });
-  });
  }
  
  function selectUserAddress(){
@@ -53,7 +50,7 @@ $(function(){
   	//data = $.parseJSON(data);
     for(var i=0;i<data.length;i++){
         if(i == 0){
-    	$(".addUser").append("<li class='sel' id='selChecked-"+data[i].id+"'><input nid='"+data[i].id+"' value='"+data[i].id+"'  class='s_input aaa' type='radio' name='month'  checked='checked'/><span>"+data[i].realName+"</span>"+data[i].detailAddress+"</li>");
+    	$(".addUser").append("<li class='sel'><input nid='"+data[i].id+"' value='"+data[i].id+"'  class='s_input aaa' type='radio' name='month'  checked='checked'/><span>"+data[i].realName+"</span>"+data[i].detailAddress+"</li>");
     	$(".selUser").append("<li class='urealname'>收货人姓名：<span>"+data[i].realName+"</span></li>"+
 						"<li class='area'>地区：<span>"+data[i].area+"</span> </li>"+
 						"<li class='uaddress'>地址：<span>"+data[i].detailAddress+"</span></li>"+
@@ -62,9 +59,13 @@ $(function(){
 						"<li class='uphone'>手机：<span>"+data[i].cellphone+"</span> </li>"+
 						"<li class='uemail'>E-mail：<span>"+data[i].email+"</span></li>");
         }else{
-        	$(".addUser").append("<li class='sel' id='selChecked'><input nid='"+data[i].id+"' class='s_input aaa' type='radio' name='month'  value='"+data[i].id+"' /><span>"+data[i].realName+"</span>"+data[i].detailAddress+"</li>");
+        	$(".addUser").append("<li class='sel'><input nid='"+data[i].id+"' class='s_input aaa' type='radio' name='month'  value='"+data[i].id+"' /><span>"+data[i].realName+"</span>"+data[i].detailAddress+"</li>");
         }
     }
+    
+    $(".aaa").click(function(){
+     selchecked(this);
+    });
   }
   $(".addUser").append("<li class='del_s'><a href='javascript:void(0)' class='btn  btn-lg active insert-user' role='button'>新 增</a>"+
 								 "<a href='javascript:void(0)' class='btn btn-default btn-lg active update-user' role='button'>修 改</a>"+
@@ -91,6 +92,44 @@ $(function(){
 		 });
  });
  }
+ 
+ function selectUserAddressHead(){
+ var url = "/gemtak/gemClient/getUserAddress.do";
+ $.post(url,function(data){
+  $(".addUser").empty();
+  $(".addUser").append("<li>常用地址</li>");
+  if(data != null){
+  	//data = $.parseJSON(data);
+    for(var i=0;i<data.length;i++){
+    	$(".addUser").append("<li class='sel'><input nid='"+data[i].id+"' value='"+data[i].id+"'  class='s_input aaa' type='radio' name='month'  checked='checked'/><span>"+data[i].realName+"</span>"+data[i].detailAddress+"</li>");
+     }
+     $(".addUser").append("<li class='del_s'><a href='javascript:void(0)' class='btn  btn-lg active insert-user' role='button'>新 增</a>"+
+								 "<a href='javascript:void(0)' class='btn btn-default btn-lg active update-user' role='button'>修 改</a>"+
+								 "<a href='javascript:void(0)' class='btn btn-default btn-lg active del-user' role='button'>删 除</a></li>");
+		 $(".insert-user").bind("click",function(){
+		   $(".show-addUser").show();
+		   $(".btn-save").attr("ntype","insert");
+		 });
+		 $(".update-user").bind("click",function(){
+		   $(".aaa").each(function(){
+		   	if ($(this).is(':checked')) {
+                updateAddress($(this).attr("nid"));//修改 用户收货地址
+                $(".btn-save").attr("ntype","update");
+            }
+		   });
+		 });
+		 $(".del-user").bind("click",function(){
+		   $(".aaa").each(function(){
+		   	if ($(this).is(':checked')) {
+		   	    $(".selUser").remove();
+                deleteAddress($(this).attr("nid"));//删除用户收货地址
+            }
+		   });
+		 });
+  }
+ });
+ }
+ 
  
  var s = ["vpovince","vcity","vdistrict"];
  var opt0 = ["省份","城市","区县"];
@@ -192,8 +231,8 @@ $(function(){
 					 <dt><a href=""><img src="${ctx }/resources/client/images/gw1.jpg" width="100%" /></a></dt>
 					 <dd><p><b>${gem.type_cn}•${gem.type_cn}</b></p>
 						 <p>数量：<span>${gem.vdef1}</span></p>
-						 <p>原价：<span>￥${gem.retail_price}</span></p></dd>
-					 </dd>
+						 <p>原价：<span>￥${gem.retail_price}</span></p>
+				     </dd>
 				  </dl>
 				  <c:set var="TotalPrice" value="${TotalPrice+gem.retail_price*gem.vdef1}"/>
 				 </c:forEach>
@@ -203,7 +242,7 @@ $(function(){
 					 <p class="jsxx_p">订单总金额: ￥${TotalPrice}元</p>
 				  </div>
 			   </div>
-			   <div class="tjdd"><input   type="submit" title="提交订单" value="提交订单"/></div>
+			   <div class="tjdd saveOrder"><input  type="submit" title="提交订单" value="提交订单"/></div>
 			   
 	 </div>
   </div>
@@ -223,7 +262,7 @@ $(function(){
   var realName = $(".username").val();
   var area = $(".area1").find("option:selected").text()+","+$(".area2").find("option:selected").text()+","+$(".area3").find("option:selected").text(); 
   var detailAddress = $(".detailAddress").val();
-  var zipcode = $(".uzipcode").val();
+  var zipcode = $(".zipcode").val();
   var tel = $(".tel").val();
   var cellphone = $(".cellphone").val();
   var email = $(".email").val();
@@ -243,8 +282,15 @@ $(function(){
 	success: function(data){ //成功 
 	 if(data == "true"){
      alert("添加成功！");
-     /* $(".selUser").remove(); */
-     selchecked();
+     $(".selUser").empty();
+     selectUserAddressHead();
+     $(".selUser").append("<li class='urealname'>收货人姓名：<span>"+realName+"</span></li>"+
+			"<li class=''>地区：<span> "+area+"</span></li>"+
+			"<li class='uaddress'>地址：<span>"+detailAddress+"</span></li>"+
+			"<li class='uzipcode'>邮编：<span>"+zipcode+"</span> </li>"+
+			"<li class='utel'>座机：<span>"+tel+"</span> </li>"+
+			"<li class='uphone'>手机：<span>"+cellphone+"</span> </li>"+
+			"<li class='uemail'>E-mail：<span>"+email+"</span></li>");
      } 
 	} 
   }); 
@@ -261,6 +307,7 @@ $(function(){
   $(".show-addUser").hide();
 	
 });
+
 });
  
    //修改用户收货地址
@@ -273,13 +320,6 @@ $(function(){
     $(".tel").val($(".utel span").text());
     $(".cellphone").val($(".uphone span").text());
     $(".email").val($(".uemail span").text());
-   /*var url = "/gemtak/gemClient/updateUserAddress.do";
-    $.post(url,{realName:realName,area:area,detailAddress:detailAddress,zipCode:zipcode,tel:tel,cellphone:cellphone,email:email,optype:id},function(data){
-	    if(data == "true"){
-	     alert("修改成功！");
-	     selectUserAddress();
-	    }
-	  }); */
  }
  
  //删除用户收货地址
@@ -288,7 +328,7 @@ $(function(){
    $.post(url,{id:id},function(data){
     if(data == "true"){
      alert("删除成功！");
-     selectUserAddress();
+      selectUserAddress();
     }
    });
  }
