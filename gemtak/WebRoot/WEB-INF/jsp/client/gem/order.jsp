@@ -51,13 +51,13 @@ $(function(){
     for(var i=0;i<data.length;i++){
         if(i == 0){
     	$(".addUser").append("<li class='sel'><input nid='"+data[i].id+"' value='"+data[i].id+"'  class='s_input aaa' type='radio' name='month'  checked='checked'/><span>"+data[i].realName+"</span>"+data[i].detailAddress+"</li>");
-    	$(".selUser").append("<li class='urealname'>收货人姓名：<span>"+data[i].realName+"</span></li>"+
+    	$(".selUser").append("<li class='urealname' name='real_name'>收货人姓名：<span>"+data[i].realName+"</span></li>"+
 						"<li class='area'>地区：<span>"+data[i].area+"</span> </li>"+
-						"<li class='uaddress'>地址：<span>"+data[i].detailAddress+"</span></li>"+
-						"<li class='uzipcode'>邮编：<span>"+data[i].zipcode+"</span> </li>"+
-						"<li class='utel'>座机：<span>"+data[i].tel+"</span> </li>"+
-						"<li class='uphone'>手机：<span>"+data[i].cellphone+"</span> </li>"+
-						"<li class='uemail'>E-mail：<span>"+data[i].email+"</span></li>");
+						"<li class='uaddress'name='mail_address'>地址：<span>"+data[i].area+""+data[i].detailAddress+"</span></li>"+
+						"<li class='uzipcode' name='zipcode'>邮编：<span>"+data[i].zipcode+"</span> </li>"+
+						"<li class='utel' name='tel'>座机：<span>"+data[i].tel+"</span> </li>"+
+						"<li class='uphone' name='cellphone'>手机：<span>"+data[i].cellphone+"</span> </li>"+
+						"<li class='uemail' name='email'>E-mail：<span>"+data[i].email+"</span></li>");
         }else{
         	$(".addUser").append("<li class='sel'><input nid='"+data[i].id+"' class='s_input aaa' type='radio' name='month'  value='"+data[i].id+"' /><span>"+data[i].realName+"</span>"+data[i].detailAddress+"</li>");
         }
@@ -160,7 +160,7 @@ $(function(){
 			   </ul>
 			  
 			</div>     
-			 
+			 <form action="" id="orderForm">
 			 <div class="wrap_br wrap_br_d">
 				<h2><span>收货人信息</span></h2>	  
 				 <ul class="srxx addUser">
@@ -229,9 +229,10 @@ $(function(){
 			    <c:forEach items="${gemList}" var="gem">
 				  <dl class="spqd">
 					 <dt><a href=""><img src="${ctx }/resources/client/images/gw1.jpg" width="100%" /></a></dt>
-					 <dd><p><b>${gem.type_cn}•${gem.type_cn}</b></p>
-						 <p>数量：<span>${gem.vdef1}</span></p>
-						 <p>原价：<span>￥${gem.retail_price}</span></p>
+					 <dd><p class="gemid" nid="${gem.id}" sid="${gem.vdef1}" jid="${gem.retail_price}"><b>${gem.type_cn}•${gem.type_cn}</b></p>
+					     <p class="shopcarid" style="display:none"><span>${gem.vdef2}</span></p>
+						 <p class="shuliang">数量：<span>${gem.vdef1}</span></p>
+						 <p class="jiage">原价：￥<span>${gem.retail_price}</span></p>
 				     </dd>
 				  </dl>
 				  <c:set var="TotalPrice" value="${TotalPrice+gem.retail_price*gem.vdef1}"/>
@@ -239,12 +240,12 @@ $(function(){
 				 <h2><span>结算信息</span></h2>
 				  <div class="jsxx">
 					 <p><input class="jsxx_m" type="text"   name="key" value="输入优惠券编码" /><input class="jsxx_b"   type="submit" title="添加" value="添加"/></p>
-					 <p class="jsxx_p">订单总金额: ￥${TotalPrice}元</p>
+					 <p class="jsxx_p zongjia">订单总金额: ￥<span>${TotalPrice}</span>元</p>
 				  </div>
 			   </div>
-			   <div class="tjdd saveOrder"><input  type="submit" title="提交订单" value="提交订单"/></div>
-			   
-	 </div>
+			  </form>
+			   <div class="tjdd"><input class="saveOrder" type="button" title="提交订单" value="提交订单"/></div>
+	  </div>
   </div>
 </div>
 <div class="footer hidden-xs hidden-sm">
@@ -260,7 +261,6 @@ $(function(){
  //新增用户收货地址
  function saveOrUpdate(){
   var realName = $(".username").val();
-  var area = $(".area1").find("option:selected").text()+","+$(".area2").find("option:selected").text()+","+$(".area3").find("option:selected").text(); 
   var detailAddress = $(".detailAddress").val();
   var zipcode = $(".zipcode").val();
   var tel = $(".tel").val();
@@ -333,8 +333,62 @@ $(function(){
    });
  }
 
-
+  
+  /* $(".saveOrder").bind("click",function(){
+  var realName = $(".username").val();
+  var area = $(".area1").find("option:selected").text()+","+$(".area2").find("option:selected").text()+","+$(".area3").find("option:selected").text(); 
+  var detailAddress = $(".area1").find("option:selected").text()+","+$(".area2").find("option:selected").text()+","+$(".area3").find("option:selected").text(),$(".detailAddress").val();
+  var zipcode = $(".zipcode").val();
+  var tel = $(".tel").val();
+  var cellphone = $(".cellphone").val();
+  var email = $(".email").val();
+  var gemid = $(".baoshi span").text();
+  var quantity = $("shuliang span").text();
+  var price = $(".jiage span").text();
+  var totalprice = $(".zongjia span").text();
+  var shoppingCarid = $(".shopcarid").text();
+  var url = "/gemtak/gemClient/orderSuccess.do";
+   $.post(url,{realname:realName,address:detailAddress,zipcode:zipcode,tel:tel,cellphone:cellphone,email:email,gemid:gemid,quantity:quantity,price:price,
+   totalprice:totalprice,shoppingCarid:shoppingCarid},function(data){
+     
+   });
+  }); */
  
-
+  $(".saveOrder").click(function(){
+   addOrder();
+  });
+  function addOrder(){
+   var orderListJson = getOrderlistInfo();
+   $.ajax({
+    url:"/gemtak/gemClient/orderSuccess.do",
+    type:"post",
+    data:$("#orderForm").serialize()+"&list="+orderListJson,
+    async:false,
+    cache:false,
+    success:function(data){
+     alert("保存成功！");
+    },
+    error:function(e){
+     alert("保存失败！");
+    }
+   });
+  }
+  
+  //收集清单数据
+  function getOrderlistInfo(){
+   var listJson = "[";
+   $(".gemid").each(function(){
+    var gemid = $(this).attr("nid");
+    var quantity = $(this).attr("sid");
+    var price = $(this).attr("jid");
+    listJson +="{\"gemid\":\""+gemid+"\",\"quantity\":\""+quantity+"\",\"price\":\""+price+"\"},";
+   });
+   if(listJson.length>1){
+     listJson = listJson.substring(0,listJson.length-1);
+   }
+   listJson += "]";
+   return listJson;
+  }
+  
 </script>
 </html>
