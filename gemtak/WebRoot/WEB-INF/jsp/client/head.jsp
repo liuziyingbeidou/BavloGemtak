@@ -63,12 +63,44 @@
 </div>
 <div class="nav col-xs-12">
    <ul>
-   <li class="nav_list hidden-md hidden-lg"><a href="./nav.html"><image src="${ctx }/resources/client/images/list.png" /></a></li>
-<li class="nav_logo hidden-xs hidden-sm"><a href="./list.html"><image src="${ctx }/resources/client/images/logo.png" /></a></li>
-<li class="nav_logo hidden-md hidden-lg"><a href="./list.html"><image src="${ctx }/resources/client/images/logos.png" /></a></li>
-<li class="nav_home hidden-md hidden-lg"><a href="./login.html"><image src="${ctx }/resources/client/images/home.png" /></a></li>
+    <li class="nav_list hidden-md hidden-lg"><image src="${ctx }/resources/client/images/list.png" />
+    <nav data-am-widget="menu" class="am-menu  am-menu-offcanvas1"  
+     data-am-menu-offcanvas > 
+    <a href="javascript: void(0)" class="am-menu-toggle">
+          <i class="am-menu-toggle-icon "></i>
+    </a>
+
+    <div class="am-offcanvas" >
+      <div class="am-offcanvas-bar">
+      <ul class="am-menu-nav am-avg-sm-1">
+      	  <li class="am-parent">
+            <a href="##" class="" >${pagehfvo['hMSignIn'] }</a>
+          </li>
+          <li class="am-parent">
+            <a href="##" class="" >${pagehfvo['hMReg'] }</a>
+          </li>
+          <li class="am-parent">
+            <a href="##" class="" >${pagehfvo['hMOrder'] }</a>
+          </li>
+          <li class="am-parent">
+            <a href="##" class="" >${pagehfvo['hMFavr'] }</a>
+          </li>
+          <li class="am-parent">
+            <a href="##" class="" >${pagehfvo['hMShoppingCart'] }</a>
+          </li>
+          <li class="am-parent">
+            <a href="##" class="" >${pagehfvo['hMSignOut'] }</a>
+          </li>
+      </ul>
+      </div>
+    </div>
+  </nav>
+    </li>
+	<li class="nav_logo hidden-xs hidden-sm"><a href="./list.html"><image src="${ctx }/resources/client/images/logo.png" /></a></li>
+	<li class="nav_logo hidden-md hidden-lg"><a href="./list.html"><image src="${ctx }/resources/client/images/logos.png" /></a></li>
+	<li class="nav_home hidden-md hidden-lg"><a href="./login.html"><image src="${ctx }/resources/client/images/home.png" /></a></li>
 </ul>
-</div>  
+</div> 
 
 <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-common.js"></script>
 <link rel="stylesheet" href="${ctx }/resources/admin/css/gem-common.css" />
