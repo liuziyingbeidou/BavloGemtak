@@ -29,21 +29,21 @@
 	<div class="top_a">
 	  <c:if test="${uname != null}">
 	    <t class="t-css"> Hi, ${uname}</t>
-	    <a class="replaceA" href="${ctx }/gemClient/logout.do">注销</a>|
-		<a class="replaceB" href="">我的订单</a>|
+	    <a class="replaceA" href="${ctx }/gemClient/logout.do">${pagehfvo['hMSignOut'] }</a>|
+		<a class="replaceB" href="">${pagehfvo['hMOrder'] }</a>|
 	  </c:if>
 	  <c:if test="${uname == null}">
 	    <t class="t-css"></t>
-	    <a class="replaceA" href="${ctx }/gemClient/login.do?dengluNUM=1">登录</a>|
-		<a class="replaceB" href="${ctx }/gemClient/login.do">注册</a>|
+	    <a class="replaceA" href="${ctx }/gemClient/login.do?dengluNUM=1">${pagehfvo['hMSignIn'] }</a>|
+		<a class="replaceB" href="${ctx }/gemClient/login.do">${pagehfvo['hMReg'] }</a>|
 	  </c:if>
-		<a href="javascript:void(0)" class="myCollapse" cls="cls-folder">收藏夹</a>|
+		<a href="javascript:void(0)" class="myCollapse" cls="cls-folder">${pagehfvo['hMFavr'] }</a>|
 	  <c:if test="${uname == null}">
-	    <a  href="${ctx }/gemClient/login.do">购物车 <t class="cart-num"></t></a>
+	    <a  href="${ctx }/gemClient/login.do">${pagehfvo['hMShoppingCart'] } <t class="cart-num"></t></a>
 	  </c:if>
 	  <c:if test="${uname != null}">
-	    <a  href="${ctx }/gemClient/viewShoppingCar.do">购物车 <t class="cart-num"></t></a>
-		<a href="${ctx }/gemClient/order.do" class="jesuan">去结算</a>
+	    <a  href="${ctx }/gemClient/viewShoppingCar.do">${pagehfvo['hMShoppingCart'] }<t class="cart-num"></t></a>
+		<a href="${ctx }/gemClient/order.do" class="jesuan">${pagehfvo['hMBalance'] }</a>
 	  </c:if>
 	</div>
   </div>
