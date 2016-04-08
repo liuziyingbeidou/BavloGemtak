@@ -378,9 +378,8 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="getUserAddressByAid")
 	public void getUserAddressByAid(Model model,HttpServletResponse response,HttpServletRequest request,Long aid){
-		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
-		StringBuffer user = HttpTools.submitPost(IConstant.getShoppingAddressByAidURL, "asi="+aid+"");
-		renderJson(user+"");
+		String user = HttpTools.getDataByURL(IConstant.getShoppingAddressByAidURL+"?asi="+aid+"");
+		renderJson(user);
 	}
 	
 	/**
@@ -396,8 +395,14 @@ public class GemClientController extends BaseController {
 		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
 //		StringBuffer user = HttpTools.submitPost(IConstant.addShoppingAddressURL, "realName="+realName+"&cellphone="+cellphone+"&tel="+tel+"" +
 //				"&area="+area+"&detailAddress="+detailAddress+"&email="+email+"&zipCode="+zipCode+"&uname="+uname+"");
-		String user = HttpTools.getDataByURL(IConstant.addShoppingAddressURL+"?realName="+realName+"&cellphone="+cellphone+"&tel="+tel+"" +
-				"&area="+area+"&detailAddress="+detailAddress+"&email="+email+"&zipCode="+zipCode+"&aid="+aid+"&uname="+uname+"");
+		String user = "";
+		if(aid == null){
+			user = HttpTools.getDataByURL(IConstant.addShoppingAddressURL+"?realName="+realName+"&cellphone="+cellphone+"&tel="+tel+"" +
+					"&area="+area+"&detailAddress="+detailAddress+"&email="+email+"&zipCode="+zipCode+"&uname="+uname+"");
+		}else{
+			user = HttpTools.getDataByURL(IConstant.addShoppingAddressURL+"?realName="+realName+"&cellphone="+cellphone+"&tel="+tel+"" +
+					"&area="+area+"&detailAddress="+detailAddress+"&email="+email+"&zipCode="+zipCode+"&aid="+aid+"&uname="+uname+"");
+		}
 		renderText(user);
 	}
 	
@@ -406,7 +411,7 @@ public class GemClientController extends BaseController {
 	 * @param model
 	 * @param response
 	 * @param request
-	 */
+	 *//*
 	@RequestMapping(value="updateUserAddress")
 	public void updateUserAddress(Model model,HttpServletResponse response,HttpServletRequest request,String cellphone,String tel,
 			String area,String detailAddress,String email,String zipCode,String realName,String optype){
@@ -414,7 +419,7 @@ public class GemClientController extends BaseController {
 		String user = HttpTools.getDataByURL(IConstant.addShoppingAddressURL+"?realName="+realName+"&cellphone="+cellphone+"&tel="+tel+"" +
 				"&area="+area+"&detailAddress="+detailAddress+"&email="+email+"&zipCode="+zipCode+"&optype="+optype+"&uname="+uname+"");
 		renderText(user);
-	}
+	}*/
 	
 	/**
 	 * 删除用户 收货地址
