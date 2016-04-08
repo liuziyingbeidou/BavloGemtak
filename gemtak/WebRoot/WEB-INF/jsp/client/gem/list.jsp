@@ -9,10 +9,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="bavlo">
-	<meta name="keywords" content="bavlo">
 	<meta name="author" content="bavlo">
-<title>bavlo</title>
+	<title>彩色宝石、钻石、报价、3D、鉴定、珠宝定制</title>
+    <meta content="彩色宝石、钻石、报价、3D、鉴定、珠宝定制、gemtak" name="keywords"/>
+    <meta content="彩色宝石、钻石、报价、3D、鉴定、珠宝定制、gemtak" name="description"/>
+
 	<link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 	<link rel="stylesheet" href="${ctx }/resources/client/css/swiper.css">
 	<link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
