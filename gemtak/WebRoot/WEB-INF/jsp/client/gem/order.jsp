@@ -20,6 +20,7 @@
 </head>
 <script>
 $(function(){
+  getCarNum();
   selectUserAddress();
 });
  function selchecked(em){
