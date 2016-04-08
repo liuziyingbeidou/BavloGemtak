@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.ui.Model;
 
 import com.bavlo.gemtak.model.gem.GemVO;
+import com.bavlo.gemtak.model.ui.OrderVO;
 import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 
 /**
@@ -133,5 +134,6 @@ public interface IGemService {
 	 */
 	public Integer getListSizeGem(String contions);
 	
-	
+	//ÐÂÔö¶©µ¥
+	public Integer saveOrderRelID(OrderVO orderVO) throws Exception;
 }
