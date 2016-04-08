@@ -11,8 +11,8 @@ import com.bavlo.gemtak.model.IdEntity;
  * @Title: 宝珑Gemtak
  * @ClassName: OrderVO 
  * @Description: 订单主表
- * @author liuzy
- * @date 2016-3-17 下午04:54:22
+ * @author lisuike
+ * @date 2016-4-8 下午14:54:22
  */
 @Entity
 @Table(name="gt_order")
