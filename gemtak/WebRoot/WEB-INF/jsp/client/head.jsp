@@ -123,6 +123,7 @@
    });
   }
   $(function(){
+  	
      //点击触发收藏夹
   	$(".myCollapse").click(function(){
 		$("#collapse-nav").collapse('toggle');
