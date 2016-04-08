@@ -30,7 +30,13 @@ public class PageLangUtil {
 			//头部
 			aGemHeadFootVO.sethTitle(AGemHeadFootLang.H_Title_EN);
 			aGemHeadFootVO.sethLanguage(AGemHeadFootLang.H_Language_EN);
-			
+			aGemHeadFootVO.sethMSignIn(AGemHeadFootLang.H_MENU_LOGIN_EN);
+			aGemHeadFootVO.sethMReg(AGemHeadFootLang.H_MENU_REGISTER_EN);
+			aGemHeadFootVO.sethMFavr(AGemHeadFootLang.H_MENU_FAVORITE_EN);
+			aGemHeadFootVO.sethMShoppingCart(AGemHeadFootLang.H_MENU_SHOPPINGCART_EN);
+			aGemHeadFootVO.sethMBalance(AGemHeadFootLang.H_MENU_BALANCE_EN);
+			aGemHeadFootVO.sethMSignOut(AGemHeadFootLang.H_MENU_SIGNOUT_EN);
+			aGemHeadFootVO.sethMOrder(AGemHeadFootLang.H_MENU_MYORDER_EN);
 			
 			//尾部
 			aGemHeadFootVO.setfAboutGemtak(AGemHeadFootLang.f_AboutGemtak_EN);
@@ -44,6 +50,13 @@ public class PageLangUtil {
 			//头部
 			aGemHeadFootVO.sethTitle(AGemHeadFootLang.H_Title_CN);
 			aGemHeadFootVO.sethLanguage(AGemHeadFootLang.H_Language_CN);
+			aGemHeadFootVO.sethMSignIn(AGemHeadFootLang.H_MENU_LOGIN_CN);
+			aGemHeadFootVO.sethMReg(AGemHeadFootLang.H_MENU_REGISTER_CN);
+			aGemHeadFootVO.sethMFavr(AGemHeadFootLang.H_MENU_FAVORITE_CN);
+			aGemHeadFootVO.sethMShoppingCart(AGemHeadFootLang.H_MENU_SHOPPINGCART_CN);
+			aGemHeadFootVO.sethMBalance(AGemHeadFootLang.H_MENU_BALANCE_CN);
+			aGemHeadFootVO.sethMSignOut(AGemHeadFootLang.H_MENU_SIGNOUT_CN);
+			aGemHeadFootVO.sethMOrder(AGemHeadFootLang.H_MENU_MYORDER_CN);
 			
 			//尾部
 			aGemHeadFootVO.setfAboutGemtak(AGemHeadFootLang.f_AboutGemtak_CN);

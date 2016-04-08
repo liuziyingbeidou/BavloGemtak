@@ -16,6 +16,20 @@ public class AGemHeadFootVO {
 	private String hTitle;
 	//中英文切换
 	private String hLanguage;
+	//登录
+	private String hMSignIn;
+	//注册
+	private String hMReg;
+	//注销
+	private String hMSignOut;
+	//我的订单
+	private String hMOrder;
+	//收藏夹
+	private String hMFavr;
+	//购物车
+	private String hMShoppingCart;
+	//结算
+	private String hMBalance;
 	
 	/**
 	 * 尾部
@@ -105,6 +119,62 @@ public class AGemHeadFootVO {
 
 	public void sethLanguage(String hLanguage) {
 		this.hLanguage = hLanguage;
+	}
+
+	public String gethMSignIn() {
+		return hMSignIn;
+	}
+
+	public void sethMSignIn(String hMSignIn) {
+		this.hMSignIn = hMSignIn;
+	}
+
+	public String gethMReg() {
+		return hMReg;
+	}
+
+	public void sethMReg(String hMReg) {
+		this.hMReg = hMReg;
+	}
+
+	public String gethMFavr() {
+		return hMFavr;
+	}
+
+	public void sethMFavr(String hMFavr) {
+		this.hMFavr = hMFavr;
+	}
+
+	public String gethMShoppingCart() {
+		return hMShoppingCart;
+	}
+
+	public void sethMShoppingCart(String hMShoppingCart) {
+		this.hMShoppingCart = hMShoppingCart;
+	}
+
+	public String gethMBalance() {
+		return hMBalance;
+	}
+
+	public void sethMBalance(String hMBalance) {
+		this.hMBalance = hMBalance;
+	}
+
+	public String gethMSignOut() {
+		return hMSignOut;
+	}
+
+	public void sethMSignOut(String hMSignOut) {
+		this.hMSignOut = hMSignOut;
+	}
+
+	public String gethMOrder() {
+		return hMOrder;
+	}
+
+	public void sethMOrder(String hMOrder) {
+		this.hMOrder = hMOrder;
 	}
 	
 }

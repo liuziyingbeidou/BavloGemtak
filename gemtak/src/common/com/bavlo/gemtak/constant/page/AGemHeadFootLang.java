@@ -17,6 +17,26 @@ public class AGemHeadFootLang {
 	public static final String H_Language_CN = "英文";//中文
 	public static final String H_Language_EN = "Chinese";//英文
 	
+	public static final String H_MENU_LOGIN_CN = "登录";
+	public static final String H_MENU_LOGIN_EN = "SIGN IN";
+	
+	public static final String H_MENU_REGISTER_CN = "注册";
+	public static final String H_MENU_REGISTER_EN = "REGISTER";
+	
+	public static final String H_MENU_SIGNOUT_CN = "注销";
+	public static final String H_MENU_SIGNOUT_EN = "SIGN OUT";
+	
+	public static final String H_MENU_MYORDER_CN = "我的订单";
+	public static final String H_MENU_MYORDER_EN = "MYSELF ORDER";
+	
+	public static final String H_MENU_FAVORITE_CN = "收藏夹";
+	public static final String H_MENU_FAVORITE_EN = "FAVORITE";
+	
+	public static final String H_MENU_SHOPPINGCART_CN = "购物车";
+	public static final String H_MENU_SHOPPINGCART_EN = "SHOPPING CART";
+	
+	public static final String H_MENU_BALANCE_CN = "去结算";
+	public static final String H_MENU_BALANCE_EN = "BALANCE";
 	/**
 	 * 尾部
 	 */
