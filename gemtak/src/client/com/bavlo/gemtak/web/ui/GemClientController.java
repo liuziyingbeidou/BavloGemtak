@@ -28,6 +28,7 @@ import com.bavlo.gemtak.constant.controller.IClientForward;
 import com.bavlo.gemtak.httpclient.HttpTools;
 import com.bavlo.gemtak.model.LoginVO;
 import com.bavlo.gemtak.model.gem.GemVO;
+import com.bavlo.gemtak.model.ui.OrderVO;
 import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.service.weixin.itf.IWXZFService;
@@ -275,7 +276,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description:查询该用户的购物车
+	 * @Description:根据用户名 查询该用户的购物车商品总数
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -328,36 +329,7 @@ public class GemClientController extends BaseController {
 		return IClientForward.viewGemShoppingCar;
 	}
 	
-	/**
-	 * @Description: 订单
-	 * @param @param model
-	 * @param @param response
-	 * @param @param request
-	 * @param @return
-	 * @return String
-	 */
-	@RequestMapping(value="order")
-	public String gemOrder(Model model,HttpServletResponse response,HttpServletRequest request){
-		
-		//当前本地化语言
-		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang："+lang);
-		//根据本地语言更新页面数据
-		GemClientPageModel.getCOrderPageModel(model,lang);
-		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
-		try {
-			List<GemVO> gemList = new ArrayList<GemVO>();
-			if(uname != null){
-				gemList = gemService.getShoppingCarListByUname(uname.toString());
-			}
-			if(gemList != null){
-				model.addAttribute("gemList",gemList);	
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return IClientForward.gemOrder;
-	}
+	
 	
 	/**
 	 * 获取用户 收货地址
@@ -373,7 +345,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * 获取用户 收货地址
+	 * 根据id 收货地址
 	 * @param model
 	 * @param response
 	 * @param request
@@ -436,15 +408,47 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: 订单完成
+	 * @Description: 订单
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
 	 * @param @return
 	 * @return String
 	 */
+	@RequestMapping(value="order")
+	public String gemOrder(Model model,HttpServletResponse response,HttpServletRequest request){
+		
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCOrderPageModel(model,lang);
+		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+		try {
+			List<GemVO> gemList = new ArrayList<GemVO>();
+			if(uname != null){
+				gemList = gemService.getShoppingCarListByUname(uname.toString());
+			}
+			if(gemList != null){
+				model.addAttribute("gemList",gemList);	
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return IClientForward.gemOrder;
+	}
+	
+	/**
+	 * @Description: 订单完成
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 * @throws Exception 
+	 */
 	@RequestMapping(value="orderSuccess")
-	public String orderSuccess(Model model,HttpServletResponse response,HttpServletRequest request){
+	public String orderSuccess(Model model,OrderVO orderVO,HttpServletResponse response,HttpServletRequest request,Integer shoppingCarid) throws Exception{
 		String code = request.getParameter("code");
 		System.out.println("Code:-----"+code);
 		String openId = WXPayUtil.getopendid(code);
@@ -455,6 +459,17 @@ public class GemClientController extends BaseController {
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCOrderSuccessPageModel(model,lang);
+		//根据 用户名 和 购物车id 删除 购物车信息
+		/*Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);*/
+		/*gemService.delShoppingCarByGemId(uname+"", shoppingCarid);*/
+		Integer flag = gemService.saveOrderRelID(orderVO);
+		if(flag == 1){
+			System.out.println("新增成功！");
+		}else{
+			System.out.println("新增失败！");
+		}
+		
+		
 		//微信支付
 		String orderId = CommonUtils.getBillCode("GM");
 		System.out.println(orderId);
