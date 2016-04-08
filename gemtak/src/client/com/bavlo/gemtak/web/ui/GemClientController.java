@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.constant.controller.IClientForward;
 import com.bavlo.gemtak.httpclient.HttpTools;
+import com.bavlo.gemtak.model.LoginVO;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 import com.bavlo.gemtak.service.ui.itf.IGemService;
@@ -35,6 +36,7 @@ import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.WebUtils;
 import com.bavlo.gemtak.web.BaseController;
 import com.bavlo.gemtak.web.weixin.GetWeiXinCode;
+import com.bavlo.gemtak.weixin.qy.interceptor.OAuthRequired;
 
 /**
  * @Title: 宝珑Gemtak
@@ -540,6 +542,38 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
+	 * @Description: 企业号注册后商家登录
+	 * @param @param model
+	 * @param @param request
+	 * @param @param response
+	 * @param @param uname
+	 * @param @param upwd
+	 * @param @param status
+	 * @param @return
+	 * @return String
+	 */
+	@OAuthRequired
+	@RequestMapping(value="wxlogin")
+	public String loginByWx(Model model,HttpServletRequest request,HttpServletResponse response){
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCListPageModel(model,lang);	
+		
+		//微信授权登录获取信息
+		Object objUid = session.getAttribute("loginInfo");
+		if(objUid != null){
+			//登录成功后将用户名存在session中
+			request.getSession().setAttribute(IConstant.SESSIONUSERNAEM, ((LoginVO)objUid).getUserId());
+			//标记是否为商户
+			request.getSession().setAttribute("bisBis", "Y");
+		}
+		
+		return "/client/gem/list";
+	}
+	
+	/**
 	 * @Description: 忘记密码
 	 * @param @param model
 	 * @param @param response
@@ -575,6 +609,7 @@ public class GemClientController extends BaseController {
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCListPageModel(model,lang);		
 		request.getSession().removeAttribute(IConstant.SESSIONUSERNAEM);
+		request.getSession().removeAttribute("bisBis");
 		return "/client/gem/list";
 		//renderText(msg);
 	}

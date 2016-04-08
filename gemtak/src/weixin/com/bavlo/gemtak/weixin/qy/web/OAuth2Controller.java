@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bavlo.gemtak.model.LoginVO;
+import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.weixin.qy.pojo.AccessToken;
 import com.bavlo.gemtak.weixin.qy.util.Constants;
 import com.bavlo.gemtak.weixin.qy.util.QiYeUtil;
@@ -84,9 +85,11 @@ public class OAuth2Controller {
 							String name = fileObj.getString("name");
 							if("所属主账号".equals(name)){
 								lvo.setMuserId(fileObj.getString("value"));
-								isMain = true;
 							}else if("扫描设备号".equals(name)){
 								lvo.setEcode(fileObj.getString("value"));
+								if(!CommonUtils.isNull(fileObj.getString("value"))){
+									isMain = true;
+								}
 							}
 						}
 						if(isMain){

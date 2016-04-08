@@ -13,6 +13,8 @@ public class LoginVO {
 
 	//登录用户userid
 	private String userId;
+	//用户名
+	private String uname;
 	//主用户userid
 	private String muserId;
 	//角色
@@ -67,6 +69,12 @@ public class LoginVO {
 	}
 	public void setEcode(String ecode) {
 		this.ecode = ecode;
+	}
+	public String getUname() {
+		return uname;
+	}
+	public void setUname(String uname) {
+		this.uname = uname;
 	}
 	
 }
