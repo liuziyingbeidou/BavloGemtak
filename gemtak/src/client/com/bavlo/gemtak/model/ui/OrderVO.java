@@ -19,8 +19,7 @@ import com.bavlo.gemtak.model.IdEntity;
 public class OrderVO extends IdEntity {
 
 	private static final long serialVersionUID = 6114467828526147643L;
-	//订单表主键
-	private Integer id;
+	
 	//手机
 	private String cellphone;
 	
@@ -71,12 +70,6 @@ public class OrderVO extends IdEntity {
 	private Integer customer_id;
 	private Integer invoice_id;
 	private Integer logistic_id;
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	public String getCellphone() {
 		return cellphone;
 	}
