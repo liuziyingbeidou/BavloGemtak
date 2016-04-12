@@ -253,9 +253,8 @@ public class GemCService extends CommonService implements IGemService {
 	 * 7.提交订单  保存订单子表
 	 */
 	@Override
-	public Integer saveOrderBVORelID(OrderBVO orderBVO) throws Exception {
-		Integer id = saveReID(orderBVO);
-		return id;
+	public void saveOrderBVORelID(List<OrderBVO> orderBList) throws Exception {
+			save(orderBList);
 	}
 
 	
