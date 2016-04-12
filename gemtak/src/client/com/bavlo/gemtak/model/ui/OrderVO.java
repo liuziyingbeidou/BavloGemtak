@@ -24,15 +24,25 @@ public class OrderVO extends IdEntity {
 	private String cellphone;
 	
 	private Timestamp complete_date;
+	//优惠劵
+	private String coupon;
 	//优惠劵金额
 	private Double coupon_fee;
 	//创建日期
 	private Timestamp created;
 	
+	//保价金额
+	private Double support_fee;
 	private Timestamp delivery_date;
 	//邮箱
 	private String email;
 	private Double insure_fee;
+	//是否开发票
+	private String invoice;
+	//发票抬头
+	private String invoice_title;
+	//发票内容
+	private String invoice_content;
 	//邮寄地址
 	private String mail_address;
 	private Timestamp manufacture_date;
@@ -252,6 +262,36 @@ public class OrderVO extends IdEntity {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public Double getSupport_fee() {
+		return support_fee;
+	}
+	public void setSupport_fee(Double support_fee) {
+		this.support_fee = support_fee;
+	}
+	public String getInvoice() {
+		return invoice;
+	}
+	public void setInvoice(String invoice) {
+		this.invoice = invoice;
+	}
+	public String getInvoice_title() {
+		return invoice_title;
+	}
+	public void setInvoice_title(String invoice_title) {
+		this.invoice_title = invoice_title;
+	}
+	public String getInvoice_content() {
+		return invoice_content;
+	}
+	public void setInvoice_content(String invoice_content) {
+		this.invoice_content = invoice_content;
+	}
+	public String getCoupon() {
+		return coupon;
+	}
+	public void setCoupon(String coupon) {
+		this.coupon = coupon;
 	}
 
 	
