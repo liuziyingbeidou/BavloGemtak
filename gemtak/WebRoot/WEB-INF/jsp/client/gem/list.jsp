@@ -21,7 +21,6 @@
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/gemClient.js"></script>
 <script language=javaScript>
 	 $(document).ready(function(){
-	 getCarNum();
 	 	// show_menuone(1);//显示哪个分类        
 	 	 /*$("#contid1 .swiper-slide").click(function(){
 	 		$(this).parent("div").find("div").each(function(i){
