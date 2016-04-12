@@ -84,14 +84,18 @@ $(function(){
 	//宝石类型
 	$(".selects-type").click(function(){
 		$(this).empty();
+		$(this).attr("ms-key","a");
 		$(".p_default").css("border","0px");
 		//以下调用相应的事件
+		selectClientList();
 	});
 	//宝石形状
 	$(".selects-shape").click(function(){
 		$(this).empty();
+		$(this).attr("ms-key","a");
 		$(".nav_default").css("border","0px");
 		//以下调用相应的事件
+		selectClientList(1);
 	});
 	//宝石重量
 	$(".selects-weight").click(function(){
@@ -99,6 +103,7 @@ $(function(){
 		$(".from-weight").val("");
 		$(".to-weight").val("");
 		//以下调用相应的事件
+		selectClientList(1);
 	});
 	//宝石价格
 	$(".selects-price").click(function(){
@@ -106,6 +111,7 @@ $(function(){
 		$(".from-price").val("");
 		$(".to-price").val("");
 		//以下调用相应的事件
+		selectClientList(1);
 	});
 
 });
@@ -118,26 +124,6 @@ function goDetail(id){
 }
 
   function selectClientList(switchover){
-	/*var url = "viewGemList.do?";
-	var gemType = $(".selects-type").attr("ms-key"); 
-	if(gemType != null && gemType != ""){
-		url += "&typegem="+gemType;
-	}
-	var gemShape = $(".selects-shape").attr("ms-key"); 
-	if(gemShape != null && gemShape != ""){
-		url += "&shapegem="+gemShape;
-	}
-	var fromv = $(".from-weight").val();
-	var tov = $(".to-weight").val();
-	if(fromv != null && fromv != "" && tov != null && tov != ""){
-		url += "&fromWeight="+fromv+"&toWeight="+tov;
-	}
-	var fromPri = $(".from-price").val();
-	var toPri = $(".to-price").val();
-	if(fromPri != null && fromPri != "" && toPri != null && toPri != ""){
-		url += "&fromPrice="+fromPri+"&toPrice="+toPri;
-	}
-	window.location.href= url;*/
 	     var url = "getGemClientListBy.do?";
 		 var gemType = $(".selects-type").attr("ms-key"); 
 		 var gemShape = $(".selects-shape").attr("ms-key"); 
@@ -148,7 +134,7 @@ function goDetail(id){
 	 	 var seldate = $(".select-createdate").find("option:selected").val();
 	 	 var inwhere = "'";//单粒、多粒、配对
 	 	 var inwheres = "'";//弧度、切面
-	 	 //切换宫格显示、横行显示 1为宫格 2为横
+	 	 //切换宫格显示、横行显示  1为宫格宫格展示   2为横排展示
 	 	 if(switchover == undefined){
 	 		switchover = 1; 
 	 	 }
@@ -211,6 +197,7 @@ function goDetail(id){
 		  });
   }
 
+  
   
   function appendToHead(switchover){
 	  if(switchover == 2){//横行展示时，添加第一行
