@@ -450,9 +450,9 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="orderSuccess")
 	public String orderSuccess(Model model,OrderVO orderVO,HttpServletResponse response,HttpServletRequest request,Integer shoppingCarid) throws Exception{
 		String code = request.getParameter("code");
-		System.out.println("Code:-----"+code);
+		/*System.out.println("Code:-----"+code);
 		String openId = WXPayUtil.getopendid(code);
-		System.out.println("opendId:"+openId);
+		System.out.println("opendId:"+openId);*/
 		String forword = IClientForward.gemOrderSuccess;
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
@@ -471,10 +471,10 @@ public class GemClientController extends BaseController {
 		
 		
 		//微信支付
-		String orderId = CommonUtils.getBillCode("GM");
+		/*String orderId = CommonUtils.getBillCode("GM");
 		System.out.println(orderId);
 		Map pr=wXZFService.createOrder(request,orderId, openId);
-		model.addAttribute("map", pr);
+		model.addAttribute("map", pr);*/
 		
 		return forword;
 	}
