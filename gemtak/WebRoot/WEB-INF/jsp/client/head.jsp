@@ -96,8 +96,8 @@
     </div>
   </nav>
     </li>
-	<li class="nav_logo hidden-xs hidden-sm"><a href="./list.html"><image src="${ctx }/resources/client/images/logo.png" /></a></li>
-	<li class="nav_logo hidden-md hidden-lg"><a href="./list.html"><image src="${ctx }/resources/client/images/logos.png" /></a></li>
+	<li class="nav_logo hidden-xs hidden-sm"><a href="${ctx }/gemClient/viewGemList.do"><image src="${ctx }/resources/client/images/logo.png" /></a></li>
+	<li class="nav_logo hidden-md hidden-lg"><a href="${ctx }/gemClient/viewGemList.do"><image src="${ctx }/resources/client/images/logos.png" /></a></li>
 	<li class="nav_home hidden-md hidden-lg"><a href="./login.html"><image src="${ctx }/resources/client/images/home.png" /></a></li>
 </ul>
 </div> 
