@@ -239,6 +239,9 @@ public class GemCService extends CommonService implements IGemService {
 	    return gemList;
 	}
 
+	/**
+	 * 6.提交订单  保存订单主表
+	 */
 	@Override
 	public Integer saveOrderRelID(OrderVO orderVO) throws Exception {
 		Integer id  = saveReID(orderVO);
