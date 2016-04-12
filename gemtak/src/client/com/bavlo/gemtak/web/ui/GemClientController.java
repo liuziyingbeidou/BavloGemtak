@@ -28,6 +28,7 @@ import com.bavlo.gemtak.constant.controller.IClientForward;
 import com.bavlo.gemtak.httpclient.HttpTools;
 import com.bavlo.gemtak.model.LoginVO;
 import com.bavlo.gemtak.model.gem.GemVO;
+import com.bavlo.gemtak.model.ui.OrderBVO;
 import com.bavlo.gemtak.model.ui.OrderVO;
 import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 import com.bavlo.gemtak.service.ui.itf.IGemService;
@@ -459,12 +460,15 @@ public class GemClientController extends BaseController {
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCOrderSuccessPageModel(model,lang);
-		//根据 用户名 和 购物车id 删除 购物车信息
-		/*Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);*/
-		/*gemService.delShoppingCarByGemId(uname+"", shoppingCarid);*/
-		Integer flag = gemService.saveOrderRelID(orderVO);
-		if(flag == 1){
+		Integer orderId = gemService.saveOrderRelID(orderVO);
+		if(orderId > 0){
 			System.out.println("新增成功！");
+			//根据 用户名 和 购物车id 删除 购物车信息
+			/*Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+			gemService.delShoppingCarByGemId(uname+"", shoppingCarid);*/
+			OrderBVO orb = new OrderBVO();
+			orb.setGem_id(orderId);
+			
 		}else{
 			System.out.println("新增失败！");
 		}
