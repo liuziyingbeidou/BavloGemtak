@@ -471,8 +471,8 @@ public class GemClientController extends BaseController {
 		if(orderId > 0){
 			System.out.println("新增成功！");
 			//根据 用户名 和 购物车id 删除 购物车信息
-			/*Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
-			gemService.delShoppingCarByGemId(uname+"", shoppingCarid);*/
+			Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+			gemService.delShoppingCarByUname(uname+"");
 			List<OrderBVO> orderBList = JsonUtils.getListFromJson(list, OrderBVO.class);
 			if(orderBList != null){
 				for (OrderBVO orderBVO : orderBList) {
