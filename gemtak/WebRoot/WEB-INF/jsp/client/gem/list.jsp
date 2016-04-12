@@ -92,13 +92,15 @@
          //2.按时间排序
          $(function(){    
            $(".select-createdate").change(function(){
-            selectClientList();
+            var switchover = $(".sel-show").val();
+            selectClientList(switchover);
            });
          });
          
          //3.横排展示界面
          $(function(){    
            $(".show-line").click(function(){
+            $(".sel-show").val(2);
             selectClientList(2);
            });
          });
@@ -106,6 +108,7 @@
          //4.宫格展示界面
          $(function(){    
            $(".show-speed").click(function(){
+           $(".sel-show").val(1);
             selectClientList(1);
            });
          });
@@ -206,6 +209,7 @@
 				<span class="hidden-xs hidden-sm">
 				 <a href="#" class="show-line"><image src="${ctx }/resources/client/images/tu1.png" /></a>
 				 <a href="#" class="show-speed"><image src="${ctx }/resources/client/images/tu2.png" /></a>
+				 <input type="hidden" class="sel-show" value="1"/>
 				</span>
 			</p>
 		  
