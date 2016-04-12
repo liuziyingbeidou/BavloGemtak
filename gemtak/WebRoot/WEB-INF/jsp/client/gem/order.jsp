@@ -52,13 +52,13 @@ $(function(){
     for(var i=0;i<data.length;i++){
         if(i == 0){
     	$(".addUser").append("<li class='sel'><input nid='"+data[i].id+"' value='"+data[i].id+"'  class='s_input aaa' type='radio' name='month'  checked='checked'/><span>"+data[i].realName+"</span>"+data[i].detailAddress+"</li>");
-    	$(".selUser").append("<li class='urealname' name='real_name'>收货人姓名：<span>"+data[i].realName+"</span></li>"+
+    	$(".selUser").append("<li class='urealname' name='real_name'>收货人姓名：<span>"+data[i].realName+"</span><input type='hidden' name='real_name' value='"+data[i].realName+"'/></li>"+
 						"<li class='area'>地区：<span>"+data[i].area+"</span> </li>"+
-						"<li class='uaddress'name='mail_address'>地址：<span>"+data[i].area+""+data[i].detailAddress+"</span></li>"+
-						"<li class='uzipcode' name='zipcode'>邮编：<span>"+data[i].zipcode+"</span> </li>"+
-						"<li class='utel' name='tel'>座机：<span>"+data[i].tel+"</span> </li>"+
-						"<li class='uphone' name='cellphone'>手机：<span>"+data[i].cellphone+"</span> </li>"+
-						"<li class='uemail' name='email'>E-mail：<span>"+data[i].email+"</span></li>");
+						"<li class='uaddress'name='mail_address'>地址：<span>"+data[i].area+""+data[i].detailAddress+"</span><input type='hidden' name='mail_address' value='"+data[i].area+""+data[i].detailAddress+"'/></li>"+
+						"<li class='uzipcode' name='zipcode'>邮编：<span>"+data[i].zipcode+"</span><input type='hidden' name='zipcode' value='"+data[i].zipcode+"'/> </li>"+
+						"<li class='utel' name='tel'>座机：<span>"+data[i].tel+"</span><input type='hidden' name='tel' value='"+data[i].tel+"'/> </li>"+
+						"<li class='uphone' name='cellphone'>手机：<span>"+data[i].cellphone+"</span><input type='hidden' name='cellphone' value='"+data[i].cellphone+"'/> </li>"+
+						"<li class='uemail' name='email'>E-mail：<span>"+data[i].email+"</span><input type='hidden' name='email' value='"+data[i].email+"'/></li>");
         }else{
         	$(".addUser").append("<li class='sel'><input nid='"+data[i].id+"' class='s_input aaa' type='radio' name='month'  value='"+data[i].id+"' /><span>"+data[i].realName+"</span>"+data[i].detailAddress+"</li>");
         }
@@ -161,7 +161,7 @@ $(function(){
 			   </ul>
 			  
 			</div>     
-			 <form action="" id="orderForm">
+			<form action="./finish_order.html" method="post"  id="orderForm">
 			 <div class="wrap_br wrap_br_d">
 				<h2><span>收货人信息</span></h2>	  
 				 <ul class="srxx addUser">
@@ -182,7 +182,6 @@ $(function(){
 										  <a href="#" class="btn btn-default btn-lg active" role="button">删 除</a></li> -->
 				</ul>         
 			    <ul style="display:none;" class="srxx1 show-addUser" >
-			    <form action="./finish_order.html" id="addUserAddress" method="post" >
 				  <li><input type="text" class="form-control username" placeholder="收货人姓名"></li>
 				  <li><select class="form-control area1" id="vpovince" name="vpovince">
                             <!-- <option value="-1">请选择地区</option>
@@ -208,7 +207,6 @@ $(function(){
 				  <li><input  type="text" class="form-control tel" placeholder="固定电话（可不填）" /></li>
 				  <li><input  type="text" class="form-control cellphone" placeholder="手机号码" /></li>
 				  <li><input  type="text" class="form-control email" placeholder="E-mail" /></li>
-				  </form>
 				  <li class="del_s">
 				     <a href="javascript:void(0)" class="btn btn-8c btn-lg active btn-save" ntype="insert" role="button">保存</a>
                      <a href="javascript:void(0)" class="btn btn-default btn-lg active btn-clean" role="button">取 消</a>
@@ -222,9 +220,9 @@ $(function(){
 				   
 			    <h2><span>发票信息 ——商业零售机打发票</span></h2>
 				<div class="status">
-					<p>需开发票？<span><input type="radio" name="invoice"  value="1" checked="checked"/>开发票</span><span><input type="radio" name="invoice"  value="2" />不开发票</span></p>
+					<p>需开发票？<span><input type="radio" name="invoice"  value="开发票" checked=""/>开发票</span><span><input type="radio" name="invoice"  value="不开发票" />不开发票</span></p>
 					<p>发票抬头：<b><input  type="text" placeholder="个人" name="invoice_title"/></b></p>
-					<p>发票内容：<span><input type="radio" name="invoice_content"  value="3" checked=""/>珠宝首饰</span><span><input type="radio" name="invoice_content" value="4" /></span>办公用品</p>
+					<p>发票内容：<span><input type="radio" name="invoice_content"  value="珠宝首饰" checked=""/>珠宝首饰</span><span><input type="radio" name="invoice_content" value="办公用品" /></span>办公用品</p>
 			    </div> 
 				<h2><span>商品清单</span></h2>
 			    <c:forEach items="${gemList}" var="gem">
@@ -241,9 +239,9 @@ $(function(){
 				 <h2><span>结算信息</span></h2>
 				  <div class="jsxx">
 					 <p>
-					    <input class="jsxx_m couponNum" type="text"   name="coupon" value="输入优惠券编码" />
+					    <input class="jsxx_m couponNum" type="text"   name="coupon" value="" />
 					    <input class="jsxx_b sel_couppon"   type="button" title="添加" value="添加"/>
-					    <input class="jsxx_m youhuijia" type="hidden"   name="coupon_fee" value="0" />
+					    <input class="jsxx_m youhuijia" type="hidden"   name="coupon_fee" value="" />
 					 </p>
 					 <p class="jsxx_p zongjia">订单总金额: ￥<span><b class="dingdan">${TotalPrice+23}</b>  &nbsp;(<b>运费：23</b>,保价：<b class="baoj">0</b>,优惠：<b class="huij">0</b>)</span>元</p>
 				  </div>
@@ -412,6 +410,7 @@ $(function(){
    });
   }); */
  
+ //提交订单
   $(".saveOrder").click(function(){
    addOrder();
   });
