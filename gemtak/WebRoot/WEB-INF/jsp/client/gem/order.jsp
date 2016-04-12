@@ -338,7 +338,7 @@ $(function(){
     $(".show-addUser").show();
     $(".username").val($(".urealname span").text());
     var area = $(".area span").text();
-    var nums = area.split(",");debugger
+    var nums = area.split(",");
     for (var i=0 ; i< nums.length ; i++){
      $(".area"+(i+1)).val(nums[i]);
      change(i+1);
