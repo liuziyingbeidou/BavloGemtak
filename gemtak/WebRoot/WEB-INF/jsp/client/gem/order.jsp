@@ -20,7 +20,6 @@
 </head>
 <script>
 $(function(){
-  getCarNum();
   selectUserAddress();
 });
  function selchecked(em){
@@ -31,7 +30,7 @@ $(function(){
      if(data != null){
        for(var i=0;i<data.length;i++){
         $(".selUser").append("<li class='urealname'>收货人姓名：<span>"+data[i].realName+"</span></li>"+
-			"<li class=''>地区： <span>"+data[i].area+"</span></li>"+
+			"<li class='area'>地区： <span>"+data[i].area+"</span></li>"+
 			"<li class='uaddress'>地址：<span>"+data[i].area+""+data[i].detailAddress+"</span></li>"+
 			"<li class='uzipcode'>邮编：<span>"+data[i].zipcode+"</span> </li>"+
 			"<li class='utel'>座机：<span>"+data[i].tel+"</span> </li>"+
@@ -63,10 +62,12 @@ $(function(){
         	$(".addUser").append("<li class='sel'><input nid='"+data[i].id+"' class='s_input aaa' type='radio' name='month'  value='"+data[i].id+"' /><span>"+data[i].realName+"</span>"+data[i].detailAddress+"</li>");
         }
     }
-    
+    getCarNum();
     $(".aaa").click(function(){
      selchecked(this);
     });
+  }else{
+  	getCarNum();
   }
   $(".addUser").append("<li class='del_s'><a href='javascript:void(0)' class='btn  btn-lg active insert-user' role='button'>新 增</a>"+
 								 "<a href='javascript:void(0)' class='btn btn-default btn-lg active update-user' role='button'>修 改</a>"+
@@ -306,7 +307,7 @@ $(function(){
      $(".selUser").empty();
      selectUserAddressHead();
      $(".selUser").append("<li class='urealname'>收货人姓名：<span>"+realName+"</span></li>"+
-			"<li class=''>地区：<span> "+area+"</span></li>"+
+			"<li class='diqu'>地区：<span> "+area+"</span></li>"+
 			"<li class='uaddress'>地址：<span>"+area+","+detailAddress+"</span></li>"+
 			"<li class='uzipcode'>邮编：<span>"+zipcode+"</span> </li>"+
 			"<li class='utel'>座机：<span>"+tel+"</span> </li>"+
@@ -336,9 +337,13 @@ $(function(){
  function updateAddress(id){
     $(".show-addUser").show();
     $(".username").val($(".urealname span").text());
-    $(".area1").find("option:selected").text(); 
-    $(".area2").find("option:selected").text();
-    $(".area3").find("option:selected").text();
+    var area = $(".area span").text();
+    var nums = area.split(",");debugger
+    for (var i=0 ; i< nums.length ; i++){
+     $(".area"+(i+1)).val(nums[i]);
+     change(i+1);
+    }
+    
     $(".detailAddress").val($(".uaddress span").text());
     $(".zipcode").val($(".uzipcode span").text());
     $(".tel").val($(".utel span").text());
