@@ -35,6 +35,8 @@ import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.service.weixin.itf.IWXZFService;
 import com.bavlo.gemtak.util.weixin.WXPayUtil;
 import com.bavlo.gemtak.utils.CommonUtils;
+import com.bavlo.gemtak.utils.DateUtil;
+import com.bavlo.gemtak.utils.JsonUtils;
 import com.bavlo.gemtak.utils.WebUtils;
 import com.bavlo.gemtak.web.BaseController;
 import com.bavlo.gemtak.web.weixin.GetWeiXinCode;
@@ -449,7 +451,7 @@ public class GemClientController extends BaseController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value="orderSuccess")
-	public String orderSuccess(Model model,OrderVO orderVO,HttpServletResponse response,HttpServletRequest request,Integer shoppingCarid) throws Exception{
+	public String orderSuccess(Model model,OrderVO orderVO,HttpServletResponse response,HttpServletRequest request,Integer shoppingCarid,String list) throws Exception{
 		String code = request.getParameter("code");
 		/*System.out.println("Code:-----"+code);
 		String openId = WXPayUtil.getopendid(code);
@@ -466,9 +468,15 @@ public class GemClientController extends BaseController {
 			//根据 用户名 和 购物车id 删除 购物车信息
 			/*Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
 			gemService.delShoppingCarByGemId(uname+"", shoppingCarid);*/
-			OrderBVO orb = new OrderBVO();
-			orb.setGem_id(orderId);
-			
+			List<OrderBVO> orderBList = JsonUtils.getListFromJson(list, OrderBVO.class);
+			if(orderBList != null){
+				for (OrderBVO orderBVO : orderBList) {
+					orderBVO.setOrder_id(orderId);
+					orderBVO.setTs(DateUtil.getCurTimestamp());
+					orderBVO.setDr(IConstant.SHORT_ZERO);
+				}
+				gemService.saveOrderBVORelID(orderBList);
+			}
 		}else{
 			System.out.println("新增失败！");
 		}
