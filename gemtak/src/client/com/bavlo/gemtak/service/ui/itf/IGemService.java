@@ -82,6 +82,8 @@ public interface IGemService {
 	 */
 	public void delShoppingCarByGemId(String username,Integer shoppingCarid) throws Exception;
 	
+	public void delShoppingCarByUname(String username) throws Exception;
+	
 	/**
 	 * 5.查询存储到cookie中的商品信息
 	 * @param id

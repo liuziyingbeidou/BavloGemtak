@@ -257,6 +257,12 @@ public class GemCService extends CommonService implements IGemService {
 			save(orderBList);
 	}
 
+	@Override
+	public void delShoppingCarByUname(String username) throws Exception {
+		delete(ShoppingCarVO.class, username);
+		
+	}
+
 	
 	
 	
