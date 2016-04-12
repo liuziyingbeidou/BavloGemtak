@@ -245,7 +245,7 @@ $(function(){
 					    <input class="jsxx_b sel_couppon"   type="button" title="添加" value="添加"/>
 					    <input class="jsxx_m youhuijia" type="hidden"   name="coupon_fee" value="0" />
 					 </p>
-					 <p class="jsxx_p zongjia">订单总金额: ￥<span><b class="dingdan">${TotalPrice+23}</b>(<b>运费：23</b>,保价：<b class="baoj">0</b>,优惠：<b class="huij">0</b>)</span>元</p>
+					 <p class="jsxx_p zongjia">订单总金额: ￥<span><b class="dingdan">${TotalPrice+23}</b>  &nbsp;(<b>运费：23</b>,保价：<b class="baoj">0</b>,优惠：<b class="huij">0</b>)</span>元</p>
 				  </div>
 			   </div>
 			  </form>
