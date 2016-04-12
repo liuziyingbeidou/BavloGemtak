@@ -12,7 +12,8 @@ $(function(){
 		$(".selects-type").append("<a href='#' class='a_item a_item_type'>种类："+$(this).attr("vn")+"</a>");
 		$(".selects-type").attr("ms-key",$(this).attr("vid"));
 		//以下查询处理
-		selectClientList();
+		var switchover = $(".sel-show").val();
+		selectClientList(switchover);
 	});
 	//宝石形状
 	$(".nav_default").click(function(){
@@ -21,7 +22,8 @@ $(function(){
 		$(".selects-shape").append("<a href='#' class='a_item a_item_shape'>形状："+$(this).attr("vn")+"</a>");
 		$(".selects-shape").attr("ms-key",$(this).attr("vid"));
 		//$(this).css({"background":"url('/gemtak/resources/client/images/mot/Round_a.png') top center no-repeat"}).parents("div").siblings().find(".nav_default").css("background","");
-		selectClientList();
+		var switchover = $(".sel-show").val();
+		selectClientList(switchover);
 	});
 	//宝石重量
 	$(".btn-weight").click(function(){
@@ -35,7 +37,8 @@ $(function(){
 		}
 		$(".a_item_weight").remove();
 		$(".selects-weight").append("<a href='#' class='a_item a_item_weight'>重量："+fromv+"克-"+tov+"克</a>");
-		selectClientList();
+		var switchover = $(".sel-show").val();
+		selectClientList(switchover);
 	});
 	//宝石价格
 	$(".btn-price").click(function(){
@@ -50,33 +53,34 @@ $(function(){
 		}
 		$(".a_item_price").remove();
 		$(".selects-price").append("<a href='#' class='a_item a_item_price'>价格："+fromv+"元-"+tov+"元</a>");
-		selectClientList();
+		var switchover = $(".sel-show").val();
+		selectClientList(switchover);
 	});
 
 	//单粒
 	$(".pairs-sl").click(function(){
-		
-		selectClientList();
+		var switchover = $(".sel-show").val();
+		selectClientList(switchover);
 	});
 	//配对
 	$(".pairs-pl").click(function(){
-		
-		selectClientList();
+		var switchover = $(".sel-show").val();
+		selectClientList(switchover);
 	});
 	//多粒
 	$(".pairs-ml").click(function(){
-		
-		selectClientList();
+		var switchover = $(".sel-show").val();
+		selectClientList(switchover);
 	});
 	//弧面
 	$(".pairs-h").click(function(){
-		
-		selectClientList();
+		var switchover = $(".sel-show").val();
+		selectClientList(switchover);
 	});
 	//刻面
 	$(".pairs-k").click(function(){
-		
-		selectClientList();
+		var switchover = $(".sel-show").val();
+		selectClientList(switchover);
 	});
 	/**
 	 * 查询条件
@@ -87,7 +91,8 @@ $(function(){
 		$(this).attr("ms-key","a");
 		$(".p_default").css("border","0px");
 		//以下调用相应的事件
-		selectClientList();
+		var switchover = $(".sel-show").val();
+		selectClientList(switchover);
 	});
 	//宝石形状
 	$(".selects-shape").click(function(){
@@ -95,7 +100,8 @@ $(function(){
 		$(this).attr("ms-key","a");
 		$(".nav_default").css("border","0px");
 		//以下调用相应的事件
-		selectClientList(1);
+		var switchover = $(".sel-show").val();
+		selectClientList(switchover);
 	});
 	//宝石重量
 	$(".selects-weight").click(function(){
@@ -103,7 +109,8 @@ $(function(){
 		$(".from-weight").val("");
 		$(".to-weight").val("");
 		//以下调用相应的事件
-		selectClientList(1);
+		var switchover = $(".sel-show").val();
+		selectClientList(switchover);
 	});
 	//宝石价格
 	$(".selects-price").click(function(){
@@ -111,7 +118,8 @@ $(function(){
 		$(".from-price").val("");
 		$(".to-price").val("");
 		//以下调用相应的事件
-		selectClientList(1);
+		var switchover = $(".sel-show").val();
+		selectClientList(switchover);
 	});
 
 });
@@ -193,6 +201,7 @@ function goDetail(id){
 						}
 					}
 					appendToFoot(switchover);
+					getCarNum();  //查询购物车
 				}
 		  });
   }
