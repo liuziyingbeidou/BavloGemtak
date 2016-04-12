@@ -143,5 +143,5 @@ public interface IGemService {
 	/**
 	 * 7.提交订单  保存订单子表
 	 */
-	public Integer saveOrderBVORelID(OrderBVO orderBVO) throws Exception;
+	public void saveOrderBVORelID(List<OrderBVO> orderBList) throws Exception;
 }
