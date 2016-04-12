@@ -13,6 +13,7 @@ import com.alibaba.druid.sql.dialect.sqlserver.ast.SQLServerColumnDefinition.Ide
 import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.model.IdEntity;
 import com.bavlo.gemtak.model.gem.GemVO;
+import com.bavlo.gemtak.model.ui.OrderBVO;
 import com.bavlo.gemtak.model.ui.OrderVO;
 import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 import com.bavlo.gemtak.service.ui.itf.IGemService;
@@ -245,6 +246,15 @@ public class GemCService extends CommonService implements IGemService {
 	@Override
 	public Integer saveOrderRelID(OrderVO orderVO) throws Exception {
 		Integer id  = saveReID(orderVO);
+		return id;
+	}
+
+	/**
+	 * 7.提交订单  保存订单子表
+	 */
+	@Override
+	public Integer saveOrderBVORelID(OrderBVO orderBVO) throws Exception {
+		Integer id = saveReID(orderBVO);
 		return id;
 	}
 
