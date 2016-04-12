@@ -39,7 +39,7 @@
 	      <div class="wrap">
 		     <div class="gw_tite"></div>
 			 <div class="wrap_br">
-				<div class="wrap_bj"><h3>抱歉，您暂时没有权限访问...</h3></div>	 
+				<div class="wrap_bj"><h3>抱歉，您还不是商户...</h3></div>	 
 			 </div>
 		   </div>
 	</div>
