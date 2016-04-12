@@ -138,31 +138,6 @@
  
 
 </script>
-<script type="text/javascript">
-  	var timer=setInterval("wxlogin();",50000);
-	function wxlogin(){
-		$.post("${ctx }/gemClient/wxsslogin.do",{},function(data){
-			if(data == "Y"){
-				clearTimeout(timer);
-				location.href="${ctx }/gemClient/viewGemList.do";
-			}
-		});
-	}
-
-	</script>
-<style type="text/css">
-.sign-busi{
-	display: none;
-}
-.menu-normal{
-	color: red;
-	font-weight: bold;
-}
-.menu-sign{
-	cursor: pointer;
-}
-
-</style>
 
 </head>
 <body>
@@ -174,16 +149,12 @@
 	       <h2 class="tit_log col-sm-12">登录 | 注册</h2>
 			<div class="w_442 col-sm-12 col-md-6">
 				<form name="mailBox" id="mailBox" method="post" action="mother.html">
-				<h3><span class="menu-normal menu-sign">会员登录</span><span class="menu-busi menu-sign">商户登录</span></h3>
+				<h3><span>会员登录</span></h3>
 				<div class="side">
 					<ul class="word sign-normal">
 						<li><label>E-mail：</label><div class="s_te"><input class="inp_text input-username" type="text" value="" /><b class="error"></b></div></li>
 						<li><label>密码：</label><div class="s_te"><input class="inp_text input-pwd" type="password" value="" /></div></li>
 						<li><label>&nbsp;</label><div class="s_te"><span><input class="inp_che " id="remember" type="checkbox" value=""/>记住密码</span><input class="inp_sub login" type="button" value="登录" /></div></li>
-					</ul>
-					
-					<ul class="word sign-busi">
-						<li><div class="s_te qrcode-busi"><image src="${ctx}/resources/client/login/${qrname}" />扫一扫登录...</div></li>
 					</ul>
 				</form>
 					<p class="forget">忘记密码？</p>
