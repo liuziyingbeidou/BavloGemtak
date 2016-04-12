@@ -220,9 +220,14 @@ $(function(){
 				   
 			    <h2><span>发票信息 ——商业零售机打发票</span></h2>
 				<div class="status">
-					<p>需开发票？<span><input type="radio" name="invoice"  value="开发票" checked=""/>开发票</span><span><input type="radio" name="invoice"  value="不开发票" />不开发票</span></p>
-					<p>发票抬头：<b><input  type="text" placeholder="个人" name="invoice_title"/></b></p>
-					<p>发票内容：<span><input type="radio" name="invoice_content"  value="珠宝首饰" checked=""/>珠宝首饰</span><span><input type="radio" name="invoice_content" value="办公用品" /></span>办公用品</p>
+					<p>需开发票？
+					 <span>
+					   <input type="radio" class="open-invoice" name="invoice"  value="开发票" />开发票</span><span>
+					   <input type="radio" class="close-invoice" name="invoice"  value="不开发票" checked="checked"/>不开发票
+					 </span>
+					</p>
+					<p class="show-intitle" style="display: none">发票抬头：<b><input  type="text" value="个人" name="invoice_title"/></b></p>
+					<p class="show-incontent" style="display: none">发票内容：<span><input type="radio" name="invoice_content"  value="珠宝首饰" />珠宝首饰</span><span><input type="radio" name="invoice_content" value="办公用品" /></span>办公用品</p>
 			    </div> 
 				<h2><span>商品清单</span></h2>
 			    <c:forEach items="${gemList}" var="gem">
@@ -241,7 +246,7 @@ $(function(){
 					 <p>
 					    <input class="jsxx_m couponNum" type="text"   name="coupon" value="" />
 					    <input class="jsxx_b sel_couppon"   type="button" title="添加" value="添加"/>
-					    <input class="jsxx_m youhuijia" type="hidden"   name="coupon_fee" value="" />
+					    <input class="jsxx_m youhuijia" type="hidden"   name="coupon_fee" value="${youhuijia}" />
 					 </p>
 					 <p class="jsxx_p zongjia">订单总金额: ￥<span><b class="dingdan">${TotalPrice+23}</b>  &nbsp;(<b>运费：23</b>,保价：<b class="baoj">0</b>,优惠：<b class="huij">0</b>)</span>元</p>
 				  </div>
@@ -257,6 +262,18 @@ $(function(){
 </body>
 <script>
 $(function(){
+ //点击开发票
+ $(".open-invoice").click(function(){
+  $(".show-intitle").show();
+  $(".show-incontent").show();
+ });
+ //点不开发票
+ $(".close-invoice").click(function(){
+  $(".show-intitle").hide();
+  $(".show-incontent").hide();
+ });
+
+
 //新增时 保存
  $(".btn-save").click(function(){
   saveOrUpdate();
@@ -319,7 +336,9 @@ $(function(){
  function updateAddress(id){
     $(".show-addUser").show();
     $(".username").val($(".urealname span").text());
-    $(".area1").find("option:selected").text()+","+$(".area2").find("option:selected").text()+","+$(".area3").find("option:selected").text(); 
+    $(".area1").find("option:selected").text(); 
+    $(".area2").find("option:selected").text();
+    $(".area3").find("option:selected").text();
     $(".detailAddress").val($(".uaddress span").text());
     $(".zipcode").val($(".uzipcode span").text());
     $(".tel").val($(".utel span").text());
@@ -438,7 +457,7 @@ $(function(){
     var gemid = $(this).attr("nid");
     var quantity = $(this).attr("sid");
     var price = $(this).attr("jid");
-    listJson +="{\"gemid\":\""+gemid+"\",\"quantity\":\""+quantity+"\",\"price\":\""+price+"\"},";
+    listJson +="{\"gem_id\":\""+gemid+"\",\"quantity\":\""+quantity+"\",\"price\":\""+price+"\"},";
    });
    if(listJson.length>1){
      listJson = listJson.substring(0,listJson.length-1);
