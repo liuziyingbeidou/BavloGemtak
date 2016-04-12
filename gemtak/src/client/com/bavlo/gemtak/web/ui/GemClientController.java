@@ -7,17 +7,18 @@ import java.awt.image.BufferedImage;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,11 +34,12 @@ import com.bavlo.gemtak.model.ui.OrderVO;
 import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.service.weixin.itf.IWXZFService;
-import com.bavlo.gemtak.util.weixin.WXPayUtil;
 import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.DateUtil;
 import com.bavlo.gemtak.utils.JsonUtils;
+import com.bavlo.gemtak.utils.QrCodeUtil;
 import com.bavlo.gemtak.utils.WebUtils;
+import com.bavlo.gemtak.utils.wxcode.WXUtil;
 import com.bavlo.gemtak.web.BaseController;
 import com.bavlo.gemtak.web.weixin.GetWeiXinCode;
 import com.bavlo.gemtak.weixin.qy.interceptor.OAuthRequired;
@@ -57,6 +59,9 @@ public class GemClientController extends BaseController {
 	IWXZFService wXZFService;
 	@Resource
 	IGemService gemService;
+	
+	@Autowired
+	private ServletContext servletContext;
 	
 	/**
 	 * @Description: 首页-宝石列表
@@ -555,6 +560,20 @@ public class GemClientController extends BaseController {
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCLoginPageModel(model,lang);
 		model.addAttribute("dengluNo",dengluNUM);
+		
+		// 为微信扫一扫创造条件
+		String sessionId = session.getId();
+		WXUtil.setBoolean(sessionId, "N");
+		QrCodeUtil.createCode(sessionId, servletContext);
+		String url = sessionId + ".jpg";
+		model.addAttribute("qrname", url);
+		String ua = request.getHeader("user-agent").toLowerCase();
+		if (ua.indexOf("micromessenger") > 0) {// 是微信浏览器
+			session.setAttribute("isweixin", "Y");
+		} else {
+			session.setAttribute("isweixin", "N");
+		}
+		
 		return IClientForward.gemLogin;
 	}
 	
@@ -579,6 +598,22 @@ public class GemClientController extends BaseController {
 		request.getSession().setAttribute(IConstant.SESSIONUSERNAEM, uname);
 		return msg;
 		//renderText(msg);
+	}
+	
+	/**
+	 * 判断微信是否扫一扫
+	 * 
+	 * @return
+	 */
+	@Deprecated
+	@RequestMapping("wxsslogin")
+	public void WSSSLogin(HttpServletRequest request) {
+		Object bisb = request.getSession().getAttribute("bisBis");
+		if("Y".equals(bisb)){
+			renderText("Y");
+		}else{
+			renderText("N");
+		}
 	}
 	
 	/**
@@ -609,8 +644,13 @@ public class GemClientController extends BaseController {
 			//标记是否为商户
 			request.getSession().setAttribute("bisBis", "Y");
 		}
-		
+		System.out.println("是否商户:"+request.getSession().getAttribute("bisBis"));
 		return "/client/gem/list";
+	}
+	
+	@RequestMapping(value="test")
+	public String testWarn(){
+		return "/client/warn";
 	}
 	
 	/**
