@@ -492,6 +492,19 @@ public class GemClientController extends BaseController {
 		return "redirect:"+code;
 	}
 	
+	/**
+	 * @Description: 根据优惠码 获取优惠价格
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="getcouppon")
+	public void getcouppon(HttpServletResponse response,HttpServletRequest request,String code){
+		String coup = HttpTools.getDataByURL(IConstant.getCoupponURL+"?code="+code);
+		/*return "redirect:"+coup.toString();*/
+		renderText(coup);
+	}
 	
 	/**
 	 * @Description: 订单支付
