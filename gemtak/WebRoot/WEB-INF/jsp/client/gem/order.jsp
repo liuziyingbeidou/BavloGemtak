@@ -32,7 +32,7 @@ $(function(){
        for(var i=0;i<data.length;i++){
         $(".selUser").append("<li class='urealname'>收货人姓名：<span>"+data[i].realName+"</span></li>"+
 			"<li class=''>地区： <span>"+data[i].area+"</span></li>"+
-			"<li class='uaddress'>地址：<span>"+data[i].detailAddress+"</span></li>"+
+			"<li class='uaddress'>地址：<span>"+data[i].area+""+data[i].detailAddress+"</span></li>"+
 			"<li class='uzipcode'>邮编：<span>"+data[i].zipcode+"</span> </li>"+
 			"<li class='utel'>座机：<span>"+data[i].tel+"</span> </li>"+
 			"<li class='uphone'>手机：<span>"+data[i].cellphone+"</span> </li>"+
@@ -86,7 +86,7 @@ $(function(){
 		 $(".del-user").bind("click",function(){
 		   $(".aaa").each(function(){
 		   	if ($(this).is(':checked')) {
-		   	    $(".selUser").remove();
+		   	    $(".selUser").empty();
                 deleteAddress($(this).attr("nid"));//删除用户收货地址
             }
 		   });
@@ -122,7 +122,7 @@ $(function(){
 		 $(".del-user").bind("click",function(){
 		   $(".aaa").each(function(){
 		   	if ($(this).is(':checked')) {
-		   	    $(".selUser").remove();
+		   	    $(".selUser").empty();
                 deleteAddress($(this).attr("nid"));//删除用户收货地址
             }
 		   });
@@ -217,31 +217,35 @@ $(function(){
 				<h2><span>快递方式</span></h2>
 				<ul class="srxx">
 				   <li>优先顺丰快递，顺丰不及地区用EMS</li>
-				   <li><input type="checkbox" value="0" name="showFlag" checked=""> <span>需要全额保价</span>（费用是总价值的千分之五）</li>
+				   <li><input class="addsupport" type="checkbox" value="" name="support_fee" > <span>需要全额保价</span>（费用是总价值的千分之五）</li>
 				</ul>
 				   
 			    <h2><span>发票信息 ——商业零售机打发票</span></h2>
 				<div class="status">
-					<p>需开发票？<span><input type="radio" name="month"  value="1" checked="checked"/>开发票</span><span><input type="radio" name="month"  value="2" />不开发票</span></p>
-					<p>发票抬头：<b><input  type="text" placeholder="个人" /></b></p>
-					<p>发票内容：<span><input type="radio" name="month"  value="3" checked="checked"/>珠宝首饰</span><span><input type="radio" name="month"  value="4" /></span>办公用品</p>
+					<p>需开发票？<span><input type="radio" name="invoice"  value="1" checked="checked"/>开发票</span><span><input type="radio" name="invoice"  value="2" />不开发票</span></p>
+					<p>发票抬头：<b><input  type="text" placeholder="个人" name="invoice_title"/></b></p>
+					<p>发票内容：<span><input type="radio" name="invoice_content"  value="3" checked=""/>珠宝首饰</span><span><input type="radio" name="invoice_content" value="4" /></span>办公用品</p>
 			    </div> 
 				<h2><span>商品清单</span></h2>
 			    <c:forEach items="${gemList}" var="gem">
 				  <dl class="spqd">
-					 <dt><a href=""><img src="${ctx }/resources/client/images/gw1.jpg" width="100%" /></a></dt>
+					 <dt><a href=""><img  src="${ctx }/resources/client/images/gw1.jpg" width="100%" /></a></dt>
 					 <dd><p class="gemid" nid="${gem.id}" sid="${gem.vdef1}" jid="${gem.retail_price}"><b>${gem.type_cn}•${gem.type_cn}</b></p>
 					     <p class="shopcarid" style="display:none"><span>${gem.vdef2}</span></p>
-						 <p class="shuliang">数量：<span>${gem.vdef1}</span></p>
-						 <p class="jiage">原价：￥<span>${gem.retail_price}</span></p>
+						 <p class="shuliang" name="quantity">数量：<span>${gem.vdef1}</span></p>
+						 <p class="jiage" name="price">原价：￥<span>${gem.retail_price}</span></p>
 				     </dd>
 				  </dl>
 				  <c:set var="TotalPrice" value="${TotalPrice+gem.retail_price*gem.vdef1}"/>
 				 </c:forEach>
 				 <h2><span>结算信息</span></h2>
 				  <div class="jsxx">
-					 <p><input class="jsxx_m" type="text"   name="key" value="输入优惠券编码" /><input class="jsxx_b"   type="submit" title="添加" value="添加"/></p>
-					 <p class="jsxx_p zongjia">订单总金额: ￥<span>${TotalPrice}</span>元</p>
+					 <p>
+					    <input class="jsxx_m couponNum" type="text"   name="coupon" value="输入优惠券编码" />
+					    <input class="jsxx_b sel_couppon"   type="button" title="添加" value="添加"/>
+					    <input class="jsxx_m youhuijia" type="hidden"   name="coupon_fee" value="0" />
+					 </p>
+					 <p class="jsxx_p zongjia">订单总金额: ￥<span><b class="dingdan">${TotalPrice+23}</b>(<b>运费：23</b>,保价：<b class="baoj">0</b>,优惠：<b class="huij">0</b>)</span>元</p>
 				  </div>
 			   </div>
 			  </form>
@@ -262,6 +266,7 @@ $(function(){
  //新增用户收货地址
  function saveOrUpdate(){
   var realName = $(".username").val();
+  var area = $(".area1").find("option:selected").text()+","+$(".area2").find("option:selected").text()+","+$(".area3").find("option:selected").text();
   var detailAddress = $(".detailAddress").val();
   var zipcode = $(".zipcode").val();
   var tel = $(".tel").val();
@@ -287,11 +292,12 @@ $(function(){
      selectUserAddressHead();
      $(".selUser").append("<li class='urealname'>收货人姓名：<span>"+realName+"</span></li>"+
 			"<li class=''>地区：<span> "+area+"</span></li>"+
-			"<li class='uaddress'>地址：<span>"+detailAddress+"</span></li>"+
+			"<li class='uaddress'>地址：<span>"+area+","+detailAddress+"</span></li>"+
 			"<li class='uzipcode'>邮编：<span>"+zipcode+"</span> </li>"+
 			"<li class='utel'>座机：<span>"+tel+"</span> </li>"+
 			"<li class='uphone'>手机：<span>"+cellphone+"</span> </li>"+
 			"<li class='uemail'>E-mail：<span>"+email+"</span></li>");
+	 $(".show-addUser").hide();
      } 
 	} 
   }); 
@@ -313,7 +319,7 @@ $(function(){
  
    //修改用户收货地址
  function updateAddress(id){
-   $(".show-addUser").show();
+    $(".show-addUser").show();
     $(".username").val($(".urealname span").text());
     $(".area1").find("option:selected").text()+","+$(".area2").find("option:selected").text()+","+$(".area3").find("option:selected").text(); 
     $(".detailAddress").val($(".uaddress span").text());
@@ -329,11 +335,62 @@ $(function(){
    $.post(url,{id:id},function(data){
     if(data == "true"){
      alert("删除成功！");
-      selectUserAddress();
+     selectUserAddress();
     }
    });
  }
 
+ //获取优惠码 
+  $(".sel_couppon").bind("click",function(){
+   var code = $(".couponNum").val();
+   if(code == null || code == ""){
+      alert("优惠券编码不能为空!");
+      return;
+    }
+   var url = "/gemtak/gemClient/getcouppon.do";
+   $.post(url,{code:code},function(data){
+    if(data != null || data != ""){
+      if(data == "优惠券编码不正确!"){
+        alert("优惠券编码不正确!");
+        return;
+      }else{
+        var couppon = data;
+        $(".youhuijia").attr("value",couppon);
+        var youhuijia = $(".youhuijia").val();   //获取的优惠码 价格
+        var tprice = ${TotalPrice}-youhuijia+23; //23元为运费
+        $(".dingdan").text(tprice);
+        $(".huij").text(youhuijia);
+        if($(".addsupport").is(":checked")){   //当有优惠码时  选择保价时
+	        var baojia = ${TotalPrice*0.005};
+	        var tprice = ${TotalPrice}+${TotalPrice*0.005}-youhuijia+23; //23元为运费
+	        $(".dingdan").text(tprice);
+	        $(".baoj").text(baojia);
+	        $(".huij").text(youhuijia);
+        }
+      }
+    }
+   });
+  });
+  
+  //当选中 全额保价
+  $(".addsupport").bind("click",function(){
+   if($(".addsupport").is(":checked")){
+       $(".addsupport").attr("value","${TotalPrice*0.005}");
+       var baojia = ${TotalPrice*0.005};
+       var youhuijia = $(".youhuijia").val();
+       var tprice = ${TotalPrice}+${TotalPrice*0.005}-youhuijia+23; //23元为运费
+       $(".dingdan").text(tprice);
+       $(".baoj").text(baojia);
+       $(".huij").text(youhuijia);
+      }else{
+        $(".addsupport").attr("value","${TotalPrice*0.005}");
+        var youhuijia = $(".youhuijia").val();
+        var tprice = ${TotalPrice}-youhuijia+23; //23元为运费
+        $(".dingdan").text(tprice);
+        $(".baoj").text("0");
+        $(".huij").text(youhuijia);
+      }
+  });
   
   /* $(".saveOrder").bind("click",function(){
   var realName = $(".username").val();
