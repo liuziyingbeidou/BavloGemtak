@@ -53,6 +53,8 @@ public interface IConstant {
 	//	宝石证书类型接口				
 	public static final String URL_GEMLAB = "http://www.bavlo.com/getAllGemLab";
 	
+	// 扫一扫登陆路径
+	public final static String WXSSLOGIN = "http://lzy348860554.imwork.net/gemtak/gemClient/wxlogin.do";
 	
 	//已发布 
 	public static final String RELEASE_Y = "Y";
