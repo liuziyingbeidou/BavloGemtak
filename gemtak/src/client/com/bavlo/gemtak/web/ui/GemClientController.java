@@ -109,6 +109,43 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
+	 * @Description: 订单生成
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="orderFish")
+	public String orderFish(Model model,HttpServletRequest request,HttpServletResponse response,Double totalMoney){
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCListPageModel(model,lang);
+		model.addAttribute("totalPrice",totalMoney);
+		return IClientForward.gemOrderSuccess;
+	}
+	
+	/**
+	 * @Description: 订单支付
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="orderPay")
+	public String orderPay(Model model,HttpServletRequest request,HttpServletResponse response){
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCListPageModel(model,lang);
+		return "/client/gem/order-pay";
+	}
+	
+	/**
 	 * 2.ajax根据条件查询
 	 * @param model
 	 * @param request
