@@ -126,17 +126,17 @@ function addShoppCar(id){
 				<h6>${gem.weight} ${gem.type_cn} （${gem.type_en}）</h6>
 				<ul>
 					<li><span>${gem.supplier}</span> </li><li>TEL：${gem.supplier_tel}
-					</li><li>形状（Shalie）：<slian>${gem.shape_cn}（${gem.shape_en}）</span>
-					</li><li>尺寸（Measurement）：<span>${gem.size_l}×${gem.size_w}×${gem.size_h}</span>
-					</li><li>颜色（Average color）：<span> ${gem.average_color}</span>
-					</li><li>净度（Clarity）：<span>${gem.clarity_cn}（${gem.clarity_en}）</span>
-					</li><li>切工（Cut）：<span>${gem.cut_cn}（${gem.cut_en}）</span>
-					</li><li>产地（Origin）：<span>${gem.origin_cn}（Sri Lanka）</span>
-					</li><li>处理（Treatment）：<span>${gem.treatment_cn}（${gem.treatment_en}）</span>
-					</li><li>证书（Cert.）：<span>国检（${gem.lab_en}） ${gem.supplier_code}</span>
-					</li><li>数量（Quantity）:  <span class="selquantity">1</span>
-					</li><li>编号（ID）：<span>${gem.stock_qty}</span>
-					</li><li>卖家（Seller）：<span>${gem.supplier}（HuiXing Gemstone）</span></li>
+					</li><li>形状：<slian>${gem.shape_cn}</span>
+					</li><li>尺寸：<span>${gem.size_l}×${gem.size_w}×${gem.size_h}</span>
+					</li><li>颜色：<span> ${gem.average_color}</span>
+					</li><li>净度：<span>${gem.clarity_cn}（${gem.clarity_en}）</span>
+					</li><li>切工：<span>${gem.cut_cn}</span>
+					</li><li>产地：<span>${gem.origin_cn}</span>
+					</li><li>处理：<span>${gem.treatment_cn}</span>
+					</li><li>证书：<span>国检（${gem.lab_en}） ${gem.supplier_code}</span>
+					</li><li>数量:  <span class="selquantity">1</span>
+					</li><li>编号：<span>${gem.stock_qty}</span>
+					</li><li>卖家：<span>${gem.supplier}</span></li>
 				</ul>
 				<p>价格（Price）：<span>¥${gem.retail_price} <em>/${gem.pairs}</em></span></p>
 				<div class="add_gu"><a href="javascript:void(0)" class="gw_a" onclick="addShoppCar(${gem.id})">+ 购物车</a><a href="">订购款式 ></a></div>		  
