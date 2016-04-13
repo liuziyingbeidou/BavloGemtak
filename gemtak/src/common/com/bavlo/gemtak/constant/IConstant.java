@@ -26,7 +26,7 @@ public interface IConstant {
     public static final String delShoppingAddressURL = "http://192.168.1.115/gemtak-invoke/deleteAddress";
     //根据id获取用户收货地址接口
     public static final String getShoppingAddressByAidURL = "http://192.168.1.115/gemtak-invoke/getCustomerAddrById";
-  //获取优惠码接口
+    //获取优惠码接口
   	public static final String getCoupponURL = "http://www.bavlo.com/gemtak-invoke/checkCode";
     
 	//本地语言化
