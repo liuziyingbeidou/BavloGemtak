@@ -38,8 +38,8 @@
 				 <div class="wrap_br wrap_br_d">
 					<h2><span>订单已生成</span></h2>	  
 					<div class="scdd scdd1">
-						 <p  class="fc_0">订单号为：<span>2336984875</span></p>
-						 <p>总金额为：<span>￥3850元</span></p>
+						 <p  class="fc_0">订单号为：<span>${orderNo}</span></p>
+						 <p>总金额为：<span>￥${totalPrice}元</span></p>
 						 <div class="qzf"><a href="javascript:jsPayFee();">去支付</a></div>
 					</div>
 				 </div>
