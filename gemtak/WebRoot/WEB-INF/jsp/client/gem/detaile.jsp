@@ -74,6 +74,7 @@ function addShoppCar(id){
   $(".replaceB").text("我的订单");
   $(".replaceB").attr("href","");
   $("#my-popup").modal('close');
+  window.location.reload(); 
  }
 
 </script>
