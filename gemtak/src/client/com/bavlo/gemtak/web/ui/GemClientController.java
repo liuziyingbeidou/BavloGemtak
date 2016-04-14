@@ -534,7 +534,7 @@ public class GemClientController extends BaseController {
 			Map mpo = (Map)mapOrder;
 			Object orderId = mpo.get("orderCode");
 			Object totalPrice = mpo.get("totalPrice");
-			Map pr=wXZFService.createOrder(request,orderId+"", openId,totalPrice);
+			Map pr=wXZFService.createOrder(request,orderId+"", openId,totalPrice+"");
 			model.addAttribute("map", pr);
 			model.addAttribute("totalPrice", mpo.get("totalPrice"));
 			model.addAttribute("orderNo", orderId);
