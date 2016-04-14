@@ -55,8 +55,8 @@ public class GemAService extends CommonService implements IGemService {
 		saveReID(gemVO);
 	}
 
-	/*
-	 * 3.15 lisuike
+	/**
+	 * 3.15 lisuike 查询所有的宝石
 	 * @see com.bavlo.gemtak.service.gem.itf.IGemService#findAllGemVO()
 	 */
 	@Override
@@ -66,8 +66,8 @@ public class GemAService extends CommonService implements IGemService {
 	}
 
 	/**
-	 * 3.15 lisuike
-	 * 给据id查询 一个GemVO
+	 * 3.15 lisuike 根据id查询 一个GemVO
+	 * 
 	 */
 	@Override
 	public GemVO findGemVOByID(Integer id) {
