@@ -266,6 +266,18 @@ public class GemCService extends CommonService implements IGemService {
 		
 	}
 
+	/**
+	 * 9.根据订单号 改写订单状态
+	 */
+	@Override
+	public void rewriteOrderStatus(String orderno) {
+		String[] attrname = new String[]{"status","ts"};//要更新的字段
+		Object[] attrval = new Object[]{"Y",DateUtil.getStrTimestamp(DateUtil.getCurDateTime())};        //更新的值
+		if(orderno != null){
+			updateAttrs(OrderVO.class, attrname, attrval, " order_no="+orderno);
+		}
+	}
+
 	
 	
 	
