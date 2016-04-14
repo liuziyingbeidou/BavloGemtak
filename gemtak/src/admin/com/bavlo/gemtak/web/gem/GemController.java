@@ -208,7 +208,8 @@ public class GemController extends BaseController {
 	
 	
 	/**
-	 * @Description: 给据id查询出一条gemVO 点击发布按钮 将其改为关闭
+	 * 4.点击发布按钮 将其改为关闭
+	 * @Description: 给据id查询出一条gemVO 
 	 * @param @param GemVO
 	 * @param @param lisuike
 	 * @return void
