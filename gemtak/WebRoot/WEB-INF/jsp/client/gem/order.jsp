@@ -31,7 +31,7 @@ $(function(){
        for(var i=0;i<data.length;i++){
         $(".selUser").append("<li class='urealname'>收货人姓名：<span>"+data[i].realName+"</span></li>"+
 			"<li class='area'>地区： <span>"+data[i].area+"</span></li>"+
-			"<li class='uaddress'>地址：<span>"+data[i].area+""+data[i].detailAddress+"</span></li>"+
+			"<li class='uaddress'>地址：<span>"+data[i].detailAddress+"</span></li>"+
 			"<li class='uzipcode'>邮编：<span>"+data[i].zipcode+"</span> </li>"+
 			"<li class='utel'>座机：<span>"+data[i].tel+"</span> </li>"+
 			"<li class='uphone'>手机：<span>"+data[i].cellphone+"</span> </li>"+
@@ -53,7 +53,7 @@ $(function(){
     	$(".addUser").append("<li class='sel'><input nid='"+data[i].id+"' value='"+data[i].id+"'  class='s_input aaa' type='radio' name='month'  checked='checked'/><span>"+data[i].realName+"</span>"+data[i].detailAddress+"</li>");
     	$(".selUser").append("<li class='urealname' name='real_name'>收货人姓名：<span>"+data[i].realName+"</span><input type='hidden' name='real_name' value='"+data[i].realName+"'/></li>"+
 						"<li class='area'>地区：<span>"+data[i].area+"</span> </li>"+
-						"<li class='uaddress'name='mail_address'>地址：<span>"+data[i].area+""+data[i].detailAddress+"</span><input type='hidden' name='mail_address' value='"+data[i].area+""+data[i].detailAddress+"'/></li>"+
+						"<li class='uaddress'name='mail_address'>地址：<span>"+data[i].detailAddress+"</span><input type='hidden' name='mail_address' value='"+data[i].area+","+data[i].detailAddress+"'/></li>"+
 						"<li class='uzipcode' name='zipcode'>邮编：<span>"+data[i].zipcode+"</span><input type='hidden' name='zipcode' value='"+data[i].zipcode+"'/> </li>"+
 						"<li class='utel' name='tel'>座机：<span>"+data[i].tel+"</span><input type='hidden' name='tel' value='"+data[i].tel+"'/> </li>"+
 						"<li class='uphone' name='cellphone'>手机：<span>"+data[i].cellphone+"</span><input type='hidden' name='cellphone' value='"+data[i].cellphone+"'/> </li>"+
@@ -250,6 +250,7 @@ $(function(){
 					    <input class="jsxx_m youhuijia" type="hidden"   name="coupon_fee" value="${youhuijia}" />
 					 </p>
 					 <p class="jsxx_p zongjia">订单总金额: ￥<span><b class="dingdan">${TotalPrice+23}</b>  &nbsp;(<b>运费：23</b>,保价：<b class="baoj">0</b>,优惠：<b class="huij">0</b>)</span>元</p>
+					 <input type="hidden" name="totalPrice" value="${TotalPrice+23}"/>
 				  </div>
 			   </div>
 			    <div class="tjdd"><input class="saveOrder" type="submit" title="提交订单" value="提交订单"/></div>
@@ -283,7 +284,7 @@ $(function(){
  function saveOrUpdate(){
   var realName = $(".username").val();
   var area = $(".area1").find("option:selected").text()+","+$(".area2").find("option:selected").text()+","+$(".area3").find("option:selected").text();
-  var detailAddress = $(".detailAddress").val();
+  var detailAddress =$(".detailAddress").val();
   var zipcode = $(".zipcode").val();
   var tel = $(".tel").val();
   var cellphone = $(".cellphone").val();
@@ -308,7 +309,7 @@ $(function(){
      selectUserAddressHead();
      $(".selUser").append("<li class='urealname'>收货人姓名：<span>"+realName+"</span></li>"+
 			"<li class='diqu'>地区：<span> "+area+"</span></li>"+
-			"<li class='uaddress'>地址：<span>"+area+","+detailAddress+"</span></li>"+
+			"<li class='uaddress'>地址：<span>"+detailAddress+"</span></li>"+
 			"<li class='uzipcode'>邮编：<span>"+zipcode+"</span> </li>"+
 			"<li class='utel'>座机：<span>"+tel+"</span> </li>"+
 			"<li class='uphone'>手机：<span>"+cellphone+"</span> </li>"+
