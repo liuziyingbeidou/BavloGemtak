@@ -257,9 +257,12 @@ public class GemCService extends CommonService implements IGemService {
 			save(orderBList);
 	}
 
+	/**
+	 * 8.根据用户名 删除购物车
+	 */
 	@Override
 	public void delShoppingCarByUname(String username) throws Exception {
-		delete(ShoppingCarVO.class, username);
+		delete(ShoppingCarVO.class, " and user_name='"+username+"'");
 		
 	}
 
