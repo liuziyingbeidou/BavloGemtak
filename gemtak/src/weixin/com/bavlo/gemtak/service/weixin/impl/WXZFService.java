@@ -22,7 +22,7 @@ import com.bavlo.gemtak.utils.WebUtils;
 public class WXZFService extends CommonService implements IWXZFService {
 
 	@Override
-	public Map createOrder(HttpServletRequest request,String orderId, String openid) {
+	public Map createOrder(HttpServletRequest request,String orderId, String openid,String totalPrice) {
 		Map map = new HashMap();
 		if (orderId == null) {
 			map.put("msg", "非法参数!");
@@ -43,7 +43,7 @@ public class WXZFService extends CommonService implements IWXZFService {
 		tpWxPay.setBody("购买宝珑珠宝");
 		tpWxPay.setOrderId(orderId);
 		tpWxPay.setSpbillCreateIp(WebUtils.getIpAddr(request));
-		tpWxPay.setTotalFee("0.01");
+		tpWxPay.setTotalFee(totalPrice);
 		PackageResult pr=WXPayUtil.getPackage(tpWxPay,IContant.notifyurl1);
 		map.put("pr", pr);
 		map.put("status", "Y");
