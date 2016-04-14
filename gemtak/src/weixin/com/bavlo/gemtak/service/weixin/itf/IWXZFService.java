@@ -17,5 +17,5 @@ public interface IWXZFService {
 	 * @param openid
 	 * @return
 	 */
-	Map createOrder(HttpServletRequest request,String orderId,String openid);
+	Map createOrder(HttpServletRequest request,String orderId,String openid,String totalPrice);
 }
