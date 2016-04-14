@@ -57,7 +57,7 @@ public class GemController extends BaseController {
 	 * @param @return
 	 * @return String
 	 */
-	@OAuthRequired
+	//@OAuthRequired
 	@RequestMapping(value="viewGemList")
 	public String viewGemList(Model model,HttpServletRequest request,HttpServletResponse response,Integer dgpage,String allgem,String typegem,String shapegem,String inputgem){
 		//
