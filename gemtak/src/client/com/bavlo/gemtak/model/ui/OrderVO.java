@@ -50,6 +50,8 @@ public class OrderVO extends IdEntity {
 	private String order_message;
 	//订单号
 	private String order_no;
+	//订单总价
+	private Double totalPrice;
 	//交付日期
 	private Timestamp pay_date;
 	
@@ -292,6 +294,12 @@ public class OrderVO extends IdEntity {
 	}
 	public void setCoupon(String coupon) {
 		this.coupon = coupon;
+	}
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	
