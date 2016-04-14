@@ -156,6 +156,7 @@
           <div class="more hidden-md hidden-lg"><p><a href="" >${pagevo['btnMore'] }</a></p></div>
 		  
 	  </div>
+	  <!-- 分页插件 -->
 	  <div class="tcdPageCode"></div>
   </div>
 </div>
@@ -225,10 +226,10 @@
     
     //-----------------------条件查询-------------------------
     function searchResult(p){
-    	var gemType = $(".type-gem").find("option:selected").val(); //取宝石类型下拉框中的值
-    	var gemShape =  $(".shape-gem").find("option:selected").val();
-    	var gemStatus =  $(".all-gem").find("option:selected").val();
-    	var gemInput =  $(".input-gem").val();
+    	var gemType = $(".type-gem").find("option:selected").val();   //取宝石类型下拉框中的值
+    	var gemShape =  $(".shape-gem").find("option:selected").val();//宝石形状下拉框中的值
+    	var gemStatus =  $(".all-gem").find("option:selected").val(); //全部产品
+    	var gemInput =  $(".input-gem").val();    //搜索框
     	var url = "${ctx}/gemAdmin/viewGemList.do?";
     	if(gemType != null && gemType != ""){     //宝石类型
     		url += "&typegem="+gemType;
