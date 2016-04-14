@@ -73,6 +73,7 @@
 						}, function(res) {
 								if (res.err_msg == "get_brand_wcpay_request:ok") {
 									alert("付款成功！");
+									rewriteOrderSatus(); //支付成功后 修改订单状态 为已支付
 								} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
 									//alert("取消支付");
 								} else if (res.err_msg == "get_brand_wcpay_request:fail") {
@@ -80,6 +81,14 @@
 								}
 							});
 					}
+			}
+			//修改 订单状态
+			function rewriteOrderSatus(){
+			  var orderno = ${orderNo};
+			  var url = "/gemtak/gemClient/rewriteOrderStatus.do";
+			  $.post(url,{orderno:orderno},function(data){
+			    
+			  });
 			}
 </script>
 </html>
