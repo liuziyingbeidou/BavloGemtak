@@ -411,8 +411,8 @@ background-size: 25px 15px;text-align:right;height: 25px;margin-right: 10px;curs
 .fc_0{color:#8c0000}
 
 .m_bottom_80{margin-bottom:80px}
-/*尾部*/
-.footer{position: fixed;left:0px;bottom:0px;width:100%;margin:0px auto 0px;overflow:hidden;}
+/*尾部position: fixed;*/
+.footer{left:0px;bottom:0px;width:100%;margin:0px auto 0px;overflow:hidden;}
 .foot{background:#8c0000;margin:0px auto;overflow:hidden;line-height:30px;padding:5px 0px}
 .foot p{width:100%;line-height:30px;color:#bbbbbb;text-align:center}
 .foot p a{color:#bbbbbb;margin:0px 5px;}
