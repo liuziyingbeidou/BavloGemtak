@@ -162,7 +162,7 @@ $(function(){
 			   </ul>
 			  
 			</div>     
-			<form action="./finish_order.html" method="post"  id="orderForm">
+			<form action="${ctx }/gemClient/balancePay.do" method="post"  id="orderForm">
 			 <div class="wrap_br wrap_br_d">
 				<h2><span>收货人信息</span></h2>	  
 				 <ul class="srxx addUser">
@@ -227,7 +227,7 @@ $(function(){
 					   <input type="radio" class="close-invoice" name="invoice"  value="不开发票" checked="checked"/>不开发票
 					 </span>
 					</p>
-					<p class="show-intitle" style="display: none">发票抬头：<b><input  type="text" value="个人" name="invoice_title"/></b></p>
+					<p class="show-intitle" style="display: none">发票抬头：<b><input  type="text" value="" placeholder="个人" name="invoice_title"/></b></p>
 					<p class="show-incontent" style="display: none">发票内容：<span><input type="radio" name="invoice_content"  value="珠宝首饰" />珠宝首饰</span><span><input type="radio" name="invoice_content" value="办公用品" /></span>办公用品</p>
 			    </div> 
 				<h2><span>商品清单</span></h2>
@@ -252,8 +252,8 @@ $(function(){
 					 <p class="jsxx_p zongjia">订单总金额: ￥<span><b class="dingdan">${TotalPrice+23}</b>  &nbsp;(<b>运费：23</b>,保价：<b class="baoj">0</b>,优惠：<b class="huij">0</b>)</span>元</p>
 				  </div>
 			   </div>
+			    <div class="tjdd"><input class="saveOrder" type="submit" title="提交订单" value="提交订单"/></div>
 			  </form>
-			   <div class="tjdd"><input class="saveOrder" type="button" title="提交订单" value="提交订单"/></div>
 	  </div>
   </div>
 </div>
@@ -341,8 +341,10 @@ $(function(){
     var nums = area.split(",");
     for (var i=0 ; i< nums.length ; i++){
      $(".area"+(i+1)).val(nums[i]);
-     change(i+1);
-    }
+     if(i < 2){
+     	change(i+1);
+     }
+    } 
     
     $(".detailAddress").val($(".uaddress span").text());
     $(".zipcode").val($(".uzipcode span").text());
@@ -435,28 +437,25 @@ $(function(){
   }); */
  
  //提交订单
-  $(".saveOrder").click(function(){
+  /* $(".saveOrder").click(function(){
    addOrder();
   });
   function addOrder(){
    var orderListJson = getOrderlistInfo();
+   
    $.ajax({
-    url:"/gemtak/gemClient/orderSuccess.do",
+    url:"/gemtak/gemClient/balancePay.do",
     type:"post",
     data:$("#orderForm").serialize()+"&list="+orderListJson,
     async:false,
     cache:false,
     success:function(data){
-     alert("保存成功！");
-    },
-    error:function(e){
-     alert("保存失败！");
     }
    });
-  }
+  } */
   
   //收集清单数据
-  function getOrderlistInfo(){
+  /* function getOrderlistInfo(){
    var listJson = "[";
    $(".gemid").each(function(){
     var gemid = $(this).attr("nid");
@@ -469,7 +468,7 @@ $(function(){
    }
    listJson += "]";
    return listJson;
-  }
+  } */
   
 </script>
 </html>
