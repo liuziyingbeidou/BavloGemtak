@@ -146,4 +146,9 @@ public interface IGemService {
 	 * 7.提交订单  保存订单子表
 	 */
 	public void saveOrderBVORelID(List<OrderBVO> orderBList) throws Exception;
+	
+	/**
+	 * 8.根据订单号 改写订单状态
+	 */
+	public void rewriteOrderStatus(String orderno);
 }
