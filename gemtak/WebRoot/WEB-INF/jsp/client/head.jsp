@@ -42,7 +42,7 @@
 	    <a  href="${ctx }/gemClient/login.do">${pagehfvo['hMShoppingCart'] } <t class="cart-num"></t></a>
 	  </c:if>
 	  <c:if test="${uname != null}">
-	    <a  href="${ctx }/gemClient/viewShoppingCar.do">${pagehfvo['hMShoppingCart'] }<t class="cart-num"></t></a>
+	    <a  href="javascript:void(0)" class="view-shoppingcar">${pagehfvo['hMShoppingCart'] }<t class="cart-num"></t></a>
 		<a href="${ctx }/gemClient/order.do" class="jesuan">${pagehfvo['hMBalance'] }</a>
 	  </c:if>
 	</div>
@@ -73,23 +73,29 @@
     <div class="am-offcanvas" >
       <div class="am-offcanvas-bar">
       <ul class="am-menu-nav am-avg-sm-1">
-      	  <li class="am-parent">
-            <a href="##" class="" >${pagehfvo['hMSignIn'] }</a>
+        <c:if test="${uname == null}">
+          <li class="">
+            <a href="${ctx }/gemClient/login.do?dengluNUM=1" class="" >${pagehfvo['hMSignIn'] }</a>
           </li>
-          <li class="am-parent">
-            <a href="##" class="" >${pagehfvo['hMReg'] }</a>
+          <li class="">
+            <a href="${ctx }/gemClient/login.do" class="" >${pagehfvo['hMReg'] }</a>
           </li>
-          <li class="am-parent">
+        </c:if>
+      	<c:if test="${uname != null}">
+      	   <li class="t-css"><a href="##" class="" > Hi, ${uname}</a></li>
+      	   <li class="">
             <a href="##" class="" >${pagehfvo['hMOrder'] }</a>
           </li>
-          <li class="am-parent">
+          <li class="">
+            <a href="${ctx }/gemClient/logout.do" class="" >${pagehfvo['hMSignOut'] }</a>
+          </li>
+      	</c:if>
+         
+          <li class="">
             <a href="##" class="" >${pagehfvo['hMFavr'] }</a>
           </li>
-          <li class="am-parent">
-            <a href="##" class="" >${pagehfvo['hMShoppingCart'] }</a>
-          </li>
-          <li class="am-parent">
-            <a href="##" class="" >${pagehfvo['hMSignOut'] }</a>
+          <li class="">
+            <a href="${ctx }/gemClient/viewShoppingCar.do" class="" >${pagehfvo['hMShoppingCart'] }</a>
           </li>
       </ul>
       </div>
@@ -170,4 +176,17 @@ function delCookie(id){
 		  }
 	  });
 }
+
+// 购物车
+$(".view-shoppingcar").click(function(){
+ var url = "/gemtak/gemClient/checkGemShoppingCar.do";
+ $.post(url,function(data){
+  if(data == "N"){
+    alert("您的购物车还没有宝贝哟！");
+  }else if(data == "Y"){
+   location.href = "/gemtak/gemClient/viewShoppingCar.do";
+  }
+ });
+});
+
 </script>
