@@ -35,11 +35,11 @@
 	  <c:if test="${uname == null}">
 	    <t class="t-css"></t>
 	    <a class="replaceA" href="${ctx }/gemClient/login.do?dengluNUM=1">${pagehfvo['hMSignIn'] }</a>|
-		<a class="replaceB" href="${ctx }/gemClient/login.do">${pagehfvo['hMReg'] }</a>|
+		<a class="replaceB" href="${ctx }/gemClient/login.do?dengluNUM=1">${pagehfvo['hMReg'] }</a>|
 	  </c:if>
 		<a href="javascript:void(0)" class="myCollapse" cls="cls-folder">${pagehfvo['hMFavr'] }</a>|
 	  <c:if test="${uname == null}">
-	    <a  href="${ctx }/gemClient/login.do">${pagehfvo['hMShoppingCart'] } <t class="cart-num"></t></a>
+	    <a  href="${ctx }/gemClient/login.do?dengluNUM=1">${pagehfvo['hMShoppingCart'] } <t class="cart-num"></t></a>
 	  </c:if>
 	  <c:if test="${uname != null}">
 	    <a  href="javascript:void(0)" class="view-shoppingcar">${pagehfvo['hMShoppingCart'] }<t class="cart-num"></t></a>
@@ -128,8 +128,8 @@
     selCarNO(data);
    });
   }
+  
   $(function(){
-  	
      //点击触发收藏夹
   	$(".myCollapse").click(function(){
 		$("#collapse-nav").collapse('toggle');
