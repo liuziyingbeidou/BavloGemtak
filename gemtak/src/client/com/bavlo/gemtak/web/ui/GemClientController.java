@@ -533,8 +533,8 @@ public class GemClientController extends BaseController {
 		if(mapOrder != null){
 			Map mpo = (Map)mapOrder;
 			Object orderId = mpo.get("orderCode");
-			
-			Map pr=wXZFService.createOrder(request,orderId+"", openId);
+			Object totalPrice = mpo.get("totalPrice");
+			Map pr=wXZFService.createOrder(request,orderId+"", openId,totalPrice);
 			model.addAttribute("map", pr);
 			model.addAttribute("totalPrice", mpo.get("totalPrice"));
 			model.addAttribute("orderNo", orderId);
@@ -597,12 +597,29 @@ public class GemClientController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		//*************将订单 号 和总价格存在 session中********************
 		Map map = new HashMap();
-		orderVO.setTotalPrice(0.1);
+		//orderVO.setTotalPrice(0.1);
 		map.put("totalPrice", orderVO.getTotalPrice());
 		map.put("orderCode", orderNo);
 		session.setAttribute("sOrderMap", map);
 		return "redirect:"+code;
+	}
+	
+	/**
+	 * @Description: 根据订单号 改写订单状态
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="rewriteOrderStatus")
+	public void rewriteOrderStatus(Model model,HttpServletResponse response,HttpServletRequest request,String orderno){
+		if(orderno != null){
+			gemService.rewriteOrderStatus(orderno);
+		}
+		renderText("{\"msg\":\"Y\"}");
 	}
 	
 	/**
