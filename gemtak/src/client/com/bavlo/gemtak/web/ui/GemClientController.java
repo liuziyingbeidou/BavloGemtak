@@ -308,7 +308,7 @@ public class GemClientController extends BaseController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			/*renderText(num+"");*/
+			renderText(num+"");
 	    }
 	}
 	
