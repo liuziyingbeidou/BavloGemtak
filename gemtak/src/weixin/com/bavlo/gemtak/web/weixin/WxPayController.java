@@ -2,14 +2,17 @@ package com.bavlo.gemtak.web.weixin;
 
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.util.weixin.MessageUtil;
 import com.bavlo.gemtak.web.BaseController;
+
 
 /**
  * @Title: 宝珑Gemtak
@@ -22,6 +25,9 @@ import com.bavlo.gemtak.web.BaseController;
 @RequestMapping(value="wx")
 public class WxPayController extends BaseController {
 
+	@Resource
+	IGemService gemService;
+	
 	/**
 	 * @Description: 微信支付回调
 	 * @param @param response
@@ -43,7 +49,9 @@ public class WxPayController extends BaseController {
 			//商户订单号
 			String outTradeNo = requestMap.get("out_trade_no");
 			/**支付结果逻辑处理---开始**/
-			
+			synchronized (outTradeNo) {
+				gemService.rewriteOrderStatus(outTradeNo);	
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			st = "FAIL";
