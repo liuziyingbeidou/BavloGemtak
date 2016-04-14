@@ -48,7 +48,7 @@
         	 $.cookie('password',null,{path:'/'});
         	}
         }else{
-        	alert("密码错误！！");
+        	$(".pwd-error").text("您输入的密码错误！！");
         }
       });
     }
@@ -152,8 +152,8 @@
 				<h3><span>会员登录</span></h3>
 				<div class="side">
 					<ul class="word sign-normal">
-						<li><label>E-mail：</label><div class="s_te"><input class="inp_text input-username" type="text" value="" /><b class="error"></b></div></li>
-						<li><label>密码：</label><div class="s_te"><input class="inp_text input-pwd" type="password" value="" /></div></li>
+						<li><label>E-mail：</label><div class="s_te"><input class="inp_text input-username" type="text" value="" /></div></li>
+						<li><label>密码：</label><div class="s_te"><input class="inp_text input-pwd" type="password" value="" /><b class="error pwd-error"></b></div></li>
 						<li><label>&nbsp;</label><div class="s_te"><span><input class="inp_che " id="remember" type="checkbox" value=""/>记住密码</span><input class="inp_sub login" type="button" value="登录" /></div></li>
 					</ul>
 				</form>
