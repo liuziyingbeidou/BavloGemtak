@@ -6,7 +6,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -34,6 +36,7 @@ import com.bavlo.gemtak.model.ui.OrderVO;
 import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.service.weixin.itf.IWXZFService;
+import com.bavlo.gemtak.util.weixin.WXPayUtil;
 import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.DateUtil;
 import com.bavlo.gemtak.utils.JsonUtils;
@@ -108,24 +111,6 @@ public class GemClientController extends BaseController {
 		return "/client/gem/list";
 	}
 	
-	/**
-	 * @Description: 订单生成
-	 * @param @param model
-	 * @param @param response
-	 * @param @param request
-	 * @param @return
-	 * @return String
-	 */
-	@RequestMapping(value="orderFish")
-	public String orderFish(Model model,HttpServletRequest request,HttpServletResponse response,Double totalMoney){
-		//当前本地化语言
-		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang："+lang);
-		//根据本地语言更新页面数据
-		GemClientPageModel.getCListPageModel(model,lang);
-		model.addAttribute("totalPrice",totalMoney);
-		return IClientForward.gemOrderSuccess;
-	}
 	
 	/**
 	 * 2.ajax根据条件查询
@@ -323,7 +308,7 @@ public class GemClientController extends BaseController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			renderText(num+"");
+			/*renderText(num+"");*/
 	    }
 	}
 	
@@ -343,11 +328,12 @@ public class GemClientController extends BaseController {
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCShoppingCarPageModel(model,lang);
+		List<GemVO> gemList;
 		Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
 		if(username != null|| username != ""){
 			try {
 				uname = (String) username;
-				List<GemVO> gemList = gemService.getShoppingCarListByUname(uname);
+				gemList = gemService.getShoppingCarListByUname(uname);
 				model.addAttribute("gemList",gemList);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -356,7 +342,41 @@ public class GemClientController extends BaseController {
 		return IClientForward.viewGemShoppingCar;
 	}
 	
-	
+	/**
+	 * @Description: 检查购物车 是否为空
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="checkGemShoppingCar")
+	public void checkGemShoppingCar(Model model,HttpServletResponse response,HttpServletRequest request,String uname,Integer gmeid){
+		
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCShoppingCarPageModel(model,lang);
+		List<GemVO> gemList = null;
+		Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+		if(username != null|| username != ""){
+			try {
+				uname = (String) username;
+				gemList = gemService.getShoppingCarListByUname(uname);
+				/*renderText(gemList+"");*/
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		String flag = "N";
+		if(gemList != null){
+			if(gemList.size() > 0){
+				flag = "Y";
+			}
+		}
+		renderText(flag);
+	}
 	
 	/**
 	 * 获取用户 收货地址
@@ -458,6 +478,7 @@ public class GemClientController extends BaseController {
 			}
 			if(gemList != null){
 				model.addAttribute("gemList",gemList);	
+				session.setAttribute("shoppCart", gemList);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -466,7 +487,27 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: 订单完成
+	 * 订单完成
+	 * @param model
+	 * @param response
+	 * @param request
+	 * @param toalPrice
+	 * @return
+	 */
+	@RequestMapping(value="orderFish")
+	public String ordrFish(Model model,HttpServletResponse response,HttpServletRequest request,String toalPrice,String orderNo){
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCShoppingCarPageModel(model,lang);
+		model.addAttribute("totalPrice",toalPrice);
+		model.addAttribute("orderNo",orderNo);
+		return IClientForward.gemOrderSuccess;
+	}
+	
+	/**
+	 * @Description: 提交订单
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -475,43 +516,31 @@ public class GemClientController extends BaseController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value="orderSuccess")
-	public String orderSuccess(Model model,OrderVO orderVO,HttpServletResponse response,HttpServletRequest request,Integer shoppingCarid,String list) throws Exception{
+	public String orderSuccess(Model model,HttpServletResponse response,HttpServletRequest request){
 		String code = request.getParameter("code");
-		/*System.out.println("Code:-----"+code);
+		System.out.println("Code:-----"+code);
 		String openId = WXPayUtil.getopendid(code);
-		System.out.println("opendId:"+openId);*/
-		String forword = IClientForward.gemOrderSuccess;
+		System.out.println("opendId:"+openId);
+	
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
-		GemClientPageModel.getCOrderSuccessPageModel(model,lang);
-		Integer orderId = gemService.saveOrderRelID(orderVO);
-		if(orderId > 0){
-			System.out.println("新增成功！");
-			//根据 用户名 和 购物车id 删除 购物车信息
-			Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
-			gemService.delShoppingCarByUname(uname+"");
-			List<OrderBVO> orderBList = JsonUtils.getListFromJson(list, OrderBVO.class);
-			if(orderBList != null){
-				for (OrderBVO orderBVO : orderBList) {
-					orderBVO.setOrder_id(orderId);
-					orderBVO.setTs(DateUtil.getCurTimestamp());
-					orderBVO.setDr(IConstant.SHORT_ZERO);
-				}
-				gemService.saveOrderBVORelID(orderBList);
-			}
-		}else{
-			System.out.println("新增失败！");
-		}
-		
+		GemClientPageModel.getCOrderPayPageModel(model,lang);
 		
 		//微信支付
-		/*String orderId = CommonUtils.getBillCode("GM");
-		System.out.println(orderId);
-		Map pr=wXZFService.createOrder(request,orderId, openId);
-		model.addAttribute("map", pr);*/
+		Object mapOrder = session.getAttribute("sOrderMap");// CommonUtils.getBillCode("GM");
+		if(mapOrder != null){
+			Map mpo = (Map)mapOrder;
+			Object orderId = mpo.get("orderCode");
+			
+			Map pr=wXZFService.createOrder(request,orderId+"", openId);
+			model.addAttribute("map", pr);
+			model.addAttribute("totalPrice", mpo.get("totalPrice"));
+			model.addAttribute("orderNo", orderId);
+		}
 		
+		String forword = IClientForward.gemOrderSuccess;
 		return forword;
 	}
 	
@@ -523,8 +552,56 @@ public class GemClientController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value="balancePay")
-	public String testPay(HttpServletResponse response,HttpServletRequest request){
+	public String testPay(HttpServletResponse response,HttpServletRequest request,OrderVO orderVO,Integer shoppingCarid,String list){
 		String code = GetWeiXinCode.getCodeRequest();
+		
+		String orderNo = CommonUtils.getBillCode("GM");
+		orderVO.setOrder_no(orderNo);
+		Integer orderId;
+		//根据 用户名 和 购物车id 删除 购物车信息
+		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+		try {
+			orderId = gemService.saveOrderRelID(orderVO);
+		
+			if(orderId > 0){
+				System.out.println("新增成功！");
+				//获取Session 商品表
+				Object spCart = session.getAttribute("shoppCart");
+				if(spCart != null){
+					List<GemVO> gemList = (List<GemVO>)spCart;
+					List<OrderBVO> orderBList = new ArrayList<OrderBVO>();
+					OrderBVO orderBVO;
+					for (GemVO gemVO : gemList) {
+						orderBVO = new OrderBVO();
+						orderBVO.setPrice(gemVO.getRetail_price());
+						orderBVO.setGem_id(gemVO.getId());
+						orderBVO.setQuantity(CommonUtils.isNull(gemVO.getVdef1()) ? 0 : Integer.valueOf(gemVO.getVdef1()));
+						orderBVO.setOrder_id(orderId);
+						orderBVO.setTs(DateUtil.getCurTimestamp());
+						orderBVO.setDr(IConstant.SHORT_ZERO);
+						orderBList.add(orderBVO);
+					}
+					gemService.saveOrderBVORelID(orderBList);
+				}
+				/*List<OrderBVO> orderBList = JsonUtils.getListFromJson(list, OrderBVO.class);
+				if(orderBList != null){
+					for (OrderBVO orderBVO : orderBList) {
+						orderBVO.setOrder_id(orderId);
+						orderBVO.setTs(DateUtil.getCurTimestamp());
+						orderBVO.setDr(IConstant.SHORT_ZERO);
+					}
+					gemService.saveOrderBVORelID(orderBList);
+				}*/
+			}
+			gemService.delShoppingCarByUname(uname+"");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Map map = new HashMap();
+		orderVO.setTotalPrice(0.1);
+		map.put("totalPrice", orderVO.getTotalPrice());
+		map.put("orderCode", orderNo);
+		session.setAttribute("sOrderMap", map);
 		return "redirect:"+code;
 	}
 	
