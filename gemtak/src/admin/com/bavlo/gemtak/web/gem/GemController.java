@@ -252,7 +252,7 @@ public class GemController extends BaseController {
 		//返回状态
 		String bkst = st;
 		if(!IConstant.RELEASE_C.equals(st)){
-			bkst = IConstant.RELEASE_C;
+			bkst = IConstant.RELEASE_C; //已关闭
 			if(IConstant.EN_UK.equals(lang)){
 				btnName = AGemListLang.LT_GEM_RELEASE_EN;//发布
 				warName = AGemListLang.LT_GEM_CLOSE_EN;//关闭
@@ -261,7 +261,7 @@ public class GemController extends BaseController {
 				warName = AGemListLang.LT_GEM_CLOSE_CN;//关闭
 			}
 		}else{
-			bkst = IConstant.RELEASE_Y;
+			bkst = IConstant.RELEASE_Y; //已发布
 			if(IConstant.EN_UK.equals(lang)){
 				btnName = AGemListLang.LT_GEM_CLOSE_EN;//关闭
 				warName = AGemListLang.LT_GEM_RELEASE_EN;//发布
