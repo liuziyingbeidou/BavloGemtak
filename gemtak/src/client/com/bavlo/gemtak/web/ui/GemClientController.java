@@ -219,9 +219,10 @@ public class GemClientController extends BaseController {
 	 * @param @param request
 	 * @param @return
 	 * @return String
+	 * @throws Exception 
 	 */
 	@RequestMapping(value="viewGemDetaile")
-	public String viewGemDetaile(Model model,HttpServletResponse response,HttpServletRequest request,Integer id){
+	public String viewGemDetaile(Model model,HttpServletResponse response,HttpServletRequest request,Integer id) throws Exception{
 		
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
@@ -230,6 +231,7 @@ public class GemClientController extends BaseController {
 		GemClientPageModel.getCDetailePageModel(model,lang);
 		GemVO gem = gemService.findGemVOByID(id);
 		gem.setPage_views(gem.getPage_views()+1);
+		gemService.updateGemVOPageViews(gem);//没查看一次详情页，浏览次数加1
 		model.addAttribute("gem", gem);
 		model.addAttribute("model", "hbx");
 		/*return IClientForward.viewGemDetaile;*/
