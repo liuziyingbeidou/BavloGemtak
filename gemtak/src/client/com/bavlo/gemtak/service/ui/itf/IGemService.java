@@ -50,6 +50,13 @@ public interface IGemService {
 	public void saveOrupdateGemVO(GemVO gemVO) throws Exception;
 	
 	/**
+	 *  修改gemVO 中page_views子段 +1
+	 * 3.15 lisuike
+	 * 
+	 */
+	public void updateGemVOPageViews(GemVO gemVO) throws Exception;
+	
+	/**
 	 *1. 添加到购物车
 	 * @param gemId
 	 * @param userId
