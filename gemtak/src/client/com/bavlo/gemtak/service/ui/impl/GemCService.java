@@ -69,9 +69,12 @@ public class GemCService extends CommonService implements IGemService {
 	 */
 	@Override
 	public void updateGemVOPageViews(GemVO gemVO) throws Exception {
+		if(gemVO.getPage_views() == null){
+			gemVO.setPage_views(0);
+		}
 		gemVO.setPage_views(gemVO.getPage_views()+1);
 		//saveOrUpdate(gemVO);
-		saveReID(gemVO);
+		update(gemVO);
 	}
 	
 	/**
