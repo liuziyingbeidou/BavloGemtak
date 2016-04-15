@@ -51,6 +51,7 @@ public class GemCService extends CommonService implements IGemService {
 	}
 
 	/**
+	 *  新增GemVO
 	 * 3.15 lisuike
 	 * @see com.bavlo.gemtak.service.gem.itf.IGemService#saveGemVO(com.bavlo.gemtak.model.gem.GemVO)
 	 */
@@ -62,6 +63,19 @@ public class GemCService extends CommonService implements IGemService {
 	}
 
 	/**
+	 *  修改gemVO 中page_views子段 +1
+	 * 3.15 lisuike
+	 * 
+	 */
+	@Override
+	public void updateGemVOPageViews(GemVO gemVO) throws Exception {
+		gemVO.setPage_views(gemVO.getPage_views()+1);
+		//saveOrUpdate(gemVO);
+		saveReID(gemVO);
+	}
+	
+	/**
+	 * 查询所有 宝石
 	 * 3.15 lisuike
 	 * @see com.bavlo.gemtak.service.gem.itf.IGemService#findAllGemVO()
 	 */
@@ -72,8 +86,9 @@ public class GemCService extends CommonService implements IGemService {
 	}
 
 	/**
-	 * 3.15 lisuike
 	 * 给据id查询 一个GemVO
+	 * 3.15 lisuike
+	 * 
 	 */
 	@Override
 	public GemVO findGemVOByID(Integer id) {
