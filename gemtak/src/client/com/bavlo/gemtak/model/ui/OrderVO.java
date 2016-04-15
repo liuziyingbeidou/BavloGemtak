@@ -80,8 +80,17 @@ public class OrderVO extends IdEntity {
 	private Integer code_id;
 	//用户id
 	private Integer customer_id;
+	//用户名
+	private String username;
 	private Integer invoice_id;
 	private Integer logistic_id;
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public String getCellphone() {
 		return cellphone;
 	}
