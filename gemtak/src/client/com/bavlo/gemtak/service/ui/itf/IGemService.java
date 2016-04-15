@@ -88,11 +88,15 @@ public interface IGemService {
 	 * @throws Exception
 	 */
 	public void delShoppingCarByGemId(String username,Integer shoppingCarid) throws Exception;
-	
+	/**
+	 * 5.根据用户名删除购物车
+	 * @param username
+	 * @throws Exception
+	 */
 	public void delShoppingCarByUname(String username) throws Exception;
 	
 	/**
-	 * 5.查询存储到cookie中的商品信息
+	 * 6.查询存储到cookie中的商品信息
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -100,15 +104,16 @@ public interface IGemService {
 	public List<GemVO> getGemByCookie(String ids) throws Exception;
 	
 	/**
-	 * 
-	 * @return 查询所有的GemVO list集合
+	 * 7.查询所有的GemVO list集合
+	 * @return 
 	 * @throws Exceptionc
 	 */
 	public List<GemVO> findAllGemVO();
 	
 	/**
+	 * 8.根据id 查询一条gemVO
 	 * lisuike 3.15
-	 * 给据id查询 一个 GemVO
+	 * 
 	 */
 	public GemVO findGemVOByID(Integer id);
 	
@@ -134,28 +139,34 @@ public interface IGemService {
 	public void updateGemById(Integer id,String st) throws Exception;
 	
 	/**
-	 * 删除按钮
+	 * 9.删除按钮
 	 */
 	public void updateDrGemById(Integer id) throws Exception;
 	
 	/**
-	 * 根据
+	 * 
 	 * @param sql
 	 */
 	public Integer getListSizeGem(String contions);
 	
 	/**
-	 * 6.提交订单  保存订单主表
+	 * 10.提交订单  保存订单主表
 	 */
 	public Integer saveOrderRelID(OrderVO orderVO) throws Exception;
 	
 	/**
-	 * 7.提交订单  保存订单子表
+	 * 11.提交订单  保存订单子表
 	 */
 	public void saveOrderBVORelID(List<OrderBVO> orderBList) throws Exception;
 	
 	/**
-	 * 8.根据订单号 改写订单状态
+	 * 12.根据订单号 改写订单状态
 	 */
 	public void rewriteOrderStatus(String orderno);
+	
+	/**
+	 * 13.根据用户名查订单
+	 * @param uname
+	 */
+	public List<OrderVO> getOrderByUname(String uname);
 }
