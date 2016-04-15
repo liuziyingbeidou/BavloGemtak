@@ -157,7 +157,12 @@
 				 </p>
 				 <p class="col-md-2 hidden-xs hidden-sm">
 				   <a href="javascript:updeIs_del(${gem.id})" class="btn-del-${gem.id}" ms-state="${gem.is_release}">${pagevo['ltGemDel'] }</a>
-				   <a href="javascript:updeIs_release(${gem.id})" class="btn-rele-${gem.id}" ms-state="${gem.is_release}">${pagevo['ltGemRelease'] }</a>
+				   <c:if test="${gem.is_release=='Y'}">
+				    <a href="javascript:updeIs_release(${gem.id})" class="btn-rele-${gem.id}" ms-state="${gem.is_release}">${pagevo['ltGemClose'] }</a>
+				   </c:if>
+				   <c:if test="${gem.is_release=='C'||gem.is_release=='E'}">
+				    <a href="javascript:updeIs_release(${gem.id})" class="btn-rele-${gem.id}" ms-state="${gem.is_release}">${pagevo['ltGemRelease'] }</a>
+				   </c:if>
 				 </p>
 			 </dd>
 		  </dl>
