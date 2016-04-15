@@ -188,7 +188,7 @@ public class GemController extends BaseController {
 			return "/admin/warn";
 		}*/
 		try {
-			gemService.saveOrupdateGemVO(gemVO);
+			gemService.updateGemVO(gemVO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
