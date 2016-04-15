@@ -619,7 +619,7 @@ public class GemClientController extends BaseController {
 		if(orderno != null){
 			gemService.rewriteOrderStatus(orderno);
 		}
-		renderText("{\"msg\":\"Y\"}");
+		renderText("{\"msg\":\"Y\"}");//ÓĞ´ıÍêÉÆ
 	}
 	
 	/**
