@@ -44,7 +44,7 @@ public interface IGemService {
 	 * @param @throws Exception
 	 * @return void
 	 */
-	public void saveOrupdateGemVO(GemVO gemVO) throws Exception;
+	public void updateGemVO(GemVO gemVO) throws Exception;
 	
 	/**
 	 * lisuike 3.15
