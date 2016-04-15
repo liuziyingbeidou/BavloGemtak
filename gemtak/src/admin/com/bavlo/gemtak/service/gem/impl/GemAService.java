@@ -49,11 +49,11 @@ public class GemAService extends CommonService implements IGemService {
 	 * @see com.bavlo.gemtak.service.gem.itf.IGemService#saveGemVO(com.bavlo.gemtak.model.gem.GemVO)
 	 */
 	@Override
-	public void saveOrupdateGemVO(GemVO gemVO) throws Exception {
+	public void updateGemVO(GemVO gemVO) throws Exception {
 		gemVO.setTs(DateUtil.getStrTimestamp(DateUtil.getCurDateTime()));
 		//gemVO.setDr(IConstant.SHORT_ZERO);
 		//saveOrUpdate(gemVO);
-		saveOrUpdate(gemVO);
+		update(gemVO);
 	}
 
 	/**
