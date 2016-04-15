@@ -677,7 +677,7 @@ public class GemClientController extends BaseController {
 		GemClientPageModel.getCOrderPayPageModel(model,lang);
 		String uname = (String)session.getAttribute(IConstant.SESSIONUSERNAEM);
 		List<OrderVO> orderList = gemService.getOrderByUname(uname+"");
-		model.addAttribute("Order",orderList);
+		model.addAttribute("orderList",orderList);
 		return IClientForward.gemUser;
 	}
 	
