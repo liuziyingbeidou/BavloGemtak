@@ -26,13 +26,18 @@
 			saveOrupdate();
 		});
 		
+		//退出编辑
+		$(".btn-close").click(function(){
+		  location.href = "${ctx}/gemAdmin/viewGemList.do";
+		});
+		
 		//删除证书
 		$(".btn-delete").click(function(){
 			deleteCert();
 		});
 	});
 	
-		
+		//保存哥们VO的方法
 	  function saveOrupdate(){
 		  
 		  //宝石类型-隐藏域
@@ -65,21 +70,9 @@
 		  
 		  var url = "${ctx}/gemAdmin/saveOrUpdate.do";
 		  $.post(url,$('#gemVO').serialize(),function(data){
-			  
 			  alert("保存成功！");
+			  location.href = "${ctx}/gemAdmin/viewGemList.do";
 		  });
-		 /*  $.ajax({
-			  url:"${ctx}/gemAdmin/saveOrUpdate.do",
-			  type:"post",
-			  data:$('#gemVO').serialize(),// formid
-			  dataType:"",
-			  success:function(){
-				  alert("保存成功！");
-			  },
-		      error:function(){
-		    	  alert("保存失败!");
-		      }
-		  }); */
 	  }
 	  
 	  
@@ -153,6 +146,11 @@
 			margin-top: -20;
 		}
 	</style>
+	<%
+	 java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+     java.util.Date currentTime = new java.util.Date();  
+     String time = simpleDateFormat.format(currentTime).toString();
+	 %>
 </head>
 <body>
 
@@ -162,16 +160,20 @@
 </div>  
 <div class="tit_all">
 	<div class="container">
+	    <form id="gemVO" action="">
 	    <div class="tit col-sm-12">
+	    
 	       <!-- 表头 -->
 		   <div class="tit_game">
-		      <h2 class="col-sm-12 col-md-5 "><span>${pagevo['titleEdit'] }</span>GID 2281559</h2>
+		      <h2 class="col-sm-12 col-md-5 "><span>${pagevo['titleEdit'] }</span>${gem.id}</h2>
+		      <input type="hidden" name="id" value="${gem.id}"/>
 			  <div class="line col-sm-12 hidden-md hidden-lg"></div>
-			  <p class="col-sm-12 col-md-5 "><span>${pagevo['tableModify'] }: 2016-02-09-23 20:11</span><span>${pagevo['tablePageviews'] }: 287 ${pagevo['tablePageviewsTime'] }</span></p>
+			  <!-- 显示的更新时间  ts-->
+			  <p class="col-sm-12 col-md-5 "><span>${pagevo['tableModify'] }:${gem.ts}</span><span>${pagevo['tablePageviews'] }: ${gem.page_views} ${pagevo['tablePageviewsTime'] }</span></p>
 			  <div class="line col-sm-12 hidden-xs hidden-sm"></div>
 		   </div>
 		   <!-- Body域 -->
-		 <form id="gemVO" >
+		 
 		  <input type="hidden" name="supplier_id">
 		   <div class="game_ul">
 		       <ul class="col-sm-5">
@@ -303,10 +305,10 @@
 					    <div class="li_inp_pr col-xs-6"><input type="text" name="lab_no" class="form-control" placeholder="${pagevo['tableLabNo'] }"></div>
 					 </li>
 					 <li>
-					     <div class="li_inp_pl col-xs-6"><input type="text" name="supplier" class="form-control" placeholder="${pagevo['tableSupplier'] }"></div>
-					     <div class="li_inp_pr col-xs-6"><input type="text" name="supplier_code" class="form-control" placeholder="${pagevo['tableSupplierCode'] }"></div>
+					     <div class="li_inp_pl col-xs-6"><input type="text" name="supplier" class="form-control" value="${gem.supplier}" placeholder="${pagevo['tableSupplier'] }"></div>
+					     <div class="li_inp_pr col-xs-6"><input type="text" name="supplier_code" class="form-control" value="${gem.supplier_code}" placeholder="${pagevo['tableSupplierCode'] }"></div>
 					</li>
-					<li><input type="text" name="location" class="form-control" placeholder="${pagevo['tableLocation'] }"></li>  
+					<li><input type="text" name="location" class="form-control" value="${gem.location}" placeholder="${pagevo['tableLocation'] }"></li>  
 			         <li>
 					     <div class="li_inp_pl col-xs-5">
 							   <div class="radio">
@@ -328,6 +330,8 @@
 	  </div>
 	   <input type="hidden" class="input-lab_url" name="lab_url" value="">
 	</form>
+	
+	<!-- 上传证书 -->
 	<form id="sgform" action="" method="post" enctype="multipart/form-data">
 	  <input type="hidden" name="filemodel" id="filemodel" value="cert">
 	  <input type="hidden" name="filetype" id="filetype" value="pic">	
@@ -345,7 +349,7 @@
 		 </div>
 		 <div class="col-xs-1 col-md-2"></div>
 		 <div class="col-xs-5 col-md-5">
-			 <p class="col-xs-6 col-md-5" ><button type="button" class="btn btn-col btn-lg btn-block">${pagevo['buttonClose'] }</button></p>
+			 <p class="col-xs-6 col-md-5" ><button type="button" class="btn btn-col btn-lg btn-block btn-close">${pagevo['buttonClose'] }</button></p>
 			 <p class="col-xs-1 col-md-2" ></p>
 			 <p class="col-xs-5 col-md-5"><button type="button" class="btn btn-col btn-lg btn-block btn-save">${pagevo['buttonSave'] }</button></p>
 		 </div>
