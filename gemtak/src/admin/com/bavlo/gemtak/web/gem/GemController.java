@@ -136,9 +136,32 @@ public class GemController extends BaseController {
 	 * @param @param response
 	 * @param @return
 	 * @return String
-	 */
+	 *//*
 	@RequestMapping(value="addGem")
 	public String insertGem(Model model,HttpServletRequest request,HttpServletResponse response){
+		if(checkU()){
+			return "/admin/warn";
+		}
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		getCardPageModel(model,lang);
+		
+		return "/admin/gem/gem-card";
+	}*/
+	
+	/**
+	 * 1.点击宝石入库 根据gemid查询出一条宝石信息  跳转gem-card.jsp 
+	 * @Description:
+	 * @param @param model
+	 * @param @param request
+	 * @param @param response
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="updateGem")
+	public String updateGem(Model model,HttpServletRequest request,HttpServletResponse response,String gemid){
 		/*if(checkU()){
 			return "/admin/warn";
 		}*/
@@ -147,21 +170,23 @@ public class GemController extends BaseController {
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		getCardPageModel(model,lang);
-		
+		GemVO gem = gemService.findGemVOByID(Integer.valueOf(gemid));
+		model.addAttribute("gem",gem);
 		return "/admin/gem/gem-card";
 	}
 	
 	/**
-	 * @Description: 1.新增gemVO的方法
+	 * 2.修改gemVO的方法
+	 * @Description: 
 	 * @param @param GemVO 
 	 * @param @param lisuike
 	 * @return void
 	 */
 	@RequestMapping(value="saveOrUpdate")
 	public String saveOrupdateGemVO(Model model,HttpServletRequest request,HttpServletResponse response,GemVO gemVO) {
-		if(checkU()){
+		/*if(checkU()){
 			return "/admin/warn";
-		}
+		}*/
 		try {
 			gemService.saveOrupdateGemVO(gemVO);
 		} catch (Exception e) {
@@ -174,7 +199,8 @@ public class GemController extends BaseController {
 	
 	
 	/**
-	 * @Description: 2.查询出所有gemVO
+	 * 3.查询出所有gemVO
+	 * @Description: 
 	 * @param @param List<GemVO>
 	 * @param @param lisuike
 	 * @return void
@@ -190,7 +216,7 @@ public class GemController extends BaseController {
 	}
 	
 	/**
-	 * 3.点击删除按钮，更新DR字段为1
+	 * 4.点击删除按钮，更新DR字段为1
 	 * @Description: TODO(点击删除按钮，更新DR字段为1) 
 	 * @param @param id
 	 * @param @param dr
@@ -208,7 +234,7 @@ public class GemController extends BaseController {
 	
 	
 	/**
-	 * 4.点击发布按钮 将其改为关闭
+	 * 5.点击发布按钮 将其改为关闭
 	 * @Description: 给据id查询出一条gemVO 
 	 * @param @param GemVO
 	 * @param @param lisuike
