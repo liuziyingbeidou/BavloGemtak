@@ -563,6 +563,7 @@ public class GemClientController extends BaseController {
 		//根据 用户名 和 购物车id 删除 购物车信息
 		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
 		try {
+			orderVO.setUsername(uname+"");
 			orderId = gemService.saveOrderRelID(orderVO);
 		
 			if(orderId > 0){
@@ -608,7 +609,7 @@ public class GemClientController extends BaseController {
 		return "redirect:"+code;
 	}
 	
-	/**
+	/**88888888888888
 	 * @Description: 根据订单号 改写订单状态
 	 * @param @param model
 	 * @param @param response
@@ -621,7 +622,7 @@ public class GemClientController extends BaseController {
 		if(orderno != null){
 			gemService.rewriteOrderStatus(orderno);
 		}
-		renderText("{\"msg\":\"Y\"}");//有待完善
+		renderText("{\"msg\":\"Y\"}");//有待完善8888888888888888888888888888888888888888
 	}
 	
 	/**
@@ -656,6 +657,28 @@ public class GemClientController extends BaseController {
 		GemClientPageModel.getCOrderPayPageModel(model,lang);
 		
 		return IClientForward.gemOrderPay;
+	}
+	
+	/**
+	 * @Description: 查询 我的订单
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="selMyOrder")
+	public String selMyOrder(Model model,HttpServletResponse response,HttpServletRequest request){
+		
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCOrderPayPageModel(model,lang);
+		String uname = (String)session.getAttribute(IConstant.SESSIONUSERNAEM);
+		List<OrderVO> orderList = gemService.getOrderByUname(uname+"");
+		model.addAttribute("Order",orderList);
+		return IClientForward.gemUser;
 	}
 	
 	/**
