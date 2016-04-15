@@ -34,7 +34,7 @@
 				}
 				if(args.current > args.pageCount-4 && args.current >= args.pageCount){
 					start--;
-				}
+				}debugger
 				for (;start <= end; start++) {
 					if(start <= args.pageCount && start >= 1){
 						if(start != args.current){
@@ -47,9 +47,9 @@
 				if(args.current + 2 < args.pageCount - 1 && args.current >= 1 && args.pageCount > 5){
 					obj.append('<span>...</span>');
 				}
-				if(args.current != args.pageCount && args.current < args.pageCount -2  && args.pageCount != 4){
+				/*if(args.current != args.pageCount && args.current < args.pageCount -2  && args.pageCount != 4){
 					obj.append('<a href="javascript:;" class="tcdNumber">'+args.pageCount+'</a>');
-				}
+				}*/
 				//下一页
 				if(args.current < args.pageCount){
 					obj.append('<a href="javascript:;" class="nextPage">下一页</a>');
