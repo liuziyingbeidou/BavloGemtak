@@ -230,7 +230,6 @@ public class GemClientController extends BaseController {
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCDetailePageModel(model,lang);
 		GemVO gem = gemService.findGemVOByID(id);
-		gem.setPage_views(gem.getPage_views()+1);
 		gemService.updateGemVOPageViews(gem);//没查看一次详情页，浏览次数加1
 		model.addAttribute("gem", gem);
 		model.addAttribute("model", "hbx");
