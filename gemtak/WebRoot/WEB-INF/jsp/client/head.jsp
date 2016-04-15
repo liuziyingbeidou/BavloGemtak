@@ -30,7 +30,7 @@
 	  <c:if test="${uname != null}">
 	    <t class="t-css"> Hi, ${uname}</t>
 	    <a class="replaceA" href="${ctx }/gemClient/logout.do">${pagehfvo['hMSignOut'] }</a>|
-		<a class="replaceB" href="">${pagehfvo['hMOrder'] }</a>|
+		<a class="replaceB" href="${ctx }/gemClient/selMyOrder.do">${pagehfvo['hMOrder'] }</a>|
 	  </c:if>
 	  <c:if test="${uname == null}">
 	    <t class="t-css"></t>
