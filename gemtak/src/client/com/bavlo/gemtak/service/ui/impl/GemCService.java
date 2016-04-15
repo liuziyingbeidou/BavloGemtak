@@ -143,7 +143,6 @@ public class GemCService extends CommonService implements IGemService {
 	/**
 	 * 点击删除按钮，修改数据库字段
 	 */
-	
 	public void updateDrGemById(Integer id) throws Exception {
 		if(id != null){
 			String[] attrname = new String[]{"dr"};
@@ -151,9 +150,7 @@ public class GemCService extends CommonService implements IGemService {
 			if(id != null){
 				updateAttrs(GemVO.class, attrname, attrval, " id="+id);
 			}
-			
 		}
-		
 	}
 
 	@Override
@@ -162,7 +159,11 @@ public class GemCService extends CommonService implements IGemService {
 	}
 
 	/**
-	 * 新增到购物车
+	 *1. 添加到购物车
+	 * @param gemId
+	 * @param userId
+	 * @throws Exception
+	 * lisuike 2016-3-28 上午 11:13:45
 	 */
 	@Override
 	public void saveOrupdateShoppingCarVO(Integer gemId, String username,Integer quantity)
@@ -175,7 +176,10 @@ public class GemCService extends CommonService implements IGemService {
 	}
     
 	/**
-	 * 根据用户名查询 查询当前用户的购物车商品数量
+	 *2. 根据用户名查询购物车 的商品数量
+	 * @param userId
+	 * @return
+	 * @throws Exception
 	 */
 	@Override
 	public Integer getShoppingCarNumByUname(String username) throws Exception {
@@ -183,7 +187,10 @@ public class GemCService extends CommonService implements IGemService {
 	}
 
 	/**
-	 * 根据用户名查询 查询当前用户的购物车
+	 *3. 根据用户名查询购物车 的商品
+	 * @param userId
+	 * @return
+	 * @throws Exception
 	 */
 	@Override
 	public List<GemVO> getShoppingCarListByUname(String username)
@@ -235,7 +242,10 @@ public class GemCService extends CommonService implements IGemService {
 	}
 
 	/**
-	 * 根据用户名 商品id 删除购物车中选中的 商品
+	 *4. 根据用户名 购物车id删除购物车 选中的商品
+	 * @param userId
+	 * @return
+	 * @throws Exception
 	 */
 	@Override
 	public void delShoppingCarByGemId(String username, Integer shoppingCarid)
@@ -244,7 +254,7 @@ public class GemCService extends CommonService implements IGemService {
 	}
 
 	/**
-	 * 5.查询存储到cookie中的商品信息
+	 * 6.查询存储到cookie中的商品信息
 	 * @param id
 	 * @return
 	 * @throws Exception
@@ -276,7 +286,9 @@ public class GemCService extends CommonService implements IGemService {
 	}
 
 	/**
-	 * 8.根据用户名 删除购物车
+	 * 5.根据用户名删除购物车
+	 * @param username
+	 * @throws Exception
 	 */
 	@Override
 	public void delShoppingCarByUname(String username) throws Exception {
@@ -294,6 +306,16 @@ public class GemCService extends CommonService implements IGemService {
 		if(orderno != null){
 			updateAttrs(OrderVO.class, attrname, attrval, " order_no="+orderno);
 		}
+	}
+
+	/**
+	 * 13.根据用户名查订单
+	 * @param uname
+	 */
+	@Override
+	public List<OrderVO> getOrderByUname(String uname) {
+		List<OrderVO> orderList = findAll(OrderVO.class, " username='"+uname+"'");
+		return orderList;
 	}
 
 	
