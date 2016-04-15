@@ -45,14 +45,15 @@ public class GemAService extends CommonService implements IGemService {
 	}
 
 	/*
-	 * 3.15 lisuike
+	 * 3.15 lisuike  新增、修改宝石
 	 * @see com.bavlo.gemtak.service.gem.itf.IGemService#saveGemVO(com.bavlo.gemtak.model.gem.GemVO)
 	 */
 	@Override
 	public void saveOrupdateGemVO(GemVO gemVO) throws Exception {
 		gemVO.setTs(DateUtil.getStrTimestamp(DateUtil.getCurDateTime()));
+		//gemVO.setDr(IConstant.SHORT_ZERO);
 		//saveOrUpdate(gemVO);
-		saveReID(gemVO);
+		saveOrUpdate(gemVO);
 	}
 
 	/**
@@ -72,7 +73,7 @@ public class GemAService extends CommonService implements IGemService {
 	@Override
 	public GemVO findGemVOByID(Integer id) {
 		// TODO Auto-generated method stub
-		return findFirst(GemVO.class, id.toString());
+		return findFirst(GemVO.class, " id="+id.toString());
 	}
 
 	@Override
@@ -113,16 +114,13 @@ public class GemAService extends CommonService implements IGemService {
 		
 	}
 
-	//点击删除按钮，修改数据库字段
 	
+	//点击删除按钮，更新DR字段为1
 	public void updateDrGemById(Integer id) throws Exception {
 		if(id != null){
 			String[] attrname = new String[]{"dr"};
 			Short[] attrval = new Short[]{1};
-			if(id != null){
-				updateAttrs(GemVO.class, attrname, attrval, " id="+id);
-			}
-			
+			updateAttrs(GemVO.class, attrname, attrval, " id="+id);
 		}
 		
 	}
