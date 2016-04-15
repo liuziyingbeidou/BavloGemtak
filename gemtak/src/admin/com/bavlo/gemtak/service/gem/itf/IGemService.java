@@ -39,7 +39,7 @@ public interface IGemService {
 	public void updateGemInfo(Integer id) throws Exception;
 	
 	/**
-	 * @Description: 新增GemVO
+	 * @Description:1. 新增、 修改宝石
 	 * @param @param gemVO
 	 * @param @throws Exception
 	 * @return void
@@ -48,14 +48,14 @@ public interface IGemService {
 	
 	/**
 	 * lisuike 3.15
-	 * @return 查询所有的GemVO list集合
+	 * @return2. 查询所有的GemVO list集合
 	 * @throws Exception
 	 */
 	public List<GemVO> findAllGemVO();
 	
 	/**
 	 * lisuike 3.15
-	 * 给据id查询 一个 GemVO
+	 * 3.给据id查询 一个 GemVO
 	 */
 	public GemVO findGemVOByID(Integer id);
 	
