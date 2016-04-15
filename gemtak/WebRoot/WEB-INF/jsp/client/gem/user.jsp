@@ -30,23 +30,31 @@
 		   </div> 
 		   <div class="ddjl">
 			   <div class="user_br">
+				 <c:forEach items="${orderList}" var="order">
 				 <ul>
-					<li>订单号：<b>61818204</b></li>
-					<li>下单时间：2013-11-09 17:19</li>
-					<li>总金额：￥1685</li>
-					<li>状态：未支付<a href="">立即支付</a></li>	 
+					<li>订单号：<b>${order.order_no}</b></li>
+					<li>下单时间：${order.created}</li>
+					<li>总金额：￥${order.totalPrice}</li>
+					<c:if test="${order.status=='Y'}">
+					 <li>状态：已支付</li>
+					</c:if>
+					<c:if test="${order.status=='N'}">
+					 <li>状态：未支付<a href="">立即支付</a></li>
+					</c:if>
+					
 				 </ul>
+				 </c:forEach>	 
 				 <dl>
 					<dt class="col-xs-3"><a href=""><img src="${ctx }/resources/client/images/gw1.jpg"  /></a></dt>
 					<dd class="col-xs-9"><p><b>神话•双鱼座</b></p><p>数量：<span>1 </span></p><p>原价：<span>￥3090000</span></p></dd>
 				 </dl>
-				 <dl>
+				 <%-- <dl>
 					<dt class="col-xs-3"><a href=""><img src="${ctx }/resources/client/images/gw1.jpg"  /></a></dt>
 					<dd class="col-xs-9"><p><b>神话•双鱼座</b></p><p>数量：<span>1 </span></p><p>原价：<span>￥3090000</span></p></dd>
-				 </dl>
+				 </dl> --%>
 			   </div>
 			    <div class="line "></div>
-			   <div class="user_br">
+			   <%-- <div class="user_br">
 				 <ul>
 					<li>订单号：<b>61818204</b></li>
 					<li>下单时间：2013-11-09 17:19</li>
@@ -57,7 +65,7 @@
 					<dt class="col-xs-3"><a href=""><img src="${ctx }/resources/client/images/gw1.jpg" width="100%" /></a></dt>
 					<dd class="col-xs-9"><p><b>神话•双鱼座</b></p><p>数量：<span>1 </span></p><p>原价：<span>￥3090000</span></p></dd>
 				 </dl>
-			   </div> 
+			   </div>  --%>
 		   </div>
 		   <div class="inmenu ">
 				<h2 class="doname"><a href="./.html">收货地址管理</a></h2>
