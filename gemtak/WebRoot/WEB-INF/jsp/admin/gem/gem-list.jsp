@@ -147,8 +147,8 @@
 				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>${gem.type_cn}</font><font>${gem.shape_cn}</font><font>${gem.lab_cn}</font></span><span  class="col-md-6 col-xs-12"><font>${gem.weight}</font><font>${gem.stock_qty}${gem.pairs}</font><font class="fc_001">¥${gem.purchase_price}</font></span></p>
 				 <p class="col-md-5 col-xs-12">
 				   <span class="col-xs-12 col-md-6" >
-				      <!-- 宝石 -->
-				      ${pagevo['ltTypeGem'] }：<a href="./game.html">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a>
+				      <!-- 宝石 入库、签收 -->
+				      ${pagevo['ltTypeGem'] }：<a href="javascript:updateGemVO(${gem.id})">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a>
 				   </span>
 				   <span  class="col-xs-12 col-md-6 pad_0">
 				      <!-- 产品 -->
@@ -261,6 +261,9 @@
     	window.location.href= url;
     }
     
-    
+    //点击宝石 入库跳转 修改宝石页面
+    function updateGemVO(gemid){
+      window.location.href = "${ctx}/gemAdmin/updateGem.do?gemid="+gemid;
+    }
 </script>
 </html>
