@@ -273,6 +273,8 @@ public class GemCService extends CommonService implements IGemService {
 	 */
 	@Override
 	public Integer saveOrderRelID(OrderVO orderVO) throws Exception {
+		orderVO.setStatus("N");
+		orderVO.setCreated(DateUtil.getStrTimestamp(DateUtil.getCurDateTime()));
 		Integer id  = saveReID(orderVO);
 		return id;
 	}
