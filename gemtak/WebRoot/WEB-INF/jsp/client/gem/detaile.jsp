@@ -26,6 +26,10 @@
 <link rel="stylesheet" href="${ctx }/resources/amazeui/css/amazeui.min.css"/>
 <script type="text/javascript" src="${ctx }/resources/amazeui/js/handlebars.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/amazeui/js/amazeui.min.js"></script>
+<%
+  String bis = (String)session.getAttribute("bisBis");
+ %>
+ <c:set value="<%=bis %>" var="bis"/>
 <script>
 $(document).ready(function() {
 	getCarNum();
@@ -139,7 +143,12 @@ function addShoppCar(id){
 					</li><li>编号：<span>${gem.stock_qty}</span>
 					</li><li>卖家：<span>${gem.supplier}</span></li>
 				</ul>
-				<p>价格（Price）：<span>¥${gem.retail_price} <em>/${gem.pairs}</em></span></p>
+				<c:if test="${bis=='Y'}">
+				 <p>价格（Price）：<span>¥${gem.trade_price} <em>/${gem.pairs}</em></span></p>
+				</c:if>
+				<c:if test="${bis!='Y'}">
+				 <p>价格（Price）：<span>¥${gem.retail_price} <em>/${gem.pairs}</em></span></p>
+				</c:if>
 				<div class="add_gu"><a href="javascript:void(0)" class="gw_a" onclick="addShoppCar(${gem.id})">+ 购物车</a><a href="">订购款式 ></a></div>		  
 		  </div>
 	  </div>
