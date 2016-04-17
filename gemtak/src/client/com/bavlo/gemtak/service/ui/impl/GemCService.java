@@ -320,6 +320,16 @@ public class GemCService extends CommonService implements IGemService {
 		return orderList;
 	}
 
+	/**
+	 * 14.根据用户名查订单总数
+	 * @param uname
+	 * @return
+	 */
+	@Override
+	public Integer getOrderNoByUname(String uname) {
+		return getCountByHQL(OrderVO.class, " username='"+uname+"'");
+	}
+
 	
 	
 	
