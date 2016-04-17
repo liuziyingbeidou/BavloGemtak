@@ -676,7 +676,9 @@ public class GemClientController extends BaseController {
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCOrderPayPageModel(model,lang);
 		String uname = (String)session.getAttribute(IConstant.SESSIONUSERNAEM);
-		List<OrderVO> orderList = gemService.getOrderByUname(uname+"");
+		List<OrderVO> orderList = gemService.getOrderByUname(uname);
+		Integer num = gemService.getOrderNoByUname(uname);
+		model.addAttribute("num",num);
 		model.addAttribute("orderList",orderList);
 		return IClientForward.gemUser;
 	}
