@@ -19,13 +19,13 @@ public interface IConstant {
 	//找回密码接口
 	public static final String forgetPwdURL = "http://www.bavlo.com/web/forgetPwd";
 	//根据用户id获取收货地址接口
-	public static final String shoppingAddressURL = "http://192.168.1.115/gemtak-invoke/getCustomerAddrByUname";
+	public static final String shoppingAddressURL = "http://www.bavlo.com/gemtak-invoke/getCustomerAddrByUname";
 	//新增用户收货地址接口
-    public static final String  addShoppingAddressURL = "http://192.168.1.115/gemtak-invoke/updateAddress";
+    public static final String  addShoppingAddressURL = "http://www.bavlo.com/gemtak-invoke/updateAddress";
     //删除用户收货地址接口
-    public static final String delShoppingAddressURL = "http://192.168.1.115/gemtak-invoke/deleteAddress";
+    public static final String delShoppingAddressURL = "http://www.bavlo.com/gemtak-invoke/deleteAddress";
     //根据id获取用户收货地址接口
-    public static final String getShoppingAddressByAidURL = "http://192.168.1.115/gemtak-invoke/getCustomerAddrById";
+    public static final String getShoppingAddressByAidURL = "http://www.bavlo.com/gemtak-invoke/getCustomerAddrById";
     //获取优惠码接口
   	public static final String getCoupponURL = "http://www.bavlo.com/gemtak-invoke/checkCode";
     
