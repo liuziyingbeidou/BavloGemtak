@@ -169,4 +169,11 @@ public interface IGemService {
 	 * @param uname
 	 */
 	public List<OrderVO> getOrderByUname(String uname);
+	
+	/**
+	 * 14.根据用户名查订单总数
+	 * @param uname
+	 * @return
+	 */
+	public Integer getOrderNoByUname(String uname);
 }
