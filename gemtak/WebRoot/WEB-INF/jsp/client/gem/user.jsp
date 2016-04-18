@@ -174,42 +174,48 @@ function deluser(id){
    });
 }
 
+
 //修改密码
 function updateUPassWord(){
  $(".updatePwd").click(function(){
   $(".newPwd").show();
-  var oldPwd = $(".oldPwd").val();
-  var newPwd = $(".newPwd").val();
-  var rePwd = $(".rePwd").val();
-  $(".oldPwd").blur(function(){
-   if(oldPwd == "" || oldPwd == null){
+  });
+  
+  $(".addPwd").click(function(){
+    var oldPwd = $(".oldPwd").val();
+    var newPwd = $(".xinPwd").val();
+    var rePwd = $(".rePwd").val();
+    if(oldPwd == "" || oldPwd == null){
 	   $(".oldpass").text("请输入原密码！");
 	   return;
    }
-  });
-  $(".newPwd").blur(function(){
    if(newPwd == "" || newPwd == null){
 	   $(".newpass").text("请输入新密码！");
 	   return;
   }
-  });
-  
-   $(".rePwd").blur(function(){
     if(rePwd != newPwd){
-    $(".error").text("两次输入的密码不相同！");
-    return;
-  }
-   });
-  
-  
- });
+	    $(".error").text("两次输入的密码不相同！");
+	    return;
+    }
+     var url = "/gemtak/gemClient/updateUserPWD.do";
+	  if(oldPwd != "" && newPwd != ""){
+	   var oldpass = oldPwd;
+	   var newpass = newPwd;
+	   $.post(url,{oldPwd:oldpass,newPwd:newpass},function(data){
+	    if(data == "true"){
+	     alert("您的密码已修改成功！");
+	     $(".newPwd").hide();
+	    }
+	   });
+	  }
+  });
 }
 
 
 function cleanPwd(){
  $(".cleanPwd").click(function(){
   $(".oldPwd").val();
-  $(".newPwd").val();
+  $(".xinPwd").val();
   $(".rePwd").val();
   $(".newPwd").hide();
  });
@@ -339,12 +345,12 @@ function selOrderGem(id){
 					<div class="ddgl newPwd" style="display: none"> 
 					   <form action="" method="post" > 
 						   <ul class="add_new1 m_top">
-							  <li><input  type="text" class="oldPwd"  name="key" placeholder="原密码" value="" /></li><b style="color: red;size: 14px;text-align: center;" class="oldpass"></b>
-							  <li><input  type="text" class="newPwd"  name="pwd" placeholder="新密码" value="" /></li><b style="color: red;size: 14px;text-align: center;" class="newpass"></b>
-							  <li><input  type="text" class="rePwd"  name="key" placeholder="确认密码" value="" /></li><b style="color: red;size: 14px;text-align: center;" class="error"></b>
-							  <li class="del_s"><a href="javascript:void(0)" class="cleanPwd">取 消</a><a href="javascript:void(0)" class="addPwd">保 存</a></li>
+							  <li><input  type="password" class="oldPwd"  name="key" placeholder="原密码" value="" /></li><b style="color: red;size: 14px;text-align: center;" class="oldpass"></b>
+							  <li><input  type="password" class="xinPwd"  name="pwd" placeholder="新密码" value="" /></li><b style="color: red;size: 14px;text-align: center;" class="newpass"></b>
+							  <li><input  type="password" class="rePwd"  name="key" placeholder="确认密码" value="" /></li><b style="color: red;size: 14px;text-align: center;" class="error"></b>
+							  <li class="del_s"><a href="javascript:void(0)" class="cleanPwd">取 消</a><a href="javascript:void(0)" class="addPwd" >保 存</a></li>
 						   </ul>
-						 </form>
+						</form>
 					</div>	
 			</div>    	  
 	</div>
