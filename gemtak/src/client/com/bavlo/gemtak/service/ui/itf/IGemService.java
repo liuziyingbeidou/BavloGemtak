@@ -176,4 +176,10 @@ public interface IGemService {
 	 * @return
 	 */
 	public Integer getOrderNoByUname(String uname);
+	
+	/**
+	 * 15.根据订单号查宝石
+	 * @param uname
+	 */
+	public List<GemVO> getOrderGemById(String orderid);
 }
