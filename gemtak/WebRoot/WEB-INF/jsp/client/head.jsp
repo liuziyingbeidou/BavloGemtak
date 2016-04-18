@@ -84,7 +84,7 @@
       	<c:if test="${uname != null}">
       	   <li class="t-css"><a href="##" class="" > Hi, ${uname}</a></li>
       	   <li class="">
-            <a href="##" class="" >${pagehfvo['hMOrder'] }</a>
+            <a href="${ctx }/gemClient/selMyOrder.do" class="" >${pagehfvo['hMOrder'] }</a>
           </li>
           <li class="">
             <a href="${ctx }/gemClient/logout.do" class="" >${pagehfvo['hMSignOut'] }</a>
@@ -92,7 +92,7 @@
       	</c:if>
          
           <li class="">
-            <a href="##" class="" >${pagehfvo['hMFavr'] }</a>
+            <a href="javascript:void(0)" class="myCollapse" cls="cls-folder" >${pagehfvo['hMFavr'] }</a>
           </li>
           <li class="">
             <a href="${ctx }/gemClient/viewShoppingCar.do" class="" >${pagehfvo['hMShoppingCart'] }</a>
