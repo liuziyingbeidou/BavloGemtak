@@ -19,19 +19,26 @@
 <script type="text/javascript" src="${ctx }/resources/client/js/area_cus.js"></script>
 <script>
 $(function(){
+  getCarNum();
   showUserOrder();
   closeUserOrder();
   manageAddress();
   closeAddress();
   addUserAddress();
   btnclean();
-  
+  btnSave();
+  deluser();
 });
 
 //收货地址管理
 function manageAddress(){
  $(".userAddress").click(function(){
-  $(".uaddress").empty();
+  selectUaddress();
+ });
+}
+//查询收货地址
+function selectUaddress(){
+ $(".uaddress").empty();
   $(".uaddress").show();
   var url = "/gemtak/gemClient/getUserAddress.do";
   $.post(url,function(data){
@@ -43,11 +50,11 @@ function manageAddress(){
 						"<li >地址：<span class='uaddress"+data[i].id+"'>"+data[i].detailAddress+"</span></li>"+
 						"<li >邮编：<span class='uzipcode"+data[i].id+"'>"+data[i].zipcode+"</span></li>"+
 						"<li >座机：<span class='utel"+data[i].id+"'>"+data[i].tel+"</span></li></ul>"+
+						"<li style='display:none'>E-mail：<span class='uemail"+data[i].id+"'>"+data[i].email+"</span></li></ul>"+
 						"<div class='xgdz'><span style='float:left'><input type='checkbox' class='aaa' value='0' name='showFlag' nid='"+data[i].id+"'> 设为默认地址</span><span style='float:right'><a href='javascript:void(0)' onclick='updateuser("+data[i].id+")'>修 改</a><a href='javascript:void(0)' onclick='deluser("+data[i].id+")'>删 除</a></span></div>");
     }
    }
   });
- });
 }
 
 function closeAddress(){
@@ -87,10 +94,13 @@ function btnclean(){
   });
 }
 
-//新增时 保存
+function btnSave(){
+ //新增时 保存
  $(".btn-save").click(function(){
   saveOrUpdate();
  });
+}
+
  //新增用户收货地址
  function saveOrUpdate(){
   var realName = $(".username").val();
@@ -113,12 +123,14 @@ function btnclean(){
 	 if(data == "true"){
      alert("添加成功！");
      $(".shouhuo").empty();
+     $(".tianjiaAddress").hide();
      $(".shouhuo").append("<ul><li >收货人：<span class='urealname'>"+realName+"</span></li>"+
+                        "<li >地区：<span class='area'>"+area+"</span> </li>"+
 						"<li >手机：<span class='uphone'>"+cellphone+"</span></li>"+
 						"<li >地址：<span class='uaddress'>"+detailAddress+"</span></li>"+
 						"<li >邮编：<span class='uzipcode'>"+zipcode+"</span></li>"+
 						"<li >座机：<span class='utel'>"+tel+"</span></li></ul>"+
-						"<div class='xgdz'><span style='float:left'><input type='checkbox' value='0' name='showFlag' > 设为默认地址</span><span style='float:right'><a href='javascript:void(0)' onclick='updateuser("+data[i].id+")'>修 改</a><a href='javascript:void(0)' onclick='deluser("+data[i].id+")'>删 除</a></span></div>");
+						"<div class='xgdz'><span style='float:left'><input type='checkbox' value='0' name='showFlag' > 设为默认地址</span><span style='float:right'><a href='javascript:void(0)' onclick='updateuser("+id+")'>修 改</a><a href='javascript:void(0)' onclick='deluser("+id+")'>删 除</a></span></div>");
      } 
 	} 
   }); 
@@ -134,9 +146,9 @@ function updateuser(id){
  function updateAddress(id){
     $(".username").val($(".urealname"+id).text());
     var area = $(".area"+id).text();
-    var nums = area.split(" ");
-    for (var i=0 ; i< nums.length ; i++){
-     $(".area"+id+""+(i+1)).val(nums[i]);
+    var nums = area.split(",");
+    for (var i=0 ; i<nums.length ; i++){
+     $(".area"+(i+1)).val(nums[i]);
      if(i < 2){
      	change(i+1);
      }
@@ -148,6 +160,42 @@ function updateuser(id){
     $(".cellphone").val($(".uphone"+id).text());
     $(".email").val($(".uemail"+id).text());
  }
+
+//删除收货地址
+function deluser(id){
+  var url = "/gemtak/gemClient/delUserAddress.do";
+   $.post(url,{id:id},function(data){
+    if(data == "true"){
+     alert("删除成功！");
+     selectUaddress();
+    }
+   });
+}
+
+//修改密码
+function updateUPassWord(){
+ $(".updatePwd").click(function(){
+  $(".newPwd").show();
+  var oldPwd = $(".oldPwd").text();
+  var newPwd = $(".newPwd").text();
+  var rePwd = $(".rePwd").text();
+  $("oldPwd").blur(function(){
+   if(oldPwd == "" || oldPwd == null){
+   $(".oldpass").text("请输入原密码！");
+   return;
+  }
+  });
+  
+  if(newPwd == "" || newPwd == null){
+   $(".newpass").text("请输入新密码！");
+   return;
+  }
+  if(rePwd != newPwd){
+    $(".error").text("两次输入的密码不相同！");
+    return;
+  }
+ });
+}
 
 //***************************
  var s = ["vpovince","vcity","vdistrict"];
@@ -247,15 +295,15 @@ function updateuser(id){
 				</div>
 			 </div>	
 				<div class="inmenu ">
-					<h2 class="doname"><a href="./.html">修改地址</a></h2>
+					<h2 class="doname"><a href="javascript:void(0)" class="updatePwd">修改密码</a></h2>
 					<i class="icon-me icon-me1"></i>
 				</div>
-					<div class="ddgl"> 
+					<div class="ddgl newPwd" style="display: none"> 
 					   <form action="" method="post" > 
 						   <ul class="add_new1 m_top">
-							  <li><input  type="text"   name="key" value="原密码" /></li>
-							  <li><input  type="text"   name="key" value="新密码" /></li>
-							  <li><input  type="text"   name="key" value="确认密码" /></li>
+							  <li><input  type="text" class="oldPwd"  name="key" palceholder="原密码" value="" /><b class="oldpass"></b></li>
+							  <li><input  type="text" class="newPwd"  name="pwd" placeholder="新密码" value="" /><b class="newpass"></b></li>
+							  <li><input  type="text" class="rePwd"  name="key" placeholder="确认密码" value="" /><b class="error"></b></li>
 							  <li class="del_s"><a href="">取 消</a><a href="">保 存</a></li>
 						   </ul>
 						 </form>
