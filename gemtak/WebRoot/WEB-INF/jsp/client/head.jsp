@@ -95,7 +95,7 @@
             <a href="javascript:void(0)" class="myCollapse" cls="cls-folder" >${pagehfvo['hMFavr'] }</a>
           </li>
           <li class="">
-            <a href="${ctx }/gemClient/viewShoppingCar.do" class="" >${pagehfvo['hMShoppingCart'] }</a>
+            <a href="javascript:void(0)" class="view-shoppingcar" >${pagehfvo['hMShoppingCart'] }</a>
           </li>
       </ul>
       </div>
