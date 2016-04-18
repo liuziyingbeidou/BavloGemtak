@@ -457,6 +457,19 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
+	 * 修改用户密码
+	 * @param model
+	 * @param response
+	 * @param request
+	 */
+	@RequestMapping(value="updateUserPWD")
+	public void updateUserPWD(Model model,HttpServletResponse response,HttpServletRequest request,String oldPwd,String newPwd){
+		String uname = (String)request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+		String user = HttpTools.getDataByURL(IConstant.updatePwdByUnameURL+"?uname="+uname+"&oldPwd="+oldPwd+"&newPwd="+newPwd);
+		renderText(user);
+	}
+	
+	/**
 	 * 根据订单id查询 宝石
 	 * @param model
 	 * @param response
@@ -635,6 +648,30 @@ public class GemClientController extends BaseController {
 			gemService.rewriteOrderStatus(orderno);
 		}
 		renderText("{\"msg\":\"Y\"}");//有待完善8888888888888888888888888888888888888888
+	}
+	
+	/**88888888888888
+	 * @Description: 跳转订单 成功界面
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="goOrderPay")
+	public String goOrderPay(Model model,HttpServletResponse response,HttpServletRequest request,String orderno,String totalPrice){
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCOrderPayPageModel(model,lang);
+		if(orderno != null){
+		 model.addAttribute("orderno");
+		}
+		if(totalPrice != null){
+			 model.addAttribute("totalPrice");
+		}
+		return IClientForward.gemOrderPay;
 	}
 	
 	/**
