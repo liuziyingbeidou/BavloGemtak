@@ -215,6 +215,19 @@ function cleanPwd(){
  });
 }
 
+function selOrderGem(id){
+ var url = "/gemtak/gemClient/selOrderGemById.do";
+ $.post(url,{orderid:id},function(data){
+  if(data != null){
+   for ( var i = 0; i < data.length; i++) {
+	  $(".selectGem"+id).append("<dl><dt class='col-xs-3'><a href=''><img src='${ctx }/resources/client/images/gw1.jpg'  /></a></dt>"+
+					"<dd class='col-xs-9'><p><b>"+data[i].type_cn+"</b></p><p>数量：<span>"+data[i].vdef2+"</span></p><p>原价：<span>￥"+data[i].vdef1+"</span></p></dd></dl>");
+    }
+  }
+ });
+ $(".shouqi-"+id).show();
+ $(".chakan-"+id).hide(); 
+}
 
 //***************************
  var s = ["vpovince","vcity","vdistrict"];
@@ -253,13 +266,19 @@ function cleanPwd(){
 					 <li>状态：已支付</li>
 					</c:if>
 					<c:if test="${order.status=='N'}">
-					 <li>状态：未支付<a href="">立即支付</a></li>
+					 <li>状态：未支付<a href="${ctx }/gemClient/balancePay.do">立即支付</a></li>
 					</c:if>
 				 </ul>
-				 <dl>
+				 <ul>
+				   <li  style="list-style:outside;"><a href="javascript:void(0)" class="chakan-${order.id}" onclick="javascript:selOrderGem(${order.id})" oid="${order.id}">查看</a></li>
+				   <li  style="list-style:outside; display: none"><a href="javascript:void(0)" class="shouqi-${order.id}">收起</a></li>
+				 </ul>
+				 <b class="selectGem${order.id}">
+				   <%-- <dl>
 					<dt class="col-xs-3"><a href=""><img src="${ctx }/resources/client/images/gw1.jpg"  /></a></dt>
 					<dd class="col-xs-9"><p><b>神话•双鱼座</b></p><p>数量：<span>1 </span></p><p>原价：<span>￥3090000</span></p></dd>
-				 </dl>
+				   </dl> --%>
+				 </b>
 				</c:forEach>
 			   </div>
 			    <div class="line "></div>
