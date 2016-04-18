@@ -457,6 +457,18 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
+	 * 根据订单id查询 宝石
+	 * @param model
+	 * @param response
+	 * @param request
+	 */
+	@RequestMapping(value="selOrderGemById")
+	public void selOrderGemById(Model model,HttpServletResponse response,HttpServletRequest request,String orderid){
+		List<GemVO> list = gemService.getOrderGemById(orderid);
+		renderJson(list);
+	}
+	
+	/**
 	 * @Description: 订单
 	 * @param @param model
 	 * @param @param response
