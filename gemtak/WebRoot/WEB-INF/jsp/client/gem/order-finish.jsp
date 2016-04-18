@@ -85,9 +85,10 @@
 			//修改 订单状态
 			function rewriteOrderSatus(){
 			  var orderno = ${orderNo};
+			  var totalPrice = ${totalPrice};
 			  var url = "/gemtak/gemClient/rewriteOrderStatus.do";
 			  $.post(url,{orderno:orderno},function(data){
-			    
+			    location.href = "/gemtak/gemClient/goOrderPay.do?orderno="+orderno+"&totalPrice="+totalPrice;
 			  });
 			}
 </script>
