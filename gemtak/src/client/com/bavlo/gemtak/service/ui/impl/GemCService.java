@@ -330,7 +330,40 @@ public class GemCService extends CommonService implements IGemService {
 		return getCountByHQL(OrderVO.class, " username='"+uname+"'");
 	}
 
-	
+	/**
+	 * 15.根据订单号查宝石
+	 * @param uname
+	 */
+	@Override
+	public List<GemVO> getOrderGemById(String orderid) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("select ");
+		sql.append(" g.type_cn,g.type_en,b.price,b.quantity");
+		sql.append(" from gt_order_b b");
+		sql.append(" left join gt_gem g");
+		sql.append(" on b.gem_id = g.id");
+		sql.append(" where order_id = "+orderid+"");
+		sql.append("  and ifnull(g.dr,0)=0");
+	    sql.append(" order by g.id desc");
+	    Integer count = getCountBySQL(sql.toString());
+	    List<GemVO> list = (List<GemVO>) findListBySQL(sql.toString(), null, 0, count);
+	    List<GemVO> nlist = new ArrayList<GemVO>();
+	    if(list != null){
+	    	String jsonStr = ObjectToJSON.writeListJSON(list);
+	    	JSONArray jsonArr = JSONArray.fromObject(jsonStr);
+	    	int size = jsonArr.size();
+	    	for(int i = 0; i < size; i++){
+	    		GemVO gem = new GemVO();
+	    		Object [] arry = jsonArr.getJSONArray(i).toArray();
+	    		gem.setType_cn(CommonUtils.isNull(arry[0]) ? null:arry[0]+"");
+	    		gem.setType_en(CommonUtils.isNull(arry[1]) ? null:arry[1]+"");
+	    		gem.setVdef1(CommonUtils.isNull(arry[2]) ? null:arry[2]+"");
+	    		gem.setVdef2(CommonUtils.isNull(arry[3]) ? null:arry[3]+"");
+	    		nlist.add(gem);
+	    	}
+	   }
+	    return nlist;
+	}
 	
 	
 }
