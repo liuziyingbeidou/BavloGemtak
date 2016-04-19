@@ -132,6 +132,7 @@ function goDetail(id){
 }
 
   function selectClientList(switchover){
+	  
 	     var url = "getGemClientListBy.do?";
 		 var gemType = $(".selects-type").attr("ms-key"); 
 		 var gemShape = $(".selects-shape").attr("ms-key"); 
@@ -175,7 +176,14 @@ function goDetail(id){
 			  appendToHead(switchover);
 				if(data != null){
 					var len = data.length;
+					var jiage;
 					for(var i=0;i<len;i++){
+						var uname = $(".juname").val();
+						if(uname == "NLogin"){
+							jiage = retail_price;
+						}else{
+							jiage = trade_price;
+						}
 						if(switchover == 1){
 							var NM = "3";
 							if(data[i].vdef3 == "T"){
@@ -184,7 +192,7 @@ function goDetail(id){
 							$(".appendClientList .cCard").append(
 							    "<li class='col-md-3 col-xs-6'>"+		
 								  "<span><a href='javascript:void(0)' onclick='goDetail("+data[i].id+")'><image src='/gemtak/resources/client/images/cp1.png' /></a></span>"+
-								  "<h6><b>"+data[i].type_cn+"<font class='hidden-xs hidden-sm'>（"+data[i].type_en+"）</font></b><i>¥"+data[i].retail_price+"</i></h6>"+
+								  "<h6><b>"+data[i].type_cn+"<font class='hidden-xs hidden-sm'>（"+data[i].type_en+"）</font></b><i>¥"+data[i].jiage+"</i></h6>"+
 								  "<p><b>"+data[i].weight+" "+data[i].clarity_en+" "+data[i].cut_en+"</b><i onclick='addFavorite("+data[i].id+")'><image class='changimg-"+data[i].id+"' src='/gemtak/resources/client/images/tu"+NM+".png' /></i></p>"+
 								"</li>");
 						}else if(switchover == 2){
