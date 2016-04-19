@@ -31,9 +31,9 @@
 					<h2><span>支付提示</span></h2>
 					<div class="scdd scdd1">
 						 <p class="fc_0">支付已成功！</p>
-						 <p>订单号为：<span>2336984875</span></p><p>
-						 总金额为：<span>￥3850元</span></p>
-						 <div class="qzf"><a href="">关 闭</a></div>
+						 <p>订单号为：<span>${orderno}</span></p><p>
+						 总金额为：<span>￥${totalPrice}元</span></p>
+						 <div class="qzf"><a href="${ctx }/gemtak/gemClient/viewGemList.do">关 闭</a></div>
 					</div>
 				 </div>
 		   </div>   	  
