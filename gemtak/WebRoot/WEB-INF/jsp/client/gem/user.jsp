@@ -249,47 +249,13 @@ function selOrderGem(id){
   });
  });
 //***************************
-
-         var ua = navigator.userAgent.toLowerCase();
-		    if(ua.match(/MicroMessenger/i)=="micromessenger") {
-		    } else {
-		    	alert("支付!请在微信端打开!");
-		    }
-			function jsPayFee() {
-				var str = window.navigator.userAgent;
-				var version = str.substring(8, 11);
-				if (version != "5.0") {
-					alert("请将微信升级至5.0以上");
-				} else {
-						WeixinJSBridge.invoke('getBrandWCPayRequest', {
-							"appId" :'${map.pr.appId}', //公众号名称，由商户传入
-							"timeStamp" :'${map.pr.timeStamp}' , //戳
-							"nonceStr" : '${map.pr.nonceStr}', //随机串
-							"package" :'${map.pr.packageurl}' ,//统一支付接口返回的prepay_id 参数值，提交格式如：prepay_id=***
-							"signType" : "MD5", //微信签名方式:sha1
-							"paySign" : '${map.pr.paySign}'//微信签名
-							
-						}, function(res) {
-								if (res.err_msg == "get_brand_wcpay_request:ok") {
-									alert("付款成功！");
-									rewriteOrderSatus(); //支付成功后 修改订单状态 为已支付
-								} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
-									//alert("取消支付");
-								} else if (res.err_msg == "get_brand_wcpay_request:fail") {
-									alert("支付失败");
-								}
-							});
-					}
-			}
-			//修改 订单状态
-			function rewriteOrderSatus(){
-			  var orderno = ${orderNo};
-			  var totalPrice = ${totalPrice};
-			  var url = "/gemtak/gemClient/rewriteOrderStatus.do";
-			  $.post(url,{orderno:orderno},function(data){
-			    location.href = "/gemtak/gemClient/goOrderPay.do?orderno="+orderno+"&totalPrice="+totalPrice;
-			  });
-			}
+//立即支付
+function jsPayFee(id){
+ var orderno = $(".dingdan"+id).text();
+ var totalPrice = $(".zongjia"+id).text();
+ var url = "/gemtak/gemClient/insPay.do";
+ location.href = "/gemtak/gemClient/insPay.do?orderno="+orderno+"&totalPrice="+totalPrice;
+}
 </script>
 </head>
 <body>
@@ -306,14 +272,14 @@ function selOrderGem(id){
 			   <div class="user_br">
 				 <c:forEach items="${orderList}" var="order">
 				 <ul>
-					<li>订单号：<b>${order.order_no}</b></li>
+					<li>订单号：<b class="dingdan${order.id}">${order.order_no}</b></li>
 					<li>下单时间：${order.created}</li>
-					<li>总金额：￥${order.totalPrice}</li>
+					<li>总金额：￥<b class="zongjia${order.id}">${order.totalPrice}</b></li>
 					<c:if test="${order.status=='Y'}">
 					 <li>状态：已支付</li>
 					</c:if>
 					<c:if test="${order.status=='N'}">
-					 <li>状态：未支付<a href="javascript:jsPayFee()">立即支付</a></li>
+					 <li>状态：未支付<a href="javascript:void(0)" onclick="javascript:jsPayFee(${order.id})">立即支付</a></li>
 					</c:if>
 				 </ul>
 				 <ul>
