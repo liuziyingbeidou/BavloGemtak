@@ -30,7 +30,6 @@
 			  $(this).css("color","#8c0000");
 		 	 $(this).find("a").css("background-image","url(${ctx }/resources/client/images/game/g" + ($(this).index()) + "a1.png)");	
 	 	});*/
-	 	 
 	 });
      $(document).ready(function(){ 	        
 	 	 /*$("#contid2  .swiper-slide").click(function(){
@@ -123,6 +122,7 @@
  
 </head>
 <body>
+<input type="hidden" class="juname" value="${uname }"/>
 <div>
    <jsp:include page="../head.jsp"></jsp:include>
 </div> 
