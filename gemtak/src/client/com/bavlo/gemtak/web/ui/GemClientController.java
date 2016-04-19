@@ -634,6 +634,25 @@ public class GemClientController extends BaseController {
 		return "redirect:"+code;
 	}
 	
+	/**
+	 * @Description: 立即支付user.jsp 
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="insPay")
+	public String insPay(HttpServletResponse response,HttpServletRequest request,String orderno,String totalPrice){
+		String code = GetWeiXinCode.getCodeRequest();
+		//*************将订单 号 和总价格存在 session中********************
+		Map map = new HashMap();
+		//orderVO.setTotalPrice(0.1);
+		map.put("totalPrice", totalPrice);
+		map.put("orderCode", orderno);
+		session.setAttribute("sOrderMap", map);
+		return "redirect:"+code;
+	}
+	
 	/**88888888888888
 	 * @Description: 根据订单号 改写订单状态
 	 * @param @param model
@@ -647,7 +666,7 @@ public class GemClientController extends BaseController {
 		if(orderno != null){
 			gemService.rewriteOrderStatus(orderno);
 		}
-		renderText("{\"msg\":\"Y\"}");//有待完善8888888888888888888888888888888888888888
+		renderText("{\"msg\":\"Y\"}");//8888888888888888888888888888888888888888
 	}
 	
 	/**88888888888888
