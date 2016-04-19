@@ -123,13 +123,45 @@
   }
    //动态查询购物车数量
   function getCarNum(){
-   var url = "/gemtak/gemClient/getCarNum.do";
+   var url = "${ctx }/gemClient/getCarNum.do";
    $.post(url,function(data){
     selCarNO(data);
    });
   }
   
-  $(function(){
+  /**
+ * 跳转详情页
+ */
+function goDetail(id){
+	location.href = "viewGemDetaile.do?id="+id;
+}
+  /**
+ * 刪除cookie中選中的商品
+ */
+function delCookie(id){
+	 var url = "removeCookie.do";
+	  $.post(url,{gemid:id},function(data){
+		  data = $.parseJSON(data);
+		  var flag = data.msg;
+		  if(flag=="Y"){
+			  alert("您已成功删除该宝贝！");
+			  $(".delectPic-"+id+"").remove();
+		  }
+	  });
+}
+
+$(function(){
+	  // 购物车
+	$(".view-shoppingcar").click(function(){
+		 var url = "/gemtak/gemClient/checkGemShoppingCar.do";
+		 $.post(url,function(data){
+		  if(data == "N"){
+		    alert("您的购物车还没有宝贝哟！");
+		  }else if(data == "Y"){
+		   location.href = "/gemtak/gemClient/viewShoppingCar.do";
+		  }
+		 });
+		});
      //点击触发收藏夹
   	$(".myCollapse").click(function(){
 		$("#collapse-nav").collapse('toggle');
@@ -154,39 +186,5 @@
 	  		}
   		}
 	});
-  });
-  
-  /**
- * 跳转详情页
- */
-function goDetail(id){
-	location.href = "viewGemDetaile.do?id="+id;
-}
-  /**
- * 刪除cookie中選中的商品
- */
-function delCookie(id){
-	 var url = "removeCookie.do";
-	  $.post(url,{gemid:id},function(data){
-		  data = $.parseJSON(data);
-		  var flag = data.msg;
-		  if(flag=="Y"){
-			  alert("您已成功删除该宝贝！");
-			  $(".delectPic-"+id+"").remove();
-		  }
-	  });
-}
-
-// 购物车
-$(".view-shoppingcar").click(function(){
- var url = "/gemtak/gemClient/checkGemShoppingCar.do";
- $.post(url,function(data){
-  if(data == "N"){
-    alert("您的购物车还没有宝贝哟！");
-  }else if(data == "Y"){
-   location.href = "/gemtak/gemClient/viewShoppingCar.do";
-  }
- });
 });
-
 </script>
