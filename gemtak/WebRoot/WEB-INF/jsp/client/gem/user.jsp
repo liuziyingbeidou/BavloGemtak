@@ -132,7 +132,7 @@ function btnSave(){
 						"<li >地址：<span class='uaddress'>"+detailAddress+"</span></li>"+
 						"<li >邮编：<span class='uzipcode'>"+zipcode+"</span></li>"+
 						"<li >座机：<span class='utel'>"+tel+"</span></li></ul>"+
-						"<div class='xgdz'><span style='float:left'><input type='checkbox' value='0' name='showFlag' > 设为默认地址</span><span style='float:right'><a href='javascript:void(0)' onclick='updateuser("+id+")'>修 改</a><a href='javascript:void(0)' onclick='deluser("+id+")'>删 除</a></span></div>");
+						"<div class='xgdz'><span style='float:right'><a href='javascript:void(0)' onclick='updateuser("+id+")'>修 改</a><a href='javascript:void(0)' onclick='deluser("+id+")'>删 除</a></span></div>");
      } 
 	} 
   }); 
@@ -268,7 +268,7 @@ function jsPayFee(id){
 				<h2 class="doname"><a href="javascript:void(0)" class="userOrder">订单记录<font>（${num}）</font></a></h2>
 				<i class="icon-me icon-me1 close-order"></i>
 		   </div> 
-		   <div class="ddjl uOrder" style="display: none">
+		   <div class="ddjl uOrder" style="display: none;">
 			   <div class="user_br">
 				 <c:forEach items="${orderList}" var="order">
 				 <ul>
@@ -309,7 +309,7 @@ function jsPayFee(id){
 						<li>邮编：${order.zipcode} </li>
 						<li>座机：${order.tel}</li> 
 					 </ul>
-					 <div class="xgdz"><span style="float:left"><input type="checkbox" value="0" name="showFlag" checked=""> 设为默认地址</span><span style="float:right"><a href="">修 改</a><a href="">删 除</a></span></div> --%>
+					 <div class="xgdz"><span style="float:left;display: none;"><input type="checkbox" value="0" name="showFlag" checked=""> 设为默认地址</span><span style="float:right"><a href="">修 改</a><a href="">删 除</a></span></div>--%> 
 			   </div>
 			   <p class="add_new"><a href="javascript:void(0)" class="addUaddress"><img src="${ctx }/resources/client/images/add.png"  />添加新地址</a></p>
 			   <div class="ddgl tianjiaAddress" style="display: none"> 
