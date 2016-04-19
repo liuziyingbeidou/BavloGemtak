@@ -15,11 +15,10 @@
 <title>bavlo</title>
 <link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
-<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/client/js/area_cus.js"></script>
 <script>
 $(function(){
-  getCarNum();
   showUserOrder();
   closeUserOrder();
   manageAddress();
@@ -27,9 +26,9 @@ $(function(){
   addUserAddress();
   btnclean();
   btnSave();
-  deluser();
   updateUPassWord();
   cleanPwd();
+  getCarNum();
 });
 
 //收货地址管理
@@ -53,7 +52,7 @@ function selectUaddress(){
 						"<li >邮编：<span class='uzipcode"+data[i].id+"'>"+data[i].zipcode+"</span></li>"+
 						"<li >座机：<span class='utel"+data[i].id+"'>"+data[i].tel+"</span></li></ul>"+
 						"<li style='display:none'>E-mail：<span class='uemail"+data[i].id+"'>"+data[i].email+"</span></li></ul>"+
-						"<div class='xgdz'><span style='float:left'><input type='checkbox' class='aaa' value='0' name='showFlag' nid='"+data[i].id+"'> 设为默认地址</span><span style='float:right'><a href='javascript:void(0)' onclick='updateuser("+data[i].id+")'>修 改</a><a href='javascript:void(0)' onclick='deluser("+data[i].id+")'>删 除</a></span></div>");
+						"<div class='xgdz'><span style='float:left;display: none;'><input type='checkbox' class='aaa' value='0' name='showFlag' nid='"+data[i].id+"'> 设为默认地址</span><span style='float:right'><a href='javascript:void(0)' onclick='updateuser("+data[i].id+")'>修 改</a><a href='javascript:void(0)' onclick='deluser("+data[i].id+")'>删 除</a></span></div>");
     }
    }
   });
@@ -132,7 +131,7 @@ function btnSave(){
 						"<li >地址：<span class='uaddress'>"+detailAddress+"</span></li>"+
 						"<li >邮编：<span class='uzipcode'>"+zipcode+"</span></li>"+
 						"<li >座机：<span class='utel'>"+tel+"</span></li></ul>"+
-						"<div class='xgdz'><span style='float:right'><a href='javascript:void(0)' onclick='updateuser("+id+")'>修 改</a><a href='javascript:void(0)' onclick='deluser("+id+")'>删 除</a></span></div>");
+						"<div class='xgdz'><span  style='float:left;display: none;'><input type='checkbox' value='0' name='showFlag' > 设为默认地址</span><span style='float:right'><a href='javascript:void(0)' onclick='updateuser("+id+")'>修 改</a><a href='javascript:void(0)' onclick='deluser("+id+")'>删 除</a></span></div>");
      } 
 	} 
   }); 
