@@ -249,6 +249,47 @@ function selOrderGem(id){
   });
  });
 //***************************
+
+         var ua = navigator.userAgent.toLowerCase();
+		    if(ua.match(/MicroMessenger/i)=="micromessenger") {
+		    } else {
+		    	alert("支付!请在微信端打开!");
+		    }
+			function jsPayFee() {
+				var str = window.navigator.userAgent;
+				var version = str.substring(8, 11);
+				if (version != "5.0") {
+					alert("请将微信升级至5.0以上");
+				} else {
+						WeixinJSBridge.invoke('getBrandWCPayRequest', {
+							"appId" :'${map.pr.appId}', //公众号名称，由商户传入
+							"timeStamp" :'${map.pr.timeStamp}' , //戳
+							"nonceStr" : '${map.pr.nonceStr}', //随机串
+							"package" :'${map.pr.packageurl}' ,//统一支付接口返回的prepay_id 参数值，提交格式如：prepay_id=***
+							"signType" : "MD5", //微信签名方式:sha1
+							"paySign" : '${map.pr.paySign}'//微信签名
+							
+						}, function(res) {
+								if (res.err_msg == "get_brand_wcpay_request:ok") {
+									alert("付款成功！");
+									rewriteOrderSatus(); //支付成功后 修改订单状态 为已支付
+								} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+									//alert("取消支付");
+								} else if (res.err_msg == "get_brand_wcpay_request:fail") {
+									alert("支付失败");
+								}
+							});
+					}
+			}
+			//修改 订单状态
+			function rewriteOrderSatus(){
+			  var orderno = ${orderNo};
+			  var totalPrice = ${totalPrice};
+			  var url = "/gemtak/gemClient/rewriteOrderStatus.do";
+			  $.post(url,{orderno:orderno},function(data){
+			    location.href = "/gemtak/gemClient/goOrderPay.do?orderno="+orderno+"&totalPrice="+totalPrice;
+			  });
+			}
 </script>
 </head>
 <body>
@@ -272,7 +313,7 @@ function selOrderGem(id){
 					 <li>状态：已支付</li>
 					</c:if>
 					<c:if test="${order.status=='N'}">
-					 <li>状态：未支付<a href="${ctx }/gemClient/balancePay.do">立即支付</a></li>
+					 <li>状态：未支付<a href="javascript:jsPayFee()">立即支付</a></li>
 					</c:if>
 				 </ul>
 				 <ul>
