@@ -176,13 +176,13 @@ function goDetail(id){
 			  appendToHead(switchover);
 				if(data != null){
 					var len = data.length;
-					var jiage;
+					var jiage = data[i].retail_price;
 					for(var i=0;i<len;i++){
 						var uname = $(".juname").val();
-						if(uname == "NLogin"){
-							jiage = retail_price;
+						if(uname == "WxLogin"){
+							jiage = data[i].trade_price;
 						}else{
-							jiage = trade_price;
+							jiage = data[i].retail_price;
 						}
 						if(switchover == 1){
 							var NM = "3";
@@ -192,7 +192,7 @@ function goDetail(id){
 							$(".appendClientList .cCard").append(
 							    "<li class='col-md-3 col-xs-6'>"+		
 								  "<span><a href='javascript:void(0)' onclick='goDetail("+data[i].id+")'><image src='/gemtak/resources/client/images/cp1.png' /></a></span>"+
-								  "<h6><b>"+data[i].type_cn+"<font class='hidden-xs hidden-sm'>（"+data[i].type_en+"）</font></b><i>¥"+data[i].jiage+"</i></h6>"+
+								  "<h6><b>"+data[i].type_cn+"<font class='hidden-xs hidden-sm'>（"+data[i].type_en+"）</font></b><i>¥"+jiage+"</i></h6>"+
 								  "<p><b>"+data[i].weight+" "+data[i].clarity_en+" "+data[i].cut_en+"</b><i onclick='addFavorite("+data[i].id+")'><image class='changimg-"+data[i].id+"' src='/gemtak/resources/client/images/tu"+NM+".png' /></i></p>"+
 								"</li>");
 						}else if(switchover == 2){
@@ -203,7 +203,7 @@ function goDetail(id){
 								"<td><b class='fon1'>"+data[i].cut_cn+"</b><br />"+data[i].cut_en+"</td>"+
 								"<td>"+data[i].weight+"</td>"+
 								"<td>"+data[i].lab_en+"</td>"+
-								"<td><font class='fc_0a'>¥"+data[i].retail_price+"</font></td>"+
+								"<td><font class='fc_0a'>¥"+jiage+"</font></td>"+
 								"<td><a href='javascript:void(0)' onclick='goDetail("+data[i].id+")'><image  src='/gemtak/resources/client/images/tu4.png' /></a></td>"+
 							"</tr>");
 						}
