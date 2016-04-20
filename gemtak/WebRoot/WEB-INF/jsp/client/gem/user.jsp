@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
 <script type="text/javascript" src="${ctx }/resources/client/js/area_cus.js"></script>
 <script>
 $(function(){
@@ -80,6 +81,7 @@ function closeUserOrder(){
 function addUserAddress(){
  $(".addUaddress").click(function(){
   $(".tianjiaAddress").show();
+  $(".btn-save").attr("ntype","insert");
  });
 }
 
@@ -124,6 +126,15 @@ function btnSave(){
 	 if(data == "true"){
      alert("添加成功！");
      $(".shouhuo").empty();
+     $(".username").val("");
+     $(".area1").val("省份");
+     $(".area2").val("城市");
+     $(".area1").val("区县");
+	 $(".detailAddress").val("");
+	 $(".zipcode").val("");
+	 $(".tel").val("");
+	 $(".cellphone").val("");
+	 $(".email").val("");
      $(".tianjiaAddress").hide();
      $(".shouhuo").append("<ul><li >收货人：<span class='urealname'>"+realName+"</span></li>"+
                         "<li >地区：<span class='area'>"+area+"</span> </li>"+
@@ -339,7 +350,7 @@ function jsPayFee(id){
 						  <li><input  type="text" class="tel"  name="key" value="" placeholder="固定电话（可不填）" /></li>
 						  <li><input  type="text" class="cellphone"  name="key" value="" placeholder="手机号码"/></li>
 						  <li><input  type="text" class="email"  name="key" value="" placeholder="E-mail"/></li>
-						  <li class="del_s"><a href="javascript:void(0)" class="btn-clean">取 消</a><a href="javascript:void(0)" class="btn-save">保 存</a></li>
+						  <li class="del_s"><a href="javascript:void(0)" class="btn-clean">取 消</a><a href="javascript:void(0)" class="btn-save" ntype="insert">保 存</a></li>
 					   </ul>
 					 </form>
 				</div>
