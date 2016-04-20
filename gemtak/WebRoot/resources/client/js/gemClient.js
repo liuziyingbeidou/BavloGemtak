@@ -176,7 +176,7 @@ function goDetail(id){
 			  appendToHead(switchover);
 				if(data != null){
 					var len = data.length;
-					var jiage = data[i].retail_price;
+					var jiage = null;
 					for(var i=0;i<len;i++){
 						var uname = $(".juname").val();
 						if(uname == "WxLogin"){
