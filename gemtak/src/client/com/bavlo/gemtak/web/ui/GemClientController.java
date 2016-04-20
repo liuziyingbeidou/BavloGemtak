@@ -108,6 +108,11 @@ public class GemClientController extends BaseController {
         List<GemVO> gems = gemService.findListGem(sql+"", dgpage, rows,null,null);
 		model.addAttribute("gems", gems);*/
 		/*return IClientForward.viewGemList;*/
+		Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+		if(username == null){
+			username = "NLogin";
+		}
+		model.addAttribute("uname", username);
 		return "/client/gem/list";
 	}
 	
@@ -207,6 +212,11 @@ public class GemClientController extends BaseController {
 		
         List<GemVO> gems = gemService.findListGem(sql+"", dgpage, rows,null,null);
 		model.addAttribute("gems", gems);
+		Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+		if(username == null){
+			username = "NLogin";
+		}
+		model.addAttribute("uname", username);
 		/*return IClientForward.viewGemList;*/
 		return "/client/gem/list";
 	}
@@ -232,7 +242,7 @@ public class GemClientController extends BaseController {
 		GemVO gem = gemService.findGemVOByID(id);
 		gemService.updateGemVOPageViews(gem);//没查看一次详情页，浏览次数加1
 		model.addAttribute("gem", gem);
-		model.addAttribute("model", "hbx");
+		model.addAttribute("model", "hbx");   //gem.getUrl_360();
 		/*return IClientForward.viewGemDetaile;*/
 		return "/client/gem/detaile";
 	}
@@ -851,6 +861,7 @@ public class GemClientController extends BaseController {
 			request.getSession().setAttribute(IConstant.SESSIONUSERNAEM, ((LoginVO)objUid).getUserId());
 			//标记是否为商户
 			request.getSession().setAttribute("bisBis", "Y");
+			model.addAttribute("uname", "WxLogin");
 		}
 		System.out.println("是否商户:"+request.getSession().getAttribute("bisBis"));
 		return "/client/gem/list";
@@ -898,6 +909,7 @@ public class GemClientController extends BaseController {
 		GemClientPageModel.getCListPageModel(model,lang);		
 		request.getSession().removeAttribute(IConstant.SESSIONUSERNAEM);
 		request.getSession().removeAttribute("bisBis");
+		model.addAttribute("uname", "NLogin");
 		return "/client/gem/list";
 		//renderText(msg);
 	}
@@ -1005,6 +1017,7 @@ public class GemClientController extends BaseController {
 			e.printStackTrace();
 		}
 		model.addAttribute("carNum",num);
+		model.addAttribute("uname", uname);
 		return "/client/gem/list";
 	}
 	
