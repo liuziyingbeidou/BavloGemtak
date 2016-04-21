@@ -71,13 +71,13 @@ function addShoppCar(id){
 } 
  //登录成功 关闭登录弹窗
  function closeMwin(name){ 
-  getCarNum();
+  /* getCarNum();
   $(".t-css").text("Hi,"+name);//登录成功后，将用户名传过来
   $(".replaceA").text("注销");
   $(".replaceA").attr("href","${ctx }/gemClient/logout.do");
   $(".replaceB").text("我的订单");
-  $(".replaceB").attr("href","");
-  $("#my-popup").modal('close');
+  $(".replaceB").attr("href",""); */
+  //$("#my-popup").modal('close');
   window.location.reload(); 
  }
 
