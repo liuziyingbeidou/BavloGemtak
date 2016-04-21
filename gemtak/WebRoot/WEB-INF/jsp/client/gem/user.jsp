@@ -21,21 +21,27 @@
 <script>
 $(function(){
   showUserOrder();
-  closeUserOrder();
   manageAddress();
-  closeAddress();
   addUserAddress();
   btnclean();
   btnSave();
   updateUPassWord();
-  cleanPwd();
   getCarNum();
 });
 
-//收货地址管理
+//显示 \ 关闭 收货地址管理
 function manageAddress(){
  $(".userAddress").click(function(){
-  selectUaddress();
+ if($(".shouhuodizhiup").css("display")=="none"){
+    $(".shouhuodizhiup").show();
+    $(".shouhuodizhidown").hide();
+    selectUaddress();
+ }else{
+    $(".shouhuodizhiup").hide();
+    $(".shouhuodizhidown").show();
+    $(".uaddress").hide();
+ }
+  
  });
 }
 //查询收货地址
@@ -59,24 +65,22 @@ function selectUaddress(){
   });
 }
 
-function closeAddress(){
- $(".close-address").click(function(){
-  $(".uaddress").hide();
- });
-}
 
-//显示订单记录
+//显示 \ 关闭 订单记录
 function showUserOrder(){
- $(".userOrder").click(function(){
-   $(".uOrder").show();
- });
+  $(".userOrder").click(function(){
+	   if($(".uOrder").css("display")=="none"){
+	     $(".dingdanjiluup").show();
+	     $(".dingdanjiludown").hide();
+	     $(".uOrder").show();
+	   }else{
+	     $(".dingdanjiluup").hide();
+	     $(".dingdanjiludown").show();
+	     $(".uOrder").hide();
+	   }
+  });
 }
 
-function closeUserOrder(){
- $(".close-order").click(function(){
-   $(".uOrder").hide();
- });
-}
 
 function addUserAddress(){
  $(".addUaddress").click(function(){
@@ -185,10 +189,22 @@ function deluser(id){
 }
 
 
-//修改密码
+//显示 \ 关闭  修改密码
 function updateUPassWord(){
  $(".updatePwd").click(function(){
-  $(".newPwd").show();
+  if($(".newPwd").css("display")=="none"){
+    $(".xiugaimimaup").show();
+    $(".xiugaimimadown").hide();
+    $(".newPwd").show();
+  }else{
+    $(".xiugaimimaup").hide();
+    $(".xiugaimimadown").show();
+    $(".oldPwd").val();
+    $(".xinPwd").val();
+    $(".rePwd").val();
+    $(".newPwd").hide();
+  }
+  
   });
   
   $(".addPwd").click(function(){
@@ -221,17 +237,9 @@ function updateUPassWord(){
   });
 }
 
-
-function cleanPwd(){
- $(".cleanPwd").click(function(){
-  $(".oldPwd").val();
-  $(".xinPwd").val();
-  $(".rePwd").val();
-  $(".newPwd").hide();
- });
-}
-
+//查看 未支付订单
 function selOrderGem(id){
+ $(".quzhifu").append("<a class='gopay-"+id+"' href='javascript:void(0)' onclick='javascript:jsPayFee("+id+")'>立即支付</a>");
  var url = "/gemtak/gemClient/selOrderGemById.do";
  $.post(url,{orderid:id},function(data){
   if(data != null){
@@ -241,11 +249,21 @@ function selOrderGem(id){
     }
   }
  });
- $(".shouqi-"+id).show();
- $(".chakan-"+id).hide(); 
+}
+//查看 已支付 订单
+function selOldOrderGem(id){
+ var url = "/gemtak/gemClient/selOrderGemById.do";
+ $.post(url,{orderid:id},function(data){
+  if(data != null){
+   for ( var i = 0; i < data.length; i++) {
+	  $(".selectGem"+id).append("<dl><dt class='col-xs-3'><a href=''><img src='${ctx }/resources/client/images/gw1.jpg'  /></a></dt>"+
+					"<dd class='col-xs-9'><p><b>"+data[i].type_cn+"</b></p><p>数量：<span>"+data[i].vdef2+"</span></p><p>原价：<span>￥"+data[i].vdef1+"</span></p></dd></dl>");
+    }
+  }
+ });
 }
 
-//***************************
+//***************************START***************************
  var s = ["vpovince","vcity","vdistrict"];
  var opt0 = ["省份","城市","区县"];
  
@@ -258,7 +276,7 @@ function selOrderGem(id){
     change(2);
   });
  });
-//***************************
+//***************************END****************************
 //立即支付
 function jsPayFee(id){
  var orderno = $(".dingdan"+id).text();
@@ -276,7 +294,8 @@ function jsPayFee(id){
 	  <div class="container">
           <div class="inmenu ">
 				<h2 class="doname"><a href="javascript:void(0)" class="userOrder">订单记录<font>（${num}）</font></a></h2>
-				<i class="icon-me icon-me1 close-order"></i>
+				<i class="icon-me icon-me11  dingdanjiludown"></i>
+				<i style="display: none" class="icon-me icon-me1  dingdanjiluup"></i>
 		   </div> 
 		   <div class="ddjl uOrder" style="display: none;">
 			   <div class="user_br">
@@ -286,15 +305,11 @@ function jsPayFee(id){
 					<li>下单时间：${order.created}</li>
 					<li>总金额：￥<b class="zongjia${order.id}">${order.totalPrice}</b></li>
 					<c:if test="${order.status=='Y'}">
-					 <li>状态：已支付</li>
+					 <li>状态：已支付<a href="javascript:void(0)" class="chakan-${order.id}" onclick="javascript:selOldOrderGem(${order.id})" oid="${order.id}">查看</a></li>
 					</c:if>
 					<c:if test="${order.status=='N'}">
-					 <li>状态：未支付<a href="javascript:void(0)" onclick="javascript:jsPayFee(${order.id})">立即支付</a></li>
+					 <li>状态：未支付<b class="quzhifu"><a href="javascript:void(0)" class="chakan-${order.id}" onclick="javascript:selOrderGem(${order.id})" oid="${order.id}">查看</a></b></li>
 					</c:if>
-				 </ul>
-				 <ul>
-				   <li  style="list-style:outside;"><a href="javascript:void(0)" class="chakan-${order.id}" onclick="javascript:selOrderGem(${order.id})" oid="${order.id}">查看</a></li>
-				   <li  style="list-style:outside; display: none"><a href="javascript:void(0)" class="shouqi-${order.id}">收起</a></li>
 				 </ul>
 				 <b class="selectGem${order.id}">
 				   <%-- <dl>
@@ -308,7 +323,8 @@ function jsPayFee(id){
 		   </div>
 		   <div class="inmenu ">
 				<h2 class="doname"><a href="javascript:void(0)" class="userAddress">收货地址管理</a></h2>
-				<i class="icon-me icon-me1 close-address"></i>
+				<i class="icon-me icon-me11  shouhuodizhidown"></i>
+				<i style="display: none" class="icon-me icon-me1 shouhuodizhiup"></i>
 			</div>
 		   <div class="ddgl" >
 			   <div class="user_br1 uaddress shouhuo" style="display: none">
@@ -357,7 +373,8 @@ function jsPayFee(id){
 			 </div>	
 				<div class="inmenu ">
 					<h2 class="doname"><a href="javascript:void(0)" class="updatePwd">修改密码</a></h2>
-					<i class="icon-me icon-me1"></i>
+					<i class="icon-me icon-me11 xiugaimimadown"></i>
+					<i style="display: none" class="icon-me icon-me1 xiugaimimaup"></i>
 				</div>
 					<div class="ddgl newPwd" style="display: none"> 
 					   <form action="" method="post" > 
