@@ -23,6 +23,7 @@ public class GemClientPageModel {
 	public static void getCListPageModel(Model model, String lang) {
 		//“≥√ÊBodyVO
 		//¥˝ÕÍ…∆...
+		
 		//“≥√ÊHeadFootVO
 		model.addAttribute("pagehfvo", PageLangUtil.getAGemCardHeadFootPageVO(lang));
 		
