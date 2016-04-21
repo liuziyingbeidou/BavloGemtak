@@ -1,10 +1,12 @@
+
 <%@ page language="java" import="java.util.*,com.bavlo.gemtak.constant.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <%
 	Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
  %>
 <c:set var="uname" value="<%=username %>"/>
-<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<script type="text/javascript" src="${ctx }/resources/client/js/header.js"></script>
 <style>
 #collapse-nav{
 	background-color:#fff;
@@ -42,7 +44,13 @@
 	    <a  href="${ctx }/gemClient/login.do?dengluNUM=1">${pagehfvo['hMShoppingCart'] } <t class="cart-num"></t></a>
 	  </c:if>
 	  <c:if test="${uname != null}">
-	    <a  href="javascript:void(0)" class="view-shoppingcar">${pagehfvo['hMShoppingCart'] }<t class="cart-num"></t></a>
+	  
+	    <a  href="javascript:void(0)" class="view-shoppingcar">${pagehfvo['hMShoppingCart'] }<t class="cart-num"></t>
+	      <!-- <div class="gouwu" id="set_sub2" style="display:none">
+			<p style="color: #E3D1B6;text-align: center; font-size: 16px;">购物车中无商品</p>
+		  </div> -->
+	      
+	    </a>
 		<a href="${ctx }/gemClient/order.do" class="jesuan">${pagehfvo['hMBalance'] }</a>
 	  </c:if>
 	</div>
