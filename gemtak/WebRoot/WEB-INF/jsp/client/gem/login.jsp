@@ -61,35 +61,49 @@
    var reguname = $(".reg-uname").val();
    if(reguname == ""|| reguname == null){
      $(".errorname").text("E-mail不能为空！");
+     return;
+   }else{
+     $(".errorname").text("");
    }
    var regpwd = $(".reg-pwd").val();
    if(regpwd == ""|| regpwd == null){
      $(".errorpwd").text("密码不能为空！");
      return;
+   }else if(regpwd.length < 6){
+     $(".errorpwd").text("密码最少六个字符！");
+     return;
+   }else{
+     $(".errorpwd").text("");
    }
    var regrpwd = $(".reg-rpwd").val();
    if(regrpwd == ""|| regrpwd == null){
      $(".errorcpwd").text("请确认密码！");
      return;
+   }else{
+     $(".errorcpwd").text("");
    }
    if(regrpwd != regrpwd){
      $(".errorcpwd").text("两次输入的密码不相同！");
      return;
+   }else{
+     $(".errorcpwd").text("");
    }
    var regauthcode = $(".reg-authcode").val();
    if(regauthcode == ""|| regauthcode == null){
      $(".errorauthcode").text("请输入验证码！");
      return;
+   }else{
+     $(".errorauthcode").text("");
    }
    var url = "${ctx }/gemClient/registerSuccess.do";
    $.post(url,{uname:reguname,upwd:regpwd,regauthcode:regauthcode},function(data){
        var flag = data;
        if(flag == "error1"){
-         alert("该用户名已被注册！");
+         $(".errorname").text("该E-mail已被注册！");
        }else if(flag == "error2"){
-         alert("该用户名已被注册！");
+         $(".errorname").text("E-mail格式不正确！");
        }else if(flag == "true"){
-         alert("恭喜您，注册成功！");
+         $(".errorname").text("恭喜您，注册成功！");
        }
    });
    });
@@ -170,11 +184,14 @@
 				
 				<div class="pass">
 					<ul class="word">
-						<li><label>E-mail：</label><div class="s_te"><input class="inp_text reg-uname" type="text" value="" /><b class="error errorname"></b></div></li>
-						<li><label>密码：</label><div class="s_te"><input class="inp_text reg-pwd" type="password" value="" /><b class="error errorpwd"></b></div></li>
-						<li style="margin:0px auto;line-height:20px"><label>&nbsp;</label><div class="s_te">密码最少六个字符</li>
-						<li><label>确认密码：</label><div class="s_te"><input class="inp_text reg-rpwd" type="password" value="" /><b class="error errorcpwd"></b></div></li>
-						<li><label>验证码：</label><div class="s_te"><input class="inp_text reg-authcode" type="password" style="width:50%" value="" />&nbsp;<img src="" class="authcodeimg" onclick="refush('authcodeimg')"/><b class="error errorauthcode"></b></div></li>
+						<li><label>E-mail：</label><div class="s_te"><input class="inp_text reg-uname" type="text" value="" /><b class="error "></b></div></li>
+						<li style="margin:0px auto;line-height:20px;color: red;"><label>&nbsp;</label><div class="s_te errorname"></div></li>
+						<li><label>密码：</label><div class="s_te"><input class="inp_text reg-pwd" type="password" value="" /><b class="error "></b></div></li>
+						<li style="margin:0px auto;line-height:20px;color: red;"><label>&nbsp;</label><div class="s_te errorpwd"></div></li>
+						<li><label>确认密码：</label><div class="s_te"><input class="inp_text reg-rpwd" type="password" value="" /><b class="error "></b></div></li>
+						<li style="margin:0px auto;line-height:20px;color: red;"><label>&nbsp;</label><div class="s_te errorcpwd"></div></li>
+						<li><label>验证码：</label><div class="s_te"><input class="inp_text reg-authcode" type="password" style="width:50%" value="" />&nbsp;<img src="" class="authcodeimg" onclick="refush('authcodeimg')"/><b class="error"></b></div></li>
+						<li style="margin:0px auto;line-height:20px;color: red;"><label>&nbsp;</label><div class="s_te errorauthcode"></div></li>
 					</ul>
 					
 					<ul class="word redo">
