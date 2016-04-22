@@ -171,16 +171,7 @@ $(function(){
 				   </c:forEach> --%>
 				 </ul>
 				 <ul class="srxx selUser">
-						<!-- <li>收货人姓名：丁力 </li>
-						<li>地区： 北京市 海淀区</li>
-						<li>地址：清华东路17号院29号楼B座1003</li>
-						<li>邮编：100086 </li>
-						<li>座机：010-82830789 </li>
-						<li>手机：13810539493 </li>
-						<li>E-mail：mtvdb@sina.com</li>
-						<li class="del_s"><a href="#" class="btn  btn-lg active" role="button">新 增</a>
-										  <a href="#" class="btn btn-default btn-lg active" role="button">修 改</a>
-										  <a href="#" class="btn btn-default btn-lg active" role="button">删 除</a></li> -->
+						
 				</ul>         
 			    <ul style="display:none;" class="srxx1 show-addUser" >
 				  <li><input type="text" class="form-control username" placeholder="收货人姓名"></li>
