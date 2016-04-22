@@ -339,13 +339,14 @@ $(function(){
     $(".show-addUser").show();
     $(".username").val($(".urealname span").text());
     var area = $(".area span").text();
-    var nums = area.split(",");
-    for (var i=0 ; i< nums.length ; i++){
-     $(".area"+(i+1)).val(nums[i]);
-     if(i < 2){
-     	change(i+1);
-     }
-    } 
+        var nums = area.split(",");
+	    for (var i=0 ; i< nums.length ; i++){
+		     $(".area"+(i+1)).val(nums[i]);
+		     if(i < 2){
+		     	change(i+1);
+		     }
+	    } 
+     
     
     $(".detailAddress").val($(".uaddress span").text());
     $(".zipcode").val($(".uzipcode span").text());
