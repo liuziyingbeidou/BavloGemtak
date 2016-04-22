@@ -621,15 +621,6 @@ public class GemClientController extends BaseController {
 					}
 					gemService.saveOrderBVORelID(orderBList);
 				}
-				/*List<OrderBVO> orderBList = JsonUtils.getListFromJson(list, OrderBVO.class);
-				if(orderBList != null){
-					for (OrderBVO orderBVO : orderBList) {
-						orderBVO.setOrder_id(orderId);
-						orderBVO.setTs(DateUtil.getCurTimestamp());
-						orderBVO.setDr(IConstant.SHORT_ZERO);
-					}
-					gemService.saveOrderBVORelID(orderBList);
-				}*/
 			}
 			gemService.delShoppingCarByUname(uname+"");
 		} catch (Exception e) {
