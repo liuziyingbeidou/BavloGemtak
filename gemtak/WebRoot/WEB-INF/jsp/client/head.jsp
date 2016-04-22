@@ -6,6 +6,7 @@
 	Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
  %>
 <c:set var="uname" value="<%=username %>"/>
+<link rel="stylesheet" href="${ctx }/resources/client/css/newfly.css" type="text/css"/>
 <style>
 #collapse-nav{
 	background-color:#fff;
@@ -44,12 +45,11 @@
 	  </c:if>
 	  <c:if test="${uname != null}">
 	  
-	    <a  href="javascript:void(0)" class="view-shoppingcar">${pagehfvo['hMShoppingCart'] }<t class="cart-num"></t>
-	      <!-- <div class="gouwu" id="set_sub2" style="display:none">
-			<p style="color: #E3D1B6;text-align: center; font-size: 16px;">购物车中无商品</p>
-		  </div> -->
-	      
-	    </a>
+	    <i></i>
+	    <a  href="javascript:void(0)" class="view-shoppingcar">${pagehfvo['hMShoppingCart'] }<t class="cart-num"></t></a>
+	   
+	   <div id="msg">已成功加入购物车！</div>
+	    
 		<a href="${ctx }/gemClient/order.do" class="jesuan">${pagehfvo['hMBalance'] }</a>
 	  </c:if>
 	</div>
