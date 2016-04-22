@@ -59,6 +59,7 @@ em, i{ font-style:normal; }
 .tit_lie p{width:50%;text-align:center;float:left;overflow:hidden;text-align:center}
 .tit_lie p span{float:left;display:block;width:100%;text-align:center;line-height:30px;color:#999;margin-bottom:10px}
 .tit_lir{height:100px;padding-top:2%}
+.shangbiao h3{font-size: 1.1em;margin: 10px auto;line-height: 30px;text-align: center;}
 /*进度条*/
 .para{margin:0px auto;line-height:28px;width:100%;position:relative;top:50%}
 .para span{float:left;display:block;width:7%;cursor: pointer;}
