@@ -293,7 +293,7 @@ function jsPayFee(id){
 <div class="tit_all m_bottom_80 conbg">
 	  <div class="container">
           <div class="inmenu ">
-				<h2 class="doname"><a href="javascript:void(0)" class="userOrder">订单记录<font>（${num}）</font></a></h2>
+				<h2 class="doname"><a href="javascript:void(0)" class="userOrder">订单记录<font>（<b class="dingdanNO">${num}</b>）</font></a></h2>
 				<i class="icon-me icon-me11  dingdanjiludown"></i>
 				<i style="display: none" class="icon-me icon-me1  dingdanjiluup"></i>
 		   </div> 
