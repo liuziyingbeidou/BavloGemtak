@@ -59,39 +59,45 @@
  $(function(){
    $(".register").click(function(){
    var reguname = $(".reg-uname").val();
+   var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
    if(reguname == ""|| reguname == null){
      $(".errorname").text("E-mail不能为空！");
-     return;
+     return false;
+   }else if (!filter.test(reguname)){
+     $(".errorname").text("您的E-mail格式不正确!");
+		 return false;
    }else{
      $(".errorname").text("");
    }
+		 
+   
    var regpwd = $(".reg-pwd").val();
    if(regpwd == ""|| regpwd == null){
      $(".errorpwd").text("密码不能为空！");
-     return;
+     return false;
    }else if(regpwd.length < 6){
      $(".errorpwd").text("密码最少六个字符！");
-     return;
+     return false;
    }else{
      $(".errorpwd").text("");
    }
    var regrpwd = $(".reg-rpwd").val();
    if(regrpwd == ""|| regrpwd == null){
      $(".errorcpwd").text("请确认密码！");
-     return;
+     return false;
    }else{
      $(".errorcpwd").text("");
    }
    if(regrpwd != regrpwd){
      $(".errorcpwd").text("两次输入的密码不相同！");
-     return;
+     return false;
    }else{
      $(".errorcpwd").text("");
    }
    var regauthcode = $(".reg-authcode").val();
    if(regauthcode == ""|| regauthcode == null){
      $(".errorauthcode").text("请输入验证码！");
-     return;
+     return false;
    }else{
      $(".errorauthcode").text("");
    }
@@ -100,8 +106,6 @@
        var flag = data;
        if(flag == "error1"){
          $(".errorname").text("该E-mail已被注册！");
-       }else if(flag == "error2"){
-         $(".errorname").text("E-mail格式不正确！");
        }else if(flag == "true"){
          $(".errorname").text("恭喜您，注册成功！");
        }
@@ -140,6 +144,14 @@
    //忘记密码
  $(".forgetpassword").click(function(){
   var email = $(".findPwd").val();
+  var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  if(email == ""|| email == null){
+     $(".error11").text("E-mail不能为空！");
+     return false;
+   }else if (!filter.test(email)){
+     $(".error11").text("您的E-mail格式不正确!");
+		 return false;
+   }
   var url = "${ctx }/gemClient/forgetpwd.do";
   $.post(url,{email:email},function(data){
    if(data == "true"){
@@ -175,6 +187,7 @@
 					<p>请在下面输入您的Email地址，然后点击“发送”按钮，我们立即把新密码发送到您的邮箱！</p>
 					<ul class="word redo">
 						<li class="mail"><label>E-mail：</label><div class="s_te"><input class="inp_text findPwd" type="text" value="" /></div></li>
+						<li style="margin:0px auto;line-height:20px;color: red;"><label>&nbsp;</label><div class="s_te error11"></div></li>
 						<li><input class="inp_sub forgetpassword" type="button" value="发送" /></li>
 					</ul>
 				</div>
