@@ -18,7 +18,8 @@
 <meta name="author" content="bavlo">
 <title>bavlo</title>
 <link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
-<link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
+<link href="${ctx }/resources/client/css/index.css" rel="stylesheet"/>
+<link rel="stylesheet" href="${ctx }/resources/client/css/newfly.css" type="text/css"/>
 <link href="${ctx }/resources/client/css/bootstrap-slider.min.css" rel="stylesheet" type="text/css" />
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery-1.7.2.min.js"></script>
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/bootstrap-slider.min.js"></script>
@@ -63,7 +64,7 @@ function addShoppCar(id){
 	    var flag = data.mess;
 	    var num = data.carNum;
 	    if(flag=="Y"){
-	      alert("恭喜你，宝物添加成功！");
+	     /*  alert("恭喜你，宝物添加成功！"); */
 	      selCarNO(num);  //方法在head.jsp 
 	    }else if(flag=="N"){  //返回N跳转到登录
 	      $("#my-popup").modal('toggle');
@@ -108,37 +109,37 @@ function addShoppCar(id){
 			   <!--<iframe id="iframe" src="${ctx }/gemClient/loadImg.do" frameborder="no" width="100%"></iframe>-->
 			   <jsp:include page="load-img.jsp"></jsp:include>
 			   
-			   <span><a href=""><image src="${ctx }/resources/client/images/360.png" /></a></span>
+			   <span><a href="javascript:void(0)" >
+			      <img  src="${ctx }/resources/client/images/360.png" />
+			   </a></span>
 			   <p>Gemtak</p>
 			 </div>
 			 <ul class="tit_ul">
-			    <li  class="tit_lie col-md-6 col-xs-12">
-				   <p><span>颜色/方位</span><image src="${ctx }/resources/client/images/ad2.png" /></p>
-				   <p><span>视角</span><img src="${ctx }/resources/client/images/ad3.png" /></p>
+				<li  class="tit_lie col-md-6 col-xs-12">
+				   <div class="col-xs-6">
+					   <div class="text-center shangbiao" >       						
+							<h3 class="font-bold no-margins">颜色/方位</h3>
+							<div class="m-b-md inline">
+								<input type="text" value="75" class="dial m-r-sm" data-fgColor="#faa668" data-width="85" data-height="85" />
+							</div>
+					   </div>
+					</div>
+					<div class="col-xs-6"  data-dismiss="modal">
+					   <div class="text-center shangbiao" >       
+							<h3 class="font-bold no-margins">视角</h3>
+							<div class="m-b-md inline">
+								<input type="text" value="88" class="dial m-r-sm" data-fgColor="#faa668" data-width="85" data-height="85" />
+							</div>				
+					   </div>
+					</div>   
 				</li>
-				<li class="tit_lir col-md-6 col-xs-12">
-				    <div class="col-xs-6">
-				        <div class="text-center shangbiao">
-				           <h3 class="font-bold  no-margins">顏色/方位</h3>
-				           <div class="m-b-md inline">
-				              <input type="text" value="75" class="dial m-r-sm"/>
-				           </div>
-				        </div>
-				    </div>
-				    <div class="col-xs-6" data-dismiss="modal">
-				        <div class="text-center shangbiao">
-				           <h3 class="font-bold  no-margins">視角</h3>
-				           <div class="m-b-md inline">
-				              <input type="text" value="88" class="dial m-r-sm"/>
-				           </div>
-				        </div>
-				    </div>
+				<li class="tit_lir col-md-6 col-xs-12">				  				 
 				   	<div class="para">
-					  <span onclick="javascript:jian();" style="text-align:right"><img src="${ctx }/resources/client/images/j.png">
-					   <font>X4.5</font>
+					  <span onclick="javascript:jian();" style="text-align:right"><img src="${ctx }/images/j.png">
+					   <font>X4.5<font>
 					  </span>
 					  <input id="ex8"  type="text" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="14"/>
-					  <span style="float:right" onclick="javascript:jia();"><img src="${ctx }/resources/client/images/ja.png">
+					  <span style="float:right" onclick="javascript:jia();"><img src="${ctx }/images/ja.png">
 					  <font>X0.7<font>
 					  </span>
 					</div>		
@@ -167,12 +168,43 @@ function addShoppCar(id){
 				<c:if test="${bis!='Y'}">
 				 <p>价格（Price）：<span>¥${gem.retail_price} <em>/${gem.pairs}</em></span></p>
 				</c:if>
-				<div class="add_gu"><a href="javascript:void(0)" class="gw_a" onclick="addShoppCar(${gem.id})">+ 购物车</a><a href="">订购款式 ></a></div>		  
+				<b style="display: none"><img  class="360tupian" src="${ctx }/resources/client/images/cp2.jpg"/></b>
+				<div class="add_gu"><a href="javascript:void(0)" class="gw_a addcar" onclick="addShoppCar(${gem.id})">购物车</a><a href="">订购款式 ></a></div>		  
 		  </div>
 	  </div>
 </div>
 <div class="footer hidden-xs hidden-sm">
     <jsp:include page="../../admin/foot.jsp"></jsp:include>
 </div>
+<script type="text/javascript" src="${ctx }/resources/client/js/fly/jquery.fly.min.js"></script>
+<script type="text/javascript" src="${ctx }/resources/client/js/fly/requestAnimationFrame.js"></script>
+
+<script>
+$(function(){
+    var offset = $("i").offset();
+	$(".addcar").click(function(event){
+		var addcar = $(this);
+		var img = $(".360tupian").attr("src");
+		var flyer = $('<img class="u-flyer" src="'+img+'">');
+		flyer.fly({
+			start: {
+				left: event.pageX,
+				top: event.pageY,
+			},
+			end: {
+				left: offset.left+1300,
+				top: offset.top+32,
+				width: 0,
+				height: 0,
+			},
+			onEnd: function(){
+				$("#msg").show().animate({width: "250px"}, 200).fadeOut(1000);
+				this.destory();
+				
+			}
+		});
+	});
+});
+</script>
 </body>
 </html>
