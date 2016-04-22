@@ -239,7 +239,7 @@ function updateUPassWord(){
 
 //查看 未支付订单
 function selOrderGem(id){
- $(".quzhifu").append("<a class='gopay-"+id+"' href='javascript:void(0)' onclick='javascript:jsPayFee("+id+")'>立即支付</a>");
+ $(".quzhifu-"+id).append("<a class='gopay-"+id+"' href='javascript:void(0)' onclick='javascript:jsPayFee("+id+")'>立即支付</a>");
  var url = "/gemtak/gemClient/selOrderGemById.do";
  $.post(url,{orderid:id},function(data){
   if(data != null){
@@ -308,7 +308,7 @@ function jsPayFee(id){
 					 <li>状态：已支付<a href="javascript:void(0)" class="chakan-${order.id}" onclick="javascript:selOldOrderGem(${order.id})" oid="${order.id}">查看</a></li>
 					</c:if>
 					<c:if test="${order.status=='N'}">
-					 <li>状态：未支付<b class="quzhifu"><a href="javascript:void(0)" class="chakan-${order.id}" onclick="javascript:selOrderGem(${order.id})" oid="${order.id}">查看</a></b></li>
+					 <li>状态：未支付<b class="quzhifu-${order.id}"><a href="javascript:void(0)" class="chakan-${order.id}" onclick="javascript:selOrderGem(${order.id})" oid="${order.id}">查看</a></b></li>
 					</c:if>
 				 </ul>
 				 <b class="selectGem${order.id}">
