@@ -160,12 +160,8 @@ function delCookie(id){
 $(function(){
      //我的订单
      $(".view-MyOrder").click(function(){
-         var num = $(".dingdanNO").text();
-         if(num == 0){
-           alert("您目前还没有订单!");
-         }else{
            location.href="${ctx }/gemClient/selMyOrder.do";
-         }
+         
      });
 	 // 购物车
 	$(".view-shoppingcar").click(function(){
