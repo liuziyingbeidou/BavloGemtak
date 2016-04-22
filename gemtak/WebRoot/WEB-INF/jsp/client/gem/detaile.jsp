@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="${ctx }/resources/amazeui/css/amazeui.min.css"/>
 <script type="text/javascript" src="${ctx }/resources/amazeui/js/handlebars.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/amazeui/js/amazeui.min.js"></script>
+<script type="text/javascript" src="${ctx }/resources/client/js/jsKnob/jquery.knob.js"></script>
 <%
   String bis = (String)session.getAttribute("bisBis");
  %>
@@ -33,6 +34,7 @@
 <script>
 $(document).ready(function() {
 	getCarNum();
+	$(".dial").knob();
 	$("#ex8").slider({
 		tooltip: 'always'
 	});
@@ -115,6 +117,22 @@ function addShoppCar(id){
 				   <p><span>视角</span><img src="${ctx }/resources/client/images/ad3.png" /></p>
 				</li>
 				<li class="tit_lir col-md-6 col-xs-12">
+				    <div class="col-xs-6">
+				        <div class="text-center shangbiao">
+				           <h3 class="font-bold  no-margins">顏色/方位</h3>
+				           <div class="m-b-md inline">
+				              <input type="text" value="75" class="dial m-r-sm"/>
+				           </div>
+				        </div>
+				    </div>
+				    <div class="col-xs-6" data-dismiss="modal">
+				        <div class="text-center shangbiao">
+				           <h3 class="font-bold  no-margins">視角</h3>
+				           <div class="m-b-md inline">
+				              <input type="text" value="88" class="dial m-r-sm"/>
+				           </div>
+				        </div>
+				    </div>
 				   	<div class="para">
 					  <span onclick="javascript:jian();" style="text-align:right"><img src="${ctx }/resources/client/images/j.png">
 					   <font>X4.5</font>
@@ -126,7 +144,7 @@ function addShoppCar(id){
 					</div>		
 				</li>			 
 			 </ul>      		    
-			  </div>
+			</div>
 			  <div class="tit_sm  col-sm-12 col-md-5">
 				<h6>${gem.weight} ${gem.type_cn} （${gem.type_en}）</h6>
 				<ul>
