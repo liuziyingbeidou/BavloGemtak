@@ -6,7 +6,6 @@
 	Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
  %>
 <c:set var="uname" value="<%=username %>"/>
-<script type="text/javascript" src="${ctx }/resources/client/js/header.js"></script>
 <style>
 #collapse-nav{
 	background-color:#fff;
@@ -32,7 +31,7 @@
 	  <c:if test="${uname != null}">
 	    <t class="t-css"> Hi, ${uname}</t>
 	    <a class="replaceA" href="${ctx }/gemClient/logout.do">${pagehfvo['hMSignOut'] }</a>|
-		<a class="replaceB" href="${ctx }/gemClient/selMyOrder.do">${pagehfvo['hMOrder'] }</a>|
+		<a class="replaceB view-MyOrder" href="javascript:void(0)">${pagehfvo['hMOrder'] }</a>|
 	  </c:if>
 	  <c:if test="${uname == null}">
 	    <t class="t-css"></t>
@@ -92,7 +91,7 @@
       	<c:if test="${uname != null}">
       	   <li class="t-css"><a href="##" class="" > Hi, ${uname}</a></li>
       	   <li class="">
-            <a href="${ctx }/gemClient/selMyOrder.do" class="" >${pagehfvo['hMOrder'] }</a>
+            <a href="javascript:void(0)" class="view-MyOrder" >${pagehfvo['hMOrder'] }</a>
           </li>
           <li class="">
             <a href="${ctx }/gemClient/logout.do" class="" >${pagehfvo['hMSignOut'] }</a>
@@ -159,7 +158,16 @@ function delCookie(id){
 }
 
 $(function(){
-	  // 购物车
+     //我的订单
+     $(".view-MyOrder").click(function(){
+         var num = $(".dingdanNO").text();
+         if(num == 0){
+           alert("您目前还没有订单!");
+         }else{
+           location.href="${ctx }/gemClient/selMyOrder.do";
+         }
+     });
+	 // 购物车
 	$(".view-shoppingcar").click(function(){
 		 var url = "/gemtak/gemClient/checkGemShoppingCar.do";
 		 $.post(url,function(data){
