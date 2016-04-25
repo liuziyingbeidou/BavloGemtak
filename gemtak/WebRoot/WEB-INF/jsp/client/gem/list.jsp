@@ -16,9 +16,12 @@
 
 	<link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 	<link rel="stylesheet" href="${ctx }/resources/client/css/swiper.css">
+	<link rel="stylesheet" href="${ctx }/resources/client/css/newfly.css" type="text/css"/>
 	<link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/gemClient.js"></script>
+	<script type="text/javascript" src="${ctx }/resources/client/js/fly/jquery.fly.min.js"></script>
+    <script type="text/javascript" src="${ctx }/resources/client/js/fly/requestAnimationFrame.js"></script>
 <script language=javaScript>
 	 $(document).ready(function(){
 	 	// show_menuone(1);//显示哪个分类        
@@ -111,13 +114,7 @@
            });
          });
          
-         //5.展示详情界面
-        /*  $(function(){    
-           $(".select-detaile").click(function(){
-            var id = $(".gem-id").val();
-            location.href = "viewGemDetaile.do?&id="+id;
-           });
-         }); */
+ 
 </script>
  
 </head>
