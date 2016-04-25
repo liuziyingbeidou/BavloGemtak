@@ -39,6 +39,7 @@
 	    <a class="replaceA" href="${ctx }/gemClient/login.do?dengluNUM=1">${pagehfvo['hMSignIn'] }</a>|
 		<a class="replaceB" href="${ctx }/gemClient/login.do?dengluNUM=1">${pagehfvo['hMReg'] }</a>|
 	  </c:if>
+	    <ii></ii>
 		<a href="javascript:void(0)" class="myCollapse" cls="cls-folder">${pagehfvo['hMFavr'] }</a>|
 	  <c:if test="${uname == null}">
 	    <a  href="${ctx }/gemClient/login.do?dengluNUM=1">${pagehfvo['hMShoppingCart'] } <t class="cart-num"></t></a>
