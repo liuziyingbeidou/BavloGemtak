@@ -164,7 +164,6 @@ public class GemClientController extends BaseController {
 			reldate = "asc";
 		}
         List<GemVO> gems = gemService.findListGem(sql+"", dgpage, rows,"releasedate",reldate);
-        
         /****/
         Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
         for(Cookie cookie : cookies){
@@ -182,7 +181,6 @@ public class GemClientController extends BaseController {
         }
         /****/
 		renderJson(gems);
-		
 	}
 	
 	/**
