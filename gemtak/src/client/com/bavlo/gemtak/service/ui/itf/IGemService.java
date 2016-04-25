@@ -110,6 +110,8 @@ public interface IGemService {
 	 */
 	public List<GemVO> findAllGemVO();
 	
+	
+	
 	/**
 	 * 8.根据id 查询一条gemVO
 	 * lisuike 3.15
