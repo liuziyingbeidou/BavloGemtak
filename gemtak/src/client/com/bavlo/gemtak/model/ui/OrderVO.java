@@ -30,7 +30,8 @@ public class OrderVO extends IdEntity {
 	private Double coupon_fee;
 	//创建日期
 	private Timestamp created;
-	
+	//支付方式
+	private String zhifu;
 	//保价金额
 	private Double support_fee;
 	private Timestamp delivery_date;
@@ -309,6 +310,12 @@ public class OrderVO extends IdEntity {
 	}
 	public void setTotalPrice(Double totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+	public String getZhifu() {
+		return zhifu;
+	}
+	public void setZhifu(String zhifu) {
+		this.zhifu = zhifu;
 	}
 
 	
