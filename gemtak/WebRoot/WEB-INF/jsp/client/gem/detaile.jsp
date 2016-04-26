@@ -55,6 +55,33 @@ function jia(){
 	}
 }
 
+//加入购物车效果
+$(function(){
+    var offset = $("i").offset();
+	$(".addcar").click(function(event){
+		var addcar = $(this);
+		var img = $(".360tupian").attr("src");
+		var flyer = $('<img class="u-flyer" src="'+img+'">');
+		flyer.fly({
+			start: {
+				left: event.pageX,
+				top: event.pageY,
+			},
+			end: {
+				left: offset.left+1000,
+				top: offset.top+150,
+				width: 0,
+				height: 0,
+			},
+			onEnd: function(){
+				$("#msg").show().animate({width: "250px"}, 200).fadeOut(1000);
+				this.destory();
+				getCarNum();
+			}
+		});
+	});
+});
+
 //添加到购物车
 function addShoppCar(id){
       var quantity =  $(".selquantity").text();
@@ -135,11 +162,11 @@ function addShoppCar(id){
 				</li>
 				<li class="tit_lir col-md-6 col-xs-12">				  				 
 				   	<div class="para">
-					  <span onclick="javascript:jian();" style="text-align:right"><img src="${ctx }/images/j.png">
+					  <span onclick="javascript:jian();" style="text-align:right"><img src="${ctx }/resources/client/images/j.png"/>
 					   <font>X4.5<font>
 					  </span>
 					  <input id="ex8"  type="text" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="14"/>
-					  <span style="float:right" onclick="javascript:jia();"><img src="${ctx }/images/ja.png">
+					  <span style="float:right" onclick="javascript:jia();"><img src="${ctx }/resources/client/images/ja.png"/>
 					  <font>X0.7<font>
 					  </span>
 					</div>		
@@ -163,13 +190,29 @@ function addShoppCar(id){
 					</li><li>卖家：<span>${gem.supplier}</span></li>
 				</ul>
 				<c:if test="${bis=='Y'}">
-				 <p>价格（Price）：<span>¥${gem.trade_price} <em>/${gem.pairs}</em></span></p>
+				 <c:if test="${gem.pairs=='sl'}">
+				   <p>价格（Price）：<span>¥${gem.trade_price} <em>/单粒</em></span></p>
+				 </c:if>
+				 <c:if test="${gem.pairs=='pl'}">
+				   <p>价格（Price）：<span>¥${gem.trade_price} <em>/配对</em></span></p>
+				 </c:if>
+				 <c:if test="${gem.pairs=='ml'}">
+				   <p>价格（Price）：<span>¥${gem.trade_price} <em>/</em>多粒</span></p>
+				 </c:if>
 				</c:if>
 				<c:if test="${bis!='Y'}">
-				 <p>价格（Price）：<span>¥${gem.retail_price} <em>/${gem.pairs}</em></span></p>
+				  <c:if test="${gem.pairs=='sl'}">
+				   <p>价格（Price）：<span>¥${gem.retail_price} <em>/单粒</em></span></p>
+				 </c:if>
+				 <c:if test="${gem.pairs=='pl'}">
+				   <p>价格（Price）：<span>¥${gem.retail_price} <em>/配对</em></span></p>
+				 </c:if>
+				 <c:if test="${gem.pairs=='ml'}">
+				   <p>价格（Price）：<span>¥${gem.retail_price} <em>/</em>多粒</span></p>
+				 </c:if>
 				</c:if>
 				<b style="display: none"><img  class="360tupian" src="${ctx }/resources/client/images/cp2.jpg"/></b>
-				<div class="add_gu"><a href="javascript:void(0)" class="gw_a addcar" onclick="addShoppCar(${gem.id})">购物车</a><a href="">订购款式 ></a></div>		  
+				<div class="add_gu"><a href="javascript:void(0)" class="gw_a addcar" onclick="addShoppCar(${gem.id})">购物车</a><a style="display: none;"  href="javascript:void(0)">订购款式 ></a></div>		  
 		  </div>
 	  </div>
 </div>
@@ -180,31 +223,7 @@ function addShoppCar(id){
 <script type="text/javascript" src="${ctx }/resources/client/js/fly/requestAnimationFrame.js"></script>
 
 <script>
-$(function(){
-    var offset = $("i").offset();
-	$(".addcar").click(function(event){
-		var addcar = $(this);
-		var img = $(".360tupian").attr("src");
-		var flyer = $('<img class="u-flyer" src="'+img+'">');
-		flyer.fly({
-			start: {
-				left: event.pageX,
-				top: event.pageY,
-			},
-			end: {
-				left: offset.left+1300,
-				top: offset.top+32,
-				width: 0,
-				height: 0,
-			},
-			onEnd: function(){
-				$("#msg").show().animate({width: "250px"}, 200).fadeOut(1000);
-				this.destory();
-				
-			}
-		});
-	});
-});
+
 </script>
 </body>
 </html>
