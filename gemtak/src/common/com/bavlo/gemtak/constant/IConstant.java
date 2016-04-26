@@ -60,6 +60,9 @@ public interface IConstant {
 	// 扫一扫登陆路径
 	public final static String WXSSLOGIN = "http://lzy348860554.imwork.net/gemtak/gemClient/wxlogin.do";
 	
+	// 扫一扫支付成功后返回的路径
+    public final static String WXSSPAYSUCCESSURL = "http://lzy348860554.imwork.net/gemtak/wx/payNoticeUrl.do";
+	
 	//已发布 
 	public static final String RELEASE_Y = "Y";
 	//新上传（E）
