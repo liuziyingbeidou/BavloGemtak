@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.bavlo.gemtak.model.IdEntity;
 
@@ -22,7 +23,8 @@ public class OrderVO extends IdEntity {
 	
 	//手机
 	private String cellphone;
-	
+	//当前登录的设备
+	private String mrType;
 	private Timestamp complete_date;
 	//优惠劵
 	private String coupon;
@@ -316,6 +318,12 @@ public class OrderVO extends IdEntity {
 	}
 	public void setZhifu(String zhifu) {
 		this.zhifu = zhifu;
+	}
+	public String getMrType() {
+		return mrType;
+	}
+	public void setMrType(String mrType) {
+		this.mrType = mrType;
 	}
 
 	
