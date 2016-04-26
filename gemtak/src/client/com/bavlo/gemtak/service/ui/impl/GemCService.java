@@ -316,7 +316,7 @@ public class GemCService extends CommonService implements IGemService {
 	 */
 	@Override
 	public List<OrderVO> getOrderByUname(String uname) {
-		List<OrderVO> orderList = findAll(OrderVO.class, " username='"+uname+"'");
+		List<OrderVO> orderList = findAll(OrderVO.class, " username='"+uname+"'",null,"created","desc");
 		return orderList;
 	}
 
