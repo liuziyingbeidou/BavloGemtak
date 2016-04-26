@@ -141,7 +141,8 @@
 		  <div class="tab_cont col-xs-12 col-sm-12 " id="contid1" style="displays:none">
 		    <div class="swiper-container swiper-container-horizontal swiper1" >
 				<div class="swiper-wrapper list_ul2">
-					   <div class="swiper-slide"><a class="p_default " id="gemid" vid="a" vn="全部" style="background: url('/gemtak/resources/client/images/game/g0.png') top center no-repeat;"></a><span >全部</span></div>
+					   <div class="swiper-slide">
+					   <a class="p_default " id="gemid" vid="a" vn="全部" style="background: url('/gemtak/resources/client/images/game/g0.png') top center no-repeat;"></a><span >全部</span></div>
 					   <c:forEach var="bean" items="${listGemType}" varStatus="status">
 						  <div class="swiper-slide">
 						  <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/g1.png') top center no-repeat;"></a>
