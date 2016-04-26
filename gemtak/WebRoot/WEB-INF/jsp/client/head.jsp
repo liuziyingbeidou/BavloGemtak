@@ -51,7 +51,7 @@
 	   
 	   <div id="msg">已成功加入购物车！</div>
 	    
-		<a href="${ctx }/gemClient/order.do" class="jesuan">${pagehfvo['hMBalance'] }</a>
+		<a href="javascript:void(0)" class="jesuan">${pagehfvo['hMBalance'] }</a>
 	  </c:if>
 	</div>
   </div>
@@ -175,6 +175,19 @@ $(function(){
 		  }
 		 });
 		});
+		
+	// 结算
+	$(".jesuan").click(function(){
+		 var url = "/gemtak/gemClient/checkGemShoppingCar.do";
+		 $.post(url,function(data){
+		  if(data == "N"){
+		    alert("您还没有要结算的商品！");
+		  }else if(data == "Y"){
+		   location.href = "/gemtak//gemClient/order.do";
+		  }
+		 });
+		});
+		
      //点击触发收藏夹
   	$(".myCollapse").click(function(){
 		$("#collapse-nav").collapse('toggle');
