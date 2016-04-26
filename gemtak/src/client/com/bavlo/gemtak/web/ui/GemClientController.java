@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.apache.commons.lang3.StringUtils;
 
 import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.constant.controller.IClientForward;
@@ -34,11 +37,13 @@ import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.model.ui.OrderBVO;
 import com.bavlo.gemtak.model.ui.OrderVO;
 import com.bavlo.gemtak.model.ui.ShoppingCarVO;
+import com.bavlo.gemtak.model.weixin.WxPayDto;
 import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.service.weixin.itf.IWXZFService;
 import com.bavlo.gemtak.util.weixin.WXPayUtil;
 import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.DateUtil;
+import com.bavlo.gemtak.utils.GenerateQrCodeUtil;
 import com.bavlo.gemtak.utils.JsonUtils;
 import com.bavlo.gemtak.utils.QrCodeUtil;
 import com.bavlo.gemtak.utils.WebUtils;
@@ -46,13 +51,18 @@ import com.bavlo.gemtak.utils.wxcode.WXUtil;
 import com.bavlo.gemtak.web.BaseController;
 import com.bavlo.gemtak.web.weixin.GetWeiXinCode;
 import com.bavlo.gemtak.weixin.qy.interceptor.OAuthRequired;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
 
 /**
- * @Title: ±¦ççGemtak
+ * @Title: å®ç‘Gemtak
  * @ClassName: GemClientController 
  * @Description: GemClient
  * @author liuzy
- * @date 2016-3-8 ÏÂÎç04:42:31
+ * @date 2016-3-8 ä¸‹åˆ04:42:31
  */
 @Controller(value="GemClientController")
 @RequestMapping(value="gemClient")
@@ -67,7 +77,7 @@ public class GemClientController extends BaseController {
 	private ServletContext servletContext;
 	
 	/**
-	 * @Description: Ê×Ò³-±¦Ê¯ÁĞ±í
+	 * @Description: é¦–é¡µ-å®çŸ³åˆ—è¡¨
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -79,10 +89,10 @@ public class GemClientController extends BaseController {
 			Integer dgpage,String typegem,String shapegem,String fromWeight,String toWeight,String fromPrice,String toPrice,
 			String inwhere,String inwheres){
 		
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCListPageModel(model,lang);
 		/*StringBuilder sql = new StringBuilder(" 1=1");
 		if(!CommonUtils.isNull(typegem)){
@@ -100,7 +110,7 @@ public class GemClientController extends BaseController {
 		if(!CommonUtils.isNull(inwhere)){
 			sql.append(" and pairs in ("+inwhere+")");
 		}
-		//ĞÎ×´ »¡¶È¡¢ÇĞÃæ
+		//å½¢çŠ¶ å¼§åº¦ã€åˆ‡é¢
 		if(!CommonUtils.isNull(inwheres)){
 			sql.append(" and pairs in ("+inwheres+")");
 		}
@@ -118,7 +128,7 @@ public class GemClientController extends BaseController {
 	
 	
 	/**
-	 * 2.ajax¸ù¾İÌõ¼ş²éÑ¯
+	 * 2.ajaxæ ¹æ®æ¡ä»¶æŸ¥è¯¢
 	 * @param model
 	 * @param request
 	 * @param response
@@ -152,7 +162,7 @@ public class GemClientController extends BaseController {
 		if(!CommonUtils.isNull(inwhere)){
 			sql.append(" and pairs in ("+inwhere+")");
 		}
-		//ĞÎ×´ »¡¶È¡¢ÇĞÃæ
+		//å½¢çŠ¶ å¼§åº¦ã€åˆ‡é¢
 		if(!CommonUtils.isNull(inwheres)){
 			sql.append(" and pairs in ("+inwheres+")");
 		}
@@ -165,7 +175,7 @@ public class GemClientController extends BaseController {
 		}
         List<GemVO> gems = gemService.findListGem(sql+"", dgpage, rows,"releasedate",reldate);
         /****/
-        Cookie[] cookies = request.getCookies();//ÕâÑù±ã¿ÉÒÔ»ñÈ¡Ò»¸öcookieÊı×é
+        Cookie[] cookies = request.getCookies();//è¿™æ ·ä¾¿å¯ä»¥è·å–ä¸€ä¸ªcookieæ•°ç»„
         for(Cookie cookie : cookies){
             System.out.println("name:"+cookie.getName()+",value:"+ cookie.getValue());
             if(!"".equals(cookie.getName())){
@@ -184,7 +194,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * 3.°´ÀàĞÍÃû³Æ»òÀàĞÍidÄ£ºı ²éÑ¯
+	 * 3.æŒ‰ç±»å‹åç§°æˆ–ç±»å‹idæ¨¡ç³Š æŸ¥è¯¢
 	 * @param model
 	 * @param request
 	 * @param response
@@ -197,10 +207,10 @@ public class GemClientController extends BaseController {
 	public String selectClientByType(Model model,HttpServletRequest request,HttpServletResponse response,
 			Integer dgpage,String typegem) throws UnsupportedEncodingException{
 		
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCListPageModel(model,lang);
 		String tgem = new String( typegem.getBytes("ISO-8859-1") , "utf-8");
 		StringBuilder sql = new StringBuilder(" 1=1");
@@ -221,7 +231,7 @@ public class GemClientController extends BaseController {
 	
 	
 	/**
-	 * @Description: ±¦Ê¯ÏêÏ¸Ò³
+	 * @Description: å®çŸ³è¯¦ç»†é¡µ
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -232,13 +242,13 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="viewGemDetaile")
 	public String viewGemDetaile(Model model,HttpServletResponse response,HttpServletRequest request,Integer id) throws Exception{
 		
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCDetailePageModel(model,lang);
 		GemVO gem = gemService.findGemVOByID(id);
-		gemService.updateGemVOPageViews(gem);//Ã¿²é¿´Ò»´ÎÏêÇéÒ³£¬ä¯ÀÀ´ÎÊı¼Ó1
+		gemService.updateGemVOPageViews(gem);//æ¯æŸ¥çœ‹ä¸€æ¬¡è¯¦æƒ…é¡µï¼Œæµè§ˆæ¬¡æ•°åŠ 1
 		model.addAttribute("gem", gem);
 		model.addAttribute("model", "hbx");   //gem.getUrl_360();
 		/*return IClientForward.viewGemDetaile;*/
@@ -246,12 +256,12 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * Ìí¼Óµ½¹ºÎï³µ
+	 * æ·»åŠ åˆ°è´­ç‰©è½¦
 	 * @param model
 	 * @param response
 	 * @param request
 	 * @param carVO
-	 * lisuike 2016-3-28 ÉÏÎç10:44:50
+	 * lisuike 2016-3-28 ä¸Šåˆ10:44:50
 	 * @throws Exception 
 	 * @throws NumberFormatException 
 	 */
@@ -260,7 +270,7 @@ public class GemClientController extends BaseController {
 			String username,Integer quantity) {
 	    Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
 	    if(uname == ""|| uname == null){
-	    	 renderText("{\"mess\":\"N\"}"); //Ìí¼Óµ½¹ºÎï³µÇ°ÅĞ¶ÏsessionÊÇ·ñÎª¿Õ£¬Îª¿Õ·µ»ØN£¬ÈÃÆäµÇÂ¼
+	    	 renderText("{\"mess\":\"N\"}"); //æ·»åŠ åˆ°è´­ç‰©è½¦å‰åˆ¤æ–­sessionæ˜¯å¦ä¸ºç©ºï¼Œä¸ºç©ºè¿”å›Nï¼Œè®©å…¶ç™»å½•
 	    }else {
 	    	username = (String) uname;
 	    	Integer num = 0;
@@ -275,12 +285,12 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * É¾³ı¹ºÎï³µ ÖĞÑ¡ÖĞµÄÉÌÆ·
+	 * åˆ é™¤è´­ç‰©è½¦ ä¸­é€‰ä¸­çš„å•†å“
 	 * @param model
 	 * @param response
 	 * @param request
 	 * @param carVO
-	 * lisuike 2016-3-31 ÉÏÎç13:25:50
+	 * lisuike 2016-3-31 ä¸Šåˆ13:25:50
 	 * @throws Exception 
 	 * @throws NumberFormatException 
 	 */
@@ -298,7 +308,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description:¸ù¾İÓÃ»§Ãû ²éÑ¯¸ÃÓÃ»§µÄ¹ºÎï³µÉÌÆ·×ÜÊı
+	 * @Description:æ ¹æ®ç”¨æˆ·å æŸ¥è¯¢è¯¥ç”¨æˆ·çš„è´­ç‰©è½¦å•†å“æ€»æ•°
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -323,7 +333,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: ¹ºÎï³µ
+	 * @Description: è´­ç‰©è½¦
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -333,10 +343,10 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="viewShoppingCar")
 	public String viewGemShoppingCar(Model model,HttpServletResponse response,HttpServletRequest request,String uname,Integer gmeid){
 		
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCShoppingCarPageModel(model,lang);
 		List<GemVO> gemList;
 		Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
@@ -353,7 +363,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: ¼ì²é¹ºÎï³µ ÊÇ·ñÎª¿Õ
+	 * @Description: æ£€æŸ¥è´­ç‰©è½¦ æ˜¯å¦ä¸ºç©º
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -363,10 +373,10 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="checkGemShoppingCar")
 	public void checkGemShoppingCar(Model model,HttpServletResponse response,HttpServletRequest request,String uname,Integer gmeid){
 		
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCShoppingCarPageModel(model,lang);
 		List<GemVO> gemList = null;
 		Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
@@ -389,7 +399,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * »ñÈ¡ÓÃ»§ ÊÕ»õµØÖ·
+	 * è·å–ç”¨æˆ· æ”¶è´§åœ°å€
 	 * @param model
 	 * @param response
 	 * @param request
@@ -402,7 +412,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * ¸ù¾İid ÊÕ»õµØÖ·
+	 * æ ¹æ®id æ”¶è´§åœ°å€
 	 * @param model
 	 * @param response
 	 * @param request
@@ -414,7 +424,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * ĞÂÔöÓÃ»§ ÊÕ»õµØÖ·
+	 * æ–°å¢ç”¨æˆ· æ”¶è´§åœ°å€
 	 * @param model
 	 * @param response
 	 * @param request
@@ -438,7 +448,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * ĞŞ¸ÄÓÃ»§ ÊÕ»õµØÖ·
+	 * ä¿®æ”¹ç”¨æˆ· æ”¶è´§åœ°å€
 	 * @param model
 	 * @param response
 	 * @param request
@@ -453,7 +463,7 @@ public class GemClientController extends BaseController {
 	}*/
 	
 	/**
-	 * É¾³ıÓÃ»§ ÊÕ»õµØÖ·
+	 * åˆ é™¤ç”¨æˆ· æ”¶è´§åœ°å€
 	 * @param model
 	 * @param response
 	 * @param request
@@ -465,7 +475,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * ĞŞ¸ÄÓÃ»§ÃÜÂë
+	 * ä¿®æ”¹ç”¨æˆ·å¯†ç 
 	 * @param model
 	 * @param response
 	 * @param request
@@ -478,7 +488,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * ¸ù¾İ¶©µ¥id²éÑ¯ ±¦Ê¯
+	 * æ ¹æ®è®¢å•idæŸ¥è¯¢ å®çŸ³
 	 * @param model
 	 * @param response
 	 * @param request
@@ -490,7 +500,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: ¶©µ¥
+	 * @Description: è®¢å•
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -500,10 +510,10 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="order")
 	public String gemOrder(Model model,HttpServletResponse response,HttpServletRequest request){
 		
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCOrderPageModel(model,lang);
 		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
 		try {
@@ -522,7 +532,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * ¶©µ¥Íê³É
+	 * è®¢å•å®Œæˆ
 	 * @param model
 	 * @param response
 	 * @param request
@@ -531,10 +541,10 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="orderFish")
 	public String ordrFish(Model model,HttpServletResponse response,HttpServletRequest request,String toalPrice,String orderNo){
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCShoppingCarPageModel(model,lang);
 		model.addAttribute("totalPrice",toalPrice);
 		model.addAttribute("orderNo",orderNo);
@@ -542,7 +552,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: Ìá½»¶©µ¥
+	 * @Description: æäº¤è®¢å•
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -557,13 +567,13 @@ public class GemClientController extends BaseController {
 		String openId = WXPayUtil.getopendid(code);
 		System.out.println("opendId:"+openId);
 	
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCOrderPayPageModel(model,lang);
 		
-		//Î¢ĞÅÖ§¸¶
+		//å¾®ä¿¡æ”¯ä»˜
 		Object mapOrder = session.getAttribute("sOrderMap");// CommonUtils.getBillCode("GM");
 		if(mapOrder != null){
 			Map mpo = (Map)mapOrder;
@@ -580,61 +590,155 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: »ñÈ¡Î¢ĞÅÓÃ»§code
+	 * @Description: å¾®ä¿¡æ‰«ç æ”¯ä»˜ é‡åˆ·æ–°å½“å‰æ”¯ä»˜é¡µé¢
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="orderSuc")
+	public String orderSuc(Model model,HttpServletResponse response,HttpServletRequest request){
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
+		GemClientPageModel.getCOrderPayPageModel(model,lang);
+
+		//å¾®ä¿¡æ”¯ä»˜PC
+		Object mapOrder = session.getAttribute("pcwxOrderMap");// CommonUtils.getBillCode("GM");
+		if(mapOrder != null){
+			Map mpo = (Map)mapOrder;
+			Object orderId = mpo.get("orderCode");
+			Object totalPrice = mpo.get("totalPrice");
+			Object code_url = mpo.get("code_url");
+			model.addAttribute("totalPrice", totalPrice);
+			model.addAttribute("orderNo", orderId);
+			model.addAttribute("code_url", code_url);
+		}
+		
+		String forword = "/client/gem/order-success";
+		return forword;
+	}
+	
+	/**
+	 * @Description: è·å–å¾®ä¿¡ç”¨æˆ·code
 	 * @param @param response
 	 * @param @param request
 	 * @param @return
 	 * @return String
 	 */
 	@RequestMapping(value="balancePay")
-	public String testPay(HttpServletResponse response,HttpServletRequest request,OrderVO orderVO,Integer shoppingCarid,String list){
-		String code = GetWeiXinCode.getCodeRequest();
+	public String testPay(Model model,HttpServletResponse response,HttpServletRequest request,OrderVO orderVO,Integer shoppingCarid,String list){
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
+		GemClientPageModel.getCOrderPayPageModel(model,lang);
 		
+		String sessionId = session.getId();
+		
+		System.out.println("sessionId:"+sessionId);
+		Object sid = session.getAttribute("sessionId");
 		String orderNo = CommonUtils.getBillCode("GM");
-		orderVO.setOrder_no(orderNo);
-		Integer orderId;
-		//¸ù¾İ ÓÃ»§Ãû ºÍ ¹ºÎï³µid É¾³ı ¹ºÎï³µĞÅÏ¢
-		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
-		try {
-			orderVO.setUsername(uname+"");
-			orderId = gemService.saveOrderRelID(orderVO);
-		
-			if(orderId > 0){
-				System.out.println("ĞÂÔö³É¹¦£¡");
-				//»ñÈ¡Session ÉÌÆ·±í
-				Object spCart = session.getAttribute("shoppCart");
-				if(spCart != null){
-					List<GemVO> gemList = (List<GemVO>)spCart;
-					List<OrderBVO> orderBList = new ArrayList<OrderBVO>();
-					OrderBVO orderBVO;
-					for (GemVO gemVO : gemList) {
-						orderBVO = new OrderBVO();
-						orderBVO.setPrice(gemVO.getRetail_price());
-						orderBVO.setGem_id(gemVO.getId());
-						orderBVO.setQuantity(CommonUtils.isNull(gemVO.getVdef1()) ? 0 : Integer.valueOf(gemVO.getVdef1()));
-						orderBVO.setOrder_id(orderId);
-						orderBVO.setTs(DateUtil.getCurTimestamp());
-						orderBVO.setDr(IConstant.SHORT_ZERO);
-						orderBList.add(orderBVO);
+		if(!sessionId.equals(sid)){
+			session.setAttribute("sessionId", sessionId);
+			orderVO.setOrder_no(orderNo);
+			Integer orderId;
+			//æ ¹æ® ç”¨æˆ·å å’Œ è´­ç‰©è½¦id åˆ é™¤ è´­ç‰©è½¦ä¿¡æ¯
+			Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+			try {
+				orderVO.setUsername(uname+"");
+				orderId = gemService.saveOrderRelID(orderVO);
+			
+				if(orderId > 0){
+					System.out.println("æ–°å¢æˆåŠŸï¼");
+					//è·å–Session å•†å“è¡¨
+					Object spCart = session.getAttribute("shoppCart");
+					if(spCart != null){
+						List<GemVO> gemList = (List<GemVO>)spCart;
+						List<OrderBVO> orderBList = new ArrayList<OrderBVO>();
+						OrderBVO orderBVO;
+						for (GemVO gemVO : gemList) {
+							orderBVO = new OrderBVO();
+							orderBVO.setPrice(gemVO.getRetail_price());
+							orderBVO.setGem_id(gemVO.getId());
+							orderBVO.setQuantity(CommonUtils.isNull(gemVO.getVdef1()) ? 0 : Integer.valueOf(gemVO.getVdef1()));
+							orderBVO.setOrder_id(orderId);
+							orderBVO.setTs(DateUtil.getCurTimestamp());
+							orderBVO.setDr(IConstant.SHORT_ZERO);
+							orderBList.add(orderBVO);
+						}
+						gemService.saveOrderBVORelID(orderBList);
 					}
-					gemService.saveOrderBVORelID(orderBList);
 				}
+				gemService.delShoppingCarByUname(uname+"");
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			gemService.delShoppingCarByUname(uname+"");
-		} catch (Exception e) {
-			e.printStackTrace();
+			//*************å°†è®¢å• å· å’Œæ€»ä»·æ ¼å­˜åœ¨ sessionä¸­********************
+			Map map = new HashMap();
+			//orderVO.setTotalPrice(0.1);
+			map.put("totalPrice", orderVO.getTotalPrice());
+			map.put("orderCode", orderNo);
+			session.setAttribute("sOrderMap", map);
 		}
-		//*************½«¶©µ¥ ºÅ ºÍ×Ü¼Û¸ñ´æÔÚ sessionÖĞ********************
-		Map map = new HashMap();
-		//orderVO.setTotalPrice(0.1);
-		map.put("totalPrice", orderVO.getTotalPrice());
-		map.put("orderCode", orderNo);
-		session.setAttribute("sOrderMap", map);
-		return "redirect:"+code;
+		
+		
+		String zhifu = orderVO.getZhifu();
+		String mrType = orderVO.getMrType();
+		String forw = "";
+		if(zhifu == "1"){
+			//æ”¯ä»˜å®æ”¯ä»˜
+			forw = "";
+		}else if("2".equals(zhifu)){
+			if("pc".equals(mrType)){
+				//PCç«¯æ‰«ç æ”¯ä»˜
+				//æ‰«ç æ”¯ä»˜
+			    WxPayDto tpWxPay1 = new WxPayDto();
+			    tpWxPay1.setBody("å•†å“ä¿¡æ¯");
+			    tpWxPay1.setOrderId(orderNo);
+			    tpWxPay1.setSpbillCreateIp(WebUtils.getIpAddr(request));
+			    tpWxPay1.setTotalFee(orderVO.getTotalPrice()+"");
+				String codeurl=WXPayUtil.getCodeurl(tpWxPay1,IConstant.WXSSPAYSUCCESSURL);
+				Map map = new HashMap();
+				map.put("totalPrice", orderVO.getTotalPrice());
+				map.put("orderCode", orderNo);
+				map.put("code_url", codeurl);
+				session.setAttribute("pcwxOrderMap", map);
+				forw = "redirect:orderSuc.do";
+			}else if("mobile".equals(mrType)){
+				String code = GetWeiXinCode.getCodeRequest();
+				forw = "redirect:"+code;
+			}
+		}
+		
+		return forw;
 	}
 	
+	
+	/** Â Â Â 
+	* ç”ŸæˆäºŒç»´ç å›¾ç‰‡å¹¶ç›´æ¥ä»¥æµçš„å½¢å¼è¾“å‡ºåˆ°é¡µé¢ Â Â Â 
+	* @param code_url Â Â Â 
+	* @param response Â Â Â 
+	*/
+	 @RequestMapping("qr_code")
+	 @ResponseBody
+	 public void getQRCode(String code_url,HttpServletResponse response){
+		GenerateQrCodeUtil.encodeQrcode(code_url, response);
+	}
+	  
+	
+	   
+	     
+	        
+	        
+	        
+	  
+	
 	/**
-	 * @Description: Á¢¼´Ö§¸¶user.jsp 
+	 * @Description: ç«‹å³æ”¯ä»˜user.jsp 
 	 * @param @param response
 	 * @param @param request
 	 * @param @return
@@ -643,7 +747,7 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="insPay")
 	public String insPay(HttpServletResponse response,HttpServletRequest request,String orderno,String totalPrice){
 		String code = GetWeiXinCode.getCodeRequest();
-		//*************½«¶©µ¥ ºÅ ºÍ×Ü¼Û¸ñ´æÔÚ sessionÖĞ********************
+		//*************å°†è®¢å• å· å’Œæ€»ä»·æ ¼å­˜åœ¨ sessionä¸­********************
 		Map map = new HashMap();
 		//orderVO.setTotalPrice(0.1);
 		map.put("totalPrice", totalPrice);
@@ -653,7 +757,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**88888888888888
-	 * @Description: ¸ù¾İ¶©µ¥ºÅ ¸ÄĞ´¶©µ¥×´Ì¬
+	 * @Description: æ ¹æ®è®¢å•å· æ”¹å†™è®¢å•çŠ¶æ€
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -669,7 +773,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**88888888888888
-	 * @Description: Ìø×ª¶©µ¥ ³É¹¦½çÃæ
+	 * @Description: è·³è½¬è®¢å• æˆåŠŸç•Œé¢
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -678,10 +782,10 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="goOrderPay")
 	public String goOrderPay(Model model,HttpServletResponse response,HttpServletRequest request,String orderno,String totalPrice){
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCOrderPayPageModel(model,lang);
 		if(orderno != null){
 		 model.addAttribute("orderno");
@@ -693,7 +797,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: ¸ù¾İÓÅ»İÂë »ñÈ¡ÓÅ»İ¼Û¸ñ
+	 * @Description: æ ¹æ®ä¼˜æƒ ç  è·å–ä¼˜æƒ ä»·æ ¼
 	 * @param @param response
 	 * @param @param request
 	 * @param @return
@@ -707,7 +811,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: ¶©µ¥Ö§¸¶
+	 * @Description: è®¢å•æ”¯ä»˜
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -717,17 +821,17 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="orderPay")
 	public String orderPay(Model model,HttpServletResponse response,HttpServletRequest request){
 		
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCOrderPayPageModel(model,lang);
 		
 		return IClientForward.gemOrderPay;
 	}
 	
 	/**
-	 * @Description: ²éÑ¯ ÎÒµÄ¶©µ¥
+	 * @Description: æŸ¥è¯¢ æˆ‘çš„è®¢å•
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -737,10 +841,10 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="selMyOrder")
 	public String selMyOrder(Model model,HttpServletResponse response,HttpServletRequest request){
 		
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCOrderPayPageModel(model,lang);
 		String uname = (String)session.getAttribute(IConstant.SESSIONUSERNAEM);
 		List<OrderVO> orderList = gemService.getOrderByUname(uname);
@@ -751,7 +855,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: µÇÂ¼
+	 * @Description: ç™»å½•
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -761,21 +865,21 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="login")
 	public String login(Model model,HttpServletResponse response,HttpServletRequest request,String dengluNUM){
 		
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCLoginPageModel(model,lang);
 		model.addAttribute("dengluNo",dengluNUM);
 		
-		// ÎªÎ¢ĞÅÉ¨Ò»É¨´´ÔìÌõ¼ş
+		// ä¸ºå¾®ä¿¡æ‰«ä¸€æ‰«åˆ›é€ æ¡ä»¶
 		String sessionId = session.getId();
 		WXUtil.setBoolean(sessionId, "N");
 		QrCodeUtil.createCode(sessionId, servletContext);
 		String url = sessionId + ".jpg";
 		model.addAttribute("qrname", url);
 		String ua = request.getHeader("user-agent").toLowerCase();
-		if (ua.indexOf("micromessenger") > 0) {// ÊÇÎ¢ĞÅä¯ÀÀÆ÷
+		if (ua.indexOf("micromessenger") > 0) {// æ˜¯å¾®ä¿¡æµè§ˆå™¨
 			session.setAttribute("isweixin", "Y");
 		} else {
 			session.setAttribute("isweixin", "N");
@@ -785,7 +889,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: µÇÂ¼³É¹¦
+	 * @Description: ç™»å½•æˆåŠŸ
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -795,20 +899,20 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="loginSuccess")
 	@ResponseBody
 	public String loginSuccess(Model model,HttpServletRequest request,HttpServletResponse response,String uname,String upwd,String status){
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCListPageModel(model,lang);	
 		String msg = HttpTools.submitPost(IConstant.loginURL,"uname="+uname+"&upwd="+upwd)+"";
-		//µÇÂ¼³É¹¦ºó½«ÓÃ»§Ãû´æÔÚsessionÖĞ
+		//ç™»å½•æˆåŠŸåå°†ç”¨æˆ·åå­˜åœ¨sessionä¸­
 		request.getSession().setAttribute(IConstant.SESSIONUSERNAEM, uname);
 		return msg;
 		//renderText(msg);
 	}
 	
 	/**
-	 * ÅĞ¶ÏÎ¢ĞÅÊÇ·ñÉ¨Ò»É¨
+	 * åˆ¤æ–­å¾®ä¿¡æ˜¯å¦æ‰«ä¸€æ‰«
 	 * 
 	 * @return
 	 */
@@ -824,7 +928,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: ÆóÒµºÅ×¢²áºóÉÌ¼ÒµÇÂ¼
+	 * @Description: ä¼ä¸šå·æ³¨å†Œåå•†å®¶ç™»å½•
 	 * @param @param model
 	 * @param @param request
 	 * @param @param response
@@ -837,22 +941,22 @@ public class GemClientController extends BaseController {
 	@OAuthRequired
 	@RequestMapping(value="wxlogin")
 	public String loginByWx(Model model,HttpServletRequest request,HttpServletResponse response){
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCListPageModel(model,lang);	
 		
-		//Î¢ĞÅÊÚÈ¨µÇÂ¼»ñÈ¡ĞÅÏ¢
+		//å¾®ä¿¡æˆæƒç™»å½•è·å–ä¿¡æ¯
 		Object objUid = session.getAttribute("loginInfo");
 		if(objUid != null){
-			//µÇÂ¼³É¹¦ºó½«ÓÃ»§Ãû´æÔÚsessionÖĞ
+			//ç™»å½•æˆåŠŸåå°†ç”¨æˆ·åå­˜åœ¨sessionä¸­
 			request.getSession().setAttribute(IConstant.SESSIONUSERNAEM, ((LoginVO)objUid).getUserId());
-			//±ê¼ÇÊÇ·ñÎªÉÌ»§
+			//æ ‡è®°æ˜¯å¦ä¸ºå•†æˆ·
 			request.getSession().setAttribute("bisBis", "Y");
 			model.addAttribute("uname", "WxLogin");
 		}
-		System.out.println("ÊÇ·ñÉÌ»§:"+request.getSession().getAttribute("bisBis"));
+		System.out.println("æ˜¯å¦å•†æˆ·:"+request.getSession().getAttribute("bisBis"));
 		return "/client/gem/list";
 	}
 	
@@ -862,7 +966,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: Íü¼ÇÃÜÂë
+	 * @Description: å¿˜è®°å¯†ç 
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -872,17 +976,17 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="forgetpwd")
 	@ResponseBody
 	public String forgetpassword(Model model,HttpServletRequest request,HttpServletResponse response,String email){
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCListPageModel(model,lang);	
 		String msg = HttpTools.submitPost(IConstant.forgetPwdURL,"email="+email)+"";
 		return msg;
 	}
 	
 	/**
-	 * @Description: ×¢Ïú
+	 * @Description: æ³¨é”€
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -891,10 +995,10 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="logout")
 	public String logout(Model model,HttpServletRequest request,HttpServletResponse response,String uname){
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCListPageModel(model,lang);		
 		request.getSession().removeAttribute(IConstant.SESSIONUSERNAEM);
 		request.getSession().removeAttribute("bisBis");
@@ -904,7 +1008,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * Ìí¼Óµ½ÊÕ²Ø¼Ğ
+	 * æ·»åŠ åˆ°æ”¶è—å¤¹
 	 * @param model
 	 * @param request
 	 * @param response
@@ -913,16 +1017,16 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="favorite")
 	public void favorite(Model model,HttpServletRequest request,HttpServletResponse response,Integer gemid){
 		Cookie cookie = new Cookie(gemid+"", gemid+"");
-        cookie.setMaxAge(30000);// ÉèÖÃÎª30min
+        cookie.setMaxAge(30000);// è®¾ç½®ä¸º30min
         cookie.setPath("/");
-        System.out.println(gemid+""+"CookieÒÑÌí¼Ó===============");
+        System.out.println(gemid+""+"Cookieå·²æ·»åŠ ===============");
         response.addCookie(cookie);
         renderText("{\"msg\":\"Y\"}");
        
 	}
 	
     /**
-     * µã»÷É¾³ıÊÕ²Ø¼Ğ ÖĞÑ¡ÖĞµÄÉÌÆ·
+     * ç‚¹å‡»åˆ é™¤æ”¶è—å¤¹ ä¸­é€‰ä¸­çš„å•†å“
      * @param request
      * @param response
      * @param gemid
@@ -931,15 +1035,15 @@ public class GemClientController extends BaseController {
     public void removeCookie(HttpServletRequest request,HttpServletResponse response,String gemid){
         Cookie[] cookies = request.getCookies();
         if (null==cookies) {
-            System.out.println("Ã»ÓĞcookie==============");
+            System.out.println("æ²¡æœ‰cookie==============");
         } else {
             for(Cookie cookie : cookies){
             	if(!"".equals(cookie.getName())){
                 	if(cookie.getName().equals(gemid+"")){
                     cookie.setValue(null);
-                    cookie.setMaxAge(0);// Á¢¼´Ïú»Ùcookie
+                    cookie.setMaxAge(0);// ç«‹å³é”€æ¯cookie
                     cookie.setPath("/");
-                    System.out.println("±»É¾³ıµÄcookieÃû×ÖÎª:"+cookie.getName());
+                    System.out.println("è¢«åˆ é™¤çš„cookieåå­—ä¸º:"+cookie.getName());
                     response.addCookie(cookie);
                 }
             }
@@ -949,7 +1053,7 @@ public class GemClientController extends BaseController {
     }
 	
 	/**
-	 * ÏÔÊ¾ÊÕ²Ø¼Ğ
+	 * æ˜¾ç¤ºæ”¶è—å¤¹
 	 * @param model
 	 * @param request
 	 * @param response
@@ -957,10 +1061,10 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="showCookies")
 	public void showCookies(Model model,HttpServletRequest request,HttpServletResponse response){
-		Cookie[] cookies = request.getCookies();//ÕâÑù±ã¿ÉÒÔ»ñÈ¡Ò»¸öcookieÊı×é
+		Cookie[] cookies = request.getCookies();//è¿™æ ·ä¾¿å¯ä»¥è·å–ä¸€ä¸ªcookieæ•°ç»„
 		List<GemVO> listVo = new ArrayList<GemVO>();
         if (null==cookies) {
-            System.out.println("Ã»ÓĞcookie=========");
+            System.out.println("æ²¡æœ‰cookie=========");
         } else {
         	String ids = "";
             for(Cookie cookie : cookies){
@@ -984,7 +1088,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: µÇÂ¼³É¹¦ºóÏÔÊ¾Ê×Ò³£¬²¢²éÑ¯¸ÃÓÃ»§µÄ¹ºÎï³µ
+	 * @Description: ç™»å½•æˆåŠŸåæ˜¾ç¤ºé¦–é¡µï¼Œå¹¶æŸ¥è¯¢è¯¥ç”¨æˆ·çš„è´­ç‰©è½¦
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -993,10 +1097,10 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="goToList")
 	public String goToList(Model model,HttpServletRequest request,HttpServletResponse response,String uname){
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCListPageModel(model,lang);	
 		Integer num = 0;
 		try {
@@ -1013,11 +1117,11 @@ public class GemClientController extends BaseController {
 	
 	
 	/**
-	 * @Description: ×¢²á³É¹¦
+	 * @Description: æ³¨å†ŒæˆåŠŸ
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
-	 * @param @return regauthcode ºóÌ¨Éú³ÉµÄÑéÖ¤Âë
+	 * @param @return regauthcode åå°ç”Ÿæˆçš„éªŒè¯ç 
 	 * @return String
 	 */
 	@RequestMapping(value="registerSuccess")
@@ -1037,7 +1141,7 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
-	 * @Description: ÓÃ»§
+	 * @Description: ç”¨æˆ·
 	 * @param @param model
 	 * @param @param response
 	 * @param @param request
@@ -1047,10 +1151,10 @@ public class GemClientController extends BaseController {
 	@RequestMapping(value="user")
 	public String user(Model model,HttpServletResponse response,HttpServletRequest request){
 		
-		//µ±Ç°±¾µØ»¯ÓïÑÔ
+		//å½“å‰æœ¬åœ°åŒ–è¯­è¨€
 		String lang = WebUtils.getLang(request);
-		System.out.println("Loc Lang£º"+lang);
-		//¸ù¾İ±¾µØÓïÑÔ¸üĞÂÒ³ÃæÊı¾İ
+		System.out.println("Loc Langï¼š"+lang);
+		//æ ¹æ®æœ¬åœ°è¯­è¨€æ›´æ–°é¡µé¢æ•°æ®
 		GemClientPageModel.getCUserPageModel(model,lang);
 		
 		return IClientForward.gemUser;
@@ -1067,9 +1171,9 @@ public class GemClientController extends BaseController {
 	public String imgValidate(HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			int width = 80; // ¿í¶È
-			int height = 25;// ¸ß¶È
-			int codeCount = 4;// ÑéÖ¤Âë×Ö·û¸öÊı
+			int width = 80; // å®½åº¦
+			int height = 25;// é«˜åº¦
+			int codeCount = 4;// éªŒè¯ç å­—ç¬¦ä¸ªæ•°
 			char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
 					'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
 					'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5',
@@ -1078,56 +1182,56 @@ public class GemClientController extends BaseController {
 			BufferedImage buffImg = new BufferedImage(width, height,
 					BufferedImage.TYPE_INT_RGB);
 			Graphics g = buffImg.createGraphics();
-			// ´´½¨Ò»¸öËæ»úÊıÉú³ÉÆ÷Àà
+			// åˆ›å»ºä¸€ä¸ªéšæœºæ•°ç”Ÿæˆå™¨ç±»
 			Random random = new Random();
-			// ½«Í¼ÏñÌî³äÎª°×É«
+			// å°†å›¾åƒå¡«å……ä¸ºç™½è‰²
 			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, width, height);
-			// ´´½¨×ÖÌå£¬×ÖÌåµÄ´óĞ¡Ó¦¸Ã¸ù¾İÍ¼Æ¬µÄ¸ß¶ÈÀ´¶¨."Times New Roman"/Fixedsys, Font.PLAIN, 20
+			// åˆ›å»ºå­—ä½“ï¼Œå­—ä½“çš„å¤§å°åº”è¯¥æ ¹æ®å›¾ç‰‡çš„é«˜åº¦æ¥å®š."Times New Roman"/Fixedsys, Font.PLAIN, 20
 			Font font = new Font("Fixedsys", Font.PLAIN, 20);
-			// ÉèÖÃ×ÖÌå¡£
+			// è®¾ç½®å­—ä½“ã€‚
 			g.setFont(font);
-			// »­±ß¿ò¡£
+			// ç”»è¾¹æ¡†ã€‚
 			g.setColor(Color.BLACK);
 			g.drawRect(0, 0, width - 1, height - 1);
-			// Ëæ»ú²úÉú160(i<160)Ìõ¸ÉÈÅÏß£¬Ê¹Í¼ÏóÖĞµÄÈÏÖ¤Âë²»Ò×±»ÆäËü³ÌĞòÌ½²âµ½¡£
+			// éšæœºäº§ç”Ÿ160(i<160)æ¡å¹²æ‰°çº¿ï¼Œä½¿å›¾è±¡ä¸­çš„è®¤è¯ç ä¸æ˜“è¢«å…¶å®ƒç¨‹åºæ¢æµ‹åˆ°ã€‚
 			g.setColor(Color.BLACK);
 			for (int i = 0; i < 20; i++) {
 				int x = random.nextInt(width);
 				int y = random.nextInt(height);
 				int xl = random.nextInt(12);
 				int yl = random.nextInt(12);
-				g.drawLine(x, y, x + xl, y + yl); // ÏßÌõÊı
+				g.drawLine(x, y, x + xl, y + yl); // çº¿æ¡æ•°
 			}
-			// randomCodeÓÃÓÚ±£´æËæ»ú²úÉúµÄÑéÖ¤Âë£¬ÒÔ±ãÓÃ»§µÇÂ¼ºó½øĞĞÑéÖ¤¡£
+			// randomCodeç”¨äºä¿å­˜éšæœºäº§ç”Ÿçš„éªŒè¯ç ï¼Œä»¥ä¾¿ç”¨æˆ·ç™»å½•åè¿›è¡ŒéªŒè¯ã€‚
 			StringBuffer randomCode = new StringBuffer();
 			int red = 0, green = 0, blue = 0;
-			// Ëæ»ú²úÉúcodeCountÊı×ÖµÄÑéÖ¤Âë¡£
+			// éšæœºäº§ç”ŸcodeCountæ•°å­—çš„éªŒè¯ç ã€‚
 			for (int i = 0; i < codeCount; i++) {
-				// µÃµ½Ëæ»ú²úÉúµÄÑéÖ¤ÂëÊı×Ö¡£
+				// å¾—åˆ°éšæœºäº§ç”Ÿçš„éªŒè¯ç æ•°å­—ã€‚
 				String strRand = String
 						.valueOf(codeSequence[random.nextInt(36)]);
-				// ²úÉúËæ»úµÄÑÕÉ«·ÖÁ¿À´¹¹ÔìÑÕÉ«Öµ£¬ÕâÑùÊä³öµÄÃ¿Î»Êı×ÖµÄÑÕÉ«Öµ¶¼½«²»Í¬¡£
+				// äº§ç”Ÿéšæœºçš„é¢œè‰²åˆ†é‡æ¥æ„é€ é¢œè‰²å€¼ï¼Œè¿™æ ·è¾“å‡ºçš„æ¯ä½æ•°å­—çš„é¢œè‰²å€¼éƒ½å°†ä¸åŒã€‚
 				red = random.nextInt(255);
 				green = random.nextInt(255);
 				blue = random.nextInt(255);
-				// ÓÃËæ»ú²úÉúµÄÑÕÉ«½«ÑéÖ¤Âë»æÖÆµ½Í¼ÏñÖĞ¡£
+				// ç”¨éšæœºäº§ç”Ÿçš„é¢œè‰²å°†éªŒè¯ç ç»˜åˆ¶åˆ°å›¾åƒä¸­ã€‚
 				g.setColor(new Color(red, green, blue));
 				g.drawString(strRand, (i + 1) * (width / (codeCount + 1)),
 						height - 4);
-				// ½«²úÉúµÄËÄ¸öËæ»úÊı×éºÏÔÚÒ»Æğ¡£
+				// å°†äº§ç”Ÿçš„å››ä¸ªéšæœºæ•°ç»„åˆåœ¨ä¸€èµ·ã€‚
 				randomCode.append(strRand);
 			}
-			// ½«ËÄÎ»Êı×ÖµÄÑéÖ¤Âë±£´æµ½SessionÖĞ¡£
+			// å°†å››ä½æ•°å­—çš„éªŒè¯ç ä¿å­˜åˆ°Sessionä¸­ã€‚
 			HttpSession session = request.getSession();
 			session.setAttribute("validateCode", randomCode.toString());
-			// ½ûÖ¹Í¼Ïñ»º´æ¡£
+			// ç¦æ­¢å›¾åƒç¼“å­˜ã€‚
 			response.setHeader("Pragma", "no-cache");
 			response.setHeader("Cache-Control", "no-cache");
 			response.setDateHeader("Expires", 0);
 			response.setContentType("image/jpeg");
 
-			// ½«Í¼ÏñÊä³öµ½ServletÊä³öÁ÷ÖĞ¡£
+			// å°†å›¾åƒè¾“å‡ºåˆ°Servletè¾“å‡ºæµä¸­ã€‚
 			ServletOutputStream sos = response.getOutputStream();
 			ImageIO.write(buffImg, "jpeg", sos);
 			sos.flush();
