@@ -132,6 +132,27 @@ $(function(){
  });
  }
  
+ 
+     //平台、设备和操作系统 
+        var system = { 
+            win: false, 
+            mac: false, 
+            xll: false, 
+            ipad:false 
+        }; 
+        //检测平台 
+        var p = navigator.platform; 
+        system.win = p.indexOf("Win") == 0; 
+        system.mac = p.indexOf("Mac") == 0; 
+        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0); 
+        system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false; 
+        //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面 
+        if (system.win || system.mac || system.xll||system.ipad) { 
+           
+        } else { 
+          $(".mrtype").val("mobile");
+        } 
+ 
  //**********************************************
  var s = ["vpovince","vcity","vdistrict"];
  var opt0 = ["省份","城市","区县"];
@@ -163,6 +184,7 @@ $(function(){
 			  
 			</div>     
 			<form action="${ctx }/gemClient/balancePay.do" method="post"  id="orderForm">
+			 <input name="mrType" class="mrtype" type="hidden" value="pc"/>
 			 <div class="wrap_br wrap_br_d">
 				<h2><span>收货人信息</span></h2>	  
 				 <ul class="srxx addUser">
@@ -233,11 +255,17 @@ $(function(){
 				  </dl>
 				  <c:set var="TotalPrice" value="${TotalPrice+gem.retail_price*gem.vdef1}"/>
 				 </c:forEach>
+				 <h2><span>支付方式</span></h2>
+				  <div class="status">
+					 <span class="jsxx_p "><input type="radio" name="zhifu" class="zfb" value="1" checked="checked"/>支付宝支付  </span>
+					 <span class="jsxx_p "> <input type="radio" name="zhifu" class="wx" value="2"/>微信支付<span>
+				  </div>
 				 <h2><span>结算信息</span></h2>
 				  <div class="jsxx">
 					 <p>
 					    <input class="jsxx_m couponNum" type="text"   name="coupon" value="" />
 					    <input class="jsxx_b sel_couppon"   type="button" title="添加" value="添加"/>
+					    <b class="couponNo" style="font-size: 14px;color: #8c0000;"></b>
 					    <input class="jsxx_m youhuijia" type="hidden"   name="coupon_fee" value="${youhuijia}" />
 					 </p>
 					 <p class="jsxx_p zongjia">订单总金额: ￥<span><b class="dingdan">${TotalPrice+23}</b>  &nbsp;(<b>运费：23</b>,保价：<b class="baoj">0</b>,优惠：<b class="huij">0</b>)</span>元</p>
@@ -361,15 +389,17 @@ $(function(){
   $(".sel_couppon").bind("click",function(){
    var code = $(".couponNum").val();
    if(code == null || code == ""){
-      alert("优惠券编码不能为空!");
-      return;
+      $(".couponNo").text("请填写优惠券编码!");
+      return false;
+    }else{
+      $(".couponNo").text("");
     }
    var url = "/gemtak/gemClient/getcouppon.do";
    $.post(url,{code:code},function(data){
     if(data != null || data != ""){
       if(data == "优惠券编码不正确!"){
-        alert("优惠券编码不正确!");
-        return;
+        $(".couponNo").text("优惠券编码不正确!");
+        return false;
       }else{
         var couppon = data;
         $(".youhuijia").attr("value",couppon);
