@@ -15,13 +15,11 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
-import com.alipay.mobile.config.AlipayConfig;
-import com.alipay.mobile.util.httpClient.HttpProtocolHandler;
-import com.alipay.mobile.util.httpClient.HttpRequest;
-import com.alipay.mobile.util.httpClient.HttpResponse;
-import com.alipay.mobile.util.httpClient.HttpResultType;
-import com.alipay.mobile.sign.MD5;
-import com.alipay.mobile.sign.RSA;
+import com.bavlo.gemtak.config.AlipayConfig;
+import com.bavlo.gemtak.sign.MD5;
+import com.bavlo.gemtak.sign.RSA;
+
+
 
 /* *
  *类名：AlipaySubmit
@@ -52,6 +50,40 @@ public class AlipaySubmit {
         	mysign = RSA.sign(prestr, AlipayConfig.private_key, AlipayConfig.input_charset);
         }
         return mysign;
+    }
+	
+	 /**
+     * 构造提交表单HTML数据
+     * @param sParaTemp 请求参数数组
+     * @param gateway 网关地址
+     * @param strMethod 提交方式。两个值可选：post、get
+     * @param strButtonName 确认按钮显示文字
+     * @return 提交表单HTML文本
+     */
+    public static String buildForm(Map<String, String> sParaTemp, String gateway, String strMethod,
+                                   String strButtonName) {
+        //待请求参数数组
+        Map<String, String> sPara = buildRequestPara(sParaTemp);
+        List<String> keys = new ArrayList<String>(sPara.keySet());
+
+        StringBuffer sbHtml = new StringBuffer();
+
+        sbHtml.append("<html><body><form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway
+                      + "_input_charset=" + AlipayConfig.input_charset + "\" method=\"" + strMethod
+                      + "\">");
+
+        for (int i = 0; i < keys.size(); i++) {
+            String name = (String) keys.get(i);
+            String value = (String) sPara.get(name);
+
+            sbHtml.append("<input type=\"hidden\" name=\"" + name + "\" value=\"" + value + "\"/>");
+        }
+
+        //submit按钮控件请不要含有name属性
+        sbHtml.append("<input type=\"submit\" value=\"" + strButtonName + "\" style=\"display:none;\"></form></body>");
+        sbHtml.append("<script type='text/javascript'>document.forms['alipaysubmit'].submit();</script></html>");
+
+        return sbHtml.toString();
     }
 	
     /**
