@@ -33,6 +33,10 @@ public class AlipayConfig {
 	// 签约支付宝账号或卖家收款支付宝帐户
 	public static String seller_email = "bavlo@sina.com";
 	
+	// 支付宝的公钥
+    // 如果签名方式设置为“0001”时，请设置该参数
+    public static String ali_public_key = "";
+	
 	// 支付宝服务器通知的页面 要用 http://格式的完整路径，不允许加?id=123这类自定义参数
 	// 必须保证其地址能够在互联网中访问的到
 	public static String notify_url = "http://www.bavlo.com/web/payNotify";
