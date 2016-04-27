@@ -4,7 +4,7 @@
 
 
 					<img src="${ctx }/resources/1024/hbx/001.jpg" width="100%" height="100%" 
-					class="reel"
+					class="reel change"
 				   	id="image"
 				  	data-images="${ctx }/resources/1024/hbx/###.jpg"
 				 	data-frames="200"
