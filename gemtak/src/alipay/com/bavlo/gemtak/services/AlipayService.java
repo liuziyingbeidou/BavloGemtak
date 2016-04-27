@@ -1,4 +1,4 @@
-package com.alipay.services;
+package com.bavlo.gemtak.services;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -11,35 +11,38 @@ import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
-import com.alipay.config.AlipayConfig;
-import com.alipay.util.AlipaySubmit;
+import com.bavlo.gemtak.config.AlipayConfig;
+import com.bavlo.gemtak.util.AlipaySubmit;
+
+
 
 /* *
- *ÀàÃû£ºAlipayService
- *¹¦ÄÜ£ºÖ§¸¶±¦¸÷½Ó¿Ú¹¹ÔìÀà
- *ÏêÏ¸£º¹¹ÔìÖ§¸¶±¦¸÷½Ó¿ÚÇëÇó²ÎÊı
- *°æ±¾£º3.2
- *ĞŞ¸ÄÈÕÆÚ£º2011-03-17
- *ËµÃ÷£º
- *ÒÔÏÂ´úÂëÖ»ÊÇÎªÁË·½±ãÉÌ»§²âÊÔ¶øÌá¹©µÄÑùÀı´úÂë£¬ÉÌ»§¿ÉÒÔ¸ù¾İ×Ô¼ºÍøÕ¾µÄĞèÒª£¬°´ÕÕ¼¼ÊõÎÄµµ±àĞ´,²¢·ÇÒ»¶¨ÒªÊ¹ÓÃ¸Ã´úÂë¡£
- *¸Ã´úÂë½ö¹©Ñ§Ï°ºÍÑĞ¾¿Ö§¸¶±¦½Ó¿ÚÊ¹ÓÃ£¬Ö»ÊÇÌá¹©Ò»¸ö²Î¿¼¡£
+ *ç±»åï¼šAlipayService
+ *åŠŸèƒ½ï¼šæ”¯ä»˜å®å„æ¥å£æ„é€ ç±»
+ *è¯¦ç»†ï¼šæ„é€ æ”¯ä»˜å®å„æ¥å£è¯·æ±‚å‚æ•°
+ *ç‰ˆæœ¬ï¼š3.2
+ *ä¿®æ”¹æ—¥æœŸï¼š2011-03-17
+ *è¯´æ˜ï¼š
+ *ä»¥ä¸‹ä»£ç åªæ˜¯ä¸ºäº†æ–¹ä¾¿å•†æˆ·æµ‹è¯•è€Œæä¾›çš„æ ·ä¾‹ä»£ç ï¼Œå•†æˆ·å¯ä»¥æ ¹æ®è‡ªå·±ç½‘ç«™çš„éœ€è¦ï¼ŒæŒ‰ç…§æŠ€æœ¯æ–‡æ¡£ç¼–å†™,å¹¶éä¸€å®šè¦ä½¿ç”¨è¯¥ä»£ç ã€‚
+ *è¯¥ä»£ç ä»…ä¾›å­¦ä¹ å’Œç ”ç©¶æ”¯ä»˜å®æ¥å£ä½¿ç”¨ï¼Œåªæ˜¯æä¾›ä¸€ä¸ªå‚è€ƒã€‚
  */
+
 
 public class AlipayService {
     
-    /**
-     * Ö§¸¶±¦Ìá¹©¸øÉÌ»§µÄ·şÎñ½ÓÈëÍø¹ØURL(ĞÂ)
+	/**
+     * æ”¯ä»˜å®æä¾›ç»™å•†æˆ·çš„æœåŠ¡æ¥å…¥ç½‘å…³URL(æ–°)
      */
     private static final String ALIPAY_GATEWAY_NEW = "https://mapi.alipay.com/gateway.do?";
 
     /**
-     * ¹¹Ôì¼´Ê±µ½ÕÊ½Ó¿Ú
-     * @param sParaTemp ÇëÇó²ÎÊı¼¯ºÏ
-     * @return ±íµ¥Ìá½»HTMLĞÅÏ¢
+     * æ„é€ å³æ—¶åˆ°å¸æ¥å£
+     * @param sParaTemp è¯·æ±‚å‚æ•°é›†åˆ
+     * @return è¡¨å•æäº¤HTMLä¿¡æ¯
      */
     public static String create_direct_pay_by_user(Map<String, String> sParaTemp) {
 
-    	//Ôö¼Ó»ù±¾ÅäÖÃ
+    	//å¢åŠ åŸºæœ¬é…ç½®
         sParaTemp.put("service", "create_direct_pay_by_user");
         sParaTemp.put("partner", AlipayConfig.partner);
         sParaTemp.put("return_url", AlipayConfig.return_url);
@@ -52,10 +55,11 @@ public class AlipayService {
         return AlipaySubmit.buildForm(sParaTemp, ALIPAY_GATEWAY_NEW, "get", strButtonName);
     }
 
+
     /**
-     * ÓÃÓÚ·ÀµöÓã£¬µ÷ÓÃ½Ó¿Úquery_timestampÀ´»ñÈ¡Ê±¼ä´ÁµÄ´¦Àíº¯Êı
-     * ×¢Òâ£ºÔ¶³Ì½âÎöXML³ö´í£¬Óë·şÎñÆ÷ÊÇ·ñÖ§³ÖSSLµÈÅäÖÃÓĞ¹Ø
-     * @return Ê±¼ä´Á×Ö·û´®
+     * ç”¨äºé˜²é’“é±¼ï¼Œè°ƒç”¨æ¥å£query_timestampæ¥è·å–æ—¶é—´æˆ³çš„å¤„ç†å‡½æ•°
+     * æ³¨æ„ï¼šè¿œç¨‹è§£æXMLå‡ºé”™ï¼Œä¸æœåŠ¡å™¨æ˜¯å¦æ”¯æŒSSLç­‰é…ç½®æœ‰å…³
+     * @return æ—¶é—´æˆ³å­—ç¬¦ä¸²
      * @throws IOException
      * @throws DocumentException
      * @throws MalformedURLException
@@ -64,7 +68,7 @@ public class AlipayService {
 	public static String query_timestamp() throws MalformedURLException,
                                                         DocumentException, IOException {
 
-        //¹¹Ôì·ÃÎÊquery_timestamp½Ó¿ÚµÄURL´®
+    	//æ„é€ è®¿é—®query_timestampæ¥å£çš„URLä¸²
         String strUrl = ALIPAY_GATEWAY_NEW + "service=query_timestamp&partner=" + AlipayConfig.partner;
         StringBuffer result = new StringBuffer();
 
@@ -74,9 +78,9 @@ public class AlipayService {
         List<Node> nodeList = doc.selectNodes("//alipay/*");
 
         for (Node node : nodeList) {
-            // ½ØÈ¡²¿·Ö²»ĞèÒª½âÎöµÄĞÅÏ¢
+        	// æˆªå–éƒ¨åˆ†ä¸éœ€è¦è§£æçš„ä¿¡æ¯
             if (node.getName().equals("is_success") && node.getText().equals("T")) {
-                // ÅĞ¶ÏÊÇ·ñÓĞ³É¹¦±êÊ¾
+            	// åˆ¤æ–­æ˜¯å¦æœ‰æˆåŠŸæ ‡ç¤º
                 List<Node> nodeList1 = doc.selectNodes("//response/timestamp/*");
                 for (Node node1 : nodeList1) {
                     result.append(node1.getText());
