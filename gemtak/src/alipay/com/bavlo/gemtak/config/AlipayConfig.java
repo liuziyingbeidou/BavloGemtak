@@ -43,6 +43,9 @@ public class AlipayConfig {
 
 	//↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 	
+	// 商户的私钥
+    // 如果签名方式设置为“0001”时，请设置该参数
+    public static String private_key = "";
 
 	// 调试用，创建TXT日志路径
 	public static String log_path = "c:\\alipay_log_" + System.currentTimeMillis()+".txt";
