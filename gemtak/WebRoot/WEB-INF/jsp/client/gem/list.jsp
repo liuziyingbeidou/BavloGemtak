@@ -18,6 +18,8 @@
 	<link rel="stylesheet" href="${ctx }/resources/client/css/swiper.css">
 	<link rel="stylesheet" href="${ctx }/resources/client/css/newfly.css" type="text/css"/>
 	<link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
+	
+    <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/gemClient.js"></script>
 	<script type="text/javascript" src="${ctx }/resources/client/js/fly/jquery.fly.min.js"></script>
@@ -180,6 +182,15 @@
 			</div>
 	  </div>
       <div class="line "></div>
+      <div class="loader yemianyanchi" style="display: none;">
+        <div class="loader-inner ball-pulse-rise">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	  </div>
       <div class="tit_all col-md-12">	  
           <div class="so_item col-md-12 hidden-xs hidden-sm">
           	 <span class="selects-type ms-sel" ms-key=""></span>
