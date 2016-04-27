@@ -1700,6 +1700,8 @@
                   // - and for sprites it recalculates sprite's 'background position shift and applies it.
                   //
                   frameChange: function(e, nil, frame){
+                	  setStation(frame);
+                	  setDial(frame);
                     if (nil !== undefined) return;
                     this.className= this.className.replace(reel.re.frame_klass, frame_klass + frame);
                     var
