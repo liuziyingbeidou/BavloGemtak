@@ -8,9 +8,10 @@ import java.util.Map;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 
-import com.alipay.mobile.config.AlipayConfig;
-import com.alipay.mobile.sign.MD5;
-import com.alipay.mobile.sign.RSA;
+import com.bavlo.gemtak.config.AlipayConfig;
+import com.bavlo.gemtak.sign.MD5;
+import com.bavlo.gemtak.sign.RSA;
+
 
 /* *
  *类名：AlipayNotify
