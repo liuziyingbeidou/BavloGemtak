@@ -740,7 +740,7 @@
             transform: scale(0.75); } }
 
 .ball-pulse-rise > div {
-  background-color: #fff;
+  background-color: #ed5565;
   width: 15px;
   height: 15px;
   border-radius: 100%;
