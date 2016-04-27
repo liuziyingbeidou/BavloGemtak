@@ -5,7 +5,8 @@ import java.security.SignatureException;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.alipay.config.AlipayConfig;
+import com.bavlo.gemtak.config.AlipayConfig;
+
 
 /** 
 * 功能：支付宝MD5签名处理核心文件，不需要修改
