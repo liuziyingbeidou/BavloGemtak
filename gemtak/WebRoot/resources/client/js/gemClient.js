@@ -132,7 +132,7 @@ function goDetail(id){
 }
 
   function selectClientList(switchover){
-	  
+	     $(".yemianyanchi").show();
 	     var url = "getGemClientListBy.do?";
 		 var gemType = $(".selects-type").attr("ms-key"); 
 		 var gemShape = $(".selects-shape").attr("ms-key"); 
@@ -210,6 +210,7 @@ function goDetail(id){
 					}
 					appendToFoot(switchover);
 					getCarNum();  //查询购物车
+					$(".yemianyanchi").hide();
 				}
 		  });
   }
