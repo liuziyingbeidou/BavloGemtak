@@ -1,4 +1,4 @@
-package com.bavlo.gemtak.util.httpClient;
+package com.alipay.mobile.util.httpClient;
 
 import org.apache.commons.httpclient.HttpException;
 import java.io.IOException;
