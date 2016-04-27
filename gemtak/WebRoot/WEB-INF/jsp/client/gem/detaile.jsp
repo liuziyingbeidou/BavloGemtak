@@ -38,63 +38,40 @@
 $(document).ready(function() {
     $(".yemianyanchi").show();
 	getCarNum();
-	/* $(".dial").knob({
-	   max: 360,
-       min: 0,
-       thickness: .3,
-       fgColor: '#2B99E6',
-       bgColor: '#303030',
-       'release':function(e){
-        $('#img').animate({width:e});
-    }
-	}); */
-	$('.dial').knob({draw : function () { 
-                    // "tron" case 
-                    if(this.$.data('skin') == 'tron') { 
-                        var a = this.angle(this.cv)  // Angle 
-                            , sa = this.startAngle          // Previous start angle 
-                            , sat = this.startAngle         // Start angle 
-                            , ea                            // Previous end angle 
-                            , eat = sat + a                 // End angle 
-                            , r = true; 
-                        thisthis.g.lineWidth = this.lineWidth; 
-                        this.o.cursor 
-                            && (sat = eat - 0.3) 
-                            && (eateat = eat + 0.3); 
-                        if (this.o.displayPrevious) { 
-                            ea = this.startAngle + this.angle(this.value); 
-                            this.o.cursor 
-                                && (sa = ea - 0.3) 
-                                && (eaea = ea + 0.3); 
-                            this.g.beginPath(); 
-                            thisthis.g.strokeStyle = this.previousColor; 
-                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false); 
-                            this.g.stroke(); 
-                        } 
-                        this.g.beginPath(); 
-                        this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ; 
-                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false); 
-                        this.g.stroke(); 
-                        this.g.lineWidth = 2; 
-                        this.g.beginPath(); 
-                        thisthis.g.strokeStyle = this.o.fgColor; 
-                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false); 
-                        this.g.stroke(); 
-                        return false; 
-                    } 
-                } 
-            }); 
-	
-	
-	$(".change").change(function(){ 
-        $(".dial").val($(".change").val()).trigger("change"); 
-     }); 
+	$(".dial").knob({
+	 max: 360,
+     min: 0
+	});
+	 $(".dial-station").knob({
+	 max: 360,
+     min: 0,
+	 change:function(){
+	 	//alert("change");
+	 },
+	 release:function(frame){
+	 	//$(".clz-v-station").text(frame);
+	 }
+	 });
 	
 	$("#ex8").slider({
 		tooltip: 'always'
 	});
-	$(".yemianyanchi").hide();
+	 $(".yemianyanchi").hide(); 
 });
+
+//jquery.bavlo.js 颜色/方位
+function setStation(frame){
+	var vl = frame * 1.8;
+	$(".dial-station").val(vl);
+	$(".dial-station").trigger("change");
+}
+function setDial(frame){   //视角
+   var dl = frame/90;
+   $(".dial").val(dl);
+   $(".dial").trigger("change");
+}
+
+
 function jian(){
 	var mySlider = $("#ex8").slider();
 	var num = $("#ex8").slider('getValue');
@@ -167,6 +144,12 @@ function addShoppCar(id){
  }
 
 </script>
+
+<style type="text/css">
+ .yemianyanchi{
+ 	text-align: center;
+ }
+</style>
 </head>
 <body>
 <div>
@@ -213,7 +196,8 @@ function addShoppCar(id){
 					   <div class="text-center shangbiao" >       						
 							<h3 class="font-bold no-margins">颜色/方位</h3>
 							<div class="m-b-md inline">
-								<input type="text" value="75" class="dial m-r-sm" data-fgColor="#faa668" data-width="85" data-height="85" />
+								<input type="text" value="0" class="dial-station m-r-sm" data-fgColor="#faa668" data-width="85" data-height="85" />
+								<!-- <span class="clz-v-station"></span> -->
 							</div>
 					   </div>
 					</div>
@@ -221,19 +205,19 @@ function addShoppCar(id){
 					   <div class="text-center shangbiao" >       
 							<h3 class="font-bold no-margins">视角</h3>
 							<div class="m-b-md inline">
-								<input type="text" value="88" class="dial m-r-sm" data-fgColor="#faa668" data-width="85" data-height="85" />
+								<input type="text" value="90" class="dial m-r-sm" data-fgColor="#faa668" data-width="85" data-height="85" />
 							</div>				
 					   </div>
 					</div>   
 				</li>
 				<li class="tit_lir col-md-6 col-xs-12">				  				 
 				   	<div class="para">
-					  <span onclick="javascript:jian();" style="text-align:right"><img src="${ctx }/resources/client/images/j.png"/>
-					   <font>X4.5<font>
+				   	  <span style="float:right" onclick="javascript:jia();"><img src="${ctx }/resources/client/images/ja.png"/>
+					  <font>X0.7<font>
 					  </span>
 					  <input id="ex8"  type="text" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="14"/>
-					  <span style="float:right" onclick="javascript:jia();"><img src="${ctx }/resources/client/images/ja.png"/>
-					  <font>X0.7<font>
+					  <span onclick="javascript:jian();" style="text-align:right"><img src="${ctx }/resources/client/images/j.png"/>
+					   <font>X4.5<font>
 					  </span>
 					</div>		
 				</li>			 
