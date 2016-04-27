@@ -21,6 +21,8 @@
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet"/>
 <link rel="stylesheet" href="${ctx }/resources/client/css/newfly.css" type="text/css"/>
 <link href="${ctx }/resources/client/css/bootstrap-slider.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
+
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery-1.7.2.min.js"></script>
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/bootstrap-slider.min.js"></script>
 <!-- amazeui -->
@@ -34,11 +36,64 @@
  <c:set value="<%=bis %>" var="bis"/>
 <script>
 $(document).ready(function() {
+    $(".yemianyanchi").show();
 	getCarNum();
-	$(".dial").knob();
+	/* $(".dial").knob({
+	   max: 360,
+       min: 0,
+       thickness: .3,
+       fgColor: '#2B99E6',
+       bgColor: '#303030',
+       'release':function(e){
+        $('#img').animate({width:e});
+    }
+	}); */
+	$('.dial').knob({draw : function () { 
+                    // "tron" case 
+                    if(this.$.data('skin') == 'tron') { 
+                        var a = this.angle(this.cv)  // Angle 
+                            , sa = this.startAngle          // Previous start angle 
+                            , sat = this.startAngle         // Start angle 
+                            , ea                            // Previous end angle 
+                            , eat = sat + a                 // End angle 
+                            , r = true; 
+                        thisthis.g.lineWidth = this.lineWidth; 
+                        this.o.cursor 
+                            && (sat = eat - 0.3) 
+                            && (eateat = eat + 0.3); 
+                        if (this.o.displayPrevious) { 
+                            ea = this.startAngle + this.angle(this.value); 
+                            this.o.cursor 
+                                && (sa = ea - 0.3) 
+                                && (eaea = ea + 0.3); 
+                            this.g.beginPath(); 
+                            thisthis.g.strokeStyle = this.previousColor; 
+                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false); 
+                            this.g.stroke(); 
+                        } 
+                        this.g.beginPath(); 
+                        this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ; 
+                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false); 
+                        this.g.stroke(); 
+                        this.g.lineWidth = 2; 
+                        this.g.beginPath(); 
+                        thisthis.g.strokeStyle = this.o.fgColor; 
+                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false); 
+                        this.g.stroke(); 
+                        return false; 
+                    } 
+                } 
+            }); 
+	
+	
+	$(".change").change(function(){ 
+        $(".dial").val($(".change").val()).trigger("change"); 
+     }); 
+	
 	$("#ex8").slider({
 		tooltip: 'always'
 	});
+	$(".yemianyanchi").hide();
 });
 function jian(){
 	var mySlider = $("#ex8").slider();
@@ -128,19 +183,30 @@ function addShoppCar(id){
 	    </div>
 	  </div>
 	</div>
+	
 <div class="tit_all m_bottom_80 conbg">
 	  <div class="container">
 		  <div class="tit_all_left col-sm-12 col-md-7">
+             <div class="loader yemianyanchi" style="display: none;">
+		        <div class="loader-inner ball-pulse-rise">
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		        </div>
+			 </div>
 		     <div class="tit_img">
 			   <!--<image src="${ctx }/resources/client/images/ad.jpg" style="width:100%"/>-->
 			   <!--<iframe id="iframe" src="${ctx }/gemClient/loadImg.do" frameborder="no" width="100%"></iframe>-->
-			   <jsp:include page="load-img.jsp"></jsp:include>
+			   <jsp:include  page="load-img.jsp"></jsp:include>
 			   
 			   <span><a href="javascript:void(0)" >
 			      <img  src="${ctx }/resources/client/images/360.png" />
 			   </a></span>
 			   <p>Gemtak</p>
 			 </div>
+			 
 			 <ul class="tit_ul">
 				<li  class="tit_lie col-md-6 col-xs-12">
 				   <div class="col-xs-6">
@@ -173,7 +239,7 @@ function addShoppCar(id){
 				</li>			 
 			 </ul>      		    
 			</div>
-			  <div class="tit_sm  col-sm-12 col-md-5">
+			<div class="tit_sm  col-sm-12 col-md-5">
 				<h6>${gem.weight} ${gem.type_cn} （${gem.type_en}）</h6>
 				<ul>
 					<li><span>${gem.supplier}</span> </li><li>TEL：${gem.supplier_tel}
@@ -212,7 +278,7 @@ function addShoppCar(id){
 				 </c:if>
 				</c:if>
 				<b style="display: none"><img  class="360tupian" src="${ctx }/resources/client/images/cp2.jpg"/></b>
-				<div class="add_gu"><a href="javascript:void(0)" class="gw_a addcar" onclick="addShoppCar(${gem.id})">购物车</a><a style="display: none;"  href="javascript:void(0)">订购款式 ></a></div>		  
+				<div class="add_gu"><a href="javascript:void(0)" class="gw_a addcar" onclick="addShoppCar(${gem.id})">购物车</a><a style="display: none;"  href="javascript:void(0)">订购款式 ></a></div>
 		  </div>
 	  </div>
 </div>
