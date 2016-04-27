@@ -118,7 +118,11 @@
          
  
 </script>
- 
+ <style type="text/css">
+ .yemianyanchi{
+ 	text-align: center;
+ }
+ </style>
 </head>
 <body>
 <input type="hidden" class="juname" value="${uname }"/>
