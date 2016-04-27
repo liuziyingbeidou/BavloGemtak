@@ -17,8 +17,6 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 
-import com.bavlo.domain.Customer;
-
 
 public class ExcelUtil {
 
@@ -150,7 +148,7 @@ public class ExcelUtil {
 		}
 	}
 
-	public static List<Customer> readExcel(File file)
+	/*public static List<Customer> readExcel(File file)
 	{
 		List<Customer> listCustomer=new ArrayList<Customer>();
 		Customer customer=new Customer();
@@ -197,5 +195,5 @@ public class ExcelUtil {
 //			System.out.println(str.get(i).get(i)+"sssssssssssss");
 //		}
 		return listCustomer;
-	}
+	}*/
 }
