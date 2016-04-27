@@ -14,10 +14,13 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
-
+import com.bavlo.gemtak.util.httpClient.HttpProtocolHandler;
 import com.bavlo.gemtak.config.AlipayConfig;
 import com.bavlo.gemtak.sign.MD5;
 import com.bavlo.gemtak.sign.RSA;
+import com.bavlo.gemtak.util.httpClient.HttpRequest;
+import com.bavlo.gemtak.util.httpClient.HttpResponse;
+import com.bavlo.gemtak.util.httpClient.HttpResultType;
 
 
 
@@ -198,7 +201,7 @@ public class AlipaySubmit {
         request.setParameters(generatNameValuePair(sPara));
         request.setUrl(ALIPAY_GATEWAY_NEW+"_input_charset="+AlipayConfig.input_charset);
 
-        HttpResponse response = httpProtocolHandler.execute(request,strParaFileName,strFilePath);
+        HttpResponse response = httpProtocolHandler.execute(request, strParaFileName, strFilePath);
         if (response == null) {
             return null;
         }
