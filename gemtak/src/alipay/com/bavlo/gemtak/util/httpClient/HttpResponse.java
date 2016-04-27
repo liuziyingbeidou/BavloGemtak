@@ -1,4 +1,4 @@
-package com.alipay.mobile.util.httpClient;
+package com.bavlo.gemtak.util.httpClient;
 
 import com.alipay.config.AlipayConfig;
 

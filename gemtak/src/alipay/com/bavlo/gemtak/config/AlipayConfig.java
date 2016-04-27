@@ -1,4 +1,4 @@
-package com.alipay.config;
+package com.bavlo.gemtak.config;
 
 /* *
  *ÀàÃû£ºAlipayConfig

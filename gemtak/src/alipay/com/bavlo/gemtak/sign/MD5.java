@@ -1,4 +1,4 @@
-package com.alipay.mobile.sign;
+package com.bavlo.gemtak.sign;
 
 import java.io.UnsupportedEncodingException;
 import java.security.SignatureException;

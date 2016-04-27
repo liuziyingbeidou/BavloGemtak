@@ -1,4 +1,4 @@
-package com.alipay.util;
+package com.bavlo.gemtak.util;
 
 import java.io.BufferedReader;
 import java.io.File;

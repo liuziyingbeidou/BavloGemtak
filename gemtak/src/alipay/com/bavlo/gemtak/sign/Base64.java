@@ -4,7 +4,7 @@
  * author: shiqun.shi@alipay.com
  */
 
-package com.alipay.mobile.sign;
+package com.bavlo.gemtak.sign;
 
 public final class Base64 {
 
