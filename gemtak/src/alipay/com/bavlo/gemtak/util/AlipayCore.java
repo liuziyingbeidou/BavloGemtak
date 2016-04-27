@@ -12,7 +12,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.httpclient.methods.multipart.FilePartSource;
 import org.apache.commons.httpclient.methods.multipart.PartSource;
 
-import com.alipay.config.AlipayConfig;
+import com.bavlo.gemtak.config.AlipayConfig;
+
 
 /* *
  *类名：AlipayFunction
