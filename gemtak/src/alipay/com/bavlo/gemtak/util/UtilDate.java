@@ -1,5 +1,4 @@
-
-package com.alipay.mobile.util;
+package com.bavlo.gemtak.util;
 
 import java.util.Date;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package com.alipay.mobile.util.httpClient;
+package com.bavlo.gemtak.httpClient;
 
 import org.apache.commons.httpclient.NameValuePair;
 

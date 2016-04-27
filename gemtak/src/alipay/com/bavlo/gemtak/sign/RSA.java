@@ -1,5 +1,5 @@
 
-package com.alipay.mobile.sign;
+package com.bavlo.gemtak.sign;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

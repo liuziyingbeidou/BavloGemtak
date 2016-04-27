@@ -1,4 +1,4 @@
-package com.alipay.mobile.util;
+package com.bavlo.gemtak.util;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
