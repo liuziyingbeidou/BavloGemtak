@@ -689,9 +689,16 @@ public class GemClientController extends BaseController {
 		String zhifu = orderVO.getZhifu();
 		String mrType = orderVO.getMrType();
 		String forw = "";
-		if(zhifu == "1"){
+		if("1".equals(zhifu)){
 			//支付宝支付
-			forw = "";
+			if("pc".equals(mrType)){
+				/*AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do","app_id","your private_key","json","GBK","alipay_public_key");
+				AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
+				request.setBizContent("{"out_trade_no":"20150320010101001","trade_no":"2014112611001004680 073956707"}");
+				AlipayTradeQueryResponse response = alipayClient.execute(request);*/
+				forw = "";
+			}
+			
 		}else if("2".equals(zhifu)){
 			if("pc".equals(mrType)){
 				//PC端扫码支付
