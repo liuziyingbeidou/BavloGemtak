@@ -3,10 +3,10 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 
-					<img src="${ctx }/resources/1024/hbx/001.jpg" width="100%" height="100%" 
+					<img src="${ctx }/resources/${model}/hbx/001.jpg" width="100%" height="100%" 
 					class="reel change"
 				   	id="image"
-				  	data-images="${ctx }/resources/1024/hbx/###.jpg"
+				  	data-images="${ctx }/resources/1024/${model}/###.jpg"
 				 	data-frames="200"
 				  	data-footage="50"
 				  	data-cw="true"
