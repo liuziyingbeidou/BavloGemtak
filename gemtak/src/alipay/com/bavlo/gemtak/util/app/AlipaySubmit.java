@@ -75,16 +75,16 @@ public class AlipaySubmit {
      * @param strButtonName 确认按钮显示文字
      * @return 提交表单HTML文本
      */
-    public static String buildRequest(Map<String, String> sParaTemp, String strMethod, String strButtonName) {
+    public static String buildRequest(Map<String, String> sParaTemp, String gateway,String strMethod, String strButtonName) {
         //待请求参数数组
         Map<String, String> sPara = buildRequestPara(sParaTemp);
         List<String> keys = new ArrayList<String>(sPara.keySet());
 
         StringBuffer sbHtml = new StringBuffer();
 
-        sbHtml.append("<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + ALIPAY_GATEWAY_NEW
-                      + "_input_charset=" + AlipayConfig.input_charset + "\" method=\"" + strMethod
-                      + "\">");
+        sbHtml.append("<html><body><form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + gateway
+                + "_input_charset=" + AlipayConfig.input_charset + "\" method=\"" + strMethod
+                + "\">");
 
         for (int i = 0; i < keys.size(); i++) {
             String name = (String) keys.get(i);
@@ -94,8 +94,8 @@ public class AlipaySubmit {
         }
 
         //submit按钮控件请不要含有name属性
-        sbHtml.append("<input type=\"submit\" value=\"" + strButtonName + "\" style=\"display:none;\"></form>");
-        sbHtml.append("<script>document.forms['alipaysubmit'].submit();</script>");
+        sbHtml.append("<input type=\"submit\" value=\"" + strButtonName + "\" style=\"display:none;\"></form></body>");
+        sbHtml.append("<script>document.forms['alipaysubmit'].submit();</script></html>");
 
         return sbHtml.toString();
     }
