@@ -289,10 +289,10 @@ function selOldOrderGem(id){
 function jsPayFee(id){
  var orderno = $(".dingdan"+id).text();
  var totalPrice = $(".zongjia"+id).text();
- var zhifu = "2";
+ var zhifu = "2";                     //*****************************************待完善*************************
  var mrType = $(".mrtype").val();
  var url = "/gemtak/gemClient/insPay.do";
- location.href = "/gemtak/gemClient/insPay.do?orderno="+orderno+"&totalPrice="+totalPrice"&zhifu="+zhifu"&mrType="+mrType;
+ location.href = "/gemtak/gemClient/insPay.do?orderno="+orderno+"&totalPrice="+totalPrice+"&zhifu="+zhifu+"&mrType="+mrType;
 }
 
 
