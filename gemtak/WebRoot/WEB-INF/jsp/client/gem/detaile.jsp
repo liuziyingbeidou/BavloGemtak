@@ -212,12 +212,12 @@ function addShoppCar(id){
 				</li>
 				<li class="tit_lir col-md-6 col-xs-12">				  				 
 				   	<div class="para">
-				   	  <span style="float:right" onclick="javascript:jia();"><img src="${ctx }/resources/client/images/ja.png"/>
-					  <font>X0.7<font>
+				   	  <span onclick="javascript:jian();" style="text-align:right"><img src="${ctx }/resources/client/images/j.png"/>
+					  <font>X4.5<font>
 					  </span>
 					  <input id="ex8"  type="text" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="14"/>
-					  <span onclick="javascript:jian();" style="text-align:right"><img src="${ctx }/resources/client/images/j.png"/>
-					   <font>X4.5<font>
+					  <span style="float:right" onclick="javascript:jia();"><img src="${ctx }/resources/client/images/ja.png"/>
+					  <font>X0.7<font>
 					  </span>
 					</div>		
 				</li>			 
