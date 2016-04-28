@@ -40,7 +40,7 @@
 					<div class="scdd scdd1">
 						 <p  class="fc_0">订单号为：<span>${orderNo}</span></p>
 						 <p>总金额为：<span>￥${totalPrice}元</span></p>
-						 <p><img src="qr_code.img.do?code_url=${code_url}" style="width:300px;height:300px;"/></p>
+						 <p><img src="qr_code.do?code_url=${code_url}" style="width:300px;height:300px;"/></p>
 					</div>
 				 </div>
 		   </div>   	  
