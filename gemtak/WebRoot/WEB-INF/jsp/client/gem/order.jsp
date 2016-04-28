@@ -15,12 +15,21 @@
 <title>bavlo</title>
 <link rel="stylesheet" href="${ctx}/resources/client/css/bootstrap.css" />
 <link href="${ctx}/resources/client/css/index.css" rel="stylesheet">
+<link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
 <script type="text/javascript" src="${ctx }/resources/client/js/area_cus.js"></script>
+<style type="text/css">
+ .yemianyanchi{
+ 	text-align: center;
+ }
+ </style>
 </head>
+
 <script>
 $(function(){
+  $(".yemianyanchi").show();
   selectUserAddress();
+  $(".yemianyanchi").hide();
 });
  function selchecked(em){
   var aid = $(em).attr("nid");
@@ -182,7 +191,16 @@ $(function(){
 			     <li class="col-xs-4"><span>3</span>成功提交订单</li>
 			   </ul>
 			  
-			</div>     
+			</div> 
+			<div class="loader yemianyanchi" style="display: none;">
+		        <div class="loader-inner ball-pulse-rise">
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		        </div>
+		    </div>    
 			<form action="${ctx }/gemClient/balancePay.do" method="post"  id="orderForm">
 			 <input name="mrType" class="mrtype" type="hidden" value="pc"/>
 			 <div class="wrap_br wrap_br_d">
