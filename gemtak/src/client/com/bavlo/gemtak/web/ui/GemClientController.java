@@ -624,6 +624,26 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
+	 * 支付宝扫码支付
+	 * @param model
+	 * @param orderNo
+	 * @param totalPrice
+	 * @return
+	 */
+	@RequestMapping(value="alipayURL")
+	public String alipayURL(Model model,String orderNo,Double totalPrice){
+		Map<String,String> sParaTemp = new HashMap<String,String>();
+		sParaTemp.put("payment_type", "1");
+		sParaTemp.put("out_trade_no", orderNo);
+		sParaTemp.put("subject", "订单："+orderNo);
+		sParaTemp.put("body", "");
+		sParaTemp.put("total_fee", totalPrice+"");
+		String url = AlipayService.create_direct_pay_by_user(sParaTemp);
+	    model.addAttribute("url", url);
+		return "/client/gem/order-alipaysuccess";
+	}
+	
+	/**
 	 * @Description: 获取微信用户code
 	 * @param @param response
 	 * @param @param request
@@ -637,13 +657,20 @@ public class GemClientController extends BaseController {
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCOrderPayPageModel(model,lang);
-		String orderNo = CommonUtils.getBillCode("GM");
+		String orderNo = null;
 		String sessionId = session.getId();
-		System.out.println("当前取到的sessionId:"+sessionId);
 		Object sid = session.getAttribute("sessionId");
+		if(sessionId.equals(sid)){
+			orderNo = session.getAttribute(sessionId)+"";
+		}else{
+			orderNo = CommonUtils.getBillCode("GM");
+		}
+		
+		System.out.println("当前取到的sessionId:"+sessionId);
 		
 		if(!sessionId.equals(sid)){
 			session.setAttribute("sessionId", sessionId);
+			session.setAttribute(sessionId, orderNo);
 			orderVO.setOrder_no(orderNo);
 			Integer orderId;
 			//根据 用户名 和 购物车id 删除 购物车信息
@@ -689,22 +716,22 @@ public class GemClientController extends BaseController {
 		String zhifu = orderVO.getZhifu();
 		String mrType = orderVO.getMrType();
 		String forw = "";
-		if("1".equals(zhifu)){
-			Map<String,Object> map = new HashMap<String,Object>();
-			//支付宝支付
-			if("pc".equals(mrType)){
+		if("1".equals(zhifu)){  //支付宝支付
+			if("pc".equals(mrType)){ //PC端扫码支付
+				forw = "redirect:alipayURL.do?orderNo="+orderNo+"&totalPrice="+orderVO.getTotalPrice();
+			}else{
 				Map<String,String> sParaTemp = new HashMap<String,String>();
 				sParaTemp.put("payment_type", "1");
 				sParaTemp.put("out_trade_no", orderNo);
 				sParaTemp.put("subject", "订单："+orderNo);
 				sParaTemp.put("body", "");
 				sParaTemp.put("total_fee", orderVO.getTotalPrice()+"");
-				String url = AlipayService.create_direct_pay_by_user(sParaTemp);
-			    map.put("url", url);
-				forw = "/client/gem/order-alipaysuccess";
+				String url = AlipayService.create_direct_pay_by_phone(sParaTemp);
+			    model.addAttribute("url", url);
+				return "/client/gem/order-alipaysuccess";
 			}
 			
-		}else if("2".equals(zhifu)){
+		}else if("2".equals(zhifu)){ //微信支付
 			if("pc".equals(mrType)){
 				//PC端扫码支付
 				//扫码支付
