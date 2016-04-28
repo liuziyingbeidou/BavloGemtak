@@ -55,10 +55,30 @@ public class AlipayService {
         return AlipaySubmit.buildForm(sParaTemp, ALIPAY_GATEWAY_NEW, "get", strButtonName);
     }
 
+    
+    /**
+     * 手机到帐接口
+     * @param sParaTemp 请求参数集合
+     * @return 表单提交HTML信息
+     */
+    public static String create_direct_pay_by_phone(Map<String, String> sParaTemp) {
+
+    	//增加基本配置
+        sParaTemp.put("service", "create_direct_pay_by_user");
+        sParaTemp.put("partner", AlipayConfig.partner);
+        sParaTemp.put("return_url", AlipayConfig.return_url);
+        sParaTemp.put("notify_url", AlipayConfig.notify_url);
+        sParaTemp.put("seller_email", AlipayConfig.seller_email);
+        sParaTemp.put("_input_charset", AlipayConfig.input_charset);
+
+        String strButtonName = "";
+
+        return com.bavlo.gemtak.util.app.AlipaySubmit.buildRequest(sParaTemp, ALIPAY_GATEWAY_NEW, "get", strButtonName);
+    }
 
     /**
      * 用于防钓鱼，调用接口query_timestamp来获取时间戳的处理函数
-     * 注意：远程解析XML出错，与服务器是否支持SSL等配置有关
+     * 注意：远程解析XML出错，与服务器是否支持SSL等配置有关.
      * @return 时间戳字符串
      * @throws IOException
      * @throws DocumentException
