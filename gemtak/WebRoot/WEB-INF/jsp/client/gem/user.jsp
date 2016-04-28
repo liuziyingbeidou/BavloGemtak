@@ -15,11 +15,18 @@
 <title>bavlo</title>
 <link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
+<link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
 <script type="text/javascript" src="${ctx }/resources/client/js/area_cus.js"></script>
+<style type="text/css">
+ .yemianyanchi{
+ 	text-align: center;
+ }
+ </style>
 <script>
 $(function(){
+  $(".yemianyanchi").show();
   showUserOrder();
   manageAddress();
   addUserAddress();
@@ -27,6 +34,7 @@ $(function(){
   btnSave();
   updateUPassWord();
   getCarNum();
+  $(".yemianyanchi").hide();
 });
 
 //显示 \ 关闭 收货地址管理
@@ -281,9 +289,32 @@ function selOldOrderGem(id){
 function jsPayFee(id){
  var orderno = $(".dingdan"+id).text();
  var totalPrice = $(".zongjia"+id).text();
+ var zhifu = "2";
+ var mrType = $(".mrtype").val();
  var url = "/gemtak/gemClient/insPay.do";
- location.href = "/gemtak/gemClient/insPay.do?orderno="+orderno+"&totalPrice="+totalPrice;
+ location.href = "/gemtak/gemClient/insPay.do?orderno="+orderno+"&totalPrice="+totalPrice"&zhifu="+zhifu"&mrType="+mrType;
 }
+
+
+        //平台、设备和操作系统 
+        var system = { 
+            win: false, 
+            mac: false, 
+            xll: false, 
+            ipad:false 
+        }; 
+        //检测平台 
+        var p = navigator.platform; 
+        system.win = p.indexOf("Win") == 0; 
+        system.mac = p.indexOf("Mac") == 0; 
+        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0); 
+        system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false; 
+        //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面 
+        if (system.win || system.mac || system.xll||system.ipad) { 
+           
+        } else { 
+          $(".mrtype").val("mobile");
+        } 
 </script>
 </head>
 <body>
@@ -296,7 +327,17 @@ function jsPayFee(id){
 				<h2 class="doname"><a href="javascript:void(0)" class="userOrder">订单记录<font>（${num}）</font></a></h2>
 				<i class="icon-me icon-me11  dingdanjiludown"></i>
 				<i style="display: none" class="icon-me icon-me1  dingdanjiluup"></i>
-		   </div> 
+		   </div>
+		   <div class="loader yemianyanchi" style="display: none;">
+		        <div class="loader-inner ball-pulse-rise">
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		        </div>
+		   </div>
+		   <input name="mrType" class="mrtype" type="hidden" value="pc"/> 
 		   <div class="ddjl uOrder" style="display: none;">
 			   <div class="user_br">
 				 <c:forEach items="${orderList}" var="order">
