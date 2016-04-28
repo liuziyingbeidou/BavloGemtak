@@ -14,12 +14,19 @@
 <meta name="author" content="bavlo">
 <title>bavlo</title>
 <link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
+<link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
 <link href="${ctx }/resources/client/css/login.css" rel="stylesheet">
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/common/js/jquery_cookie.js"></script>
+<style type="text/css">
+ .yemianyanchi{
+ 	text-align: center;
+ }
+ </style>
 <script type="text/javascript">
  $(function (){
+  $(".yemianyanchi").show();
   //用户登录
   refush('authcodeimg');
   $(".login").click(function(){
@@ -53,6 +60,7 @@
       });
     }
   });
+  $(".yemianyanchi").hide();
  });
  
  //用户注册
@@ -173,6 +181,15 @@
 <div class="tit_all m_bottom_80 conbg">
 	  <div class="container">
 	       <h2 class="tit_log col-sm-12">登录 | 注册</h2>
+	        <div class="loader yemianyanchi" style="display: none;">
+		        <div class="loader-inner ball-pulse-rise">
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		        </div>
+		    </div>
 			<div class="w_442 col-sm-12 col-md-6">
 				<form name="mailBox" id="mailBox" method="post" action="mother.html">
 				<h3><span>会员登录</span></h3>
