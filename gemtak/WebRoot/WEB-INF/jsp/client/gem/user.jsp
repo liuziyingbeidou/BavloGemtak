@@ -287,9 +287,14 @@ function selOldOrderGem(id){
 //***************************END****************************
 //立即支付
 function jsPayFee(id){
+ if($(".zhifubao").is(":checked")) {
+   $(".mrtype").attr("nid","1");
+ }else if($(".weixin").is(":checked")) {
+   $(".mrtype").attr("nid","2");
+ }
  var orderno = $(".dingdan"+id).text();
  var totalPrice = $(".zongjia"+id).text();
- var zhifu = "2";                     //*****************************************待完善*************************
+ var zhifu = $(".mrtype").attr("nid");
  var mrType = $(".mrtype").val();
  var url = "/gemtak/gemClient/insPay.do";
  location.href = "/gemtak/gemClient/insPay.do?orderno="+orderno+"&totalPrice="+totalPrice+"&zhifu="+zhifu+"&mrType="+mrType;
@@ -328,6 +333,11 @@ function jsPayFee(id){
 				<i class="icon-me icon-me11  dingdanjiludown"></i>
 				<i style="display: none" class="icon-me icon-me1  dingdanjiluup"></i>
 		   </div>
+		   <div class="inmenu  zffs">
+		        <h2 class="doname"><a href="javascript:void(0)" >请选择支付方式</a></h2>
+			    <span class="user_br1 "><input type="radio" style="text-align: center;" class="zhifubao" name="zhifu" class="zfb" value="1" checked="checked"/>支付宝支付  </span>
+				<span class="user_br1" > <input type="radio" style="text-align: center;"class="weixin" name="zhifu" class="wx" value="2"/>微信支付<span>
+		   </div>
 		   <div class="loader yemianyanchi" style="display: none;">
 		        <div class="loader-inner ball-pulse-rise">
 		          <div></div>
@@ -337,7 +347,7 @@ function jsPayFee(id){
 		          <div></div>
 		        </div>
 		   </div>
-		   <input name="mrType" class="mrtype" type="hidden" value="pc"/> 
+		   <input name="mrType" class="mrtype" type="hidden" value="pc" nid="1"/> 
 		   <div class="ddjl uOrder" style="display: none;">
 			   <div class="user_br">
 				 <c:forEach items="${orderList}" var="order">
