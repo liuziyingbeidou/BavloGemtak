@@ -274,9 +274,9 @@ $(function(){
 				  <c:set var="TotalPrice" value="${TotalPrice+gem.retail_price*gem.vdef1}"/>
 				 </c:forEach>
 				 <h2><span>支付方式</span></h2>
-				  <div class="jsxx">
-					 <span class="jsxx_p "><input type="radio" name="zhifu" class="zfb" value="1" checked="checked"/>支付宝支付  </span>
-					 <span class="jsxx_p "> <input type="radio" name="zhifu" class="wx" value="2"/>微信支付<span>
+				  <div class="wrap_br">
+					 <span class="jsxx_p "><input type="radio" style="text-align: center;" name="zhifu" class="zfb" value="1" checked="checked"/>支付宝支付  </span>
+					 <span class="jsxx_p " > <input type="radio" style="text-align: center;" name="zhifu" class="wx" value="2"/>微信支付<span>
 				  </div>
 				 <h2><span>结算信息</span></h2>
 				  <div class="jsxx">
