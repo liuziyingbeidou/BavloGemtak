@@ -784,7 +784,7 @@ public class GemClientController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value="insPay")
-	public String insPay(HttpServletResponse response,HttpServletRequest request,String zhifu,String mrType,String orderno,String totalPrice){
+	public String insPay(HttpServletResponse response,HttpServletRequest request,Model model,String zhifu,String mrType,String orderno,String totalPrice){
 		//*************将订单 号 和总价格存在 session中********************
 		Map map = new HashMap();
 		//orderVO.setTotalPrice(0.1);
@@ -796,11 +796,19 @@ public class GemClientController extends BaseController {
 		if("1".equals(zhifu)){
 			//支付宝支付
 			if("pc".equals(mrType)){
-				/*AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do","app_id","your private_key","json","GBK","alipay_public_key");
-				AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
-				request.setBizContent("{"out_trade_no":"20150320010101001","trade_no":"2014112611001004680 073956707"}");
-				AlipayTradeQueryResponse response = alipayClient.execute(request);*/
-				forw = "";
+				if("pc".equals(mrType)){ //PC端扫码支付
+					forw = "redirect:alipayURL.do?orderNo="+orderno+"&totalPrice="+totalPrice;
+				}else{
+					Map<String,String> sParaTemp = new HashMap<String,String>();
+					sParaTemp.put("payment_type", "1");
+					sParaTemp.put("out_trade_no", orderno);
+					sParaTemp.put("subject", "订单："+orderno);
+					sParaTemp.put("body", "");
+					sParaTemp.put("total_fee", totalPrice+"");
+					String url = AlipayService.create_direct_pay_by_phone(sParaTemp);
+				    model.addAttribute("url", url);
+					return "/client/gem/order-alipaysuccess";
+				}
 			}
 			
 		}else if("2".equals(zhifu)){
