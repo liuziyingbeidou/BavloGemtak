@@ -118,7 +118,7 @@
 
 <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-common.js"></script>
 <link rel="stylesheet" href="${ctx }/resources/admin/css/gem-common.css" />
-
+<link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
 <!-- amazeui -->
 <link rel="stylesheet" href="${ctx }/resources/amazeui/css/amazeui.min.css"/>
 <script type="text/javascript" src="${ctx }/resources/amazeui/js/handlebars.min.js"></script>
@@ -159,6 +159,7 @@ function delCookie(id){
 }
 
 $(function(){
+     
      //我的订单
      $(".view-MyOrder").click(function(){
            location.href="${ctx }/gemClient/selMyOrder.do";
