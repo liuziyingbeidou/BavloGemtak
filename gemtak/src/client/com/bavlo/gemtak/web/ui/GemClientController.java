@@ -40,6 +40,7 @@ import com.bavlo.gemtak.model.ui.ShoppingCarVO;
 import com.bavlo.gemtak.model.weixin.WxPayDto;
 import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.service.weixin.itf.IWXZFService;
+import com.bavlo.gemtak.services.AlipayService;
 import com.bavlo.gemtak.util.weixin.WXPayUtil;
 import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.DateUtil;
@@ -636,12 +637,11 @@ public class GemClientController extends BaseController {
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCOrderPayPageModel(model,lang);
-		
-		String sessionId = session.getId();
-		
-		System.out.println("sessionId:"+sessionId);
-		Object sid = session.getAttribute("sessionId");
 		String orderNo = CommonUtils.getBillCode("GM");
+		String sessionId = session.getId();
+		System.out.println("当前取到的sessionId:"+sessionId);
+		Object sid = session.getAttribute("sessionId");
+		
 		if(!sessionId.equals(sid)){
 			session.setAttribute("sessionId", sessionId);
 			orderVO.setOrder_no(orderNo);
@@ -690,13 +690,18 @@ public class GemClientController extends BaseController {
 		String mrType = orderVO.getMrType();
 		String forw = "";
 		if("1".equals(zhifu)){
+			Map<String,Object> map = new HashMap<String,Object>();
 			//支付宝支付
 			if("pc".equals(mrType)){
-				/*AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do","app_id","your private_key","json","GBK","alipay_public_key");
-				AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
-				request.setBizContent("{"out_trade_no":"20150320010101001","trade_no":"2014112611001004680 073956707"}");
-				AlipayTradeQueryResponse response = alipayClient.execute(request);*/
-				forw = "";
+				Map<String,String> sParaTemp = new HashMap<String,String>();
+				sParaTemp.put("payment_type", "1");
+				sParaTemp.put("out_trade_no", orderNo);
+				sParaTemp.put("subject", "订单："+orderNo);
+				sParaTemp.put("body", "");
+				sParaTemp.put("total_fee", orderVO.getTotalPrice()+"");
+				String url = AlipayService.create_direct_pay_by_user(sParaTemp);
+			    map.put("url", url);
+				forw = "/client/gem/order-alipaysuccess";
 			}
 			
 		}else if("2".equals(zhifu)){
@@ -752,15 +757,48 @@ public class GemClientController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value="insPay")
-	public String insPay(HttpServletResponse response,HttpServletRequest request,String orderno,String totalPrice){
-		String code = GetWeiXinCode.getCodeRequest();
+	public String insPay(HttpServletResponse response,HttpServletRequest request,String zhifu,String mrType,String orderno,String totalPrice){
 		//*************将订单 号 和总价格存在 session中********************
 		Map map = new HashMap();
 		//orderVO.setTotalPrice(0.1);
 		map.put("totalPrice", totalPrice);
 		map.put("orderCode", orderno);
 		session.setAttribute("sOrderMap", map);
-		return "redirect:"+code;
+		
+		String forw = "";
+		if("1".equals(zhifu)){
+			//支付宝支付
+			if("pc".equals(mrType)){
+				/*AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do","app_id","your private_key","json","GBK","alipay_public_key");
+				AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
+				request.setBizContent("{"out_trade_no":"20150320010101001","trade_no":"2014112611001004680 073956707"}");
+				AlipayTradeQueryResponse response = alipayClient.execute(request);*/
+				forw = "";
+			}
+			
+		}else if("2".equals(zhifu)){
+			if("pc".equals(mrType)){
+				//PC端扫码支付
+				//扫码支付
+			    WxPayDto tpWxPay1 = new WxPayDto();
+			    tpWxPay1.setBody("商品信息");
+			    tpWxPay1.setOrderId(orderno);
+			    tpWxPay1.setSpbillCreateIp(WebUtils.getIpAddr(request));
+			    tpWxPay1.setTotalFee(totalPrice);
+				String codeurl=WXPayUtil.getCodeurl(tpWxPay1,IConstant.WXSSPAYSUCCESSURL);
+				Map hmap = new HashMap();
+				hmap.put("totalPrice", totalPrice);
+				hmap.put("orderCode", orderno);
+				hmap.put("code_url", codeurl);
+				session.setAttribute("pcwxOrderMap", hmap);
+				forw = "redirect:orderSuc.do";
+			}else if("mobile".equals(mrType)){
+				String code = GetWeiXinCode.getCodeRequest();
+				forw = "redirect:"+code;
+			}
+		}
+		
+		return forw;
 	}
 	
 	/**88888888888888
