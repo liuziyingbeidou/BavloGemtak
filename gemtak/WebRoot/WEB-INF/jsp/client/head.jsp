@@ -1,4 +1,3 @@
-
 <%@ page language="java" import="java.util.*,com.bavlo.gemtak.constant.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
@@ -7,6 +6,11 @@
  %>
 <c:set var="uname" value="<%=username %>"/>
 <link rel="stylesheet" href="${ctx }/resources/client/css/newfly.css" type="text/css"/>
+<link rel="stylesheet" href="${ctx }/resources/client/css/layer.css" type="text/css"></link>
+<link rel="stylesheet" href="${ctx }/resources/client/css/layer.ext.css" type="text/css"></link>
+<script type="text/javascript" src="${ctx }/resources/client/js/layer.ext.js"></script>
+<script type="text/javascript" src="${ctx }/resources/client/js/layer.js"></script>
+
 <style>
 #collapse-nav{
 	background-color:#fff;
@@ -46,10 +50,8 @@
 	  </c:if>
 	  <c:if test="${uname != null}">
 	  
-	    <i></i>
 	    <a  href="javascript:void(0)" class="view-shoppingcar">${pagehfvo['hMShoppingCart'] }<t class="cart-num"></t></a>
 	   
-	   <div id="msg">已成功加入购物车！</div>
 	    
 		<a href="javascript:void(0)" class="jesuan">${pagehfvo['hMBalance'] }</a>
 	  </c:if>
@@ -152,7 +154,16 @@ function delCookie(id){
 		  data = $.parseJSON(data);
 		  var flag = data.msg;
 		  if(flag=="Y"){
-			  alert("您已成功删除该宝贝！");
+			  layer.alert('您已成功删除该宝贝！', {
+			  skin: 'layui-layer-molv' //样式类名
+			  ,closeBtn: 0
+			}, function(){
+			  layer.alert('更多宝贝在等你喲！', {
+			    skin: 'layui-layer-lan'
+			    ,closeBtn: 0
+			    ,shift: 4 //动画类型
+			  });
+			});
 			  $(".delectPic-"+id+"").remove();
 		  }
 	  });
@@ -170,7 +181,16 @@ $(function(){
 		 var url = "/gemtak/gemClient/checkGemShoppingCar.do";
 		 $.post(url,function(data){
 		  if(data == "N"){
-		    alert("您的购物车还没有宝贝哟！");
+		    layer.alert('您的购物车还没有宝贝哟！', {
+			  skin: 'layui-layer-molv' //样式类名
+			  ,closeBtn: 0
+			}, function(){
+			  layer.alert('请先去购物吧！', {
+			    skin: 'layui-layer-lan'
+			    ,closeBtn: 0
+			    ,shift: 4 //动画类型
+			  });
+			});
 		  }else if(data == "Y"){
 		   location.href = "/gemtak/gemClient/viewShoppingCar.do";
 		  }
@@ -182,7 +202,16 @@ $(function(){
 		 var url = "/gemtak/gemClient/checkGemShoppingCar.do";
 		 $.post(url,function(data){
 		  if(data == "N"){
-		    alert("您还没有要结算的商品！");
+		    layer.alert('您还没有要结算的商品！', {
+			  skin: 'layui-layer-molv' //样式类名
+			  ,closeBtn: 0
+			}, function(){
+			  layer.alert('请先去购物吧！', {
+			    skin: 'layui-layer-lan'
+			    ,closeBtn: 0
+			    ,shift: 4 //动画类型
+			  });
+			});
 		  }else if(data == "Y"){
 		   location.href = "/gemtak//gemClient/order.do";
 		  }
@@ -206,7 +235,16 @@ $(function(){
 		  			     $(".show-cookies").append("<li class='delectPic-"+data[i].id+"'><a onclick='goDetail("+data[i].id+")'><img src='http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640'  alt='"+data[i].retail_price+"'/></a><span onclick='delCookie("+data[i].id+")'>X</span></li>");
 		  			    }
 	  			    }else{
-	                   alert("您还没有收藏任何宝贝哟！");
+	                   layer.alert('您还没有收藏任何宝贝哟！', {
+						  skin: 'layui-layer-molv' //样式类名
+						  ,closeBtn: 0
+						}, function(){
+						  layer.alert('快去添加吧！', {
+						    skin: 'layui-layer-lan'
+						    ,closeBtn: 0
+						    ,shift: 4 //动画类型
+						  });
+						}); 
 	                }
 	  			  }
                 });
