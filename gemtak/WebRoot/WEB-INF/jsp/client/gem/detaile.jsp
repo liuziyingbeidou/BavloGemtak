@@ -1,3 +1,4 @@
+<%@page import="com.bavlo.gemtak.util.weixin.IContant"%>
 <%@ page language="java" import="java.util.*,com.bavlo.gemtak.constant.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
@@ -66,7 +67,7 @@ function setStation(frame){
 	$(".dial-station").trigger("change");
 }
 function setDial(frame){   //视角
-   var dl = frame/90;
+   var dl = 90;
    $(".dial").val(dl);
    $(".dial").trigger("change");
 }
@@ -87,21 +88,7 @@ function jia(){
 	}
 }
 
-//加入购物车效果getCarNum();
-$(function(){
-	$(".addcar").click(function(event){
-		layer.alert('恭喜您，宝贝已加入购物车！', {
-		  skin: 'layui-layer-molv' //样式类名
-		  ,closeBtn: 0
-		}, function(){
-		  layer.alert('gemtak!gemtak!', {
-		    skin: 'layui-layer-lan'
-		    ,closeBtn: 0
-		    ,shift: 4 //动画类型
-		  });
-		}); 
-	});
-});
+
 
 //添加到购物车
 function addShoppCar(id){
@@ -111,10 +98,23 @@ function addShoppCar(id){
 	    data = $.parseJSON(data);
 	    var flag = data.mess;
 	    var num = data.carNum;
-	    if(flag=="Y"){
-	     /*  alert("恭喜你，宝物添加成功！"); */
-	      selCarNO(num);  //方法在head.jsp 
-	    }else if(flag=="N"){  //返回N跳转到登录
+	    var userName =${uname};
+	    if(userName != null){
+	      if(flag=="Y"){
+	          //加入购物车效果getCarNum();
+		      layer.alert('恭喜您，宝贝已加入购物车！', {
+				  skin: 'layui-layer-molv' //样式类名
+				  ,closeBtn: 0
+				}, function(){
+				  layer.alert('gemtak!gemtak!', {
+				    skin: 'layui-layer-lan'
+				    ,closeBtn: 0
+				    ,shift: 4 //动画类型
+				  });
+				});
+		      selCarNO(num);  //方法在head.jsp 
+		    }
+	    }else {  //用户名为空  跳转到登录
 	      $("#my-popup").modal('toggle');
 	    }
 	  });
@@ -122,13 +122,6 @@ function addShoppCar(id){
 } 
  //登录成功 关闭登录弹窗
  function closeMwin(name){ 
-  /* getCarNum();
-  $(".t-css").text("Hi,"+name);//登录成功后，将用户名传过来
-  $(".replaceA").text("注销");
-  $(".replaceA").attr("href","${ctx }/gemClient/logout.do");
-  $(".replaceB").text("我的订单");
-  $(".replaceB").attr("href",""); */
-  //$("#my-popup").modal('close');
   window.location.reload(); 
  }
 
@@ -148,7 +141,7 @@ function addShoppCar(id){
 	  <div class="am-popup-inner">
 	    <div class="am-popup-hd">
 	      <span data-am-modal-close
-	            class="am-close">&times;</span>
+	            class="am-close">.&times;</span>
 	    </div>
 	    <div class="am-popup-bd">
 	      <iframe id="iframe" src="${ctx }/gemClient/login.do?dengluNUM=2" frameborder="no" height="550" width="100%"></iframe>
@@ -251,15 +244,13 @@ function addShoppCar(id){
 				 </c:if>
 				</c:if>
 				<b style="display: none"><img  class="360tupian" src="${ctx }/resources/client/images/cp2.jpg"/></b>
-				<div class="add_gu"><a href="javascript:void(0)" class="gw_a addcar" onclick="addShoppCar(${gem.id})">购物车</a><a style="display: none;"  href="javascript:void(0)">订购款式 ></a></div>
+				<div class="add_gu"><a href="javascript:void(0)" class="gw_a " onclick="addShoppCar(${gem.id})">购物车</a><a style="display: none;"  href="javascript:void(0)">订购款式 ></a></div>
 		  </div>
 	  </div>
 </div>
 <div class="footer hidden-xs hidden-sm">
     <jsp:include page="../../admin/foot.jsp"></jsp:include>
 </div>
-<script type="text/javascript" src="${ctx }/resources/client/js/fly/jquery.fly.min.js"></script>
-<script type="text/javascript" src="${ctx }/resources/client/js/fly/requestAnimationFrame.js"></script>
 
 <script>
 
