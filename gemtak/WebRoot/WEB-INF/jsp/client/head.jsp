@@ -46,7 +46,7 @@
 	    <ii></ii>
 		<a href="javascript:void(0)" class="myCollapse" cls="cls-folder">${pagehfvo['hMFavr'] }</a>|
 	  <c:if test="${uname == null}">
-	    <a  href="${ctx }/gemClient/login.do?dengluNUM=1">${pagehfvo['hMShoppingCart'] } <t class="cart-num"></t></a>
+	    <a  href="javascript:void(0)" class="tologin">${pagehfvo['hMShoppingCart'] } <t class="cart-num"></t></a>
 	  </c:if>
 	  <c:if test="${uname != null}">
 	  
@@ -170,6 +170,21 @@ function delCookie(id){
 }
 
 $(function(){
+     
+     //没登录状态下，点击购物车
+     $(".tologin").click(function(){
+       layer.alert('您还没有登录哟！', {
+			  skin: 'layui-layer-molv' //样式类名
+			  ,closeBtn: 0
+			}, function(){
+			  layer.alert('请先去登录吧！', {
+			    skin: 'layui-layer-lan'
+			    ,closeBtn: 0
+			    ,shift: 4 //动画类型
+			  });
+			});
+		window.location.href="/gemtak/gemClient/login.do?dengluNUM=1";
+     });
      
      //我的订单
      $(".view-MyOrder").click(function(){
