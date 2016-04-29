@@ -37,6 +37,26 @@ $(function(){
     }
   });
  }
+ 
+ $(".qjz").click(function(){
+     var url = "/gemtak/gemClient/checkGemShoppingCar.do";
+	 $.post(url,function(data){
+	  if(data == "N"){
+	    layer.alert('您的购物车还没有宝贝哟！', {
+		  skin: 'layui-layer-molv' //样式类名
+		  ,closeBtn: 0
+		}, function(){
+		  layer.alert('请先去购物吧！', {
+		    skin: 'layui-layer-lan'
+		    ,closeBtn: 0
+		    ,shift: 4 //动画类型
+		  });
+		});
+	  }else if(data == "Y"){
+	   location.href = "/gemtak/gemClient/order.do";
+	  }
+	 });
+ });
 </script>
 </head>
 <body>
@@ -65,14 +85,14 @@ $(function(){
 						<p>价格： ${gem.retail_price} </p>
 					</dd>
 				</dl>
-				<div class="wrap_bj wrap_bj1 del-car-${gem.vdef2}"><span>数量<input  class="" type="text" name=""  value="${gem.vdef1}" /></span><span>总价：￥<m class="price-${gem.vdef2}">${gem.retail_price*gem.vdef1}</m>元</span></div>
+				<div class="wrap_bj wrap_bj1 del-car-${gem.vdef2}"><span>数量<input  class="" readonly="readonly" type="text" name=""  value="${gem.vdef1}" /></span><span>总价：￥<m class="price-${gem.vdef2}">${gem.retail_price*gem.vdef1}</m>元</span></div>
 			  	<c:set var="TotalCartPices" value="${TotalCartPices + gem.retail_price*gem.vdef1}" />
 			  </c:forEach>  
 			 </div>
 		   </div>
    	 <div class="wrap_all">
 		   <p><span style="float:right">合计：￥<b class="total-price">${TotalCartPices}</b>元</span></p>
-		   <p><a href="${ctx }/gemClient/viewGemList.do" class="zgg">再逛逛</a><a href="${ctx }/gemClient/order.do" class="qjz">去结账</a></p>
+		   <p><a href="${ctx }/gemClient/viewGemList.do" class="zgg">再逛逛</a><a href="javascript:void(0)" class="qjz">去结账</a></p>
 	 </div>   	  
 	</div>
 </div>
