@@ -88,21 +88,6 @@ function jia(){
 	}
 }
 
-//加入购物车效果getCarNum();
-/* $(function(){
-	$(".addcar").click(function(event){
-		layer.alert('恭喜您，宝贝已加入购物车！', {
-		  skin: 'layui-layer-molv' //样式类名
-		  ,closeBtn: 0
-		}, function(){
-		  layer.alert('gemtak!gemtak!', {
-		    skin: 'layui-layer-lan'
-		    ,closeBtn: 0
-		    ,shift: 4 //动画类型
-		  });
-		}); 
-	});
-}); */
 
 //添加到购物车
 function addShoppCar(id){
@@ -115,7 +100,7 @@ function addShoppCar(id){
 		  skin: 'layui-layer-molv' //样式类名
 		  ,closeBtn: 0
 		}, function(){
-		  layer.alert('gemtak!gemtak!', {
+		  layer.alert('Gemtak,欢迎您的光临！', {
 		    skin: 'layui-layer-lan'
 		    ,closeBtn: 0
 		    ,shift: 4 //动画类型
