@@ -39,7 +39,7 @@ em, i{ font-style:normal; }
 .tit p a{display:inline-black;float:left;margin-right:25px;text-align:left;font-size:1.1em;padding-bottom:5px}
 .tit p a b{margin-left:5px;font-weight:normal;font-size:1em}
 .tit p a:last-child{margin-right:0}
-.tit p .pa_sal{border-bottom:1px solid #8c0000;color:#8c0000}
+.tit p .pa_sal{/* border-bottom:1px solid #8c0000; */color:#8c0000}
 .sou{float:right;width:189px;background: url(../images/sou.gif) no-repeat right;height: 22px;line-height: 22px;padding:0px;display: inline;}
 .sou input{float:left}
 .sear_ch_input {width:157px;height: 20px;line-height: 20px;color: #ddd;float: left;margin-left:3px;background: none;border: none;}
@@ -86,8 +86,8 @@ em, i{ font-style:normal; }
 .lanmu_nav .hao1{color:#eee;background:url(../images/bj_4.png) repeat;border:1px solid #999;border-bottom:none}
 
 
-.tab_cont{overflow:hidden;margin:0px auto 10px;padding:0px}
-.swiper-container{margin:0px 30px}
+.tab_cont{overflow:hidden;margin:0px auto 8px;padding:0px}
+.swiper-container{margin:15px 33px}
 .list_ul2 .swiper-slide{width:90px;text-align:center;line-height:25px;color:#777;margin-right:0px;}
 .list_ul2 .swiper-slide:hover{color:#8c0000}
 .list_ul2 .swiper-slide a{color:#eee;display:block;width:70%;margin:0 auto;height:65px}
