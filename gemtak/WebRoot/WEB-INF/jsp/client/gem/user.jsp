@@ -335,8 +335,8 @@ function jsPayFee(id){
 		   </div>
 		   <div class="inmenu  zffs">
 		        <h2 class="doname"><a href="javascript:void(0)" >请选择支付方式</a></h2>
-			    <span class="user_br1 "><input type="radio" style="text-align: center;" class="zhifubao" name="zhifu" class="zfb" value="1" checked="checked"/>支付宝支付  </span>
-				<span class="user_br1" > <input type="radio" style="text-align: center;"class="weixin" name="zhifu" class="wx" value="2"/>微信支付<span>
+			    <span class="user_br1 " style="color: #8c0000;font-size: 18px ;"><input type="radio" style="text-align: center;" class="zhifubao" name="zhifu" class="zfb" value="1" checked="checked"/>支付宝支付  </span>
+				<span class="user_br1" style="color: #001aff;font-size: 18px ;"> <input type="radio" style="text-align: center;"class="weixin" name="zhifu" class="wx" value="2"/>微信支付<span>
 		   </div>
 		   <div class="loader yemianyanchi" style="display: none;">
 		        <div class="loader-inner ball-pulse-rise">
