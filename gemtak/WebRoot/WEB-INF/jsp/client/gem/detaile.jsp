@@ -87,30 +87,19 @@ function jia(){
 	}
 }
 
-//加入购物车效果
+//加入购物车效果getCarNum();
 $(function(){
-    var offset = $("i").offset();
 	$(".addcar").click(function(event){
-		var addcar = $(this);
-		var img = $(".360tupian").attr("src");
-		var flyer = $('<img class="u-flyer" src="'+img+'">');
-		flyer.fly({
-			start: {
-				left: event.pageX,
-				top: event.pageY,
-			},
-			end: {
-				left: offset.left+1000,
-				top: offset.top+150,
-				width: 0,
-				height: 0,
-			},
-			onEnd: function(){
-				$("#msg").show().animate({width: "250px"}, 200).fadeOut(1000);
-				this.destory();
-				getCarNum();
-			}
-		});
+		layer.alert('恭喜您，宝贝已加入购物车！', {
+		  skin: 'layui-layer-molv' //样式类名
+		  ,closeBtn: 0
+		}, function(){
+		  layer.alert('gemtak!gemtak!', {
+		    skin: 'layui-layer-lan'
+		    ,closeBtn: 0
+		    ,shift: 4 //动画类型
+		  });
+		}); 
 	});
 });
 
