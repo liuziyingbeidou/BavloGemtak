@@ -247,7 +247,7 @@ $(function(){
 				<h2><span>快递方式</span></h2>
 				<ul class="srxx">
 				   <li>优先顺丰快递，顺丰不及地区用EMS</li>
-				   <li><input class="addsupport" type="checkbox" value="" name="support_fee" > <span>需要全额保价</span>（费用是总价值的千分之五）</li>
+				   <li ><input class="addsupport" type="checkbox" value="" name="support_fee" > <span class="qebj">需要全额保价</span>（费用是总价值的千分之五）</li>
 				</ul>
 				   
 			    <h2><span>发票信息 ——商业零售机打发票</span></h2>
@@ -301,6 +301,7 @@ $(function(){
 </body>
 <script>
 $(function(){
+ 
  //点击开发票
  $(".open-invoice").click(function(){
   $(".show-intitle").show();
@@ -456,6 +457,9 @@ $(function(){
         $(".huij").text(youhuijia);
       }
   });
+  
+  
+  
   
   /* $(".saveOrder").bind("click",function(){
   var realName = $(".username").val();
