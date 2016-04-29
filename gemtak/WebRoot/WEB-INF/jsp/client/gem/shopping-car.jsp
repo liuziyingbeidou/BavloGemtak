@@ -15,11 +15,33 @@
 <meta name="author" content="bavlo">
 <title>bavlo</title>
 <link rel="stylesheet" href="${ctx}/resources/client/css/bootstrap.css" />
+<link rel="stylesheet" href="${ctx }/resources/client/css/layer.css" type="text/css"></link>
 <link href="${ctx}/resources/client/css/index.css" rel="stylesheet">
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
+<script type="text/javascript" src="${ctx }/resources/client/js/layer.js"></script>
 <script>
 $(function(){
  getCarNum();
+ 
+ $(".qjz").click(function(){
+     var url = "/gemtak/gemClient/checkGemShoppingCar.do";
+	 $.post(url,function(data){
+	  if(data == "N"){
+	    layer.alert('您的购物车还没有宝贝哟！', {
+		  skin: 'layui-layer-molv' //样式类名
+		  ,closeBtn: 0
+		}, function(){
+		  layer.alert('赶快去逛逛吧！', {
+		    skin: 'layui-layer-lan'
+		    ,closeBtn: 0
+		    ,shift: 4 //动画类型
+		  });
+		});
+	  }else if(data == "Y"){
+	   location.href = "/gemtak/gemClient/order.do";
+	  }
+	 });
+ });
 });
  //删除购物车中 选中的商品
  function delShoppCar(id){
@@ -38,25 +60,8 @@ $(function(){
   });
  }
  
- $(".qjz").click(function(){
-     var url = "/gemtak/gemClient/checkGemShoppingCar.do";
-	 $.post(url,function(data){
-	  if(data == "N"){
-	    layer.alert('您的购物车还没有宝贝哟！', {
-		  skin: 'layui-layer-molv' //样式类名
-		  ,closeBtn: 0
-		}, function(){
-		  layer.alert('请先去购物吧！', {
-		    skin: 'layui-layer-lan'
-		    ,closeBtn: 0
-		    ,shift: 4 //动画类型
-		  });
-		});
-	  }else if(data == "Y"){
-	   location.href = "/gemtak/gemClient/order.do";
-	  }
-	 });
- });
+ 
+ 
 </script>
 </head>
 <body>
