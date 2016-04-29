@@ -33,8 +33,23 @@
     var uname = $(".input-username").val();
     var pwd = $(".input-pwd").val();
     var status = $(".addpwd").is(':checked');
+    var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     var url = "${ctx }/gemClient/loginSuccess.do";
-    if(uname != "" && uname != null && pwd != "" && pwd != null ){
+    if(uname == "" || uname == null){
+       $(".name-error").text("请输入E-mail！！");
+       return false;
+    }else if (!filter.test(uname)){
+       $(".name-error").text("输入的E-mail格式不正确！！");
+       return false;
+    }else if(pwd == "" || pwd == null){
+       $(".name-error").text("");
+       $(".pwd-error").text("请输入密码！！");
+       return false;
+    }else{
+      $(".name-error").text("");
+      $(".pwd-error").text("");
+    }
+    if(uname != "" || uname != null && pwd != "" || pwd != null ){
       $.post(url,{uname:uname,upwd:pwd,status:status},function(data){
         //data = $.parseJSON(data);
         if(data == "true"){
@@ -195,7 +210,7 @@
 				<h3><span>会员登录</span></h3>
 				<div class="side">
 					<ul class="word sign-normal">
-						<li><label>E-mail：</label><div class="s_te"><input class="inp_text input-username" type="text" value="" /></div></li>
+						<li><label>E-mail：</label><div class="s_te"><input class="inp_text input-username" type="text" value="" /><b class="error name-error"></b></div></li>
 						<li><label>密码：</label><div class="s_te"><input class="inp_text input-pwd" type="password" value="" /><b class="error pwd-error"></b></div></li>
 						<li><label>&nbsp;</label><div class="s_te"><span><input class="inp_che " id="remember" type="checkbox" value=""/>记住密码</span><input class="inp_sub login" type="button" value="登录" /></div></li>
 					</ul>
