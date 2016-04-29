@@ -88,40 +88,62 @@ function jia(){
 	}
 }
 
-
+//加入购物车效果getCarNum();
+/* $(function(){
+	$(".addcar").click(function(event){
+		layer.alert('恭喜您，宝贝已加入购物车！', {
+		  skin: 'layui-layer-molv' //样式类名
+		  ,closeBtn: 0
+		}, function(){
+		  layer.alert('gemtak!gemtak!', {
+		    skin: 'layui-layer-lan'
+		    ,closeBtn: 0
+		    ,shift: 4 //动画类型
+		  });
+		}); 
+	});
+}); */
 
 //添加到购物车
 function addShoppCar(id){
+      var uname = $(".hiduname").attr("nid");
+      if(uname == null||uname == ""){  //沒取到用戶名  跳转到登录
+        $("#my-popup").modal('toggle');
+      }else{
+        //加入购物车效果getCarNum();
+        layer.alert('恭喜您，宝贝已加入购物车！', {
+		  skin: 'layui-layer-molv' //样式类名
+		  ,closeBtn: 0
+		}, function(){
+		  layer.alert('gemtak!gemtak!', {
+		    skin: 'layui-layer-lan'
+		    ,closeBtn: 0
+		    ,shift: 4 //动画类型
+		  });
+		});
+        
+      }
       var quantity =  $(".selquantity").text();
 	  var url = "/gemtak/gemClient/addShoppingCar.do";
 	  $.post(url,{gemId:id,quantity:quantity},function(data){
 	    data = $.parseJSON(data);
 	    var flag = data.mess;
 	    var num = data.carNum;
-	    var userName =${uname};
-	    if(userName != null){
-	      if(flag=="Y"){
-	          //加入购物车效果getCarNum();
-		      layer.alert('恭喜您，宝贝已加入购物车！', {
-				  skin: 'layui-layer-molv' //样式类名
-				  ,closeBtn: 0
-				}, function(){
-				  layer.alert('gemtak!gemtak!', {
-				    skin: 'layui-layer-lan'
-				    ,closeBtn: 0
-				    ,shift: 4 //动画类型
-				  });
-				});
-		      selCarNO(num);  //方法在head.jsp 
-		    }
-	    }else {  //用户名为空  跳转到登录
-	      $("#my-popup").modal('toggle');
+	    if(flag=="Y"){
+	      selCarNO(num);  //方法在head.jsp 
 	    }
 	  });
   
 } 
  //登录成功 关闭登录弹窗
  function closeMwin(name){ 
+  /* getCarNum();
+  $(".t-css").text("Hi,"+name);//登录成功后，将用户名传过来
+  $(".replaceA").text("注销");
+  $(".replaceA").attr("href","${ctx }/gemClient/logout.do");
+  $(".replaceB").text("我的订单");
+  $(".replaceB").attr("href",""); */
+  //$("#my-popup").modal('close');
   window.location.reload(); 
  }
 
@@ -136,6 +158,7 @@ function addShoppCar(id){
 <body>
 <div>
   <jsp:include page="../head.jsp"></jsp:include>
+  <input type="hidden" class="hiduname" nid="${uname }" />
 </div>
 	<div class="am-popup" id="my-popup">
 	  <div class="am-popup-inner">
@@ -244,7 +267,7 @@ function addShoppCar(id){
 				 </c:if>
 				</c:if>
 				<b style="display: none"><img  class="360tupian" src="${ctx }/resources/client/images/cp2.jpg"/></b>
-				<div class="add_gu"><a href="javascript:void(0)" class="gw_a " onclick="addShoppCar(${gem.id})">购物车</a><a style="display: none;"  href="javascript:void(0)">订购款式 ></a></div>
+				<div class="add_gu"><a href="javascript:void(0)" class="gw_a addcar" onclick="addShoppCar(${gem.id})">购物车</a><a style="display: none;"  href="javascript:void(0)">订购款式 ></a></div>
 		  </div>
 	  </div>
 </div>
