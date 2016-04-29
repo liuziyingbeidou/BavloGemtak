@@ -22,34 +22,10 @@
     <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/gemClient.js"></script>
-	<script type="text/javascript" src="${ctx }/resources/client/js/fly/jquery.fly.min.js"></script>
-    <script type="text/javascript" src="${ctx }/resources/client/js/fly/requestAnimationFrame.js"></script>
 <script language=javaScript>
-	 $(document).ready(function(){
-	 	// show_menuone(1);//显示哪个分类        
-	 	 /*$("#contid1 .swiper-slide").click(function(){
-	 		$(this).parent("div").find("div").each(function(i){
-			    $(this).find("a").css("background-image","url(${ctx }/resources/client/images/game/g" + (i) + ".png)");
-				$(this).css("color","");
-			  });
-			  $(this).css("color","#8c0000");
-		 	 $(this).find("a").css("background-image","url(${ctx }/resources/client/images/game/g" + ($(this).index()) + "a1.png)");	
-	 	});*/
-	 });
-     $(document).ready(function(){ 	        
-	 	 /*$("#contid2  .swiper-slide").click(function(){
-	 		$(this).parent("div").find("div").each(function(i){
-			    $(this).find("a").css("background-image","url(${ctx }/resources/client/images/mot/a" + (i+1) + ".png)");
-				$(this).css("color","");
-			  });
-			   $(this).css("color","#8c0000");
-		 	 $(this).find("a").css("background-image","url(${ctx }/resources/client/images/mot/a" + ($(this).index()+1) + "a.png)");	
-	 	});*/
-	 	 
-	 });	 
+	 
 	function show_menuone(ID){
-			 	var totalCat=8;
-			 	
+			 var totalCat=8;
          	 for(i=1;i<totalCat;i++)
          	 {
          	   if(ID!=i){
@@ -66,8 +42,7 @@
          }	
 		 
 		 function show_menu(ID){
-			 	var totalCat=3;
-			 	
+			 var totalCat=3;
          	 for(i=1;i<totalCat;i++)
          	 {
          	   if(ID!=i){
@@ -84,37 +59,35 @@
          }
          
          
-         //1.根据类型名称或id模糊查询 
-         $(function(){    
+         
+         $(function(){
+         
+           //1.根据类型名称或id模糊查询 
            $(".select-type").click(function(){
             var typeval = $(".input-type-sel").val();
             location.href = "selectClientByType.do?&typegem="+typeval;
            });
-         });
-         
-         //2.按时间排序
-         $(function(){    
+           
+           //2.按时间排序
            $(".select-createdate").change(function(){
             var switchover = $(".sel-show").val();
             selectClientList(switchover);
            });
-         });
-         
-         //3.横排展示界面
-         $(function(){    
+           
+           //3.横排展示界面
            $(".show-line").click(function(){
             $(".sel-show").val(2);
             selectClientList(2);
            });
+           
+           //4.宫格展示界面
+           $(".show-speed").click(function(){
+            $(".sel-show").val(1);
+             selectClientList(1);
+           });
+           
          });
          
-         //4.宫格展示界面
-         $(function(){    
-           $(".show-speed").click(function(){
-           $(".sel-show").val(1);
-            selectClientList(1);
-           });
-         });
          
  
 </script>
