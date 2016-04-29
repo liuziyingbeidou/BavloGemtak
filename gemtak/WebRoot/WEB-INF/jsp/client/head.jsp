@@ -182,8 +182,9 @@ $(function(){
 			    ,closeBtn: 0
 			    ,shift: 4 //动画类型
 			  });
+			  window.location.href="/gemtak/gemClient/login.do?dengluNUM=1";
 			});
-		window.location.href="/gemtak/gemClient/login.do?dengluNUM=1";
+		
      });
      
      //我的订单
