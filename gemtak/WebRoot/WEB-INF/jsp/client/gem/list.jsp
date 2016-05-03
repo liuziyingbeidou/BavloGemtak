@@ -124,7 +124,69 @@
 					   <a class="p_default " id="gemid" vid="a" vn="全部" style="background: url('/gemtak/resources/client/images/game/g0.png') top center no-repeat;"></a><span >全部</span></div>
 					   <c:forEach var="bean" items="${listGemType}" varStatus="status">
 						  <div class="swiper-slide">
-						  <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/g1.png') top center no-repeat;"></a>
+						  <c:if test="${bean.pKey==3}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/3.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==2}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/2.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==5}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/5.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==6}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/6.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==7}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/7.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==8}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/8.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==10}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/10.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==11}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/11.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==12}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/12.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==13}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/13.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==14}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/43.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==23}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/341.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==34}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/346.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==36}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/396.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==40}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/676.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==43}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/878.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==44}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/1317.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==46}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/795.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==58}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/36.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==61}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/40.png') top center no-repeat;"></a>
+						  </c:if>
+						  <c:if test="${bean.pKey==63}">
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/46.png') top center no-repeat;"></a>
+						  </c:if>
 						  <span>${bean.pValue}</span>
 						  </div>
 					   </c:forEach>
