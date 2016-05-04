@@ -120,6 +120,7 @@ public class GemCService extends CommonService implements IGemService {
 		return listvo;
 	}
 
+	
 	/**
 	 * 点击发布按钮，修改数据库字段
 	 */
@@ -153,9 +154,39 @@ public class GemCService extends CommonService implements IGemService {
 		}
 	}
 
+	/**
+	 * 查询宝石总数
+	 * @param sql
+	 * @return
+	 */
 	@Override
-	public Integer getListSizeGem(String contions) {
-		return getCountByHQL(GemVO.class, contions);
+	public Integer getListSizeGem(String typegem,String shapegem,String fromWeight,String toWeight,String fromPrice,String toPrice,String inwhere,String inwheres) {
+		if(typegem == null||typegem == ""||shapegem == null||shapegem == ""||fromWeight ==null||fromWeight == ""||toWeight == null||toWeight == ""
+				||fromPrice == null||fromPrice == ""||toPrice == null||toPrice == ""||inwhere == ""||inwhere == null||inwheres == ""||inwheres == null){
+			return getCountByHQL(GemVO.class);
+		}
+		/*if(typegem != null||typegem != ""){
+			return getCountByHQL(GemVO.class, "type_id ="+typegem);
+		}
+		if(typegem != null||typegem != "" && shapegem != null||shapegem != ""){
+			return getCountByHQL(GemVO.class, "type_id ="+typegem+"&shape_id ="+shapegem);
+		}
+		if(typegem != null||typegem != "" && shapegem != null||shapegem != "" && fromWeight !=null||fromWeight != "" && toWeight != null||toWeight != ""){
+			return getCountByHQL(GemVO.class, "type_id ="+typegem+"&shape_id ="+shapegem+" &weight between"+fromWeight+"&and"+toWeight);
+		}
+		if(typegem != null||typegem != "" && shapegem != null||shapegem != "" && fromWeight !=null||fromWeight != "" && toWeight != null||toWeight != ""
+				&& fromPrice == null||fromPrice == "" && toPrice == null||toPrice == ""){
+			return getCountByHQL(GemVO.class, "type_id ="+typegem+"&shape_id ="+shapegem+" &weight between"+fromWeight+"&and"+toWeight+" &retail_price between"+fromPrice+"& and"+toPrice);
+		}
+		if(typegem != null||typegem != "" && shapegem != null||shapegem != "" && fromWeight !=null||fromWeight != "" && toWeight != null||toWeight != ""
+				&& fromPrice != null||fromPrice != "" && toPrice != null||toPrice != "" && inwhere != ""||inwhere != null){
+			return getCountByHQL(GemVO.class, "type_id ="+typegem+"&shape_id ="+shapegem+" &weight between"+fromWeight+"&and"+toWeight+" &retail_price between"+fromPrice+"& and"+toPrice+"& pairs in"+inwhere);
+		}else{
+			return getCountByHQL(GemVO.class, "type_id ="+typegem+"&shape_id ="+shapegem+" &weight between"+fromWeight+"&and"+toWeight+"&retail_price between"+fromPrice+"& and"+toPrice+"& pairs in"+inwhere+"&pairs in"+inwheres);
+		}*/
+		else{
+			return 0;
+		}
 	}
 
 	/**
