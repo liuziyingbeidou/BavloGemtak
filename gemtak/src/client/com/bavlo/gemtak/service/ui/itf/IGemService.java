@@ -110,8 +110,6 @@ public interface IGemService {
 	 */
 	public List<GemVO> findAllGemVO();
 	
-	
-	
 	/**
 	 * 8.根据id 查询一条gemVO
 	 * lisuike 3.15
@@ -149,7 +147,7 @@ public interface IGemService {
 	 * 
 	 * @param sql
 	 */
-	public Integer getListSizeGem(String contions);
+	public Integer getListSizeGem(String typegem,String shapegem,String fromWeight,String toWeight,String fromPrice,String toPrice,String inwhere,String inwheres);
 	
 	/**
 	 * 10.提交订单  保存订单主表
