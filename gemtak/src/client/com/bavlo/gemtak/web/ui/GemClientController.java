@@ -95,34 +95,13 @@ public class GemClientController extends BaseController {
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCListPageModel(model,lang);
-		/*StringBuilder sql = new StringBuilder(" 1=1");
-		if(!CommonUtils.isNull(typegem)){
-			sql.append( " and type_id = '"+typegem+"'");
-		}
-		if(!CommonUtils.isNull(shapegem)){
-			sql.append(" and shape_id = '"+shapegem+"'");
-		}
-		if(!CommonUtils.isNull(fromWeight) && !CommonUtils.isNull(toWeight)){
-			sql.append(" and weight between "+fromWeight+" and "+toWeight+"");
-		}
-		if(!CommonUtils.isNull(fromPrice) && !CommonUtils.isNull(toPrice)){
-			sql.append(" and retail_price between "+fromPrice+" and "+toPrice+"");
-		}
-		if(!CommonUtils.isNull(inwhere)){
-			sql.append(" and pairs in ("+inwhere+")");
-		}
-		//形状 弧度、切面
-		if(!CommonUtils.isNull(inwheres)){
-			sql.append(" and pairs in ("+inwheres+")");
-		}
 		
-        List<GemVO> gems = gemService.findListGem(sql+"", dgpage, rows,null,null);
-		model.addAttribute("gems", gems);*/
-		/*return IClientForward.viewGemList;*/
+        Integer gemNo = gemService.getListSizeGem(typegem, shapegem, fromWeight, toWeight, fromPrice, toPrice, inwhere, inwheres);
 		Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
 		if(username == null){
 			username = "NLogin";
 		}
+		model.addAttribute("gemNo",gemNo);
 		model.addAttribute("uname", username);
 		return "/client/gem/list";
 	}
@@ -191,8 +170,10 @@ public class GemClientController extends BaseController {
             }
         }
         /****/
+        
 		renderJson(gems);
 	}
+	
 	
 	/**
 	 * 3.按类型名称或类型id模糊 查询
