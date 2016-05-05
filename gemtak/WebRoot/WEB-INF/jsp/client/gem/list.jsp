@@ -308,7 +308,7 @@
 			    <li ><a class="a_sel" id="type1"  onclick="javascript:show_menu(1);" href="javascript:void(0);" >结果（Resault <i class="selGemNO"></i>）</a></li>
 			    <li><a  id="type2"  onclick="javascript:show_menu(2);" href="javascript:void(0);" >比较（Comparsion 5）</a></li>
 			 </ul>
-			 <p class="col-xs-12 col-md-4"><b class="visible-xs-inline-block visible-sm-inline-block ">找到${gemNo}颗宝石</b>
+			 <p class="col-xs-12 col-md-4"><b class="visible-xs-inline-block visible-sm-inline-block ">找到<i class="selPhGemNO">${gemNo}</i>颗宝石</b>
 			    <select class="select-createdate">
 						<option value="-1">按上架时间</option>
 						<option value="htol">高到低</option>
