@@ -168,6 +168,8 @@ function goDetail(id){
 	 			if(gemNo != null){
 	 			$(".selGemNO").empty();
 	 			$(".selGemNO").append(" "+gemNo+"");
+	 			/*$(".selPhGemNO").empty();
+	 			$(".selPhGemNO").append(" "+gemNo+"");*/
 	 		 }
 	 		 
 	 		 
