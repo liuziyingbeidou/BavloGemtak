@@ -61,7 +61,6 @@
          
          
          $(function(){
-         
            //1.根据类型名称或id模糊查询 
            $(".select-type").click(function(){
             var typeval = $(".input-type-sel").val();
@@ -306,7 +305,7 @@
 		  </div>
           <div class="cup_nav col-md-12">
 		     <ul class="hidden-xs hidden-sm">
-			    <li><a class="a_sel" id="type1"  onclick="javascript:show_menu(1);" href="javascript:void(0);" >结果（Resault ${gemNo}）</a></li>
+			    <li ><a class="a_sel" id="type1"  onclick="javascript:show_menu(1);" href="javascript:void(0);" >结果（Resault <i class="selGemNO"></i>）</a></li>
 			    <li><a  id="type2"  onclick="javascript:show_menu(2);" href="javascript:void(0);" >比较（Comparsion 5）</a></li>
 			 </ul>
 			 <p class="col-xs-12 col-md-4"><b class="visible-xs-inline-block visible-sm-inline-block ">找到${gemNo}颗宝石</b>
