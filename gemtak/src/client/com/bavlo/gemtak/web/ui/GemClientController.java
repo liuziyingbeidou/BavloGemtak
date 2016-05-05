@@ -87,8 +87,7 @@ public class GemClientController extends BaseController {
 	 */
 	@RequestMapping(value="viewGemList")
 	public String viewGemList(Model model,HttpServletRequest request,HttpServletResponse response,
-			Integer dgpage,String typegem,String shapegem,String fromWeight,String toWeight,String fromPrice,String toPrice,
-			String inwhere,String inwheres){
+			Integer dgpage){
 		
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
@@ -96,16 +95,32 @@ public class GemClientController extends BaseController {
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCListPageModel(model,lang);
 		
-        Integer gemNo = gemService.getListSizeGem(typegem, shapegem, fromWeight, toWeight, fromPrice, toPrice, inwhere, inwheres);
+        //Integer gemNo = gemService.getListSizeGem(typegem, shapegem, fromWeight, toWeight, fromPrice, toPrice, inwhere, inwheres);
 		Object username = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
 		if(username == null){
 			username = "NLogin";
 		}
-		model.addAttribute("gemNo",gemNo);
+		//model.addAttribute("gemNo",gemNo);
 		model.addAttribute("uname", username);
 		return "/client/gem/list";
 	}
 	
+	/**
+	 * @Description: 首页-宝石总数
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 */
+	@RequestMapping(value="selGemNO")
+	public void selGemNO(Model model,HttpServletRequest request,HttpServletResponse response,
+			String typegem,String shapegem,String fromWeight,String toWeight,String fromPrice,String toPrice,
+			String inwhere,String inwheres){
+			Integer gemNo = gemService.getListSizeGem(typegem, shapegem, fromWeight, toWeight, fromPrice, toPrice, inwhere, inwheres);
+			 renderText("{\"gemNo\":\""+gemNo+"\"}");
+        
+	}
 	
 	/**
 	 * 2.ajax根据条件查询
@@ -1001,7 +1016,8 @@ public class GemClientController extends BaseController {
 	 */
 	@OAuthRequired
 	@RequestMapping(value="wxlogin")
-	public String loginByWx(Model model,HttpServletRequest request,HttpServletResponse response){
+	public String loginByWx(Model model,HttpServletRequest request,HttpServletResponse response,String typegem,String shapegem,String fromWeight,String toWeight,String fromPrice,String toPrice,
+			String inwhere,String inwheres){
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("Loc Lang："+lang);
@@ -1017,7 +1033,9 @@ public class GemClientController extends BaseController {
 			request.getSession().setAttribute("bisBis", "Y");
 			model.addAttribute("uname", "WxLogin");
 		}
-		System.out.println("是否商户:"+request.getSession().getAttribute("bisBis"));
+		System.out.println("是否商户:"+request.getSession().getAttribute("bisBis")); 
+		Integer gemNo = gemService.getListSizeGem(typegem, shapegem, fromWeight, toWeight, fromPrice, toPrice, inwhere, inwheres);
+		model.addAttribute("gemNo",gemNo);
 		return "/client/gem/list";
 	}
 	
