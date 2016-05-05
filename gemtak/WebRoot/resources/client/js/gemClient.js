@@ -4,8 +4,7 @@
 
 $(function(){
 	selectClientList(1);
-	/**查询域**/
-	//宝石种类
+	/**查询域**/	//宝石种类
 	$(".p_default").click(function(){
 		$(this).css({"border":"2px solid #e17878"}).parents("div").siblings().find(".p_default").css("border","0px");
 		$(".a_item_type").remove();
@@ -121,7 +120,7 @@ $(function(){
 		var switchover = $(".sel-show").val();
 		selectClientList(switchover);
 	});
-
+	
 });
 
 /**
@@ -130,6 +129,50 @@ $(function(){
 function goDetail(id){
 	location.href = "viewGemDetaile.do?id="+id;
 }
+
+  function selGemNUM(){
+	     var url = "selGemNO.do?";
+		 var gemType = $(".selects-type").attr("ms-key"); 
+		 var gemShape = $(".selects-shape").attr("ms-key"); 
+		 var fromv = $(".from-weight").val();
+	     var tov = $(".to-weight").val();
+	     var fromPri = $(".from-price").val();
+	 	 var toPri = $(".to-price").val();
+	 	 var inwhere = "'";//单粒、多粒、配对
+	 	 var inwheres = "'";//弧度、切面
+	 	 if($(".pairs-sl").prop("checked")){
+	 	  var pairssl = $(".pairs-sl").val(); 
+	 	  inwhere += pairssl + "','";
+	 	 }
+	 	 if($(".pairs-pl").prop("checked")){
+	 		var pairspl = $(".pairs-pl").val(); 
+	 		inwhere += pairspl + "','";
+		 }
+	 	 if($(".pairs-ml").prop("checked")){
+	 		var pairsml = $(".pairs-ml").val(); 
+	 		inwhere += pairsml + "','";
+		 }
+		 inwhere = inwhere.substring(0, inwhere.length-2);
+		 if($(".pairs-h").prop("checked")){
+	 		var pairsh = $(".pairs-h").val(); 
+	 		inwheres += pairsh + "','";
+		 }
+	 	 if($(".pairs-k").prop("checked")){
+	 		var pairsk = $(".pairs-k").val(); 
+	 		inwheres += pairsk + "','";
+		 }
+	 	inwheres = inwheres.substring(0, inwheres.length-2);
+	 	 $.post(url,{typegem:gemType,shapegem:gemShape,fromWeight:fromv,toWeight:tov,fromPrice:fromPri,toPrice:toPri,inwhere:inwhere,inwheres:inwheres},function(data){
+	 		    dat = $.parseJSON(data);
+	 		    var gemNo = dat.gemNo;
+	 			if(gemNo != null){
+	 			$(".selGemNO").empty();
+	 			$(".selGemNO").append(" "+gemNo+"");
+	 		 }
+	 		 
+	 		 
+	 	 });
+  }
 
   function selectClientList(switchover){
 	     $(".yemianyanchi").show();
@@ -211,6 +254,7 @@ function goDetail(id){
 					appendToFoot(switchover);
 					getCarNum();  //查询购物车
 					$(".yemianyanchi").hide();
+					selGemNUM();
 				}
 		  });
   }
