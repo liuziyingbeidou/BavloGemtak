@@ -218,7 +218,7 @@ function addShoppCar(id){
 				<ul>
 					<li><span>${gem.supplier}</span> </li><li>TEL：${gem.supplier_tel}
 					</li><li>形状：<slian>${gem.shape_cn}</span>
-					</li><li>尺寸：<span>${gem.size_l}×${gem.size_w}×${gem.size_h}</span>
+					</li><li>尺寸：<span>${gem.size_l} * ${gem.size_w} * ${gem.size_h}</span>
 					</li><li>颜色：<span> ${gem.average_color}</span>
 					</li><li>净度：<span>${gem.clarity_cn}（${gem.clarity_en}）</span>
 					</li><li>切工：<span>${gem.cut_cn}</span>
