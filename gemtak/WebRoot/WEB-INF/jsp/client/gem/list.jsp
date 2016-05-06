@@ -169,7 +169,7 @@
 						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/4.png') top center no-repeat;"></a>
 						  </c:if>
 						  <c:if test="${bean.pKey==43}">
-						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/878.png') top center no-repeat;"></a>
+						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/8.png') top center no-repeat;"></a>
 						  </c:if>
 						  <c:if test="${bean.pKey==44}">
 						   <a id="gemid${status.index+1}" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/14.png') top center no-repeat;"></a>
