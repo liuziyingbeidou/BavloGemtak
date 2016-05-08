@@ -166,10 +166,14 @@ function goDetail(id){
 	 		    dat = $.parseJSON(data);
 	 		    var gemNo = dat.gemNo;
 	 			if(gemNo != null){
-	 			$(".selGemNO").empty();
-	 			$(".selGemNO").append(" "+gemNo+"");
-	 			/*$(".selPhGemNO").empty();
-	 			$(".selPhGemNO").append(" "+gemNo+"");*/
+ 				var uname = $(".juname").val();
+				if(uname == "WxLogin"){
+					$(".selPhGemNO").empty();
+		 			$(".selPhGemNO").append(" "+gemNo+"");
+				}else{
+					$(".selGemNO").empty();
+		 			$(".selGemNO").append(" "+gemNo+"");
+				}
 	 		 }
 	 		 
 	 		 
