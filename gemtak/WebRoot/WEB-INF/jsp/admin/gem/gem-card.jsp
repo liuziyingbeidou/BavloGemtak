@@ -31,13 +31,18 @@
 		  location.href = "${ctx}/gemAdmin/viewGemList.do";
 		});
 		
+		//查看我的宝石
+		$(".selMyGem").click(function(){
+		  location.href = "${ctx}/gemAdmin/viewGemList.do";
+		});
+		
 		//删除证书
 		$(".btn-delete").click(function(){
 			deleteCert();
 		});
 	});
 	
-		//保存哥们VO的方法
+		//保存GemVO的方法
 	  function saveOrupdate(){
 		  
 		  //宝石类型-隐藏域
@@ -75,6 +80,10 @@
 		  });
 	  }
 	  
+	  //查看详情页
+	  function selDetailGem(id){
+	    location.href = "${ctx}/gemClient/viewGemDetaile.do?id="+id;
+	  }
 	  
 	//********************上传证书 start*****************
 	$(function (){
@@ -320,8 +329,8 @@
 						 <div class=" col-xs-2"><p class="s_xian"></p></div>
 					     <div class="li_inp_pr col-xs-5">
 						    <p>
-							  <button type="button" class="btn btn-col btn-lg btn-block" style="margin-bottom:15px">${pagevo['buttonInfo'] }</button>
-							  <button type="button" class="btn btn-col btn-lg btn-block">${pagevo['buttonViewGem'] }</button>
+							  <button type="button" class="btn btn-col btn-lg btn-block" onclick="selDetailGem(${gem.id})" style="margin-bottom:15px">${pagevo['buttonInfo'] }</button>
+							  <button type="button" class="btn btn-col btn-lg btn-block selMyGem">${pagevo['buttonViewGem'] }</button>
 							</p>
 						 </div>
 					</li>
@@ -363,12 +372,13 @@
 	  
  <script language="Javascript">
   $(function(){
-  $(".tit_table table tr").hover(function(){
+   $(".tit_table table tr").hover(function(){
 		$(this).css("background","#eeeeee");
 	},function(){
 		$(this).css("background","#FFF");
 	})
-})
+  })
+
  </script>
 </body>
 </html>
