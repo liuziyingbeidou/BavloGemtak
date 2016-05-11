@@ -69,7 +69,7 @@ public class OAuth2Controller {
 		
 		if (accessToken != null && accessToken.getToken() != null) {
 			String Userid = getMemberGuidByCode(accessToken.getToken(), code, Constants.AGENTID);
-			if (Userid != null) {
+			if (Userid != null||Userid != "") {
 				LoginVO lvo = new LoginVO();
 				Map<String,Object> mapRoleTag = QiYeUtil.getUserTag(request,Userid);
 				List<String> listRoleTag = mapRoleTag.get("roleTag") != null ? (List<String>)mapRoleTag.get("roleTag") : null;
