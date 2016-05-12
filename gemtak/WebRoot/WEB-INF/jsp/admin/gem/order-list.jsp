@@ -7,14 +7,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <head>
-	<meta http-equiv="x-ua-compatible" content="ie=7"/>
-	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-	<title>Insert title here</title>
+   <meta http-equiv="x-ua-compatible" content="ie=7"/>
+   <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+   <title>Insert title here</title>
    <script type="text/javascript" src="${ctx}/resources/client/js/My97DatePicker/WdatePicker.js"></script>
    <script type="text/javascript" src="${ctx}/resources/client/js/jquery-1.7.2.min.js"></script>
    <script type="text/javascript">
+     $(function(){
      
-     
+     });
+     function selectOrderByType(){
+      var typeNo = $(".typeNo").val();
+      location.href="${ctx}/gemClient/viewOrderListByType.do?typeNo="+typeNo;
+     };
      
    </script>
 </head>
@@ -22,26 +27,20 @@
 	<table border="1" cellpadding="0" cellspacing="0" width="100%">
 	<tr>
 		<td align="center" colspan="21" bgcolor="#EBEBEB" height="128">
-		<form action="orderList" method="get" id="form1">
 			<input type="hidden" name="page" value="${page }" id="page"/>
 			<input type="hidden" name="orderNo" id="orderNo"/>
 			<input type="hidden" name="shippingNo" id="shippingNo"/>
-			<input type="hidden" name="str" id="str"/>
-			<input type="text" name="no" size="20" id="no"><font size="2"> </font>
-			<select size="1" name="type" id="type">
-				<option value="1">订单号</option>
-				<option value="2">运单号</option>
-				<option value="3">关键词</option>
-			</select><font size="2"> </font> 
-			<input type="submit" value="搜索" name="##"/><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="text" class="typeNo" size="40" placeholder="请输入订单号或快递单号"><font size="2"> </font>
+			<input type="button" value="搜索" onclick="selectOrderByType();"/><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</font>
-			<select size="1" name="">
+			<!-- <select size="1" name="">
 				<option selected value="">全部订单</option>
 				<option value="0" >未支付</option>
 				<option value="1" >已支付</option>
 				<option value="2" >已发货</option>
 				<option value="3" >交易完成</option>
-			</select><font size="2"> </font>
+			</select><font size="2"> </font> -->
+			<font size="2">发货时间</font>
 			<input class="Wdate" type="text" onClick="WdatePicker()" name="startDate">
 			<font size="2"> - </font>
 			<input class="Wdate" type="text" onClick="WdatePicker()" name="endDate">
@@ -52,7 +51,6 @@
 			<!-- 
 			<input type="button" value="导出订单" style="float: right; margin-right: 150px;" onclick="javaScript:window.location.href='importExcel'" />
 			 -->
-		 </form>
 		</td>
 	</tr>
 	<tr>
@@ -212,7 +210,7 @@
 		
 		<td align="center" height="129" width="75">
 		 <c:if test="${order.status=='N'}">
-		   <a href="javascript:void(0)" onclick="delOrder();">删除</a>
+		   <a href="javascript:void(0)" onclick="delOrder(${order.id});">删除</a>
 		 </c:if>
 		</td>
 		<td align="center" height="129" width="75">
@@ -222,6 +220,9 @@
 		 <font size="2">导出产品证书</font>
 		</td>
 	</tr>
+	<c:if test="${empty order}">
+	  <tr ><td align="center" width="500" style="color: red;font-size: 16px;text-align: center;">对不起，没有查询到该订单！！！</td></tr>
+	</c:if>
 	</c:forEach>
 	
 	<tr>
@@ -230,7 +231,7 @@
 		<font size="2">说明：</font><p><font size="2">1 
 		付款为no，则不能标记为产状态，不是在产状态，就不能填写运单号，不进入物流环节则不能标记交易“完成”。</font></p>
 		<p><font size="2">2 运费中增加保费，不同的物流公司一般收取2%-5%不等，希望能有个数据库表来存放物流公司的运费和保费数据。</font></p>
-		<p><font size="2">3 付款为no的订单允许删除</font></td>
+		<p><font size="2">3 未付款的订单允许删除</font></td>
 		<td colspan="13" height="128">
 		
 		<p align="right">
