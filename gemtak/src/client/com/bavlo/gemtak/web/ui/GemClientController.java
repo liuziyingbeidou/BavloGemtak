@@ -766,7 +766,27 @@ public class GemClientController extends BaseController {
 	  
 	
 	   
-	     
+	 /**
+		 * @Description: 宝石订单列表
+		 * @param @param model
+		 * @param @param response
+		 * @param @param request
+		 * @param @return
+		 * @return String
+		 */
+		@RequestMapping(value="viewOrderList")
+		public String viewOrderList(Model model,HttpServletRequest request,HttpServletResponse response,
+				Integer dgpage){
+			
+			//当前本地化语言
+			String lang = WebUtils.getLang(request);
+			System.out.println("Loc Lang："+lang);
+			//根据本地语言更新页面数据
+			GemClientPageModel.getCListPageModel(model,lang);
+			List<OrderVO> list = gemService.getOrderVO();
+			model.addAttribute("list",list);
+			return "/admin/gem/order-list";
+		}
 	        
 	        
 	        
