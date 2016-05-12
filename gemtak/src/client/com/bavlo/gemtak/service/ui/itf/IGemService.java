@@ -188,4 +188,10 @@ public interface IGemService {
 	 * @return
 	 */
 	public List<OrderVO> getOrderVO();
+	
+	/**
+	 * 17.根据订单号、运单号模糊查询搜有宝石订单
+	 * @return
+	 */
+	public List<OrderVO> getOrderVOByType(String typeNo);
 }
