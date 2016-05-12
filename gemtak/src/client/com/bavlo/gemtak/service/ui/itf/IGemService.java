@@ -182,4 +182,10 @@ public interface IGemService {
 	 * @param uname
 	 */
 	public List<GemVO> getOrderGemById(String orderid);
+	
+	/**
+	 * 16.查询所有宝石订单
+	 * @return
+	 */
+	public List<OrderVO> getOrderVO();
 }
