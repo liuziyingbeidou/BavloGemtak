@@ -132,6 +132,10 @@ function addShoppCar(id){
   window.location.reload(); 
  }
 
+ function viewFullScreen(){
+  location.href="/gemtak/gemClient/viewGemPic.do";
+ }
+
 </script>
 
 <style type="text/css">
@@ -178,6 +182,11 @@ function addShoppCar(id){
 			      <img  src="${ctx }/resources/client/images/360.png" />
 			   </a></span>
 			   <p>Gemtak</p>
+			   <b>
+			     <a href="javascript:void(0)" onclick="viewFullScreen();">
+			      <img src="${ctx }/resources/client/images/full.png" />
+			     </a>
+			   </b>
 			 </div>
 			 
 			 <ul class="tit_ul">
@@ -201,7 +210,7 @@ function addShoppCar(id){
 					</div>   
 				</li>
 				<li class="tit_lir col-md-6 col-xs-12">				  				 
-				   	<div class="para">
+				   	<%-- <div class="para">
 				   	  <span onclick="javascript:jian();" style="text-align:right"><img src="${ctx }/resources/client/images/j.png"/>
 					  <font>X4.5<font>
 					  </span>
@@ -209,7 +218,7 @@ function addShoppCar(id){
 					  <span style="float:right" onclick="javascript:jia();"><img src="${ctx }/resources/client/images/ja.png"/>
 					  <font>X0.7<font>
 					  </span>
-					</div>		
+					</div>	 --%>
 				</li>			 
 			 </ul>      		    
 			</div>
@@ -252,7 +261,10 @@ function addShoppCar(id){
 				 </c:if>
 				</c:if>
 				<b style="display: none"><img  class="360tupian" src="${ctx }/resources/client/images/cp2.jpg"/></b>
-				<div class="add_gu"><a href="javascript:void(0)" class="gw_a addcar" onclick="addShoppCar(${gem.id})">购物车</a><a style="display: none;"  href="javascript:void(0)">订购款式 ></a></div>
+				<div class="add_gu">
+				  <a href="javascript:void(0)" class="gw_a addcar" onclick="addShoppCar(${gem.id})">购物车</a>
+				  <a href="${ctx }/gemClient/viewGemList.do">去首页</a>
+				</div>
 		  </div>
 	  </div>
 </div>
