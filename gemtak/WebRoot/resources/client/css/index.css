@@ -51,7 +51,8 @@ em, i{ font-style:normal; }
 .tit_all_left{margin:10px auto 0px;overflow:hidden;}
 .tit_img{width:100%;position:relative;}
 .tit_img span{position:absolute;top:5%;right:5%}
-.tit_img p{position:absolute;bottom:5%;right:5%;color:#fafafa;font-size:1.1em}
+.tit_img p{position:absolute;bottom:2%;right:0%;color:#fafafa;font-size:1.1em;width:100%;line-height:30px;text-align:center}
+.tit_img b{position:absolute;bottom:3%;right:5%;cursor: pointer;}
 
 .tit_ul{margin:10px auto 20px;padding:0px 10px;overflow:hidden;}
 .tit_ul li{overflow:hidden;}
