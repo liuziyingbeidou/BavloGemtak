@@ -1,5 +1,7 @@
 package com.bavlo.gemtak.service.ui.itf;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.ui.Model;
@@ -190,8 +192,26 @@ public interface IGemService {
 	public List<OrderVO> getOrderVO();
 	
 	/**
-	 * 17.根据订单号、运单号模糊查询搜有宝石订单
+	 * 17.根据订单号、运单号模糊查询所有宝石订单
 	 * @return
 	 */
 	public List<OrderVO> getOrderVOByType(String typeNo);
+	
+	/**
+	 * 18.根据id删除订单
+	 */
+	public void delOrderVOById(Integer id);
+	
+	/**
+	 * 19.根据发货时间查询所有宝石订单
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public List<OrderVO> getOrderVOByDate(String startDate,String endDate);
+	
+	/**
+	 * 20.根据id 修改快递单号，发货时间
+	 */
+	public void selOrderVOById(Integer id,String ship,String shippingNo);
 }
