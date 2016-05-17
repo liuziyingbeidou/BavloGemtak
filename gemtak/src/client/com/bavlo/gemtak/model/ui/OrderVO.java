@@ -1,6 +1,7 @@
 package com.bavlo.gemtak.model.ui;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -25,18 +26,18 @@ public class OrderVO extends IdEntity {
 	private String cellphone;
 	//当前登录的设备
 	private String mrType;
-	private Timestamp complete_date;
+	private Date complete_date;
 	//优惠劵
 	private String coupon;
 	//优惠劵金额
 	private Double coupon_fee;
 	//创建日期
-	private Timestamp created;
+	private Date created;
 	//支付方式
 	private String zhifu;
 	//保价金额
 	private Double support_fee;
-	private Timestamp delivery_date;
+	private Date delivery_date;
 	//邮箱
 	private String email;
 	private Double insure_fee;
@@ -48,7 +49,7 @@ public class OrderVO extends IdEntity {
 	private String invoice_content;
 	//邮寄地址
 	private String mail_address;
-	private Timestamp manufacture_date;
+	private Date manufacture_date;
 	//订单信息
 	private String order_message;
 	//订单号
@@ -56,7 +57,7 @@ public class OrderVO extends IdEntity {
 	//订单总价
 	private Double totalPrice;
 	//交付日期
-	private Timestamp pay_date;
+	private Date pay_date;
 	
 	private String proccess_comments;
 	private String progress;
@@ -66,7 +67,7 @@ public class OrderVO extends IdEntity {
 	private String settle_accounts_status;
 	private String settle_accounts_type;
 	//发货日期
-	private Timestamp shipping_date;
+	private Date shipping_date;
 	//快递费
 	private Double shipping_fee;
 	//快递单号
@@ -87,24 +88,29 @@ public class OrderVO extends IdEntity {
 	private String username;
 	private Integer invoice_id;
 	private Integer logistic_id;
-	
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
 	public String getCellphone() {
 		return cellphone;
 	}
 	public void setCellphone(String cellphone) {
 		this.cellphone = cellphone;
 	}
-	public Timestamp getComplete_date() {
+	public String getMrType() {
+		return mrType;
+	}
+	public void setMrType(String mrType) {
+		this.mrType = mrType;
+	}
+	public Date getComplete_date() {
 		return complete_date;
 	}
-	public void setComplete_date(Timestamp complete_date) {
+	public void setComplete_date(Date complete_date) {
 		this.complete_date = complete_date;
+	}
+	public String getCoupon() {
+		return coupon;
+	}
+	public void setCoupon(String coupon) {
+		this.coupon = coupon;
 	}
 	public Double getCoupon_fee() {
 		return coupon_fee;
@@ -112,16 +118,28 @@ public class OrderVO extends IdEntity {
 	public void setCoupon_fee(Double coupon_fee) {
 		this.coupon_fee = coupon_fee;
 	}
-	public Timestamp getCreated() {
+	public Date getCreated() {
 		return created;
 	}
-	public void setCreated(Timestamp created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
-	public Timestamp getDelivery_date() {
+	public String getZhifu() {
+		return zhifu;
+	}
+	public void setZhifu(String zhifu) {
+		this.zhifu = zhifu;
+	}
+	public Double getSupport_fee() {
+		return support_fee;
+	}
+	public void setSupport_fee(Double support_fee) {
+		this.support_fee = support_fee;
+	}
+	public Date getDelivery_date() {
 		return delivery_date;
 	}
-	public void setDelivery_date(Timestamp delivery_date) {
+	public void setDelivery_date(Date delivery_date) {
 		this.delivery_date = delivery_date;
 	}
 	public String getEmail() {
@@ -136,16 +154,34 @@ public class OrderVO extends IdEntity {
 	public void setInsure_fee(Double insure_fee) {
 		this.insure_fee = insure_fee;
 	}
+	public String getInvoice() {
+		return invoice;
+	}
+	public void setInvoice(String invoice) {
+		this.invoice = invoice;
+	}
+	public String getInvoice_title() {
+		return invoice_title;
+	}
+	public void setInvoice_title(String invoice_title) {
+		this.invoice_title = invoice_title;
+	}
+	public String getInvoice_content() {
+		return invoice_content;
+	}
+	public void setInvoice_content(String invoice_content) {
+		this.invoice_content = invoice_content;
+	}
 	public String getMail_address() {
 		return mail_address;
 	}
 	public void setMail_address(String mail_address) {
 		this.mail_address = mail_address;
 	}
-	public Timestamp getManufacture_date() {
+	public Date getManufacture_date() {
 		return manufacture_date;
 	}
-	public void setManufacture_date(Timestamp manufacture_date) {
+	public void setManufacture_date(Date manufacture_date) {
 		this.manufacture_date = manufacture_date;
 	}
 	public String getOrder_message() {
@@ -160,10 +196,16 @@ public class OrderVO extends IdEntity {
 	public void setOrder_no(String order_no) {
 		this.order_no = order_no;
 	}
-	public Timestamp getPay_date() {
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public Date getPay_date() {
 		return pay_date;
 	}
-	public void setPay_date(Timestamp pay_date) {
+	public void setPay_date(Date pay_date) {
 		this.pay_date = pay_date;
 	}
 	public String getProccess_comments() {
@@ -202,10 +244,10 @@ public class OrderVO extends IdEntity {
 	public void setSettle_accounts_type(String settle_accounts_type) {
 		this.settle_accounts_type = settle_accounts_type;
 	}
-	public Timestamp getShipping_date() {
+	public Date getShipping_date() {
 		return shipping_date;
 	}
-	public void setShipping_date(Timestamp shipping_date) {
+	public void setShipping_date(Date shipping_date) {
 		this.shipping_date = shipping_date;
 	}
 	public Double getShipping_fee() {
@@ -262,6 +304,12 @@ public class OrderVO extends IdEntity {
 	public void setCustomer_id(Integer customer_id) {
 		this.customer_id = customer_id;
 	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public Integer getInvoice_id() {
 		return invoice_id;
 	}
@@ -277,54 +325,8 @@ public class OrderVO extends IdEntity {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public Double getSupport_fee() {
-		return support_fee;
-	}
-	public void setSupport_fee(Double support_fee) {
-		this.support_fee = support_fee;
-	}
-	public String getInvoice() {
-		return invoice;
-	}
-	public void setInvoice(String invoice) {
-		this.invoice = invoice;
-	}
-	public String getInvoice_title() {
-		return invoice_title;
-	}
-	public void setInvoice_title(String invoice_title) {
-		this.invoice_title = invoice_title;
-	}
-	public String getInvoice_content() {
-		return invoice_content;
-	}
-	public void setInvoice_content(String invoice_content) {
-		this.invoice_content = invoice_content;
-	}
-	public String getCoupon() {
-		return coupon;
-	}
-	public void setCoupon(String coupon) {
-		this.coupon = coupon;
-	}
-	public Double getTotalPrice() {
-		return totalPrice;
-	}
-	public void setTotalPrice(Double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-	public String getZhifu() {
-		return zhifu;
-	}
-	public void setZhifu(String zhifu) {
-		this.zhifu = zhifu;
-	}
-	public String getMrType() {
-		return mrType;
-	}
-	public void setMrType(String mrType) {
-		this.mrType = mrType;
-	}
-
+	
+	
+	
 	
 }
