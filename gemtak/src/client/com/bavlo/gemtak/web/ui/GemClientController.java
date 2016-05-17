@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -253,6 +254,27 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
+	 * @Description: 全屏展示宝石
+	 * @param @param model
+	 * @param @param response
+	 * @param @param request
+	 * @param @return
+	 * @return String
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="viewGemPic")
+	public String viewGemPic(Model model,HttpServletResponse response,HttpServletRequest request) throws Exception{
+		
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCDetailePageModel(model,lang);
+		model.addAttribute("model", "hbx");
+		return "/client/gem/full-img";
+	}
+	
+	/**
 	 * 添加到购物车
 	 * @param model
 	 * @param response
@@ -455,7 +477,7 @@ public class GemClientController extends BaseController {
 			String area,String detailAddress,String email,String zipCode,String realName,String optype){
 		Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
 		String user = HttpTools.getDataByURL(IConstant.addShoppingAddressURL+"?realName="+realName+"&cellphone="+cellphone+"&tel="+tel+"" +
-				"&area="+area+"&detailAddress="+detailAddress+"&email="+email+"&zipCode="+zipCode+"&optype="+optype+"&uname="+uname+"");
+				"&area="+area+"&detailAddress="+Address+"&email="+email+"&zipCode="+zipCode+"&optype="+optype+"&uname="+uname+"");
 		renderText(user);
 	}*/
 	
@@ -618,6 +640,8 @@ public class GemClientController extends BaseController {
 		String forword = "/client/gem/order-success";
 		return forword;
 	}
+	
+	
 	
 	/**
 	 * 支付宝扫码支付
@@ -809,8 +833,76 @@ public class GemClientController extends BaseController {
 			model.addAttribute("list",list);
 			return "/admin/gem/order-list";
 		}  
-	        
-	  
+	    
+		/**
+		 * @Description:根据发货时间 查询 宝石订单列表
+		 * @param @param model
+		 * @param @param response
+		 * @param @param request
+		 * @param @return
+		 * @return String
+		 */
+		@RequestMapping(value="viewOrderListByDate")
+		public String viewOrderListByDate(Model model,HttpServletRequest request,HttpServletResponse response,
+				Integer dgpage,String startDate,String endDate){
+			
+			//当前本地化语言
+			String lang = WebUtils.getLang(request);
+			System.out.println("Loc Lang："+lang);
+			//根据本地语言更新页面数据
+			List<OrderVO> list = null;
+			GemClientPageModel.getCListPageModel(model,lang);
+			if(!CommonUtils.isNull(startDate) && !CommonUtils.isNull(endDate)){
+				list = gemService.getOrderVOByDate(startDate,endDate);
+			}
+			model.addAttribute("list",list);
+			return "/admin/gem/order-list";
+		}
+		
+		/**
+		 * @Description:根据id 修改快递单号，发货时间
+		 * @param @param model
+		 * @param @param response
+		 * @param @param request
+		 * @param @return
+		 * @return String
+		 */
+		@RequestMapping(value="updateShippingDateById")
+		public void updateShippingDateById(Model model,HttpServletRequest request,HttpServletResponse response,
+				Integer dgpage,Integer id,String shippingDate,String shippingNo){
+			
+			//当前本地化语言
+			String lang = WebUtils.getLang(request);
+			System.out.println("Loc Lang："+lang);
+			//根据本地语言更新页面数据
+			GemClientPageModel.getCListPageModel(model,lang);
+			if(!CommonUtils.isNull(shippingDate)){
+				gemService.selOrderVOById(id,shippingDate,shippingNo);
+			}
+			
+			renderText("{\"msg\":\"Y\"}");
+		}
+		
+		
+		/**
+		 * @Description: 根据订单id 删除订单
+		 * @param @param 如果订单为未付款，可以删除
+		 * @param @param response
+		 * @param @param request
+		 * @param @return
+		 * @return String
+		 * @throws Exception 
+		 */
+		@RequestMapping(value="delOrderListById")
+		public String delOrderListById(Model model,HttpServletResponse response,HttpServletRequest request,Integer id){
+			//当前本地化语言
+			String lang = WebUtils.getLang(request);
+			System.out.println("Loc Lang："+lang);
+			//根据本地语言更新页面数据
+			GemClientPageModel.getCOrderPayPageModel(model,lang);
+			gemService.delOrderVOById(id);
+			return "redirect:viewOrderList.do";
+		}
 	
 	/**
 	 * @Description: 立即支付user.jsp 
