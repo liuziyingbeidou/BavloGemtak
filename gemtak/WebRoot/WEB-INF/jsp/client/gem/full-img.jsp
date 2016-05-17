@@ -32,7 +32,7 @@
 <script type="text/javascript" src="${ctx }/resources/amazeui/js/handlebars.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/amazeui/js/amazeui.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/client/js/jsKnob/jquery.knob.js"></script>
-<script type="text/javascript">
+<script language="javascript" type="text/javascript">
  //jquery.bavlo.js 颜色/方位
 function setStation(frame){
 	var vl = frame * 1.8;
@@ -44,6 +44,21 @@ function setDial(frame){   //视角
    $(".dial").val(dl);
    $(".dial").trigger("change");
 }
+
+
+
+window.onorientationchange = function(){
+    switch(window.orientation){
+        case -90:
+        case 90:
+        alert("横屏:" + window.orientation);
+        case 0:
+        case 180:
+        alert("竖屏:" + window.orientation);
+        break;
+    }
+}
+
 </script>
 
 <style type="text/css">
@@ -52,7 +67,7 @@ function setDial(frame){   //视角
  }
 </style>
 </head>
-<body>
+<body id="full360"> 
 	<div class="tit_img" style="width: 100%;">
 	   <jsp:include  page="load-img.jsp"></jsp:include>
 	   
@@ -66,5 +81,7 @@ function setDial(frame){   //视角
 	     </a>
 	   </b>
 	</div>
+	
+	
 </body>
 </html>
