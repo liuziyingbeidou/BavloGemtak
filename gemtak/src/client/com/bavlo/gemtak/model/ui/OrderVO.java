@@ -67,7 +67,7 @@ public class OrderVO extends IdEntity {
 	private String settle_accounts_status;
 	private String settle_accounts_type;
 	//发货日期
-	private Date shipping_date;
+	private String shipping_date;
 	//快递费
 	private Double shipping_fee;
 	//快递单号
@@ -244,10 +244,11 @@ public class OrderVO extends IdEntity {
 	public void setSettle_accounts_type(String settle_accounts_type) {
 		this.settle_accounts_type = settle_accounts_type;
 	}
-	public Date getShipping_date() {
+	
+	public String getShipping_date() {
 		return shipping_date;
 	}
-	public void setShipping_date(Date shipping_date) {
+	public void setShipping_date(String shipping_date) {
 		this.shipping_date = shipping_date;
 	}
 	public Double getShipping_fee() {
