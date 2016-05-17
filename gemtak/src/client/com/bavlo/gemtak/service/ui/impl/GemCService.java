@@ -1,6 +1,8 @@
 package com.bavlo.gemtak.service.ui.impl;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -415,7 +417,7 @@ public class GemCService extends CommonService implements IGemService {
 		sql.append(" o.mail_address,o.zipcode,o.shipping_fee,");
 		sql.append(" o.support_fee,o.total_price,");
 		sql.append(" o.coupon_fee,o.invoice_title,o.invoice_content,");
-		sql.append(" o.pay_date,o.`status`,o.shipping_no,o.coupon");
+		sql.append(" o.pay_date,o.`status`,o.shipping_no,o.shipping_date,o.coupon,o.id");
 		sql.append(" from gt_order o,");
 		sql.append(" gt_order_b b, gt_gem g");
 		sql.append("  where o.id=b.order_id ");
@@ -447,10 +449,12 @@ public class GemCService extends CommonService implements IGemService {
 	    		order.setCoupon_fee(CommonUtils.isNull(arry[12]) ? null:Double.valueOf(arry[12]+""));
 	    		order.setInvoice_title(CommonUtils.isNull(arry[13]) ? null:arry[13]+"");
 	    		order.setInvoice_content(CommonUtils.isNull(arry[14]) ? null:arry[14]+"");
-	    		order.setPay_date(CommonUtils.isNull(arry[15]) ? null:Timestamp.valueOf(arry[15]+""));
+	    		order.setPay_date(CommonUtils.isNull(arry[15]) ? null:DateUtil.getDate(arry[15]+""));
 	    		order.setStatus(CommonUtils.isNull(arry[16]) ? null:arry[16]+"");
 	    		order.setShipping_no(CommonUtils.isNull(arry[17]) ? null:arry[17]+"");
-	    		order.setCoupon(CommonUtils.isNull(arry[18]) ? null:arry[18]+"");
+	    		order.setShipping_date(CommonUtils.isNull(arry[18]) ? null:arry[18]+"");
+	    		order.setCoupon(CommonUtils.isNull(arry[19]) ? null:arry[19]+"");
+	    		order.setId(CommonUtils.isNull(arry[20]) ? null:Integer.valueOf(arry[20]+""));
 	    		nlist.add(order);
 	    	}
 	   }
@@ -471,7 +475,7 @@ public class GemCService extends CommonService implements IGemService {
 		sql.append(" o.mail_address,o.zipcode,o.shipping_fee,");
 		sql.append(" o.support_fee,o.total_price,");
 		sql.append(" o.coupon_fee,o.invoice_title,o.invoice_content,");
-		sql.append(" o.pay_date,o.`status`,o.shipping_no,o.coupon");
+		sql.append(" o.pay_date,o.`status`,o.shipping_no,o.shipping_date,o.coupon,o.id");
 		sql.append(" from gt_order o,");
 		sql.append(" gt_order_b b, gt_gem g");
 		sql.append("  where o.id=b.order_id ");
@@ -507,10 +511,92 @@ public class GemCService extends CommonService implements IGemService {
 	    		order.setPay_date(CommonUtils.isNull(arry[15]) ? null:Timestamp.valueOf(arry[15]+""));
 	    		order.setStatus(CommonUtils.isNull(arry[16]) ? null:arry[16]+"");
 	    		order.setShipping_no(CommonUtils.isNull(arry[17]) ? null:arry[17]+"");
-	    		order.setCoupon(CommonUtils.isNull(arry[18]) ? null:arry[18]+"");
+	    		order.setShipping_date(CommonUtils.isNull(arry[18]) ? null:arry[18]+"");
+	    		order.setCoupon(CommonUtils.isNull(arry[19]) ? null:arry[19]+"");
+	    		order.setId(CommonUtils.isNull(arry[20]) ? null:Integer.valueOf(arry[20]+""));
 	    		nlist.add(order);
 	    	}
 	   }
 	    return nlist;
+	}
+	
+	/**
+	 * 18.根据id删除订单
+	 */
+	public void delOrderVOById(Integer id){
+		delete(OrderVO.class, id);
+		delete(OrderBVO.class, id);
+	}
+	
+	/**
+	 * 19.根据发货时间 模糊查询所有宝石订单
+	 * @param uname
+	 */
+	@Override
+	public List<OrderVO> getOrderVOByDate(String startDate,String endDate){
+	   //return findAll(OrderVO.class);
+		StringBuffer sql = new StringBuffer();
+		sql.append("select ");
+		sql.append(" g.is_cover,b.gem_id,b.price,b.quantity,");
+		sql.append(" o.order_no,o.username,o.real_name,");
+		sql.append(" o.mail_address,o.zipcode,o.shipping_fee,");
+		sql.append(" o.support_fee,o.total_price,");
+		sql.append(" o.coupon_fee,o.invoice_title,o.invoice_content,");
+		sql.append(" o.pay_date,o.`status`,o.shipping_no,o.shipping_date,o.coupon,o.id");
+		sql.append(" from gt_order o,");
+		sql.append(" gt_order_b b, gt_gem g");
+		sql.append("  where o.id=b.order_id ");
+		sql.append("  and b.gem_id=g.id");
+		sql.append("  and o.shipping_date BETWEEN '"+startDate+"' AND '"+endDate+"'");
+		sql.append("  and ifnull(g.dr,0)=0");
+	    sql.append(" ORDER BY o.created DESC");
+	    Integer count = getCountBySQL(sql.toString());
+	    List<OrderVO> list = (List<OrderVO>) findListBySQL(sql.toString(), null, 0, count);
+	    List<OrderVO> nlist = new ArrayList<OrderVO>();
+	    if(list != null){
+	    	String jsonStr = ObjectToJSON.writeListJSON(list);
+	    	JSONArray jsonArr = JSONArray.fromObject(jsonStr);
+	    	int size = jsonArr.size();
+	    	for(int i = 0; i < size; i++){
+	    		OrderVO order = new OrderVO();
+	    		Object [] arry = jsonArr.getJSONArray(i).toArray();
+	    		order.setVdef1(CommonUtils.isNull(arry[0]) ? null:arry[0]+"");
+	    		order.setVdef2(CommonUtils.isNull(arry[1]) ? null:arry[1]+"");
+	    		order.setVdef3(CommonUtils.isNull(arry[2]) ? null:arry[2]+"");
+	    		order.setVdef4(CommonUtils.isNull(arry[3]) ? null:arry[3]+"");
+	    		order.setOrder_no(CommonUtils.isNull(arry[4]) ? null:arry[4]+"");
+	    		order.setUsername(CommonUtils.isNull(arry[5]) ? null:arry[5]+"");
+	    		order.setReal_name(CommonUtils.isNull(arry[6]) ? null:arry[6]+"");
+	    		order.setMail_address(CommonUtils.isNull(arry[7]) ? null:arry[7]+"");
+	    		order.setZipcode(CommonUtils.isNull(arry[8]) ? null:arry[8]+"");
+	    		order.setShipping_fee(CommonUtils.isNull(arry[9]) ? null:Double.valueOf(arry[9]+""));
+	    		order.setSupport_fee(CommonUtils.isNull(arry[10]) ? null:Double.valueOf(arry[10]+""));
+	    		order.setTotalPrice(CommonUtils.isNull(arry[11]) ? null:Double.valueOf(arry[11]+""));
+	    		order.setCoupon_fee(CommonUtils.isNull(arry[12]) ? null:Double.valueOf(arry[12]+""));
+	    		order.setInvoice_title(CommonUtils.isNull(arry[13]) ? null:arry[13]+"");
+	    		order.setInvoice_content(CommonUtils.isNull(arry[14]) ? null:arry[14]+"");
+	    		order.setPay_date(CommonUtils.isNull(arry[15]) ? null:Timestamp.valueOf(arry[15]+""));
+	    		order.setStatus(CommonUtils.isNull(arry[16]) ? null:arry[16]+"");
+	    		order.setShipping_no(CommonUtils.isNull(arry[17]) ? null:arry[17]+"");
+	    		order.setShipping_date(CommonUtils.isNull(arry[18]) ? null:arry[18]+"");
+	    		order.setCoupon(CommonUtils.isNull(arry[19]) ? null:arry[19]+"");
+	    		order.setId(CommonUtils.isNull(arry[20]) ? null:Integer.valueOf(arry[20]+""));
+	    		nlist.add(order);
+	    	}
+	   }
+	    return nlist;
+	}
+	
+	/**
+	 * 20.根据id 修改快递单号，发货时间
+	 */
+	@Override
+	public void selOrderVOById(Integer id,String ship,String shippingNo){
+		//return getById(OrderVO.class, id, null);
+		String[] attrname = new String[]{"shipping_date","shipping_no"};//要更新的字段
+		Object[] attrval = new Object[]{ship,shippingNo};        //更新的值
+		if(id != null){
+			updateAttrs(OrderVO.class, attrname, attrval, " id="+id);
+		}
 	}
 }
