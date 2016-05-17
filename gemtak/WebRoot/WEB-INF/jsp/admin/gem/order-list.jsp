@@ -13,13 +13,39 @@
    <script type="text/javascript" src="${ctx}/resources/client/js/My97DatePicker/WdatePicker.js"></script>
    <script type="text/javascript" src="${ctx}/resources/client/js/jquery-1.7.2.min.js"></script>
    <script type="text/javascript">
-     $(function(){
      
-     });
      function selectOrderByType(){
       var typeNo = $(".typeNo").val();
       location.href="${ctx}/gemClient/viewOrderListByType.do?typeNo="+typeNo;
      };
+     
+     function delOrder(id){
+       if(confirm("确定要删除这条数据吗？")){
+         location.href="${ctx}/gemClient/delOrderListById.do?id="+id;
+       }
+     }
+     
+     function selectOrderByTime(){
+      var start = document.getElementById("startDate").value;
+      var end = document.getElementById("endDate").value;
+      var url = "${ctx}/gemClient/viewOrderListByDate.do?";
+      if(start != null || start != ""){
+        url += "startDate="+start;
+      }
+      if(end != null || end != ""){
+        url += "&endDate="+end;
+      }
+      location.href=url;
+     }
+     
+     function addShippingDate(id){
+      var shippingDate = document.getElementById("shippingDate").value;
+      var shippingNo = $(".shippingNo").val();
+      var url = "${ctx}/gemClient/updateShippingDateById.do?id="+id;
+      $.post(url,{shippingDate:shippingDate,shippingNo:shippingNo},function(){
+        //location.reload();
+      });
+     }
      
    </script>
 </head>
@@ -30,7 +56,7 @@
 			<input type="hidden" name="page" value="${page }" id="page"/>
 			<input type="hidden" name="orderNo" id="orderNo"/>
 			<input type="hidden" name="shippingNo" id="shippingNo"/>
-			<input type="text" class="typeNo" size="40" placeholder="请输入订单号或快递单号"><font size="2"> </font>
+			<input type="text" class="typeNo" size="40" placeholder="请输入订单号或快递单号"/><font size="2"> </font>
 			<input type="button" value="搜索" onclick="selectOrderByType();"/><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</font>
 			<!-- <select size="1" name="">
@@ -41,13 +67,13 @@
 				<option value="3" >交易完成</option>
 			</select><font size="2"> </font> -->
 			<font size="2">发货时间</font>
-			<input class="Wdate" type="text" onClick="WdatePicker()" name="startDate">
+			<input class="Wdate" type="text" onClick="WdatePicker()" name="startDate" id="startDate"/>
 			<font size="2"> - </font>
-			<input class="Wdate" type="text" onClick="WdatePicker()" name="endDate">
+			<input class="Wdate" type="text" onClick="WdatePicker()" name="endDate" id="endDate"/>
 			<font size="2"> </font> 
-			<input type="submit" value="搜索" name="B10">
+			<input type="button" value="搜索" onclick="selectOrderByTime();"/>
 			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
-			<input type="checkbox" name="sortDir" value="desc" checked><font size="2">时间倒序</font>
+			<input type="checkbox" name="sortDir" value="desc" checked/><font size="2">时间倒序</font>
 			<!-- 
 			<input type="button" value="导出订单" style="float: right; margin-right: 150px;" onclick="javaScript:window.location.href='importExcel'" />
 			 -->
@@ -169,13 +195,16 @@
 		 <font size="2">${order.real_name} ${order.mail_address}</font>
 		</td>
 		<td align="center" width="114">
-		 <font size="2">(23+${order.support_fee})</font>
+		 <c:if test="${order.support_fee==null}"><font size="2">(23+0.0)</font></c:if>
+		 <c:if test="${order.support_fee!=null}"><font size="2">(23+${order.support_fee})</font></c:if>
 		</td>
 		<td align="center" width="71">
-		 <font size="2">${order.totalPrice}+${order.coupon_fee}</font>
+		 <c:if test="${order.coupon_fee==null}"><font size="2">${order.totalPrice}+0.0</font></c:if>
+		 <c:if test="${order.support_fee!=null}"><font size="2">${order.totalPrice}+${order.coupon_fee}</font></c:if>
 		</td>
 		<td align="center" width="71">
-		 <font size="2">${order.coupon_fee}</font>
+		 <c:if test="${order.coupon_fee==null}"><font size="2">0.0</font></c:if>
+		 <c:if test="${order.support_fee!=null}"><font size="2">${order.coupon_fee}</font></c:if>
 		</td>
 		<td align="center" width="71">
 		 <font size="2">${order.totalPrice}</font>
@@ -195,10 +224,25 @@
 		</td>
 		
 		<td align="center" width="78">
-		 <font size="2">运单号</font><p><font size="2">（日期）</font>
+		 <font size="2">
+		 <c:if test="${order.shipping_no==null}">
+		  <c:if test="${order.status=='Y'}">
+		    <input type="text" class="shippingNo" placeholder="请填写快递单号" /><br />
+		  </c:if>
+		 </c:if>
+		 <c:if test="${order.shipping_no!=null}">
+		   ${order.shipping_no}
+		 </c:if>
+		 </font>
 		</td>
 		<td align="center" width="78">
-		 <font size="2">预计发货时间</font><p><font size="2">（日期）</font>
+		 <font size="2">
+		  <c:if test="${order.shipping_date==null && order.status=='Y'}">
+		    <input class="Wdate" type="text" onClick="WdatePicker()" name="" id="shippingDate" />
+		    <input onclick="addShippingDate(${order.id});" type="button" value="确定"/>
+		  </c:if>
+		  ${order.shipping_date} 
+		 </font>
 		</td>
 		<td align="center" height="129" width="200">
 			
