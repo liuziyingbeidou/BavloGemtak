@@ -42,8 +42,12 @@
       var shippingDate = document.getElementById("shippingDate").value;
       var shippingNo = $(".shippingNo").val();
       var url = "${ctx}/gemClient/updateShippingDateById.do?id="+id;
-      $.post(url,{shippingDate:shippingDate,shippingNo:shippingNo},function(){
-        //location.reload();
+      $.post(url,{shippingDate:shippingDate,shippingNo:shippingNo},function(data){
+        data = $.parseJSON(data);
+        if(data.msg == "Y"){
+         alert("保存成功！");
+         window.location.reload();
+        }
       });
      }
      
@@ -73,7 +77,8 @@
 			<font size="2"> </font> 
 			<input type="button" value="搜索" onclick="selectOrderByTime();"/>
 			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
-			<input type="checkbox" name="sortDir" value="desc" checked/><font size="2">时间倒序</font>
+			<!-- <input type="checkbox" name="sortDir" value="desc" checked/><font size="2">时间倒序</font> -->
+			
 			<!-- 
 			<input type="button" value="导出订单" style="float: right; margin-right: 150px;" onclick="javaScript:window.location.href='importExcel'" />
 			 -->
@@ -154,7 +159,7 @@
 		</td>
 		
 		<td align="center" height="129" width="75">
-		 <font size="2">删除订单</font>
+		 <font size="2">操作订单</font>
 		</td>
 		
 		<td align="center" height="129" width="75">
@@ -239,7 +244,7 @@
 		 <font size="2">
 		  <c:if test="${order.shipping_date==null && order.status=='Y'}">
 		    <input class="Wdate" type="text" onClick="WdatePicker()" name="" id="shippingDate" />
-		    <input onclick="addShippingDate(${order.id});" type="button" value="确定"/>
+		    
 		  </c:if>
 		  ${order.shipping_date} 
 		 </font>
@@ -255,6 +260,9 @@
 		<td align="center" height="129" width="75">
 		 <c:if test="${order.status=='N'}">
 		   <a href="javascript:void(0)" onclick="delOrder(${order.id});">删除</a>
+		 </c:if>
+		 <c:if test="${order.status=='Y'}">
+		 <a onclick="addShippingDate(${order.id});"  href="javascript:void(0)">保存</a>
 		 </c:if>
 		</td>
 		<td align="center" height="129" width="75">
@@ -273,7 +281,7 @@
 		<td colspan="8" height="128" valign="top">
 		
 		<font size="2">说明：</font><p><font size="2">1 
-		付款为no，则不能标记为产状态，不是在产状态，就不能填写运单号，不进入物流环节则不能标记交易“完成”。</font></p>
+		未付款订单，则不能标记为产状态，不是在产状态，就不能填写运单号，不进入物流环节则不能标记交易“完成”。</font></p>
 		<p><font size="2">2 运费中增加保费，不同的物流公司一般收取2%-5%不等，希望能有个数据库表来存放物流公司的运费和保费数据。</font></p>
 		<p><font size="2">3 未付款的订单允许删除</font></td>
 		<td colspan="13" height="128">
