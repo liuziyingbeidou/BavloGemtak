@@ -592,7 +592,7 @@ public class GemCService extends CommonService implements IGemService {
 	 */
 	@Override
 	public void selOrderVOById(Integer id,String ship,String shippingNo){
-		//return getById(OrderVO.class, id, null);
+		//getById(OrderVO.class, id, null);
 		String[] attrname = new String[]{"shipping_date","shipping_no"};//要更新的字段
 		Object[] attrval = new Object[]{ship,shippingNo};        //更新的值
 		if(id != null){
