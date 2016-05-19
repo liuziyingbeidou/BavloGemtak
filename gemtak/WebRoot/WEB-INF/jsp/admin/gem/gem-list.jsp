@@ -21,12 +21,12 @@
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-list.js"></script>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-common.js"></script>
 
-	<script type="text/javascript">
-	 //1.点击发布按钮
-	 function updeIs_release(id){
-		 var st = $(".btn-rele-"+id+"").attr("ms-state");
-		 var url = "/gemtak/gemAdmin/findGemVOByID.do";
-		  $.post(url,{id:id,st:st},function(data){
+<script type="text/javascript">
+//1.点击发布按钮
+function updeIs_release(id){
+	 var st = $(".btn-rele-"+id+"").attr("ms-state");
+	 var url = "/gemtak/gemAdmin/findGemVOByID.do";
+	 $.post(url,{id:id,st:st},function(data){
 			data = $.parseJSON(data);
 		    //根据返回值做相应处理
 		    var flg = data.msg;
@@ -39,13 +39,13 @@
 		    	alert(data.warName+"失败！");
 		    	location.reload();
 		    }
-		  });
-		 
-	 }
+	  });
+ 
+}
 	 
-	  //2.点击删除按钮
-	  function updeIs_del(id){
-		 if(confirm("您确定要删除吗？")){
+ //2.点击删除按钮
+ function updeIs_del(id){
+	 if(confirm("您确定要删除吗？")){
 		  var url = "/gemtak/gemAdmin/updateDrGemById.do";
 		  $.post(url,{id:id},function(data){
 			
@@ -59,20 +59,19 @@
 		    	location.reload();
 		    }
 		  });
-	 
-	     }
 	 }
+}
 	 
-	 //点击图片跳转宝石修改界面
-	 function selGemCard(gemid){
-	  window.location.href = "${ctx}/gemAdmin/updateGem.do?gemid="+gemid;
-	 }
+//点击图片跳转宝石修改界面
+function selGemCard(gemid){
+   window.location.href = "${ctx}/gemAdmin/updateGem.do?gemid="+gemid;
+}
 	 
-	 //点击宝石 入库跳转 修改宝石页面
-    function updateGemVO(gemid){
-      window.location.href = "${ctx}/gemAdmin/updateGem.do?gemid="+gemid;
-    }
-	</script>
+//点击宝石 入库跳转 修改宝石页面
+ function updateGemVO(gemid){
+    window.location.href = "${ctx}/gemAdmin/updateGem.do?gemid="+gemid;
+ }
+</script>
 </head>
 <body>
 
@@ -131,6 +130,7 @@
 	
 	  
 	  <div class="tit_table col-md-12 ">
+	  
 	  	 <!-- 菜单标题 -->
 		 <div class="nr_tit">
 			 <p class="col-md-1 col-xs-3" style="text-align:center">${pagevo['tlGemPic'] }</p>
@@ -141,7 +141,8 @@
 				 <span class="col-xs-12 hidden-md hidden-lg" style="text-align:center">${pagevo['tlGemInfoAndOpr'] }</span>
 			 </p>
 		 </div>  
-		 <!-- 宝石列表 -后续完善-->
+		 
+		 <!-- 宝石列表 --->
 		 <!-- <span class="list-gem"></span> -->
 		 <c:forEach items="${gems}" var="gem">
 		 <dl class="nr_con col-md-12">
@@ -173,13 +174,16 @@
 				 </p>
 			 </dd>
 		  </dl>
-		  </c:forEach> 
+		  </c:forEach>
+		   
 		  <!-- “更多”按钮 -->
           <div class="more hidden-md hidden-lg"><p><a href="" >${pagevo['btnMore'] }</a></p></div>
 		  
 	  </div>
+	  
 	  <!-- 分页插件 -->
 	  <div class="tcdPageCode"></div>
+	  
   </div>
 </div>
 <div class="footer hidden-xs hidden-sm">
