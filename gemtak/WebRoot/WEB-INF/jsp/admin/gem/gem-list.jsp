@@ -24,22 +24,22 @@
 <script type="text/javascript">
 //1.点击发布按钮
 function updeIs_release(id){
-	 var st = $(".btn-rele-"+id+"").attr("ms-state");
-	 var url = "/gemtak/gemAdmin/findGemVOByID.do";
-	 $.post(url,{id:id,st:st},function(data){
-			data = $.parseJSON(data);
-		    //根据返回值做相应处理
-		    var flg = data.msg;
-		    if(flg=="Y"){
-		    	alert(data.warName+"成功！");
-		    	$(".btn-rele-"+id+"").text(data.btnNm);
-		    	$(".btn-rele-"+id+"").attr("ms-state",data.bkst);
-		        location.reload();
-		    }else{
-		    	alert(data.warName+"失败！");
-		    	location.reload();
-		    }
-	  });
+ var st = $(".btn-rele-"+id+"").attr("ms-state");
+ var url = "/gemtak/gemAdmin/findGemVOByID.do";
+  $.post(url,{id:id,st:st},function(data){
+	data = $.parseJSON(data);
+    //根据返回值做相应处理
+    var flg = data.msg;
+    if(flg=="Y"){
+    	alert(data.warName+"成功！");
+    	$(".btn-rele-"+id+"").text(data.btnNm);
+    	$(".btn-rele-"+id+"").attr("ms-state",data.bkst);
+        location.reload();
+    }else{
+    	alert(data.warName+"失败！");
+    	location.reload();
+    }
+  });
  
 }
 	 
@@ -130,7 +130,6 @@ function selGemCard(gemid){
 	
 	  
 	  <div class="tit_table col-md-12 ">
-	  
 	  	 <!-- 菜单标题 -->
 		 <div class="nr_tit">
 			 <p class="col-md-1 col-xs-3" style="text-align:center">${pagevo['tlGemPic'] }</p>
@@ -141,8 +140,7 @@ function selGemCard(gemid){
 				 <span class="col-xs-12 hidden-md hidden-lg" style="text-align:center">${pagevo['tlGemInfoAndOpr'] }</span>
 			 </p>
 		 </div>  
-		 
-		 <!-- 宝石列表 --->
+		 <!-- 宝石列表 -后续完善-->
 		 <!-- <span class="list-gem"></span> -->
 		 <c:forEach items="${gems}" var="gem">
 		 <dl class="nr_con col-md-12">
@@ -174,16 +172,13 @@ function selGemCard(gemid){
 				 </p>
 			 </dd>
 		  </dl>
-		  </c:forEach>
-		   
+		  </c:forEach> 
 		  <!-- “更多”按钮 -->
           <div class="more hidden-md hidden-lg"><p><a href="" >${pagevo['btnMore'] }</a></p></div>
 		  
 	  </div>
-	  
 	  <!-- 分页插件 -->
 	  <div class="tcdPageCode"></div>
-	  
   </div>
 </div>
 <div class="footer hidden-xs hidden-sm">
