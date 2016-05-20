@@ -9,48 +9,36 @@
 <head>
    <meta http-equiv="x-ua-compatible" content="ie=7"/>
    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+   <link rel="stylesheet" href="${ctx }/resources/common/css/css.page.css" />
    <title>Insert title here</title>
    <script type="text/javascript" src="${ctx}/resources/client/js/My97DatePicker/WdatePicker.js"></script>
    <script type="text/javascript" src="${ctx}/resources/client/js/jquery-1.7.2.min.js"></script>
+   <script language="javascript" type="text/javascript" src="${ctx }/resources/common/js/jquery.min.js"></script>
+   <script src="${ctx }/resources/common/js/jquery.page.js"></script>
    <script type="text/javascript">
-     
-     function selectOrderByType(){
-      var typeNo = $(".typeNo").val();
-      location.href="${ctx}/gemClient/viewOrderListByType.do?typeNo="+typeNo;
-     };
      
      function delOrder(id){
        if(confirm("确定要删除这条数据吗？")){
          location.href="${ctx}/gemClient/delOrderListById.do?id="+id;
        }
      }
-     
-     function selectOrderByTime(){
-      var start = document.getElementById("startDate").value;
-      var end = document.getElementById("endDate").value;
-      var url = "${ctx}/gemClient/viewOrderListByDate.do?";
-      if(start != null || start != ""){
-        url += "startDate="+start;
-      }
-      if(end != null || end != ""){
-        url += "&endDate="+end;
-      }
-      location.href=url;
-     }
-     
+ 
+ 
      function addShippingDate(id){
-      var shippingDate = document.getElementById("shippingDate").value;
-      var shippingNo = $(".shippingNo").val();
-      var url = "${ctx}/gemClient/updateShippingDateById.do?id="+id;
-      $.post(url,{shippingDate:shippingDate,shippingNo:shippingNo},function(data){
-        data = $.parseJSON(data);
-        if(data.msg == "Y"){
-         alert("保存成功！");
-         window.location.reload();
-        }
-      });
+	      var shippingDate = document.getElementById("shippingDate").value;
+	      var shippingNo = $(".shippingNo").val();
+	      var url = "${ctx}/gemClient/updateShippingDateById.do?id="+id;
+	      $.post(url,{shippingDate:shippingDate,shippingNo:shippingNo},function(data){
+		        data = $.parseJSON(data);
+		        if(data.msg == "Y"){
+		         alert("保存成功！");
+		         window.location.reload();
+		        }
+	      });
      }
-     
+   
+   
+
    </script>
 </head>
 <body>
@@ -61,7 +49,7 @@
 			<input type="hidden" name="orderNo" id="orderNo"/>
 			<input type="hidden" name="shippingNo" id="shippingNo"/>
 			<input type="text" class="typeNo" size="40" placeholder="请输入订单号或快递单号"/><font size="2"> </font>
-			<input type="button" value="搜索" onclick="selectOrderByType();"/><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<!-- <input type="button" value="搜索" onclick="selectOrderByType();"/> --><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</font>
 			<!-- <select size="1" name="">
 				<option selected value="">全部订单</option>
@@ -75,7 +63,7 @@
 			<font size="2"> - </font>
 			<input class="Wdate" type="text" onClick="WdatePicker()" name="endDate" id="endDate"/>
 			<font size="2"> </font> 
-			<input type="button" value="搜索" onclick="selectOrderByTime();"/>
+			<input type="button" value="搜索" onclick="searchResult();"/>
 			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
 			<!-- <input type="checkbox" name="sortDir" value="desc" checked/><font size="2">时间倒序</font> -->
 			
@@ -261,8 +249,11 @@
 		 <c:if test="${order.status=='N'}">
 		   <a href="javascript:void(0)" onclick="delOrder(${order.id});">删除</a>
 		 </c:if>
-		 <c:if test="${order.status=='Y'}">
+		 <c:if test="${order.status=='Y' && order.shipping_no==null}">
 		 <a onclick="addShippingDate(${order.id});"  href="javascript:void(0)">保存</a>
+		 </c:if>
+		 <c:if test="${order.status=='Y' && order.shipping_no!=null}">
+		 <a onclick=""  href="javascript:void(0)">修改</a>
 		 </c:if>
 		</td>
 		<td align="center" height="129" width="75">
@@ -283,27 +274,53 @@
 		<font size="2">说明：</font><p><font size="2">1 
 		未付款订单，则不能标记为产状态，不是在产状态，就不能填写运单号，不进入物流环节则不能标记交易“完成”。</font></p>
 		<p><font size="2">2 运费中增加保费，不同的物流公司一般收取2%-5%不等，希望能有个数据库表来存放物流公司的运费和保费数据。</font></p>
-		<p><font size="2">3 未付款的订单允许删除</font></td>
+		<p><font size="2">3 未付款的订单允许删除</font></p></td>
 		<td colspan="13" height="128">
 		
-		<p align="right">
-		<c:if test="${pageResult.totalPageTwelve > 1 }">
-		<c:if test="${page > 1 }">
-		&nbsp;&nbsp;&nbsp; <span onclick="goPage(1)"> &lt;&lt;&nbsp;</span> <span onclick="goPage(${page-1})">&lt;</span>
-		</c:if> 
-		<c:forEach begin="1" end="${pageResult.totalPageTwelve}" var="i">
-				<span onclick="goPage(${i});" style="cursor: pointer;text-decoration: underline;<c:if test="${page==i}">color:red;</c:if>">${i}</span>
-		</c:forEach>
-		<c:if test="${page < pageResult.totalPageTwelve }">
-		<span onclick="goPage(${page+1})">&gt;</span>&nbsp; <span onclick="goPage(${pageResult.totalPageTwelve})">&gt;&gt;</span>
-		</c:if>
-		</c:if>
+		<!-- 分页插件 -->
+	  <div class="tcdPageCode"></div>
 		</td>
 	</tr>
 </table>
 </body>
 <script type="text/javascript">
-/* function goPage(i){
+ var pg;
+if(pg == undefined){
+		pg = 1;
+}
+$(".tcdPageCode").createPage({
+        pageCount:"${total}",
+        current:pg,
+        backFn:function(p){
+            searchResult(p);
+        }
+     });  
+ //-------------------------------------------------
+
+function searchResult(p){
+   var url = "${ctx}/gemClient/viewOrderList.do";
+   var typeNo = $(".typeNo").val();
+   var start = document.getElementById("startDate").value;
+   var end = document.getElementById("endDate").value;
+    if(start != null || start != ""){
+      url += "&startDate="+start;
+    }
+    if(end != null || end != ""){
+      url += "&endDate="+end;
+    }
+ if(typeNo != null && typeNo != ""){ 
+  		url += "&typeNo="+typeNo;
+  	}
+ if(p != undefined && p != null && p != ""){
+  		url += "&dgpage="+p;
+  	}else{
+  		url += "&dgpage=1";
+  	}
+  	window.location.href= url;
+}
+//------------------------------------------------------------------  
+     
+/* /* function goPage(i){
 	if(i<1){
 		i=1;
 	}
@@ -428,6 +445,6 @@ $(function(){
 	$('.updateShoppingNo').click(updateShoppingNo);
 	$('.sendEmail').click(sendEmail);
 	$('.updateDeliveryDate').click(updateDeliveryDate); 
-});*/
+});*/ */
 </script>
 </html>
