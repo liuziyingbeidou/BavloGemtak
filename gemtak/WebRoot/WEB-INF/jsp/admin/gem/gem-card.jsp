@@ -157,7 +157,7 @@ function deleteCert(){
 }
 
 .btn-select-cert {
-	margin-top: -20;
+	margin-top: 0;
 }
 </style>
 <%
