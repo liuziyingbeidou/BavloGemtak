@@ -30,7 +30,7 @@
             <a href="javascript:void(0)" onclick="selGemList()" class="mn-mr-gem" >宝石管理</a>
           </li>
           <li class="am-parent">
-            <a href="javascript:void(0)" onclick="selOrderList()" class="mn-mr-order" >订单管理</a>
+            <a href="javascript:void(0)" onclick="" class="mn-mr-order" >订单管理</a><!--selOrderList()  -->
           </li>
       </ul>
       </div>
