@@ -24,6 +24,7 @@ import com.bavlo.gemtak.service.impl.CommonService;
 import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.DateUtil;
 import com.bavlo.gemtak.utils.ObjectToJSON;
+import com.bavlo.gemtak.web.BaseController;
 import com.google.zxing.common.StringUtils;
 
 /**
@@ -33,6 +34,7 @@ import com.google.zxing.common.StringUtils;
  * @author liuzy
  * @date 2016-3-14 上午11:59:09
  */
+@SuppressWarnings("unchecked")
 @Service
 public class GemCService extends CommonService implements IGemService {
 
@@ -408,7 +410,7 @@ public class GemCService extends CommonService implements IGemService {
 	 * @param uname
 	 */
 	@Override
-	public List<OrderVO> getOrderVO(){
+	public List<OrderVO> getOrderVO(Integer dgpage,Integer rows,String startDate,String endDate,String typeNo){
 	   //return findAll(OrderVO.class);
 		StringBuffer sql = new StringBuffer();
 		sql.append("select ");
@@ -422,10 +424,17 @@ public class GemCService extends CommonService implements IGemService {
 		sql.append(" gt_order_b b, gt_gem g");
 		sql.append("  where o.id=b.order_id ");
 		sql.append("  and b.gem_id=g.id");
+		if(!CommonUtils.isNull(typeNo)){
+			sql.append("  and o.order_no like '%"+typeNo+"%' or o.shipping_no like '%"+typeNo+"%'");
+		}
+		if(!CommonUtils.isNull(startDate) && !CommonUtils.isNull(endDate)){
+			sql.append("  and o.shipping_date BETWEEN '"+startDate+"' AND '"+endDate+"'");
+		}
 		sql.append("  and ifnull(g.dr,0)=0");
-	    sql.append(" ORDER BY o.created DESC");
+	    //sql.append(" ORDER BY o.created DESC");
 	    Integer count = getCountBySQL(sql.toString());
-	    List<OrderVO> list = (List<OrderVO>) findListBySQL(sql.toString(), null, 0, count);
+	    
+	    List<OrderVO> list = (List<OrderVO>) findListBySQL(sql.toString(),null,dgpage,rows);
 	    List<OrderVO> nlist = new ArrayList<OrderVO>();
 	    if(list != null){
 	    	String jsonStr = ObjectToJSON.writeListJSON(list);
@@ -462,11 +471,11 @@ public class GemCService extends CommonService implements IGemService {
 	}
 	
 	/**
-	 * 17.根据订单号、运单号 模糊查询所有宝石订单
+	 * 17.模糊查询所有宝石订单
 	 * @param uname
 	 */
 	@Override
-	public List<OrderVO> getOrderVOByType(String typeNo){
+	public List<OrderVO> getOrderVOBytype(Integer dgpage,Integer total,String startDate,String endDate,String typeNo){
 	   //return findAll(OrderVO.class);
 		StringBuffer sql = new StringBuffer();
 		sql.append("select ");
@@ -480,11 +489,17 @@ public class GemCService extends CommonService implements IGemService {
 		sql.append(" gt_order_b b, gt_gem g");
 		sql.append("  where o.id=b.order_id ");
 		sql.append("  and b.gem_id=g.id");
-		sql.append("  and o.order_no like '%"+typeNo+"%' or o.shipping_no like '%"+typeNo+"%'");
+		if(!CommonUtils.isNull(typeNo)){
+			sql.append("  and o.order_no like '%"+typeNo+"%' or o.shipping_no like '%"+typeNo+"%'");
+		}
+		if(!CommonUtils.isNull(startDate) && !CommonUtils.isNull(endDate)){
+			sql.append("  and o.shipping_date BETWEEN '"+startDate+"' AND '"+endDate+"'");
+		}
 		sql.append("  and ifnull(g.dr,0)=0");
-	    sql.append(" ORDER BY o.created DESC");
-	    Integer count = getCountBySQL(sql.toString());
-	    List<OrderVO> list = (List<OrderVO>) findListBySQL(sql.toString(), null, 0, count);
+	    //sql.append(" ORDER BY o.created DESC");
+	    //Integer count = getCountBySQL(sql.toString());
+	   
+	    List<OrderVO> list = (List<OrderVO>)  findBySql(sql.toString(), null);
 	    List<OrderVO> nlist = new ArrayList<OrderVO>();
 	    if(list != null){
 	    	String jsonStr = ObjectToJSON.writeListJSON(list);
@@ -508,7 +523,7 @@ public class GemCService extends CommonService implements IGemService {
 	    		order.setCoupon_fee(CommonUtils.isNull(arry[12]) ? null:Double.valueOf(arry[12]+""));
 	    		order.setInvoice_title(CommonUtils.isNull(arry[13]) ? null:arry[13]+"");
 	    		order.setInvoice_content(CommonUtils.isNull(arry[14]) ? null:arry[14]+"");
-	    		order.setPay_date(CommonUtils.isNull(arry[15]) ? null:Timestamp.valueOf(arry[15]+""));
+	    		order.setPay_date(CommonUtils.isNull(arry[15]) ? null:DateUtil.getDate(arry[15]+""));
 	    		order.setStatus(CommonUtils.isNull(arry[16]) ? null:arry[16]+"");
 	    		order.setShipping_no(CommonUtils.isNull(arry[17]) ? null:arry[17]+"");
 	    		order.setShipping_date(CommonUtils.isNull(arry[18]) ? null:arry[18]+"");
@@ -528,64 +543,6 @@ public class GemCService extends CommonService implements IGemService {
 		delete(OrderBVO.class, id);
 	}
 	
-	/**
-	 * 19.根据发货时间 模糊查询所有宝石订单
-	 * @param uname
-	 */
-	@Override
-	public List<OrderVO> getOrderVOByDate(String startDate,String endDate){
-	   //return findAll(OrderVO.class);
-		StringBuffer sql = new StringBuffer();
-		sql.append("select ");
-		sql.append(" g.is_cover,b.gem_id,b.price,b.quantity,");
-		sql.append(" o.order_no,o.username,o.real_name,");
-		sql.append(" o.mail_address,o.zipcode,o.shipping_fee,");
-		sql.append(" o.support_fee,o.total_price,");
-		sql.append(" o.coupon_fee,o.invoice_title,o.invoice_content,");
-		sql.append(" o.pay_date,o.`status`,o.shipping_no,o.shipping_date,o.coupon,o.id");
-		sql.append(" from gt_order o,");
-		sql.append(" gt_order_b b, gt_gem g");
-		sql.append("  where o.id=b.order_id ");
-		sql.append("  and b.gem_id=g.id");
-		sql.append("  and o.shipping_date BETWEEN '"+startDate+"' AND '"+endDate+"'");
-		sql.append("  and ifnull(g.dr,0)=0");
-	    sql.append(" ORDER BY o.created DESC");
-	    Integer count = getCountBySQL(sql.toString());
-	    List<OrderVO> list = (List<OrderVO>) findListBySQL(sql.toString(), null, 0, count);
-	    List<OrderVO> nlist = new ArrayList<OrderVO>();
-	    if(list != null){
-	    	String jsonStr = ObjectToJSON.writeListJSON(list);
-	    	JSONArray jsonArr = JSONArray.fromObject(jsonStr);
-	    	int size = jsonArr.size();
-	    	for(int i = 0; i < size; i++){
-	    		OrderVO order = new OrderVO();
-	    		Object [] arry = jsonArr.getJSONArray(i).toArray();
-	    		order.setVdef1(CommonUtils.isNull(arry[0]) ? null:arry[0]+"");
-	    		order.setVdef2(CommonUtils.isNull(arry[1]) ? null:arry[1]+"");
-	    		order.setVdef3(CommonUtils.isNull(arry[2]) ? null:arry[2]+"");
-	    		order.setVdef4(CommonUtils.isNull(arry[3]) ? null:arry[3]+"");
-	    		order.setOrder_no(CommonUtils.isNull(arry[4]) ? null:arry[4]+"");
-	    		order.setUsername(CommonUtils.isNull(arry[5]) ? null:arry[5]+"");
-	    		order.setReal_name(CommonUtils.isNull(arry[6]) ? null:arry[6]+"");
-	    		order.setMail_address(CommonUtils.isNull(arry[7]) ? null:arry[7]+"");
-	    		order.setZipcode(CommonUtils.isNull(arry[8]) ? null:arry[8]+"");
-	    		order.setShipping_fee(CommonUtils.isNull(arry[9]) ? null:Double.valueOf(arry[9]+""));
-	    		order.setSupport_fee(CommonUtils.isNull(arry[10]) ? null:Double.valueOf(arry[10]+""));
-	    		order.setTotalPrice(CommonUtils.isNull(arry[11]) ? null:Double.valueOf(arry[11]+""));
-	    		order.setCoupon_fee(CommonUtils.isNull(arry[12]) ? null:Double.valueOf(arry[12]+""));
-	    		order.setInvoice_title(CommonUtils.isNull(arry[13]) ? null:arry[13]+"");
-	    		order.setInvoice_content(CommonUtils.isNull(arry[14]) ? null:arry[14]+"");
-	    		order.setPay_date(CommonUtils.isNull(arry[15]) ? null:Timestamp.valueOf(arry[15]+""));
-	    		order.setStatus(CommonUtils.isNull(arry[16]) ? null:arry[16]+"");
-	    		order.setShipping_no(CommonUtils.isNull(arry[17]) ? null:arry[17]+"");
-	    		order.setShipping_date(CommonUtils.isNull(arry[18]) ? null:arry[18]+"");
-	    		order.setCoupon(CommonUtils.isNull(arry[19]) ? null:arry[19]+"");
-	    		order.setId(CommonUtils.isNull(arry[20]) ? null:Integer.valueOf(arry[20]+""));
-	    		nlist.add(order);
-	    	}
-	   }
-	    return nlist;
-	}
 	
 	/**
 	 * 20.根据id 修改快递单号，发货时间
@@ -598,5 +555,22 @@ public class GemCService extends CommonService implements IGemService {
 		if(id != null){
 			updateAttrs(OrderVO.class, attrname, attrval, " id="+id);
 		}
+	}
+	
+	/**
+	 * 21.查询宝石订单总数
+	 * @param contions
+	 * @return
+	 */
+	@Override
+	public Integer getListSizeOrder(String startDate,String endDate,String typeNo){
+		StringBuilder sql = new StringBuilder(" 1=1");
+		if(!CommonUtils.isNull(typeNo)){
+			sql.append("  and order_no like '%"+typeNo+"%' or shipping_no like '%"+typeNo+"%'");
+		}
+		if(!CommonUtils.isNull(startDate) && !CommonUtils.isNull(endDate)){
+			sql.append("  and shipping_date BETWEEN '"+startDate+"' AND '"+endDate+"'");
+		}
+		return getCountByHQL(OrderVO.class,sql+"");
 	}
 }
