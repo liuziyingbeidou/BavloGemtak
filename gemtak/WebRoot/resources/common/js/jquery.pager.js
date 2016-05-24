@@ -66,16 +66,16 @@
 		 var destPage = 1;        
 		 // work out destination page for required button type        
 		 switch (buttonLabel) {            
-		      case "first":                
+		      case "首页":                
 			  destPage = 1;                
 			  break;            
-			  case "prev":                
+			  case "上一页":                
 			  destPage = pagenumber - 1;                
 			  break;            
-			  case "next":                
+			  case "下一页":                
 			  destPage = pagenumber + 1;                
 			  break;            
-			  case "last":                
+			  case "尾页":                
 			  destPage = pagecount;                
 			  break;        }        
 			  // disable and 'grey' out buttons if not needed.        
@@ -92,6 +92,6 @@
 }    
 // pager defaults. hardly worth bothering with in this case but used as placeholder for expansion in the next version    
   $.fn.pager.defaults = {        
-  pagenumber: 1,        
+  pagenumber:1,        
   pagecount: 1    
   };})(jQuery);
