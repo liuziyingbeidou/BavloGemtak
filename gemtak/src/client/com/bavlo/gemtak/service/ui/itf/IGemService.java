@@ -189,29 +189,35 @@ public interface IGemService {
 	 * 16.查询所有宝石订单
 	 * @return
 	 */
-	public List<OrderVO> getOrderVO();
+	public List<OrderVO> getOrderVO(Integer dgpage,Integer rows,String startDate,String endDate,String typeNo);
 	
 	/**
-	 * 17.根据订单号、运单号模糊查询所有宝石订单
+	 * 17.模糊查询宝石订单
+	 * @param dgpage
+	 * @param total
+	 * @param startDate
+	 * @param endDate
+	 * @param typeNo
 	 * @return
 	 */
-	public List<OrderVO> getOrderVOByType(String typeNo);
+	public List<OrderVO> getOrderVOBytype(Integer dgpage,Integer total,String startDate,String endDate,String typeNo);
 	
 	/**
 	 * 18.根据id删除订单
 	 */
 	public void delOrderVOById(Integer id);
 	
-	/**
-	 * 19.根据发货时间查询所有宝石订单
-	 * @param startDate
-	 * @param endDate
-	 * @return
-	 */
-	public List<OrderVO> getOrderVOByDate(String startDate,String endDate);
+	
 	
 	/**
-	 * 20.根据id 修改快递单号，发货时间
+	 * 19.根据id 修改快递单号，发货时间
 	 */
 	public void selOrderVOById(Integer id,String ship,String shippingNo);
+	
+	/**
+	 * 20.查询宝石订单总数
+	 * @param contions
+	 * @return
+	 */
+	public Integer getListSizeOrder(String startDate,String endDate,String typeNo);
 }
