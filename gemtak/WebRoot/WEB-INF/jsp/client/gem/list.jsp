@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="${ctx }/resources/client/css/swiper.css">
 	<link rel="stylesheet" href="${ctx }/resources/client/css/newfly.css" type="text/css"/>
 	<link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
-	
+	<link rel="stylesheet" href="${ctx }/resources/client/css/files/demo.css" type="text/css"></link>
     <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/gemClient.js"></script>
@@ -92,7 +92,9 @@
 </script>
  <style type="text/css">
  .yemianyanchi{
- 	text-align: center;
+	  position:fixed;
+	  left:700px;
+	  top:300px;
  }
  </style>
 </head>
@@ -282,15 +284,7 @@
 			</div>
 	  </div>
       <div class="line "></div>
-      <div class="loader yemianyanchi" style="display: none;">
-        <div class="loader-inner ball-pulse-rise">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-	  </div>
+      
       <div class="tit_all col-md-12">	  
           <div class="so_item col-md-12 hidden-xs hidden-sm">
           	 <span class="selects-type ms-sel" ms-key=""></span>
@@ -303,6 +297,22 @@
 			 <span class="span_item"><input type="checkbox" class="pairs-h" name="renamed" value="1">弧面</span>
 			 <span class="span_item"><input type="checkbox" class="pairs-k" name="renamed" value="1">刻面</span>
 		  </div>
+		  
+		  <!-- 延迟加载   start  loaders.css-->
+		      <div class="loader yemianyanchi" style="display: none;">
+		        <div class="loader-inner ball-spin-fade-loader">
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		        </div>
+		      </div>
+		      <!-- 延迟加载   end -->
+		  
           <div class="cup_nav col-md-12">
 		     <ul class="hidden-xs hidden-sm">
 			    <li ><a class="a_sel" id="type1"  onclick="javascript:show_menu(1);" href="javascript:void(0);" >结果（Resault <i class="selGemNO"></i>）</a></li>
@@ -320,9 +330,9 @@
 				 <input type="hidden" class="sel-show" value="1"/>
 				</span>
 			</p>
-		  
 		  </div>
 		  <div class="appendClientList">
+		       
 	          <%-- <div class="job_xq col-md-12 "  id="cont1">
 			      <ul class="">
 			      <c:forEach items="${gems}" var="gem">		
