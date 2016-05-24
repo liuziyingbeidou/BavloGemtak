@@ -14,18 +14,20 @@
 <meta name="author" content="bavlo">
 <title>bavlo</title>
 <link rel="stylesheet" href="${ctx}/resources/client/css/bootstrap.css" />
-<link href="${ctx}/resources/client/css/index.css" rel="stylesheet">
+<link href="${ctx}/resources/client/css/index.css" rel="stylesheet"/>
 <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
 <script type="text/javascript" src="${ctx }/resources/client/js/area_cus.js"></script>
 <style type="text/css">
  .yemianyanchi{
- 	text-align: center;
+	  position:fixed;
+	  left:700px;
+	  top:300px;
  }
  </style>
 </head>
 
-<script>
+<script language=javaScript>
 $(function(){
   $(".yemianyanchi").show();
   selectUserAddress();
@@ -190,17 +192,23 @@ $(function(){
 				 <li class="gw_nav_sel col-xs-4"><span>2</span>确认定单</li>
 			     <li class="col-xs-4"><span>3</span>成功提交订单</li>
 			   </ul>
-			  
 			</div> 
-			<div class="loader yemianyanchi" style="display: none;">
-		        <div class="loader-inner ball-pulse-rise">
+			
+		  <!-- 延迟加载   start  loaders.css-->
+		      <div class="loader yemianyanchi" style="display: none;">
+		        <div class="loader-inner ball-spin-fade-loader">
+		          <div></div>
+		          <div></div>
+		          <div></div>
 		          <div></div>
 		          <div></div>
 		          <div></div>
 		          <div></div>
 		          <div></div>
 		        </div>
-		    </div>    
+		      </div>
+		      <!-- 延迟加载   end --> 
+		         
 			<form action="${ctx }/gemClient/balancePay.do" method="post"  id="orderForm">
 			 <input name="mrType" class="mrtype" type="hidden" value="pc"/>
 			 <div class="wrap_br wrap_br_d">
@@ -299,7 +307,7 @@ $(function(){
     <jsp:include page="../../admin/foot.jsp"></jsp:include>
 </div>
 </body>
-<script>
+<script language=javaScript>
 $(function(){
  
  //点击开发票
