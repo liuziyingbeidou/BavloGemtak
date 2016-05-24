@@ -11,33 +11,84 @@
    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
    <link rel="stylesheet" href="${ctx }/resources/common/css/css.page.css" />
    <title>Insert title here</title>
+   <link rel="stylesheet" href="${ctx }/resources/common/css/page.css" type="text/css"></link>
    <script type="text/javascript" src="${ctx}/resources/client/js/My97DatePicker/WdatePicker.js"></script>
-   <script type="text/javascript" src="${ctx}/resources/client/js/jquery-1.7.2.min.js"></script>
+   <script type="text/javascript" src="${ctx}/resources/client/js/jquery-1.12.4.js"></script>
    <script language="javascript" type="text/javascript" src="${ctx }/resources/common/js/jquery.min.js"></script>
-   <script src="${ctx }/resources/common/js/jquery.page.js"></script>
+   
    <script type="text/javascript">
      
-     function delOrder(id){
-       if(confirm("确定要删除这条数据吗？")){
-         location.href="${ctx}/gemClient/delOrderListById.do?id="+id;
-       }
-     }
+function delOrder(id){
+    if(confirm("确定要删除这条数据吗？")){
+      location.href="${ctx}/gemClient/delOrderListById.do?id="+id;
+    }
+}
  
  
-     function addShippingDate(id){
-	      var shippingDate = document.getElementById("shippingDate").value;
-	      var shippingNo = $(".shippingNo").val();
-	      var url = "${ctx}/gemClient/updateShippingDateById.do?id="+id;
-	      $.post(url,{shippingDate:shippingDate,shippingNo:shippingNo},function(data){
-		        data = $.parseJSON(data);
-		        if(data.msg == "Y"){
-		         alert("保存成功！");
-		         window.location.reload();
-		        }
-	      });
+function addShippingDate(id){
+  var shippingDate = document.getElementById("shippingDate").value;
+  var shippingNo = $(".shippingNo").val();
+  var url = "${ctx}/gemClient/updateShippingDateById.do?id="+id;
+  $.post(url,{shippingDate:shippingDate,shippingNo:shippingNo},function(data){
+     data = $.parseJSON(data);
+     if(data.msg == "Y"){
+      alert("保存成功！");
+      window.location.reload();
      }
-   
-   
+  });
+}
+
+//搜索 
+function searchResult(p){
+      var url = "${ctx }/gemClient/viewOrderListBytype.do";
+	  var typeNo = $(".typeNo").val();
+	  var start = document.getElementById("startDate").value;
+	  var end = document.getElementById("endDate").value;
+	  if(p != undefined && p != null && p != ""){
+	 		url += "?dgpage="+p;
+ 	  }else{
+ 		url += "?dgpage=1";
+ 	  }
+	  if(typeNo != null && typeNo != ""){ 
+	 		url += "&typeNo="+typeNo;
+	  }
+	   if(start != null || start != ""){
+	     url += "&startDate="+start;
+	   }
+	   if(end != null || end != ""){
+	     url += "&endDate="+end;
+	   }
+	
+	 	window.location.href= url; 
+     /* $("#pager").pager({
+      pagenumber: '${dgpage}',
+      pagecount: Math.ceil('${total}'/ '${rows}'),
+      buttonClickCallback: function (p) {
+	      var url = "${ctx }/gemClient/viewOrderList.do";
+		  var typeNo = $(".typeNo").val();
+		  var start = document.getElementById("startDate").value;
+		  var end = document.getElementById("endDate").value;
+		  if(p != undefined && p != null && p != ""){
+		 		url += "?dgpage="+p;
+	 	  }else{
+	 		url += "?dgpage=1";
+	 	  }
+		  if(typeNo != null && typeNo != ""){ 
+		 		url += "&typeNo="+typeNo;
+		  }
+		   if(start != null || start != ""){
+		     url += "&startDate="+start;
+		   }
+		   if(end != null || end != ""){
+		     url += "&endDate="+end;
+		   }
+		
+		 	window.location.href= url; 
+      },
+        TotalCount:'${total}',
+        PageEnter: true 
+    });*/
+}
 
    </script>
 </head>
@@ -224,7 +275,7 @@
 		  </c:if>
 		 </c:if>
 		 <c:if test="${order.shipping_no!=null}">
-		   ${order.shipping_no}
+		  <input type="text" class="shippingNo"  value=" ${order.shipping_no}"/><br />
 		 </c:if>
 		 </font>
 		</td>
@@ -234,7 +285,7 @@
 		    <input class="Wdate" type="text" onClick="WdatePicker()" name="" id="shippingDate" />
 		    
 		  </c:if>
-		  ${order.shipping_date} 
+		   <input class="Wdate" type="text" onClick="WdatePicker()" name="" id="shippingDate"  value="${order.shipping_date}"/>
 		 </font>
 		</td>
 		<td align="center" height="129" width="200">
@@ -253,7 +304,7 @@
 		 <a onclick="addShippingDate(${order.id});"  href="javascript:void(0)">保存</a>
 		 </c:if>
 		 <c:if test="${order.status=='Y' && order.shipping_no!=null}">
-		 <a onclick=""  href="javascript:void(0)">修改</a>
+		 <a onclick="addShippingDate(${order.id})"  href="javascript:void(0)">修改</a>
 		 </c:if>
 		</td>
 		<td align="center" height="129" width="75">
@@ -275,176 +326,53 @@
 		未付款订单，则不能标记为产状态，不是在产状态，就不能填写运单号，不进入物流环节则不能标记交易“完成”。</font></p>
 		<p><font size="2">2 运费中增加保费，不同的物流公司一般收取2%-5%不等，希望能有个数据库表来存放物流公司的运费和保费数据。</font></p>
 		<p><font size="2">3 未付款的订单允许删除</font></p></td>
-		<td colspan="13" height="128">
+		<td colspan="13" height="128"  valign="top"  align="right">
 		
-		<!-- 分页插件 -->
-	  <div class="tcdPageCode"></div>
+			<!-- 分页插件  start -->
+		    <div id="pager" class="page"  ></div>
+	        <!-- 分页插件  end -->
 		</td>
 	</tr>
 </table>
 </body>
+<script type="text/javascript" src="${ctx }/resources/common/js/jquery.pager.js"></script>
 <script type="text/javascript">
- var pg;
-if(pg == undefined){
-		pg = 1;
-}
-$(".tcdPageCode").createPage({
-        pageCount:"${total}",
-        current:pg,
-        backFn:function(p){
-            searchResult(p);
-        }
-     });  
- //-------------------------------------------------
+//------------------------------分页js start---------------------------------------
+    //pagenumber页码，
+    //pagecount分页数量，
+    //buttonClickCallback点击分页的函数，
+    //TotalCount记录总数
+    //PageEnter：true 跳页false不跳页
+    $("#pager").pager({
+      pagenumber: '${dgpage}',
+      pagecount: Math.ceil('${total}'/ '${rows}'),
+      buttonClickCallback: function (p) {
+	      var url = "${ctx }/gemClient/viewOrderList.do";
+		  var typeNo = $(".typeNo").val();
+		  var start = document.getElementById("startDate").value;
+		  var end = document.getElementById("endDate").value;
+		  if(p != undefined && p != null && p != ""){
+		 		url += "?dgpage="+p;
+	 	  }else{
+	 		url += "?dgpage=1";
+	 	  }
+		  if(typeNo != null && typeNo != ""){ 
+		 		url += "&typeNo="+typeNo;
+		  }
+		   if(start != null || start != ""){
+		     url += "&startDate="+start;
+		   }
+		   if(end != null || end != ""){
+		     url += "&endDate="+end;
+		   }
+		
+		 	window.location.href= url; 
+      },
+        TotalCount:'${total}',
+        PageEnter: true
+    });
+//-----------------------------分页js end-------------------------------------
+  
 
-function searchResult(p){
-   var url = "${ctx}/gemClient/viewOrderList.do";
-   var typeNo = $(".typeNo").val();
-   var start = document.getElementById("startDate").value;
-   var end = document.getElementById("endDate").value;
-    if(start != null || start != ""){
-      url += "&startDate="+start;
-    }
-    if(end != null || end != ""){
-      url += "&endDate="+end;
-    }
- if(typeNo != null && typeNo != ""){ 
-  		url += "&typeNo="+typeNo;
-  	}
- if(p != undefined && p != null && p != ""){
-  		url += "&dgpage="+p;
-  	}else{
-  		url += "&dgpage=1";
-  	}
-  	window.location.href= url;
-}
-//------------------------------------------------------------------  
-     
-/* /* function goPage(i){
-	if(i<1){
-		i=1;
-	}
-	$('#page').val(i);
-	$('#form1').submit();
-}
-function updateProgress(){
-	var sid = $(this).attr('sid');
-	var progress = $(this).parent().find('select').val();
-	$.post('updateProgress',{sid : sid,progress : progress},function(){
-		alert('修改成功');
-		window.location.reload();
-	},'json');
-}
-function updateStatus(){
-	var sid = $(this).attr('sid');
-	var status = $(this).parent().find("#orderStatus").val();
-	$.post('updateStatus',{sid : sid,status : status},function(){
-		alert('修改成功');
-		window.location.reload();
-	},'json');
-}
-function updateShoppingNo(){
-	var sid = $(this).attr('sid');
-	var shippingNo = $(this).parent().find('input[name="shippingNo"]').val();
-	if(shippingNo.length!=12){
-		alert('运单号为12位');
-		return ;
-	}
-	$.post('updateShoppingNo',{sid : sid,shippingNo : shippingNo},function(){
-		alert('修改成功');
-		window.location.reload();
-	},'json');
-}
-function sendEmail(){
-	var sid = $(this).attr('sid');
-	var shoppingNo = $(this).attr('shippingNo');
-	if(shoppingNo.length!=12){
-		alert('运单号为12位,请修改');
-		return ;
-	}
-	$.post('sendEmail',{sid : sid},function(){
-		alert('发送成功');
-		window.location.reload();
-	},'json');
-}
-function updateDeliveryDate(){
-	var orderId = $(this).attr('orderId');
-	var deliveryDate = $(this).parent().find('input[name="deliveryDate"]').val();
-	$.post('updateDeliveryDate',{sid : orderId,deliveryDate : deliveryDate},function(){
-		alert('修改成功');
-		window.location.reload();
-	},'json');
-}
-$(function(){
-	$('#form1').submit(function(){
-		var type=$('#type').val();
-		if(type==1){
-			$('#orderNo').val($('#no').val());
-		}
-		else if(type==3){
-			$('#str').val($('#no').val());
-		}
-		else{
-			$('#shippingNo').val($('#no').val());
-		}
-	});
-	
-	$('.update').click(function(){
-		var id=$(this).attr('orderId');
-		var tr=$(this).parent().parent();
-		var manufacture=$('input[name="manufacture"]',tr).is(':checked');
-		var complete=$('input[name="complete"]',tr).is(':checked');
-		var shippingNo=$('input[name="shippingNo"]',tr).val();
-		var processingComments=$('textarea',tr).val();
-		$.post('update',{
-			id:id,
-			shippingNo:shippingNo,
-			isManufacturing:manufacture,
-			complete:complete,
-			processingComments:processingComments
-			
-		},function(){window.location.reload();},'json');
-	});
-	$(".updateCom").click(function(){
-		var id=$(this).attr('orderId');
-		var processingComments=$(this).prev().val();
-		$.ajax({
-				url : 'updateCom',				
-				type : 'POST',
-				data : {
-					id:id,
-					processingComments:processingComments
-				 },
-				dataType : 'json',
-				success : function(data, sts) {
-					alert("保存成功！");
-				}
-		});
-	})
-	$('.importHtml').click(function(){
-		var itemId = $(this).attr('itemId');
-		window.open('toImportHtml?id='+itemId,'_blank'); 
-	});
-	
-	$('.importCertificate').click(function(){
-		var itemId = $(this).attr('itemId');
-		window.open('importCertificate?id='+itemId,'_blank'); 
-	});
-	
-	$('.delete').click(function(){
-		if(confirm("确定要删除所选数据吗？")){
-			var id=$(this).attr('orderId');
-			$.post('delete',{
-				id:id
-			},function(){window.location.reload();},'json');
-		}
-	});
-	
-	$('.updateProgress').click(updateProgress);
-	$('.updateStatus').click(updateStatus);
-	$('.updateShoppingNo').click(updateShoppingNo);
-	$('.sendEmail').click(sendEmail);
-	$('.updateDeliveryDate').click(updateDeliveryDate); 
-});*/ */
 </script>
 </html>
