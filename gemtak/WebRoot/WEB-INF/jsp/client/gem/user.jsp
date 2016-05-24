@@ -21,7 +21,9 @@
 <script type="text/javascript" src="${ctx }/resources/client/js/area_cus.js"></script>
 <style type="text/css">
  .yemianyanchi{
- 	text-align: center;
+	  position:fixed;
+	  left:700px;
+	  top:300px;
  }
  </style>
 <script>
@@ -338,15 +340,20 @@ function jsPayFee(id){
 			    <span class="user_br1 " style="color: #8c0000;font-size: 18px ;"><input type="radio" style="text-align: center;" class="zhifubao" name="zhifu" class="zfb" value="1" checked="checked"/>支付宝支付  </span>
 				<span class="user_br1" style="color: #001aff;font-size: 18px ;"> <input type="radio" style="text-align: center;"class="weixin" name="zhifu" class="wx" value="2"/>微信支付<span>
 		   </div>
-		   <div class="loader yemianyanchi" style="display: none;">
-		        <div class="loader-inner ball-pulse-rise">
+		  <!-- 延迟加载   start  loaders.css-->
+		      <div class="loader yemianyanchi" style="display: none;">
+		        <div class="loader-inner ball-spin-fade-loader">
+		          <div></div>
+		          <div></div>
+		          <div></div>
 		          <div></div>
 		          <div></div>
 		          <div></div>
 		          <div></div>
 		          <div></div>
 		        </div>
-		   </div>
+		      </div>
+		      <!-- 延迟加载   end -->
 		   <input name="mrType" class="mrtype" type="hidden" value="pc" nid="1"/> 
 		   <div class="ddjl uOrder" style="display: none;">
 			   <div class="user_br">
