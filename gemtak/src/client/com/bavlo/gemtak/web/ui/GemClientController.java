@@ -48,6 +48,7 @@ import com.bavlo.gemtak.utils.DateUtil;
 import com.bavlo.gemtak.utils.GenerateQrCodeUtil;
 import com.bavlo.gemtak.utils.JsonUtils;
 import com.bavlo.gemtak.utils.QrCodeUtil;
+import com.bavlo.gemtak.utils.StringUtil;
 import com.bavlo.gemtak.utils.WebUtils;
 import com.bavlo.gemtak.utils.wxcode.WXUtil;
 import com.bavlo.gemtak.web.BaseController;
@@ -800,62 +801,54 @@ public class GemClientController extends BaseController {
 		 */
 		@RequestMapping(value="viewOrderList")
 		public String viewOrderList(Model model,HttpServletRequest request,HttpServletResponse response,
-				Integer dgpage){
+				Integer dgpage,String startDate,String endDate,String typeNo){
 			
 			//当前本地化语言
 			String lang = WebUtils.getLang(request);
 			System.out.println("Loc Lang："+lang);
 			//根据本地语言更新页面数据
 			GemClientPageModel.getCListPageModel(model,lang);
-			List<OrderVO> list = gemService.getOrderVO();
+			Integer total = gemService.getListSizeOrder(startDate,endDate,typeNo);
+			if(dgpage == null){
+				dgpage = this.dgpage;
+			}
+			model.addAttribute("dgpage", dgpage);
+			model.addAttribute("rows", rows);
+			List<OrderVO> list = gemService.getOrderVO(dgpage,rows,startDate,endDate,typeNo);
 			model.addAttribute("list",list);
+			model.addAttribute("total",total);
 			return "/admin/gem/order-list";
 		}
-	        
+		
 		/**
-		 * @Description:根据订单号 运单号 查询 宝石订单列表
-		 * @param @param model
-		 * @param @param response
-		 * @param @param request
-		 * @param @return
-		 * @return String
+		 * 模糊查询宝石订单
+		 * @param model
+		 * @param request
+		 * @param response
+		 * @param dgpage
+		 * @param startDate
+		 * @param endDate
+		 * @param typeNo
+		 * @return
 		 */
-		@RequestMapping(value="viewOrderListByType")
-		public String viewOrderListByType(Model model,HttpServletRequest request,HttpServletResponse response,
-				Integer dgpage,String typeNo){
+		@RequestMapping(value="viewOrderListBytype")
+		public String viewOrderListBytype(Model model,HttpServletRequest request,HttpServletResponse response,
+				Integer dgpage,String startDate,String endDate,String typeNo){
 			
 			//当前本地化语言
 			String lang = WebUtils.getLang(request);
 			System.out.println("Loc Lang："+lang);
 			//根据本地语言更新页面数据
 			GemClientPageModel.getCListPageModel(model,lang);
-			List<OrderVO> list = gemService.getOrderVOByType(typeNo);
-			model.addAttribute("list",list);
-			return "/admin/gem/order-list";
-		}  
-	    
-		/**
-		 * @Description:根据发货时间 查询 宝石订单列表
-		 * @param @param model
-		 * @param @param response
-		 * @param @param request
-		 * @param @return
-		 * @return String
-		 */
-		@RequestMapping(value="viewOrderListByDate")
-		public String viewOrderListByDate(Model model,HttpServletRequest request,HttpServletResponse response,
-				Integer dgpage,String startDate,String endDate){
-			
-			//当前本地化语言
-			String lang = WebUtils.getLang(request);
-			System.out.println("Loc Lang："+lang);
-			//根据本地语言更新页面数据
-			List<OrderVO> list = null;
-			GemClientPageModel.getCListPageModel(model,lang);
-			if(!CommonUtils.isNull(startDate) && !CommonUtils.isNull(endDate)){
-				list = gemService.getOrderVOByDate(startDate,endDate);
+			Integer total = gemService.getListSizeOrder(startDate,endDate,typeNo);
+			if(dgpage == null){
+				dgpage = this.dgpage;
 			}
+			model.addAttribute("dgpage", dgpage);
+			model.addAttribute("rows", rows);
+			List<OrderVO> list = gemService.getOrderVOBytype(dgpage,total,startDate,endDate,typeNo);
 			model.addAttribute("list",list);
+			model.addAttribute("total",total);
 			return "/admin/gem/order-list";
 		}
 		
