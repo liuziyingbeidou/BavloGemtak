@@ -266,6 +266,7 @@ function selOldOrderGem(id){
  $.post(url,{orderid:id},function(data){
   if(data != null){
    for ( var i = 0; i < data.length; i++) {
+      $(".selectGem"+id).empty();
 	  $(".selectGem"+id).append("<dl><dt class='col-xs-3'><a href=''><img src='${ctx }/resources/client/images/gw1.jpg'  /></a></dt>"+
 					"<dd class='col-xs-9'><p><b>"+data[i].type_cn+"</b></p><p>数量：<span>"+data[i].vdef2+"</span></p><p>原价：<span>￥"+data[i].vdef1+"</span></p></dd></dl>");
     }
