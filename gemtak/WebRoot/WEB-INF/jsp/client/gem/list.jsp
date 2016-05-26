@@ -87,7 +87,14 @@
            
          });
          
-         
+$(window).scroll(function(){
+    t = $(document).scrollTop();
+    if(t > 20){
+        $('#gotop').fadeIn('slow');
+    }else{
+        $('#gotop').fadeOut('slow');
+    }
+});
  
 </script>
  <style type="text/css">
