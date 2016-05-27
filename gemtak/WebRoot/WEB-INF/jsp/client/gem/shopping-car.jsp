@@ -44,7 +44,7 @@ $(function(){
  });
 });
  //删除购物车中 选中的商品
- function delShoppCar(id){
+function delShoppCar(id){
   var url = "/gemtak/gemClient/delShoppingCar.do";
   $.post(url,{shoppingCarId:id},function(data){
     data = $.parseJSON(data);
