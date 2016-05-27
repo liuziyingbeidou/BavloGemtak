@@ -56,12 +56,12 @@ function manageAddress(){
 }
 //查询收货地址
 function selectUaddress(){
- $(".uaddress").empty();
+  $(".uaddress").empty();
   $(".uaddress").show();
   var url = "/gemtak/gemClient/getUserAddress.do";
   $.post(url,function(data){
    if(data != null){
-    for(var i = 0; i <data.length; i++){
+     for(var i = 0; i <data.length; i++){
      $(".shouhuo").append("<ul><li >收货人：<span class='urealname"+data[i].id+"'>"+data[i].realName+"</span></li>"+
                         "<li >地区：<span class='area"+data[i].id+"'>"+data[i].area+"</span> </li>"+
 						"<li >手机：<span class='uphone"+data[i].id+"'>"+data[i].cellphone+"</span></li>"+
