@@ -21,7 +21,7 @@
 .inp_sub{background: -webkit-gradient(linear, left top, left bottom, from(#c00000),
  to(#8f0000) );
 background-image: -moz-linear-gradient(center top , #c00000, #8f0000);
-border:none;width:20%;line-height:25px;cursor:pointer;font-size:14px;color:#eee;margin-right:17%;float:right;}
+border:none;line-height:30px;cursor:pointer;font-size:14px;color:#eee;margin-right:17%;float:right;padding: 0px 5%;}
 .inp_che{margin-right:8px;position:relative;top:2px;}
 .error{float:left;font-weight:normal;margin-left:5px;font-size:12px;width:50px;color:#ff0000}
 .left{float:left;}
@@ -30,8 +30,17 @@ border:none;width:20%;line-height:25px;cursor:pointer;font-size:14px;color:#eee;
 .w_442 p.forget{font-size:14px;color:#444;padding:5px 0;}
 .w_442 p.least{margin-left:45px;}
 .w_442 p.forget.least{padding:14px 0 2px;}
-.inp_sub.register{background: -webkit-gradient(linear, left top, left bottom, from(#c00000),
- to(#8f0000) );background-image: -moz-linear-gradient(center top , #c00000, #8f0000);border:none;width:20%;border:none;line-height:25px;cursor:pointer;color:#eee;margin-right:17%;float:right;}
+.inp_sub.register{
+	background: -webkit-gradient(linear, left top, left bottom, from(#c00000),to(#8f0000) );
+    background-image: -moz-linear-gradient(center top , #c00000, #8f0000);
+    border:none;
+    border:none;
+    line-height:30px;
+    cursor:pointer;
+    color:#eee;
+    margin-right:15%;
+    float:right;
+    padding: 0px 5%;}
 .word li.mail{margin-top:12px;}
 .word li.once{margin-top:30px;}
 
