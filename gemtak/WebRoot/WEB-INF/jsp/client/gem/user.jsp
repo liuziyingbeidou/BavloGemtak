@@ -336,11 +336,7 @@ function jsPayFee(id){
 				<i class="icon-me icon-me11  dingdanjiludown"></i>
 				<i style="display: none" class="icon-me icon-me1  dingdanjiluup"></i>
 		   </div>
-		   <div class="inmenu  zffs">
-		        <h2 class="doname"><a href="javascript:void(0)" >请选择支付方式</a></h2>
-			    <span class="user_br1 " style="color: #8c0000;font-size: 18px ;"><input type="radio" style="text-align: center;" class="zhifubao" name="zhifu" class="zfb" value="1" checked="checked"/>支付宝支付  </span>
-				<span class="user_br1" style="color: #001aff;font-size: 18px ;"> <input type="radio" style="text-align: center;"class="weixin" name="zhifu" class="wx" value="2"/>微信支付<span>
-		   </div>
+		   
 		  <!-- 延迟加载   start  loaders.css-->
 		      <div class="loader yemianyanchi" style="display: none;">
 		        <div class="loader-inner ball-spin-fade-loader">
@@ -379,6 +375,16 @@ function jsPayFee(id){
 				</c:forEach>
 			   </div>
 			    <div class="line "></div>
+		   </div>
+		   <div class="inmenu  zffs">
+		        <h2 class="doname"><a href="javascript:void(0)" >请选择支付方式</a></h2>
+		        <i class="icon-me icon-me1"></i>
+		   </div>
+		   <div class="ddgl">
+			     <ul class="jsfs">			   
+						   <li><input type="radio" style="text-align: center;" class="zhifubao" name="zhifu" class="zfb" value="1" checked="checked"/> <span>支付宝支付</span></li>
+						   <li> <input type="radio" style="text-align: center;"class="weixin" name="zhifu" class="wx" value="2"/> <span>微信支付</span></li>
+				 </ul>
 		   </div>
 		   <div class="inmenu ">
 				<h2 class="doname"><a href="javascript:void(0)" class="userAddress">收货地址管理</a></h2>
