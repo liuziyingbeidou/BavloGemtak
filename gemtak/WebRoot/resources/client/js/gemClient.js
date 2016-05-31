@@ -238,11 +238,11 @@ function goDetail(id){
 							if(data[i].vdef3 == "T"){
 								NM = "5";
 							}
-							$(".appendClientList .cCard").append(
+							$(".appendClientList .cCard").append(    //<b>"+data[i].weight+" "+data[i].clarity_en+"
 							    "<li class='col-md-3 col-xs-6'>"+		
 								  "<span><a href='javascript:void(0)' onclick='goDetail("+data[i].id+")'><image class='360tupian'  src='/gemtak/resources/client/images/cp1.png' /></a></span>"+
 								  "<h6><b>"+data[i].type_cn+"<font class='hidden-xs hidden-sm'>（"+data[i].type_en+"）</font></b><i>¥"+jiage+"</i></h6>"+
-								  "<p><b>"+data[i].weight+" "+data[i].clarity_en+" "+data[i].cut_en+"</b><i  onclick='addFavorite("+data[i].id+")'><image class='changimg-"+data[i].id+"' src='/gemtak/resources/client/images/tu"+NM+".png' /></i></p>"+
+								  "<p><b>"+data[i].weight+" "+data[i].clarity_en+" </b><i  onclick='addFavorite("+data[i].id+")'><image class='changimg-"+data[i].id+"' src='/gemtak/resources/client/images/tu"+NM+".png' /></i></p>"+
 								"</li>");
 						}else if(switchover == 2){
 							$(".appendClientList .cList").append("<tr>"+
