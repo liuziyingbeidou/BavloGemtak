@@ -30,7 +30,14 @@
 $(function(){
   $(".yemianyanchi").show();
   showUserOrder();
+  orderUp();
+  orderDown();
+  showPay();
+  payUp();
+  payDown();
   manageAddress();
+  addressUp();
+  addressDown();
   addUserAddress();
   btnclean();
   btnSave();
@@ -54,6 +61,23 @@ function manageAddress(){
   
  });
 }
+
+function addressUp(){
+   $(".shouhuodizhidown").click(function(){
+	    $(".shouhuodizhiup").show();
+	    $(".shouhuodizhidown").hide();
+	    selectUaddress();
+ });
+}
+
+function addressDown(){
+   $(".shouhuodizhiup").click(function(){
+	    $(".shouhuodizhiup").hide();
+	    $(".shouhuodizhidown").show();
+	    $(".uaddress").hide();
+ });
+}
+
 //查询收货地址
 function selectUaddress(){
   $(".uaddress").empty();
@@ -91,6 +115,53 @@ function showUserOrder(){
   });
 }
 
+function orderUp(){
+  $(".dingdanjiluup").click(function(){
+	     $(".dingdanjiluup").hide();
+	     $(".dingdanjiludown").show();
+	     $(".uOrder").hide();
+  });
+}
+
+function orderDown(){
+  $(".dingdanjiludown").click(function(){
+	     $(".dingdanjiluup").show();
+	     $(".dingdanjiludown").hide();
+	     $(".uOrder").show();
+  });
+}
+
+
+//显示\ 关闭 请选择支付方式
+function showPay(){
+   $(".zffs").click(function(){
+     if($(".ispay").css("display")=="none"){
+        $(".payup").show();
+        $(".paydown").hide();
+        $(".ispay").show();
+     }else{
+        $(".payup").hide();
+        $(".paydown").show();
+        $(".ispay").hide();
+     }
+   });
+}
+
+function payUp(){
+   $(".payup").click(function(){
+        $(".payup").hide();
+        $(".paydown").show();
+        $(".ispay").hide();
+   });
+}
+
+function payDown(){
+   $(".paydown").click(function(){
+        $(".payup").show();
+        $(".paydown").hide();
+        $(".ispay").show();
+   });
+}
 
 function addUserAddress(){
  $(".addUaddress").click(function(){
@@ -216,7 +287,31 @@ function updateUPassWord(){
   }
   
   });
-  
+
+$(".xiugaimimadown").click(function(){
+   $(".xiugaimimaup").show();
+    $(".xiugaimimadown").hide();
+    $(".newPwd").show();
+});
+
+$(".xiugaimimaup").click(function(){
+    $(".xiugaimimaup").hide();
+    $(".xiugaimimadown").show();
+    $(".oldPwd").val();
+    $(".xinPwd").val();
+    $(".rePwd").val();
+    $(".newPwd").hide();
+});
+
+$(".cleanPwd").click(function(){
+    $(".xiugaimimaup").hide();
+    $(".xiugaimimadown").show();
+    $(".oldPwd").val();
+    $(".xinPwd").val();
+    $(".rePwd").val();
+    $(".newPwd").hide();
+});
+
   $(".addPwd").click(function(){
     var oldPwd = $(".oldPwd").val();
     var newPwd = $(".xinPwd").val();
@@ -333,8 +428,8 @@ function jsPayFee(id){
 	  <div class="container">
           <div class="inmenu ">
 				<h2 class="doname"><a href="javascript:void(0)" class="userOrder">订单记录<font>（${num}）</font></a></h2>
-				<i class="icon-me icon-me11  dingdanjiludown"></i>
-				<i style="display: none" class="icon-me icon-me1  dingdanjiluup"></i>
+				<i class="icon-me icon-me11 dingdanjiludown"></i>
+				<i style="display: none" class="icon-me icon-me1 dingdanjiluup"></i>
 		   </div>
 		   
 		  <!-- 延迟加载   start  loaders.css-->
@@ -351,7 +446,7 @@ function jsPayFee(id){
 		        </div>
 		      </div>
 		      <!-- 延迟加载   end -->
-		   <input name="mrType" class="mrtype" type="hidden" value="pc" nid="1"/> 
+		   <input name="mrType" class="mrtype" type="hidden" value="pc" nid="2"/> 
 		   <div class="ddjl uOrder" style="display: none;">
 			   <div class="user_br">
 				 <c:forEach items="${orderList}" var="order">
@@ -376,14 +471,15 @@ function jsPayFee(id){
 			   </div>
 			    <div class="line "></div>
 		   </div>
-		   <div class="inmenu  zffs">
-		        <h2 class="doname"><a href="javascript:void(0)" >请选择支付方式</a></h2>
-		        <i class="icon-me icon-me1"></i>
+		   <div class="inmenu">
+		        <h2 class="doname"><a href="javascript:void(0)"  class="zffs" >请选择支付方式</a></h2>
+		        <i class="icon-me icon-me11  paydown"></i>
+				<i style="display: none" class="icon-me icon-me1  payup"></i>
 		   </div>
-		   <div class="ddgl">
+		   <div class="ddgl   ispay"  style="display: none;">
 			     <ul class="jsfs">			   
-						   <li><input type="radio" style="text-align: center;" class="zhifubao" name="zhifu" class="zfb" value="1" checked="checked"/> <span>支付宝支付</span></li>
-						   <li> <input type="radio" style="text-align: center;"class="weixin" name="zhifu" class="wx" value="2"/> <span>微信支付</span></li>
+						   <li><input type="radio" style="text-align: center;" class="zhifubao" name="zhifu" class="zfb" value="1" /> <span>支付宝支付</span></li>
+						   <li> <input type="radio" style="text-align: center;"class="weixin" name="zhifu" class="wx" value="2" checked="checked"/> <span>微信支付</span></li>
 				 </ul>
 		   </div>
 		   <div class="inmenu ">
