@@ -23,7 +23,7 @@
 background-image: -moz-linear-gradient(center top , #c00000, #8f0000);
 border:none;line-height:30px;cursor:pointer;font-size:14px;color:#eee;margin-right:17%;float:right;padding: 0px 5%;}
 .inp_che{margin-right:8px;position:relative;top:2px;}
-.error{float:left;font-weight:normal;margin-left:5px;font-size:12px;width:50px;color:#ff0000}
+.error{float:left;font-weight:normal;margin-left:5px;font-size:12px;width:100px;color:#ff0000}
 .left{float:left;}
 .right{float:right;}
 .w_442 p{margin:0px auto;line-height:20px;color:#333;width:95%;}
