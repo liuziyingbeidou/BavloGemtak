@@ -13,8 +13,7 @@ public class EquipmentVO extends IdEntity {
 
 	private static final long serialVersionUID = -5779870299691542352L;
 
-	//设备号
-	private String vcode;
+	
 	//供货商
 	private String vsupplierName;
 	//供货商编号
@@ -24,12 +23,7 @@ public class EquipmentVO extends IdEntity {
 	//创建日期
 	private Timestamp createdate;
 	
-	public String getVcode() {
-		return vcode;
-	}
-	public void setVcode(String vcode) {
-		this.vcode = vcode;
-	}
+	
 	public String getVsupplierName() {
 		return vsupplierName;
 	}
