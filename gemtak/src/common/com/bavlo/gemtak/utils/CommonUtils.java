@@ -58,13 +58,6 @@ public class CommonUtils {
         return prefix + fmt.format(new Date()) + randomCode;
     }
 	
-	public static String getGid(){
-		Integer num = 80000000;
-		for (int i = 0; i < 9999999; i++) {
-			num = num+i;
-		}
-		return num.toString();
-	}
 	
 	/**
 	 * ÅÐ¶Ï²ÎÊýÎªnull/""/"null"/"  " [],
