@@ -23,7 +23,7 @@ public class GemVO extends IdEntity implements Serializable {
 
 	//		主表ID			
 	private Integer equipment_id;
-	//		宝石编码以80000000开头	
+	//		宝石编码以GID开头	
 	private String gid;
 	//		宝石类型			接口
 	private String type_id;
