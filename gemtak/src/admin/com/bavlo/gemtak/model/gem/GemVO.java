@@ -93,16 +93,15 @@ public class GemVO extends IdEntity implements Serializable {
 	private String lab_no;
 	//		证书URL			
 	private String lab_url;
+	//     设备号
+	private String vcode;
 	//		卖家（供应商）			微信企业号-供应商标签
 	private String supplier;
+	//	    卖家编码（供应商）			
+	private String supplier_code;
 	//      公司
 	private String company;
 	
-	//      设备号
-	private String vcode;
-	
-	//		卖家编码（供应商）			
-	private String supplier_code;
 	//      卖家电话
 	private String supplier_tel;
 	//		货址			
