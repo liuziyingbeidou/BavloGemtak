@@ -265,12 +265,12 @@ function deleteCert(){
 							<li>
 								<div class="li_inp_pl col-xs-6">
 									<input type="text" name="viewpoint" class="form-control  fc_a2"
-										placeholder="${pagevo['tableViewpoint'] }">
+										placeholder="${pagevo['tableViewpoint'] }"  readonly="readonly">
 								</div>
 								<div class="li_inp_pr col-xs-6">
 									<input type="text" name="average_color"
 										class="form-control  fc_a3"
-										placeholder="${pagevo['tableAverageColor'] }">
+										placeholder="${pagevo['tableAverageColor'] }"  readonly="readonly">
 								</div>
 							</li>
 							<li>
@@ -306,7 +306,7 @@ function deleteCert(){
 							<li>
 								<div class="li_inp_p0 col-xs-4">
 									<input type="text" name="weight" class="form-control fc_a2"
-										placeholder="6.65ct">
+										placeholder="6.65ct"  readonly="readonly">
 								</div>
 								<div class="col-xs-4">
 									<input type="text" name="stock_qty" class="form-control"
