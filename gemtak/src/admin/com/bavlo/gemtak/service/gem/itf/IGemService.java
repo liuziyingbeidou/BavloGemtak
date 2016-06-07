@@ -104,7 +104,7 @@ public interface IGemService {
 	 * @param gid
 	 * @return
 	 */
-  public Boolean getGemVOByGid(String gid);
+  public Boolean getGemVOByGid(String gid,String weight,String viewpoint,String average_color)throws Exception;
 }
 
 
