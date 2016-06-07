@@ -14,6 +14,7 @@ import com.bavlo.gemtak.model.gem.EquipmentVO;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.service.gem.itf.IGemService;
 import com.bavlo.gemtak.service.impl.CommonService;
+import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.DateUtil;
 
 /**
@@ -132,19 +133,22 @@ public class GemAService extends CommonService implements IGemService {
 
 	@Transactional
 	@Override
-	public Boolean saveHeadAndBody(String vcode, String vfolder){
+	public String saveHeadAndBody(String vcode, Integer equipmentId){
+		String gid = null;
 		/**
-		 * 1、首先根据设备号判断是否已存在,非关闭态
+		 * 1、首先根据供应商ID号判断是否已存在,非关闭态
 		 * 2、存在，返回主表ID；否则，保存返回ID
 		 */
-		Integer mid = getMidByCode(vcode);
+		Integer mid = getMidByCode(equipmentId);
 		/**
 		 * 3、根据主表ID和其他信息组织子表VO，保存
 		 */
 		if(mid != null){
 			GemVO gvo = new GemVO();
 			gvo.setEquipment_id(mid);
-			gvo.setUrl_360(vfolder);
+			gvo.setGid(CommonUtils.getGidCode("GID"));
+			gvo.setUrl_360(CommonUtils.getGidCode("GID"));
+			gvo.setVcode(vcode);
 			gvo.setPower(IConstant.POWER_A);
 			gvo.setPage_views(0);
 			gvo.setIs_release(IConstant.RELEASE_E);
@@ -154,27 +158,27 @@ public class GemAService extends CommonService implements IGemService {
 			gvo.setTs(DateUtil.getCurTimestamp());
 			try {
 				save(gvo);
+				gid = CommonUtils.getGidCode("GID");
 			} catch (Exception e) {
 				e.printStackTrace();
-				return false;
+				gid = null;
 			}
 		}
-		return true;
+		return gid;
 	}
 	
 	/**
-	 * @Description: 根据设备号vcode,获取主表主键id
+	 * @Description: 根据供应商ID 查询 如果为空新增一条
 	 * @param @param vcode
 	 * @param @return
 	 * @return Integer
 	 */
-	public Integer getMidByCode(String vcode){
+	public Integer getMidByCode(Integer equipmentId){
 		Integer mid = null;
-		String conts = " ifnull(bisClose,'N')='N' and vcode='"+vcode+"'";
+		String conts = " ifnull(bisClose,'N')='N' and id='"+equipmentId+"'";
 		EquipmentVO vo = findFirst(EquipmentVO.class, conts);
 		if(vo == null){
 			EquipmentVO evo = new EquipmentVO();
-			evo.setVcode(vcode);
 			evo.setCreatedate(DateUtil.getCurTimestamp());
 			evo.setBisClose("N");
 			evo.setDr(IConstant.SHORT_ZERO);
@@ -189,5 +193,26 @@ public class GemAService extends CommonService implements IGemService {
 		}
 		return mid;
 	}
-	
+
+	//参数为 gid  供应商的名字、公司、电话。宝石重量、视角、颜色
+		public Boolean getGemVOByGid(String gid){
+			Boolean flag = false;
+			String conts = " ifnull(dr,'0')='0' and gid='"+gid+"'";
+			GemVO vo = findFirst(GemVO.class, conts);
+			if(vo != null){
+				GemVO gvo = new GemVO();
+				gvo.setSupplier_code("");
+				gvo.setSupplier_tel("");
+				gvo.setSupplier("");
+				gvo.setCompany("");
+				try {
+					update(gvo);
+					flag = true;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		    }
+			return flag;
+		}
+
 }
