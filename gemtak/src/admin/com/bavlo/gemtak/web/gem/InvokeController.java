@@ -27,14 +27,18 @@ public class InvokeController extends BaseController {
 	
 	@RequestMapping("uploadGemPic")
 	@ResponseBody
-	public String uploadGemPic(HttpServletRequest request,HttpServletResponse response,String ecode,String folder){
-		Boolean fg = true;
+	public String uploadGemPic(HttpServletRequest request,HttpServletResponse response,String ecode,Integer equipmentId){
+		//如果在同一时间登录的商户 有多家，须判断是否为当前登录的商家
+		String gemId;
 		try {
-			gemService.saveHeadAndBody(ecode, folder);
+			gemId =  gemService.saveHeadAndBody(ecode, equipmentId);
 		} catch (Exception e) {
 			e.printStackTrace();
-			fg = false;
+			gemId = null;
 		}
-		return fg ? "SUCCESS" : "FAIL";
+		return gemId;
 	}
+	
+	
+	
 }
