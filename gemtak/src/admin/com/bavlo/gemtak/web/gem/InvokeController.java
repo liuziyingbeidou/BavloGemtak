@@ -39,6 +39,19 @@ public class InvokeController extends BaseController {
 		return gemId;
 	}
 	
-	
+	@RequestMapping("saveGem")
+	@ResponseBody
+	public String  saveGem(HttpServletRequest request,HttpServletResponse respose,String gid,String weight,String viewpoint,String average_color){
+		Boolean fg = false;
+		try {
+			gemService.getGemVOByGid(gid, weight, viewpoint, average_color);
+			fg = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fg = false;
+		}
+		return fg ? "SUCCESS":"FAIL";
+	}
 	
 }
