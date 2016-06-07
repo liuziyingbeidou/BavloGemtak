@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.ui.Model;
 
 import com.bavlo.gemtak.model.gem.GemVO;
+import com.bavlo.gemtak.utils.CommonUtils;
 
 /**
  * @Title: 宝珑Gemtak
@@ -96,6 +97,14 @@ public interface IGemService {
 	/**
 	 * 上传图片
 	 */
-	public Boolean saveHeadAndBody(String vcode,String vfolder)throws Exception;
+	public String saveHeadAndBody(String vcode, Integer equipmentId)throws Exception;
 	
+	/**
+	 * 参数为 gid  供应商的名字、公司、电话。宝石重量、视角、颜色
+	 * @param gid
+	 * @return
+	 */
+  public Boolean getGemVOByGid(String gid);
 }
+
+
