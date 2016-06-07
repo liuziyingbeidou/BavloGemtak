@@ -194,25 +194,30 @@ public class GemAService extends CommonService implements IGemService {
 		return mid;
 	}
 
-	//参数为 gid  供应商的名字、公司、电话。宝石重量、视角、颜色
-		public Boolean getGemVOByGid(String gid){
-			Boolean flag = false;
-			String conts = " ifnull(dr,'0')='0' and gid='"+gid+"'";
-			GemVO vo = findFirst(GemVO.class, conts);
-			if(vo != null){
-				GemVO gvo = new GemVO();
-				gvo.setSupplier_code("");
-				gvo.setSupplier_tel("");
-				gvo.setSupplier("");
-				gvo.setCompany("");
-				try {
-					update(gvo);
-					flag = true;
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		    }
-			return flag;
-		}
+	//参数为 gid  宝石重量、视角、颜色
+	@Override
+	public Boolean getGemVOByGid(String gid,String weight,String viewpoint,String average_color)throws Exception{
+		Boolean flag = false;
+		String conts = " ifnull(dr,'0')='0' and gid='"+gid+"'";
+		GemVO vo = findFirst(GemVO.class, conts);
+		if(vo != null){
+			String econts = " ifnull(bisClose,'N')='N' and id='"+vo.getEquipment_id()+"'";
+			EquipmentVO evo = findFirst(EquipmentVO.class, econts);
+			vo.setSupplier_code(evo.getVsupplierCode());
+			vo.setCompany(evo.getCompany());
+			vo.setSupplier_tel(evo.getTel());
+			vo.setLocation(evo.getAddress());
+		    vo.setWeight(weight);
+		    vo.setViewpoint(viewpoint);
+		    vo.setAverage_color(average_color);
+			try {
+				update(vo);
+				flag = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
+		return flag;
+	}
 
 }
