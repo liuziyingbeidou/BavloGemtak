@@ -59,9 +59,9 @@ public class OAuth2Interceptor implements HandlerInterceptor {
 				String param=request.getQueryString();
 				if(param!=null){
 					resultUrl+= "?" + param;
-					System.out.println("param");
+					System.out.println("输出的param是："+param);
 				}
-				System.out.println("resultUrl="+resultUrl);
+				System.out.println("输出的resultUrl是："+resultUrl);
 				try {
 					resultUrl = java.net.URLEncoder.encode(resultUrl, "utf-8");
 				} catch (UnsupportedEncodingException e) {
