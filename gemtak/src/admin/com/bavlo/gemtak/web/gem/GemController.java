@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.constant.page.AGemListLang;
+import com.bavlo.gemtak.model.LoginVO;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.service.gem.itf.IGemService;
 import com.bavlo.gemtak.utils.CommonUtils;
@@ -35,6 +36,7 @@ public class GemController extends BaseController {
 	
 	@Resource
 	IGemService gemService;
+	private Object LoginVO;
 	
 	/**
 	 * @Description: 校验有效用户
@@ -50,17 +52,21 @@ public class GemController extends BaseController {
 	}
 	
 	/**
-	 * @Description: 管理首页
-	 * @param @param model
-	 * @param @param request
-	 * @param @param response
-	 * @param @return
-	 * @return String
+	 * 管理首页
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param dgpage
+	 * @param allgem
+	 * @param typegem
+	 * @param shapegem
+	 * @param inputgem
+	 * @return
+	 * OAuthRequired 配置注解
 	 */
-	//@OAuthRequired
+	@OAuthRequired
 	@RequestMapping(value="viewGemList")
 	public String viewGemList(Model model,HttpServletRequest request,HttpServletResponse response,Integer dgpage,String allgem,String typegem,String shapegem,String inputgem){
-		//
 		/*if(checkU()){
 			return "/admin/warn";
 		}*/
@@ -72,8 +78,13 @@ public class GemController extends BaseController {
 		getListPageModel(model,lang);
 		
 		/**数据查询-start**/
-		
-		//过滤条件
+		//当前的条件根据登录商户的微信号来查  supplier=“+uid+”
+		//微信授权登录获取信息
+		Object objUid = session.getAttribute("loginInfo");
+		if(objUid != null){
+			String uid = ((com.bavlo.gemtak.model.LoginVO) objUid).getUserId();
+			System.out.println("当前登录的用户是："+uid);
+		}
 		StringBuilder sql = new StringBuilder(" 1=1");
 		if(!("A".equals(allgem) || CommonUtils.isNull(allgem))){
 			sql.append( "  and  is_release = '"+allgem+"'");
