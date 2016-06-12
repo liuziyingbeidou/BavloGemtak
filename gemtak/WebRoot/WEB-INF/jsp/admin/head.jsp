@@ -3,7 +3,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 <div class="container">
-	 <div class="nav_logo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="./.html">${pagehfvo['hTitle'] }</a>&nbsp;<span class="h-lang">[${pagehfvo['hLanguage'] }]</span></div>
+	 <div class="nav_logo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);">${pagehfvo['hTitle'] }</a>&nbsp;<span class="h-lang">[${pagehfvo['hLanguage'] }]</span></div>
 </div>
 <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-common.js"></script>
 <link rel="stylesheet" href="${ctx }/resources/admin/css/gem-common.css" />
