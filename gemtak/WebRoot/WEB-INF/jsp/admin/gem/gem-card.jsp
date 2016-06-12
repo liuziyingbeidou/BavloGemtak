@@ -373,7 +373,7 @@ function deleteCert(){
 							<li>
 								<div class="li_inp_pl col-xs-6">
 									<input type="text" name="supplier" class="form-control"
-										value="${gem.supplier}"
+										value="${gem.company}"
 										placeholder="${pagevo['tableSupplier'] }">
 								</div>
 								<div class="li_inp_pr col-xs-6">
