@@ -174,7 +174,7 @@ function selGemCard(gemid){
 		  </dl>
 		  </c:forEach> 
 		  <!-- “更多”按钮 -->
-          <div class="more hidden-md hidden-lg"><p><a href="" >${pagevo['btnMore'] }</a></p></div>
+          <%-- <div class="more hidden-md hidden-lg"><p><a href="" >${pagevo['btnMore'] }</a></p></div> --%>
 		  
 	  </div>
 	  <!-- 分页插件 -->
