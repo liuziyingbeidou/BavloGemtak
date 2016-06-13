@@ -1158,7 +1158,8 @@ public class GemClientController extends BaseController {
 			request.getSession().setAttribute("bisBis", "Y");
 			model.addAttribute("uname", "WxLogin");
 		}
-		System.out.println("是否商户:"+request.getSession().getAttribute("bisBis")); 
+		System.out.println("是否商户："+request.getSession().getAttribute("bisBis"));
+		System.out.println("当前登录的商户是："+request.getSession().getAttribute(IConstant.SESSIONUSERNAEM));
 		Integer gemNo = gemService.getListSizeGem(typegem, shapegem, fromWeight, toWeight, fromPrice, toPrice, inwhere, inwheres);
 		model.addAttribute("gemNo",gemNo);
 		return "/client/gem/list";
@@ -1447,4 +1448,55 @@ public class GemClientController extends BaseController {
 		}
 		return null;
 	}
+	
+	
+	
+//----------------------------------test JVR start-------------------------------
+/*	*//**
+	 * 	
+	 * @param model
+	 * @param response
+	 * @param request
+	 * @return
+	 *//*
+	@RequestMapping(value="goJvr")
+	public String goJvr(Model model,HttpServletResponse response,HttpServletRequest request){
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCOrderPayPageModel(model,lang);
+		String codeurl="http://cj.bavlo.com/down.myapp.com/JVR.apk";
+		model.addAttribute("code_url", codeurl);
+		return "/client/jvr";
+	}	
+	
+	@RequestMapping(value="goJvr1")
+	public String goJvr1(Model model,HttpServletResponse response,HttpServletRequest request){
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCOrderPayPageModel(model,lang);
+		String codeurl="http://cj.bavlo.com/down.myapp.com/JVR.apk";
+		model.addAttribute("code_url", codeurl);
+		return "/client/jvr1";
+	}	*/
+	
+/*	*//**    
+	* 生成二维码图片并直接以流的形式输出到页面    
+	* @param code_url    
+	* @param response    
+	*//*
+	 @RequestMapping("jvr_code")
+	 @ResponseBody
+	 public void getJvrCode(String code_url,HttpServletResponse response){
+		GenerateQrCodeUtil.encodeQrcode(code_url, response);
+	}*/
+
+//------------------------------test JVR end-----------------------------------------
+	
+	
+	
+	
 }
