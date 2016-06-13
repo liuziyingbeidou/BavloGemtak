@@ -140,6 +140,8 @@ public class GemAService extends CommonService implements IGemService {
 		 * 2、存在，返回主表ID；否则，保存返回ID
 		 */
 		Integer mid = getMidByCode(equipmentId);
+		String conts = " ifnull(bisClose,'N')='N' and id='"+equipmentId+"'";
+		EquipmentVO vo = findFirst(EquipmentVO.class, conts);
 		/**
 		 * 3、根据主表ID和其他信息组织子表VO，保存
 		 */
@@ -148,6 +150,7 @@ public class GemAService extends CommonService implements IGemService {
 			gvo.setEquipment_id(mid);
 			gvo.setGid(CommonUtils.getGidCode("GID"));
 			gvo.setUrl_360(CommonUtils.getGidCode("GID"));
+			gvo.setSupplier(vo.getSupplier());
 			gvo.setVcode(vcode);
 			gvo.setPower(IConstant.POWER_A);
 			gvo.setPage_views(0);
