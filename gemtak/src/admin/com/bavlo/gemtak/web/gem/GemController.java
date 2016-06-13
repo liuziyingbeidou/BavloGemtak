@@ -118,22 +118,27 @@ public class GemController extends BaseController {
 	@Deprecated
 	@RequestMapping(value="getGemListByWh")
 	public void getGemListByWh(Model model,HttpServletRequest request,HttpServletResponse response,Integer dgpage,String allgem,String typegem,String shapegem,String inputgem){
-		
-		StringBuilder sql = new StringBuilder(" 1=1");
-		if(!("A".equals(allgem) || CommonUtils.isNull(allgem))){
-			sql.append( "  and  is_release = '"+allgem+"'");
-		}else if(!("-1".equals(typegem) || CommonUtils.isNull(allgem))){
-			sql.append( " and type_id = '"+typegem+"'");
-		}else if(!("-1".equals(shapegem) || CommonUtils.isNull(allgem))){
-			sql.append(" and shape_id = '"+shapegem+"'");
-		}else if(StringUtil.isNotEmpty(inputgem)){
-			sql.append(" and ( is_release like '%"+inputgem+"%' or type_id like '%"+inputgem+"%' or shape_id like '%"+inputgem+"%')");
+		Object objUid = session.getAttribute("loginInfo");
+		if(objUid != null){
+			String uid = ((com.bavlo.gemtak.model.LoginVO) objUid).getUserId();
+			System.out.println("当前登录后，依据条件查询用户是："+uid);
+			StringBuilder sql = new StringBuilder(" supplier='"+uid+"'");
+			if(!("A".equals(allgem) || CommonUtils.isNull(allgem))){
+				sql.append( "  and  is_release = '"+allgem+"'");
+			}else if(!("-1".equals(typegem) || CommonUtils.isNull(allgem))){
+				sql.append( " and type_id = '"+typegem+"'");
+			}else if(!("-1".equals(shapegem) || CommonUtils.isNull(allgem))){
+				sql.append(" and shape_id = '"+shapegem+"'");
+			}else if(StringUtil.isNotEmpty(inputgem)){
+				sql.append(" and ( is_release like '%"+inputgem+"%' or type_id like '%"+inputgem+"%' or shape_id like '%"+inputgem+"%')");
+			}
+			//逻辑处理
+			Integer total = gemService.getListSizeGem(sql+"");
+			List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows,null,null);
+			
+			renderJson(gems);
 		}
-		//逻辑处理
-		Integer total = gemService.getListSizeGem(sql+"");
-		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows,null,null);
 		
-		renderJson(gems);
 		/*Map<String, Object> jsonMap = new HashMap<String, Object>();
 		jsonMap.put("items", gems);
 		jsonMap.put("total", total);
