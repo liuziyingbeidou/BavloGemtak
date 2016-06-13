@@ -78,35 +78,35 @@ public class GemController extends BaseController {
 		getListPageModel(model,lang);
 		
 		/**数据查询-start**/
-		//当前的条件根据登录商户的微信号来查  supplier=“+uid+”
+		//当前的条件根据登录商户的微信号来查  supplier='"+uid+"'
 		//微信授权登录获取信息
 		Object objUid = session.getAttribute("loginInfo");
 		if(objUid != null){
 			String uid = ((com.bavlo.gemtak.model.LoginVO) objUid).getUserId();
 			System.out.println("当前登录的用户是："+uid);
+			StringBuilder sql = new StringBuilder(" supplier='"+uid+"'");
+			if(!("A".equals(allgem) || CommonUtils.isNull(allgem))){
+				sql.append( "  and  is_release = '"+allgem+"'");
+			}
+			if(!("-1".equals(typegem) || CommonUtils.isNull(typegem))){
+				sql.append( " and type_id = '"+typegem+"'");
+			}
+			if(!("-1".equals(shapegem) || CommonUtils.isNull(shapegem))){
+				sql.append(" and shape_id = '"+shapegem+"'");
+			}
+			if(StringUtil.isNotEmpty(inputgem)){
+				sql.append(" and ( is_release like '%"+inputgem+"%' or type_id like '%"+inputgem+"%' or shape_id like '%"+inputgem+"%')");
+			}
+			//逻辑处理
+			Integer total = gemService.getListSizeGem(sql+"");
+			if(dgpage == null){
+				dgpage = this.dgpage;
+			}
+			List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows,null,null);
+			
+			model.addAttribute("gems",gems);
+			model.addAttribute("total",CommonUtils.roundByNum(total,rows)); //CommonUtils类中 根据总数 当前页面大小获取总页数
 		}
-		StringBuilder sql = new StringBuilder(" 1=1");
-		if(!("A".equals(allgem) || CommonUtils.isNull(allgem))){
-			sql.append( "  and  is_release = '"+allgem+"'");
-		}
-		if(!("-1".equals(typegem) || CommonUtils.isNull(typegem))){
-			sql.append( " and type_id = '"+typegem+"'");
-		}
-		if(!("-1".equals(shapegem) || CommonUtils.isNull(shapegem))){
-			sql.append(" and shape_id = '"+shapegem+"'");
-		}
-		if(StringUtil.isNotEmpty(inputgem)){
-			sql.append(" and ( is_release like '%"+inputgem+"%' or type_id like '%"+inputgem+"%' or shape_id like '%"+inputgem+"%')");
-		}
-		//逻辑处理
-		Integer total = gemService.getListSizeGem(sql+"");
-		if(dgpage == null){
-			dgpage = this.dgpage;
-		}
-		List<GemVO> gems = gemService.findListGem(sql+"",dgpage,rows,null,null);
-		
-		model.addAttribute("gems",gems);
-		model.addAttribute("total",CommonUtils.roundByNum(total,rows)); //CommonUtils类中 根据总数 当前页面大小获取总页数
 		/**数据查询-end**/
 		
 		return "/admin/gem/gem-list";
