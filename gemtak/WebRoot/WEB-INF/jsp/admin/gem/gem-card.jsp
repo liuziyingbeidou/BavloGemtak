@@ -323,7 +323,7 @@ function deleteCert(){
 							<li>
 								<div class="li_inp_pl col-xs-6">
 									<input type="text" name="purchase_price" class="form-control"
-										placeholder="${pagevo['tablePurchasePrice'] }">
+										placeholder="${pagevo['tablePurchasePrice'] }"  value="${gem.purchase_price }"/>
 								</div>
 								<div class="li_inp_pr col-xs-6">
 									<select class="form-control input-lg" name="purchase_unit">
@@ -334,7 +334,7 @@ function deleteCert(){
 							</li>
 							<li><div class="li_inp_pl col-xs-6">
 									<input type="text" name="trade_price" class="form-control"
-										placeholder="${pagevo['tableTradePrice'] }">
+										placeholder="${pagevo['tableTradePrice'] }"  value="${gem.trade_price }">
 								</div>
 								<div class="li_inp_pr col-xs-6">
 									<select class="form-control input-lg" name="trade_unit">
@@ -345,7 +345,7 @@ function deleteCert(){
 							</li>
 							<li><div class="li_inp_pl col-xs-6">
 									<input type="text" name="retail_price" class="form-control"
-										placeholder="${pagevo['tableRetailPrice'] }">
+										placeholder="${pagevo['tableRetailPrice'] }"  value="${gem.retail_price }">
 								</div>
 								<div class="li_inp_pr col-xs-6">
 									<select class="form-control input-lg" name="retail_unit">
