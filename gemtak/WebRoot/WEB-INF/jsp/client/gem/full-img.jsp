@@ -33,31 +33,22 @@
 <script type="text/javascript" src="${ctx }/resources/amazeui/js/amazeui.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/client/js/jsKnob/jquery.knob.js"></script>
 <script language="javascript" type="text/javascript">
- //jquery.bavlo.js 颜色/方位
-function setStation(frame){
-	var vl = frame * 1.8;
-	$(".dial-station").val(vl);
-	$(".dial-station").trigger("change");
-}
-function setDial(frame){   //视角
-   var dl = 90;
-   $(".dial").val(dl);
-   $(".dial").trigger("change");
-}
 
-
-
-window.onorientationchange = function(){
-    switch(window.orientation){
-        case -90:
-        case 90:
-        alert("横屏:" + window.orientation);
-        case 0:
-        case 180:
-        alert("竖屏:" + window.orientation);
-        break;
-    }
+// 找到支持的方法, 使用需要全屏的 element 调用
+function launchFullScreen(element) {
+  if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if(element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if(element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
 }
+// 在支持全屏的浏览器中启动全屏
+// 整个页面
+launchFullScreen(document.documentElement);
 
 </script>
 
@@ -67,7 +58,7 @@ window.onorientationchange = function(){
  }
 </style>
 </head>
-<body id="full360"> 
+<body> 
 	<div class="tit_img" style="width: 100%;">
 	   <jsp:include  page="load-img.jsp"></jsp:include>
 	   
