@@ -225,7 +225,7 @@ function addShoppCar(id){
 			<div class="tit_sm  col-sm-12 col-md-5">
 				<h6>${gem.weight} ${gem.type_cn} （${gem.type_en}）</h6>
 				<ul>
-					<li><span>${gem.supplier}</span> </li><li>TEL：${gem.supplier_tel}
+					<li><span>${gem.company}</span> </li><li>TEL：${gem.supplier_tel}
 					</li><li>形状：<slian>${gem.shape_cn}</span>
 					</li><li>尺寸：<span>${gem.size_l} * ${gem.size_w} * ${gem.size_h}</span>
 					</li><li>颜色：<span> ${gem.average_color}</span>
@@ -236,7 +236,7 @@ function addShoppCar(id){
 					</li><li>证书：<span>国检（${gem.lab_en}） ${gem.supplier_code}</span>
 					</li><li>数量:  <span class="selquantity">1</span>
 					</li><li>编号：<span>${gem.stock_qty}</span>
-					</li><li>卖家：<span>${gem.supplier}</span></li>
+					</li><li>卖家：<span>${gem.company}</span></li>
 				</ul>
 				<c:if test="${bis=='Y'}">
 				 <c:if test="${gem.pairs=='sl'}">
