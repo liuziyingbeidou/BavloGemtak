@@ -106,7 +106,7 @@ public interface IGemService {
 	 * @return
 	 */
   public Boolean getGemVOByGid(String Gid,String Direction,
-			String ViewAngle,String Height,String Brand,String Weight,String Multiple,String LightType)throws Exception;
+			String ViewAngle,String Height,String Brand,String Weight,String Multiple,Integer LightType)throws Exception;
   
   /**
    * 查询出所有的宝石供应商
