@@ -133,24 +133,11 @@ public class GemAService extends CommonService implements IGemService {
 
 	@Transactional
 	@Override
-	public String saveHeadAndBody(String vcode, Integer equipmentId){
+	public String saveHeadAndBody(String vcode){
 		String gid = null;
-		/**
-		 * 1、首先根据供应商ID号判断是否已存在,非关闭态
-		 * 2、存在，返回主表ID；否则，保存返回ID
-		 */
-		Integer mid = getMidByCode(equipmentId);
-		String conts = " ifnull(bisClose,'N')='N' and id='"+equipmentId+"'";
-		EquipmentVO vo = findFirst(EquipmentVO.class, conts);
-		/**
-		 * 3、根据主表ID和其他信息组织子表VO，保存
-		 */
-		if(mid != null){
 			GemVO gvo = new GemVO();
-			gvo.setEquipment_id(mid);
 			gvo.setGid(CommonUtils.getGidCode("GID"));
 			gvo.setUrl_360(CommonUtils.getGidCode("GID"));
-			gvo.setSupplier(vo.getSupplier());
 			gvo.setVcode(vcode);
 			gvo.setPower(IConstant.POWER_A);
 			gvo.setPage_views(0);
@@ -166,19 +153,18 @@ public class GemAService extends CommonService implements IGemService {
 				e.printStackTrace();
 				gid = null;
 			}
-		}
 		return gid;
 	}
 	
 	/**
-	 * @Description: 根据供应商ID 查询 如果为空新增一条
+	 * @Description: 根据供应商公司  查询 如果为空新增一条
 	 * @param @param vcode
 	 * @param @return
 	 * @return Integer
 	 */
-	public Integer getMidByCode(Integer equipmentId){
+	public Integer getMidByCode(String company){
 		Integer mid = null;
-		String conts = " ifnull(bisClose,'N')='N' and id='"+equipmentId+"'";
+		String conts = " ifnull(bisClose,'N')='N' and company='"+company+"'";
 		EquipmentVO vo = findFirst(EquipmentVO.class, conts);
 		if(vo == null){
 			EquipmentVO evo = new EquipmentVO();
@@ -197,30 +183,54 @@ public class GemAService extends CommonService implements IGemService {
 		return mid;
 	}
 
-	//参数为 gid  宝石重量、视角、颜色
+	//参数为Gid、方位，视角、高度、公司、重量、倍数、变色性
 	@Override
-	public Boolean getGemVOByGid(String gid,String weight,String viewpoint,String average_color)throws Exception{
+	public Boolean getGemVOByGid(String Gid,String Direction,String ViewAngle,String Height,String Brand,String Weight,String Multiple,String LightType)throws Exception{
 		Boolean flag = false;
-		String conts = " ifnull(dr,'0')='0' and gid='"+gid+"'";
-		GemVO vo = findFirst(GemVO.class, conts);
-		if(vo != null){
-			String econts = " ifnull(bisClose,'N')='N' and id='"+vo.getEquipment_id()+"'";
-			EquipmentVO evo = findFirst(EquipmentVO.class, econts);
-			vo.setSupplier_code(evo.getVsupplierCode());
-			vo.setCompany(evo.getCompany());
-			vo.setSupplier_tel(evo.getTel());
-			vo.setLocation(evo.getAddress());
-		    vo.setWeight(weight);
-		    vo.setViewpoint(viewpoint);
-		    vo.setAverage_color(average_color);
-			try {
-				update(vo);
-				flag = true;
-			} catch (Exception e) {
-				e.printStackTrace();
+		
+		/**
+		 * 1、首先根据供应商ID号判断是否已存在,非关闭态
+		 * 2、存在，返回主表ID；否则，保存返回ID
+		 */
+		Integer mid = getMidByCode(Brand);
+		/**
+		 * 3、根据主表ID和其他信息组织子表VO，保存
+		 */
+		if(mid != null){
+			String conts = " ifnull(dr,'0')='0' and gid='"+Gid+"'";
+			GemVO gvo = findFirst(GemVO.class, conts);
+			
+			if(gvo != null){
+				String cond = " ifnull(bisClose,'N')='N' and id='"+mid+"'";
+				EquipmentVO evo = findFirst(EquipmentVO.class, cond);
+				gvo.setEquipment_id(mid);
+				gvo.setSupplier(evo.getSupplier());
+				gvo.setSupplier_code(evo.getVsupplierCode());
+				gvo.setCompany(evo.getCompany());
+				gvo.setSupplier_tel(evo.getTel());
+				gvo.setLocation(evo.getAddress());
+				gvo.setWeight(Weight);
+				gvo.setViewpoint(ViewAngle);
+				gvo.setLightType(LightType);
+				try {
+					update(gvo);
+					flag = true;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-	    }
+		}
+		
 		return flag;
 	}
 
+	/**
+	 * 查询出所有的宝石供应商
+	 */
+	@Override
+	public List<EquipmentVO> getSupplier(){
+		List<EquipmentVO> list = findAll(EquipmentVO.class);
+		return list;
+	}
+		
 }
