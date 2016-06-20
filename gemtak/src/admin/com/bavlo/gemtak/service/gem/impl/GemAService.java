@@ -209,6 +209,8 @@ public class GemAService extends CommonService implements IGemService {
 				gvo.setCompany(evo.getCompany());
 				gvo.setSupplier_tel(evo.getTel());
 				gvo.setLocation(evo.getAddress());
+				gvo.setHeight(Height);
+				gvo.setMultiple(Multiple);
 				gvo.setWeight(Weight);
 				gvo.setViewpoint(ViewAngle);
 				gvo.setLightType(LightType);
