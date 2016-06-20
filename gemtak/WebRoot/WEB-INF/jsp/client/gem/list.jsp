@@ -351,7 +351,7 @@ $(window).scroll(function(){
 					</c:forEach>
 				  </ul>
 			      <div class="jzgd hidden-md hidden-lg" ><a href="">更多</a></div>
-	          </div> --%>
+	          </div> 
           </div>
 		  <%-- <div class="job_xq  col-md-12"  id="cont2" style="display:none">
 		      <ul>
