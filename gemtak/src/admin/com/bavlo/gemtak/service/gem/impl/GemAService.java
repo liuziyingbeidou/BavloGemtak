@@ -185,7 +185,7 @@ public class GemAService extends CommonService implements IGemService {
 
 	//参数为Gid、方位，视角、高度、公司、重量、倍数、变色性
 	@Override
-	public Boolean getGemVOByGid(String Gid,String Direction,String ViewAngle,String Height,String Brand,String Weight,String Multiple,String LightType)throws Exception{
+	public Boolean getGemVOByGid(String Gid,String Direction,String ViewAngle,String Height,String Brand,String Weight,String Multiple,Integer LightType)throws Exception{
 		Boolean flag = false;
 		
 		/**
