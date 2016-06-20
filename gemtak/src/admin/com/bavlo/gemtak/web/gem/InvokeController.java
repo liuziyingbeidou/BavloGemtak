@@ -47,27 +47,30 @@ public class InvokeController extends BaseController {
 		return gemId;
 	}
 	
-	@RequestMapping(value="saveGem",method=RequestMethod.GET,produces="application/json;charset=UTF-8")
+	//
+	@RequestMapping(value="saveGem",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String  saveGem(HttpServletRequest request,HttpServletResponse respose,String Gid,String Direction,
 			String ViewAngle,String Height,String Brand,String Weight,String Multiple,String LightType) throws UnsupportedEncodingException{
+		Integer light = Integer(LightType);
 		Boolean fg = false;
-		if(!StringUtil.isEmpty(Gid)&!StringUtil.isEmpty(Direction)&!StringUtil.isEmpty(ViewAngle)&!StringUtil.isEmpty(Height)
-				&!StringUtil.isEmpty(Brand)&!StringUtil.isEmpty(Weight)&!StringUtil.isEmpty(Multiple)&!StringUtil.isEmpty(LightType)){
-			try {
-				gemService.getGemVOByGid(Gid,Direction,ViewAngle, Height, Brand,Weight,Multiple,LightType);
-				fg = true;
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				fg = false;
-			}
+		try {
+			gemService.getGemVOByGid(Gid,Direction,ViewAngle, Height, Brand,Weight,Multiple,light);
+			fg = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fg = false;
 		}
-	
 		
 		return fg ? "SUCCESS":"FAIL";
 	}
 	
+	private Integer Integer(String lightType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@RequestMapping(value="getSupplier",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String getSupplier(HttpServletRequest request,HttpServletResponse respose) throws UnsupportedEncodingException{
