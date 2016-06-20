@@ -57,8 +57,8 @@ public class GemVO extends IdEntity implements Serializable {
 	private String clarity_en;
 	//		视角			
 	private String viewpoint;
-	//		平均颜色			
-	private String average_color;
+	//变色性     默认为非变色性   1为非变色性 2为变色性
+	private String lightType;
 	//		宝石产地			接口
 	private String origin_id;
 	private String origin_cn;
@@ -200,6 +200,13 @@ public class GemVO extends IdEntity implements Serializable {
 		this.calibrated_id = calibrated_id;
 	}
 	
+	
+	public String getLightType() {
+		return lightType;
+	}
+	public void setLightType(String lightType) {
+		this.lightType = lightType;
+	}
 	public String getSize_l() {
 		return size_l;
 	}
@@ -260,12 +267,7 @@ public class GemVO extends IdEntity implements Serializable {
 	public void setViewpoint(String viewpoint) {
 		this.viewpoint = viewpoint;
 	}
-	public String getAverage_color() {
-		return average_color;
-	}
-	public void setAverage_color(String average_color) {
-		this.average_color = average_color;
-	}
+	
 	public String getOrigin_id() {
 		return origin_id;
 	}
