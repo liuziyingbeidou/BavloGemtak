@@ -58,7 +58,7 @@ public class GemVO extends IdEntity implements Serializable {
 	//		视角			
 	private String viewpoint;
 	//变色性     默认为非变色性   1为非变色性 2为变色性
-	private String lightType;
+	private Integer lightType;
 	//		宝石产地			接口
 	private String origin_id;
 	private String origin_cn;
@@ -201,10 +201,10 @@ public class GemVO extends IdEntity implements Serializable {
 	}
 	
 	
-	public String getLightType() {
+	public Integer getLightType() {
 		return lightType;
 	}
-	public void setLightType(String lightType) {
+	public void setLightType(Integer lightType) {
 		this.lightType = lightType;
 	}
 	public String getSize_l() {
