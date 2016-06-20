@@ -55,6 +55,10 @@ public class GemVO extends IdEntity implements Serializable {
 	private String clarity_id;
 	private String clarity_cn;
 	private String clarity_en;
+	//     倍数
+	private String multiple;
+	//     高度
+	private String height;
 	//		视角			
 	private String viewpoint;
 	//     变色性     默认为非变色性   1为非变色性 2为变色性
@@ -479,6 +483,18 @@ public class GemVO extends IdEntity implements Serializable {
 	}
 	public void setVcode(String vcode) {
 		this.vcode = vcode;
+	}
+	public String getMultiple() {
+		return multiple;
+	}
+	public void setMultiple(String multiple) {
+		this.multiple = multiple;
+	}
+	public String getHeight() {
+		return height;
+	}
+	public void setHeight(String height) {
+		this.height = height;
 	}
 	
 
