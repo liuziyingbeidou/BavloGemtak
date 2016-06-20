@@ -248,7 +248,7 @@ $(function(){
 	  			    var len = data.length;
 	  			    if(len > 0){
 		  			    for(var i=0;i<len;i++){
-		  			     $(".show-cookies").append("<li class='delectPic-"+data[i].id+"'><a onclick='goDetail("+data[i].id+")'><img src='http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640'  alt='"+data[i].retail_price+"'/></a><span onclick='delCookie("+data[i].id+")'>X</span></li>");
+		  			     $(".show-cookies").append("<li class='delectPic-"+data[i].id+"'><a onclick='goDetail("+data[i].id+")'><img src='http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640'  alt='"+data[i].retail_price+"'/></a><span onclick='delCookie("+data[i].id+")'><img src='${ctx }/resources/client/images/cola.png'/></span></li>");
 		  			    }
 	  			    }else{
 	                   layer.alert('您还没有收藏任何宝贝哟！', {
