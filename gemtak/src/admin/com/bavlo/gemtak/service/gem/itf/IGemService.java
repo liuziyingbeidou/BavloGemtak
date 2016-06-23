@@ -113,6 +113,12 @@ public interface IGemService {
    * @return
    */
   public List<EquipmentVO> getSupplier();
+  
+  public void saveSupplier(EquipmentVO equipment);
+  
+  public EquipmentVO getEquipmentByid(Integer id);
+  
+  public void delSupplier(Integer id);
 }
 
 
