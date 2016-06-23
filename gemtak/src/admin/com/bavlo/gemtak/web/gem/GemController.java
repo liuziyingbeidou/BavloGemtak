@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.constant.page.AGemListLang;
 import com.bavlo.gemtak.model.LoginVO;
+import com.bavlo.gemtak.model.gem.EquipmentVO;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.service.gem.itf.IGemService;
 import com.bavlo.gemtak.utils.CommonUtils;
@@ -341,6 +342,36 @@ public class GemController extends BaseController {
 		//宝石形状
 		model.addAttribute("listGemShape", SelectUtil.getListGemShape(lang));
 	}
+
 	
 	
+//------------------------------------------宝石供应商管理--------------------------------------------------
+	@RequestMapping("viewSupplier")
+	public String viewSupplier(Model model,HttpServletRequest request,HttpServletResponse response){
+		List<EquipmentVO> list = gemService.getSupplier();
+		model.addAttribute("list", list);
+		return "/admin/gem/supplier_management";
+	}
+	
+	@RequestMapping("addSupplier")
+	public String addSupplier(Model model,HttpServletRequest request,HttpServletResponse response,Integer id){
+		if(id!=null){
+			EquipmentVO equipment=gemService.getEquipmentByid(id);
+			model.addAttribute("equipment", equipment);
+		}
+		return "/admin/gem/addSupplier";
+	}
+	
+	@RequestMapping("saveSupplier")
+	public void saveSupplier(Model model,HttpServletRequest request,HttpServletResponse response,EquipmentVO equipment){
+		gemService.saveSupplier(equipment);
+		//return "redirect:viewSupplier.do";
+		renderText("{\"msg\":\"Y\"}");
+	}
+	
+	@RequestMapping("delSupplier")
+	public void delSupplier(Model model,HttpServletRequest request,HttpServletResponse response,Integer id){
+		gemService.delSupplier(id);
+		renderText("{\"msg\":\"Y\"}");
+	}
 }
