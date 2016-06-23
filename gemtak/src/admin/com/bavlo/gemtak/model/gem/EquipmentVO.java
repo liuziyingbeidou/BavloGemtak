@@ -14,9 +14,9 @@ public class EquipmentVO extends IdEntity {
 	private static final long serialVersionUID = -5779870299691542352L;
 
 	
-	//  供货商
+	//  供应商
 	private String vsupplierName;
-	//  供货商编号
+	//  供应商编号
 	private String vsupplierCode;
 	//  公司
 	private String company;
