@@ -20,8 +20,10 @@ public class EquipmentVO extends IdEntity {
 	private String vsupplierCode;
 	//  公司
 	private String company;
-    // 微信号
+    // 	卖家（供应商）			微信企业号所绑定的账号---供应商标签
 	private String supplier;
+	//  微信号
+	private String wxcode;
 	//  QQ
 	private String qq;
 	//  手机
@@ -127,6 +129,12 @@ public class EquipmentVO extends IdEntity {
 	}
 	public void setPost(String post) {
 		this.post = post;
+	}
+	public String getWxcode() {
+		return wxcode;
+	}
+	public void setWxcode(String wxcode) {
+		this.wxcode = wxcode;
 	}
 	
 }
