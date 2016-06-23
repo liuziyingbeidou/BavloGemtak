@@ -234,5 +234,26 @@ public class GemAService extends CommonService implements IGemService {
 		List<EquipmentVO> list = findAll(EquipmentVO.class);
 		return list;
 	}
-		
+	
+	@Override
+	public void saveSupplier(EquipmentVO equipment){
+		try {
+			saveOrUpdate(equipment);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public EquipmentVO getEquipmentByid(Integer id){
+		EquipmentVO equipmentVO = findFirst(EquipmentVO.class, "  id="+id);
+		return equipmentVO;
+	}
+	
+	@Override
+	 public void delSupplier(Integer id){
+		delete(EquipmentVO.class, id);
+	}
+	
 }
