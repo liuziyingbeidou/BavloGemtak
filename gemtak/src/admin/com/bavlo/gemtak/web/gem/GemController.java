@@ -15,6 +15,7 @@ import com.bavlo.gemtak.constant.page.AGemListLang;
 import com.bavlo.gemtak.model.LoginVO;
 import com.bavlo.gemtak.model.gem.EquipmentVO;
 import com.bavlo.gemtak.model.gem.GemVO;
+import com.bavlo.gemtak.model.gem.LinkmanVO;
 import com.bavlo.gemtak.service.gem.itf.IGemService;
 import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.PageLangUtil;
@@ -350,6 +351,8 @@ public class GemController extends BaseController {
 	public String viewSupplier(Model model,HttpServletRequest request,HttpServletResponse response){
 		List<EquipmentVO> list = gemService.getSupplier();
 		model.addAttribute("list", list);
+		/*List<LinkmanVO> linkmanList = gemService.getLinkman();
+		model.addAttribute("linkmanList", linkmanList);*/
 		return "/admin/gem/supplier_management";
 	}
 	
@@ -372,6 +375,27 @@ public class GemController extends BaseController {
 	@RequestMapping("delSupplier")
 	public void delSupplier(Model model,HttpServletRequest request,HttpServletResponse response,Integer id){
 		gemService.delSupplier(id);
+		renderText("{\"msg\":\"Y\"}");
+	}
+	
+	@RequestMapping("addLinkman")
+	public String addLinkman(Model model,HttpServletRequest request,HttpServletResponse response,Integer id){
+		if(id!=null){
+			LinkmanVO linkman=gemService.getLinkmanByid(id);
+			model.addAttribute("linkman", linkman);
+		}
+		return "/admin/gem/addLinkman";
+	}
+	
+	@RequestMapping("viewLinkman")
+	public void viewLinkman(Model model,HttpServletRequest request,HttpServletResponse response,Integer id){
+		List<LinkmanVO> linkmanList = gemService.getLinkman(id);
+		renderJson(linkmanList);
+	}
+	
+	@RequestMapping("delLinkman")
+	public void delLinkman(Model model,HttpServletRequest request,HttpServletResponse response,Integer id){
+		gemService.delLinkman(id);
 		renderText("{\"msg\":\"Y\"}");
 	}
 }
