@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 
 import com.bavlo.gemtak.model.gem.EquipmentVO;
 import com.bavlo.gemtak.model.gem.GemVO;
+import com.bavlo.gemtak.model.gem.LinkmanVO;
 import com.bavlo.gemtak.utils.CommonUtils;
 
 /**
@@ -114,11 +115,17 @@ public interface IGemService {
    */
   public List<EquipmentVO> getSupplier();
   
+  public List<LinkmanVO> getLinkman(Integer id);
+  
   public void saveSupplier(EquipmentVO equipment);
   
   public EquipmentVO getEquipmentByid(Integer id);
   
   public void delSupplier(Integer id);
+  
+  public LinkmanVO getLinkmanByid(Integer id);
+  
+  public void delLinkman(Integer id);
 }
 
 
