@@ -4,10 +4,10 @@
  */
 function winOpen(url,width,height) {
 	if(width == undefined){
-		width = 570;
+		width = 870;
 	}
 	if(height == undefined){
-		height = 370;
+		height = 670;
 	}
 	
     window.open(url+"?dateTime="+(new Date()).getTime(),'_blank','width='+width+'px,height='+height+'px;toolbar=no,menubar=no,scrollbars=yes, resizable=yes,location=no, status=no,screenX='+(window.screen.width/2-850/2)+',screenY='+(window.screen.height/2-550/2)); 
