@@ -14,36 +14,24 @@ public class EquipmentVO extends IdEntity {
 	private static final long serialVersionUID = -5779870299691542352L;
 
 	
-	//  供应商
+	//  品牌
 	private String vsupplierName;
-	//  供应商编号
-	private String vsupplierCode;
-	//  公司
+/*	//  供应商编号
+	private String vsupplierCode;*/
+	//  公司全称
 	private String company;
-    // 	卖家（供应商）			微信企业号所绑定的账号---供应商标签
-	private String supplier;
-	//  微信号
-	private String wxcode;
-	//  QQ
-	private String qq;
-	//  手机
-	private Integer phone;
-	//   座机
-	private String tel;
-	//   地址
-	private String address;
-	//    开户人
-	private String account_holder;
-	//    开户行
-	private String deposit_bank;
 	//    卡号
 	private String card_no;
-	//    邮编
-	private String post;
+	//    开户行
+	private String deposit_bank;
+	//    户名
+	private String account_holder;
 	//  是否关闭(N,Y)
 	private String bisClose;
 	//  创建日期
 	private Timestamp createdate;
+	
+	private String address;
 	
 	
 	public String getVsupplierName() {
@@ -51,12 +39,6 @@ public class EquipmentVO extends IdEntity {
 	}
 	public void setVsupplierName(String vsupplierName) {
 		this.vsupplierName = vsupplierName;
-	}
-	public String getVsupplierCode() {
-		return vsupplierCode;
-	}
-	public void setVsupplierCode(String vsupplierCode) {
-		this.vsupplierCode = vsupplierCode;
 	}
 	public String getBisClose() {
 		return bisClose;
@@ -76,36 +58,6 @@ public class EquipmentVO extends IdEntity {
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	public String getSupplier() {
-		return supplier;
-	}
-	public void setSupplier(String supplier) {
-		this.supplier = supplier;
-	}
-	public String getQq() {
-		return qq;
-	}
-	public void setQq(String qq) {
-		this.qq = qq;
-	}
-	public Integer getPhone() {
-		return phone;
-	}
-	public void setPhone(Integer phone) {
-		this.phone = phone;
-	}
-	public String getTel() {
-		return tel;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
 	public String getAccount_holder() {
 		return account_holder;
 	}
@@ -124,17 +76,11 @@ public class EquipmentVO extends IdEntity {
 	public void setCard_no(String card_no) {
 		this.card_no = card_no;
 	}
-	public String getPost() {
-		return post;
+	public String getAddress() {
+		return address;
 	}
-	public void setPost(String post) {
-		this.post = post;
-	}
-	public String getWxcode() {
-		return wxcode;
-	}
-	public void setWxcode(String wxcode) {
-		this.wxcode = wxcode;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }
