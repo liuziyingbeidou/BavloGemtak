@@ -12,6 +12,7 @@ import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.model.IdEntity;
 import com.bavlo.gemtak.model.gem.EquipmentVO;
 import com.bavlo.gemtak.model.gem.GemVO;
+import com.bavlo.gemtak.model.gem.LinkmanVO;
 import com.bavlo.gemtak.service.gem.itf.IGemService;
 import com.bavlo.gemtak.service.impl.CommonService;
 import com.bavlo.gemtak.utils.CommonUtils;
@@ -157,7 +158,7 @@ public class GemAService extends CommonService implements IGemService {
 	}
 	
 	/**
-	 * @Description: 根据供应商公司  查询 如果为空新增一条
+	 * @Description: 根据供应商公司  查询
 	 * @param @param vcode
 	 * @param @return
 	 * @return Integer
@@ -166,18 +167,7 @@ public class GemAService extends CommonService implements IGemService {
 		Integer mid = null;
 		String conts = " ifnull(bisClose,'N')='N' and company='"+company+"'";
 		EquipmentVO vo = findFirst(EquipmentVO.class, conts);
-		if(vo == null){
-			EquipmentVO evo = new EquipmentVO();
-			evo.setCreatedate(DateUtil.getCurTimestamp());
-			evo.setBisClose("N");
-			evo.setDr(IConstant.SHORT_ZERO);
-			evo.setTs(DateUtil.getCurTimestamp());
-			try {
-				mid = saveReID(evo);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}else{
+		if(vo != null){
 			mid = vo.getId();
 		}
 		return mid;
@@ -203,12 +193,13 @@ public class GemAService extends CommonService implements IGemService {
 			if(gvo != null){
 				String cond = " ifnull(bisClose,'N')='N' and id='"+mid+"'";
 				EquipmentVO evo = findFirst(EquipmentVO.class, cond);
+				LinkmanVO lvo = findFirst(LinkmanVO.class, " equipmentId="+mid);
 				gvo.setEquipment_id(mid);
-				gvo.setSupplier(evo.getSupplier());
-				gvo.setSupplier_code(evo.getVsupplierCode());
+				gvo.setSupplier(lvo.getSupplier());
 				gvo.setCompany(evo.getCompany());
-				gvo.setSupplier_tel(evo.getTel());
-				gvo.setLocation(evo.getAddress());
+				gvo.setSupplier_tel(lvo.getTel());
+				gvo.setLocation(lvo.getAddress());
+				gvo.setPosition(Direction);
 				gvo.setHeight(Height);
 				gvo.setMultiple(Multiple);
 				gvo.setWeight(Weight);
@@ -234,6 +225,11 @@ public class GemAService extends CommonService implements IGemService {
 		List<EquipmentVO> list = findAll(EquipmentVO.class);
 		return list;
 	}
+	@Override
+	 public List<LinkmanVO> getLinkman(Integer id){
+		List<LinkmanVO> linkmanlist = findAll(LinkmanVO.class,"  equipmentId="+id);
+		return linkmanlist;
+	  }
 	
 	@Override
 	public void saveSupplier(EquipmentVO equipment){
@@ -254,6 +250,18 @@ public class GemAService extends CommonService implements IGemService {
 	@Override
 	 public void delSupplier(Integer id){
 		delete(EquipmentVO.class, id);
+	}
+	
+	@Override
+	public LinkmanVO getLinkmanByid(Integer id){
+		LinkmanVO linkman = findFirst(LinkmanVO.class, "  id="+id);
+		return linkman;
+	}
+
+	@Override
+	public void delLinkman(Integer id) {
+		delete(LinkmanVO.class, id);
+		
 	}
 	
 }
