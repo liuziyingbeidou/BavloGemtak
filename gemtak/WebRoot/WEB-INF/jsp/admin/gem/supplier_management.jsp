@@ -64,8 +64,89 @@ html { overflow-x: auto; overflow-y: auto; border:0;}
 <link rel="stylesheet" href="<%=path %>/resources/admin/css/style.css" type="text/css"></link>
 </head>
 <SCRIPT language=JavaScript>
+function selinkman(id){
+   var url = "/gemtak/gemAdmin/viewLinkman.do";
+   $.post(url,{id:id},function(data){
+      $(".linkman").empty();
+      if(data != null){
+         $(".linkman").append("<table width='100%' border='0' cellpadding='4' cellspacing='1' bgcolor=''#464646' class='newfont03'>"+
+					"<tr>"+
+                    "<td height='100' colspan='10' align='center' bgcolor='#EEEEEE' class='tablestyle_title'>宝石供应商联系人信息列表 &nbsp;"+
+                    "<span class='menu'>"+ 
+                    	"【<a href='javascript:void(0);' onclick='addLinkman();' class='menu-btn'>新增</a>】 &nbsp;"+
+                    "</span>"+
+                    "</td>"+
+                    "</tr>"+
+                  "<tr>"+
+				    "<td width='4%' align='center' bgcolor='#EEEEEE'>联系人</td>"+
+				    "<td width='10%' height='20' align='center' bgcolor='#EEEEEE'>企业号账号</td>"+
+                    "<td width='10%' align='center' bgcolor='#EEEEEE'>个人微信号</td>"+
+                     "<td width='10%' align='center' bgcolor='#EEEEEE' >邮箱</td>"+
+                    "<td width='10%' align='center' bgcolor='#EEEEEE'>QQ</td>"+
+                    "<td width='4%' align='center' bgcolor='#EEEEEE'>手机</td>"+
+                    "<td width='4%' align='center' bgcolor='#EEEEEE'> 座机</td>"+
+                    "<td width='10%' align='center' bgcolor='#EEEEEE'>地址</td>"+
+                    "<td width='10%' align='center' bgcolor='#EEEEEE'>操作</td>"+
+                  "</tr><tr class='man'>");
+         var len = data.length;
+         for(var i = 0; i <= len; i++){
+              $(".man").append(
+				    "<td height='20' bgcolor='#FFFFFF'><div align='center'>"+
+					   ""+data[i].name+""+
+					"</div></td>"+
+					"<td height='20' bgcolor='#FFFFFF' align='center'><div align='center' class='STYLE1  companyid'  >"+data[i].supplier+"</div></td>"+
+					 "<td height='20' bgcolor='#FFFFFF' align='center'><div align='center'  class='STYLE1'>"+data[i].wxcode+"</div></td>"+
+					"<td height='20' bgcolor='#FFFFFF' align='center'><div align='center'  class='STYLE1'>"+data[i].email+"</div></td>"+
+					"<td height='20' bgcolor='#FFFFFF' align='center'><div align='center'  class='STYLE1'>"+data[i].qq+"</div></td>"+
+                    "<td height='20' bgcolor='#FFFFFF' align='center'><div align='center'  class='STYLE1'>"+data[i].phone+"</div></td>"+
+                    "<td height='20' bgcolor='#FFFFFF' align='center'><div align='center'  class='STYLE1'>"+data[i].tel+"</div></td>"+
+                    "<td height='20' bgcolor='#FFFFFF' align='center'><div align='center'  class='STYLE1'>"+data[i].address+"</div></td>"+
+                    "<td bgcolor='#FFFFFF'><div align='center'><a onclick='javasctipt:editLinkman("+data[i].id+")' href='javascript:void(0)'>修改</a> | <a onclick='javasctipt:delLinkman("+data[i].id+")' href='javascript:void(0)'>删除</a></div></td>"+
+                  "</tr>"+
+                "</table></td>"+
+              "</tr>"+
+            "</table>");
+         }
+      }
+   });
+};
 
-//新增
+//新增供应商联系人
+function addLinkman(){
+   	var url = "/gemtak/gemAdmin/addLinkman.do?type=add&";//
+	winOpen(url);
+}
+
+//修改供应商联系人
+function editLinkman(id){
+   	var url = "/gemtak/gemAdmin/addLinkman.do?id="+id+"&type=edit&";//
+	winOpen(url);
+}
+
+//删除供应商联系人
+function delLinkman(id){
+	if(confirm('确定要删除?')){
+		//method!delpattern?id=${bean.id}
+		$.ajax({
+	     type : "POST",
+	     url : "/gemtak/gemAdmin/delLinkman.do?id="+id,
+	     async:false,
+	     cache:false,
+	     success : function(data) {
+	        var flag = data.msg;
+	        if(flag == "Y"){
+	           alert("删除成功！");
+	        }
+	    	window.location.reload();
+	     },
+	     error : function(e) {
+	     	alert("删除失败");
+	     }
+	    });
+	}
+}
+
+//新增供应商
 function add(){
 	var url = "/gemtak/gemAdmin/addSupplier.do?type=add&";//
 	winOpen(url);
@@ -122,7 +203,8 @@ function del(id){
   <tr>
     <td><table id="subtree1" style="DISPLAY: " width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td><table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <td class="linkman">
+          <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"  >
           	 <tr style="display: none">
                <td height="20"><span class="newfont07">选择：<a href="#" class="right-font08" onclick="selectAll();">全选</a>-<a href="#" class="right-font08" onclick="unselectAll();">反选</a></span>
 		           <input name="Submit" type="button" class="right-button08" value="删除所选类型" />
@@ -130,10 +212,11 @@ function del(id){
 	              </td>
           </tr>
               <tr>
-                <td height="40" class="font42"><table width="100%" border="0" cellpadding="4" cellspacing="1" bgcolor="#464646" class="newfont03">
+                <td height="40" class="font42">
+                   <table width="100%" border="0" cellpadding="4" cellspacing="1" bgcolor="#464646" class="newfont03">
 
-					                  <tr>
-                    <td height="100" colspan="15" align="center" bgcolor="#EEEEEE"class="tablestyle_title">宝石供应商信息列表 &nbsp;
+					<tr>
+                    <td height="100" colspan="10" align="center" bgcolor="#EEEEEE"class="tablestyle_title">宝石供应商信息列表 &nbsp;
                     <span class="menu"> 
                     	【<a onclick="javascript:add()" class="menu-btn">新增</a>】 &nbsp;
                     </span>
@@ -141,19 +224,12 @@ function del(id){
                     </tr>
                   <tr>
 				    <td width="4%" align="center" bgcolor="#EEEEEE">序号</td>
-				    <td width="4%" height="20" align="center" bgcolor="#EEEEEE">供货商</td>
-                    <td width="4%" height="20" align="center" bgcolor="#EEEEEE">供货商编号</td>
-                    <td width="10%" align="center" bgcolor="#EEEEEE">公司</td>
-                    <td width="4%" align="center" bgcolor="#EEEEEE">供应商标签</td>
-                    <td width="4%" align="center" bgcolor="#EEEEEE">微信号</td>
-				    <td width="4%" height="20" align="center" bgcolor="#EEEEEE">QQ</td>
-                    <td width="10%" height="20" align="center" bgcolor="#EEEEEE"> 手机</td>
-                    <td width="10%" align="center" bgcolor="#EEEEEE">座机</td>
-                    <td width="10%" align="center" bgcolor="#EEEEEE">地址</td>
-                    <td width="4%" align="center" bgcolor="#EEEEEE"> 开户人</td>
-                    <td width="10" align="center" bgcolor="#EEEEEE">开户行</td>
+				    <td width="10%" height="20" align="center" bgcolor="#EEEEEE">品牌</td>
+                    <td width="10%" align="center" bgcolor="#EEEEEE">公司全称</td>
                     <td width="10%" align="center" bgcolor="#EEEEEE">卡号</td>
-                    <td width="10" align="center" bgcolor="#EEEEEE">邮编</td>
+                    <td width="10" align="center" bgcolor="#EEEEEE">开户行</td>
+                    <td width="4%" align="center" bgcolor="#EEEEEE"> 开户人</td>
+                    <td width="20%" align="center" bgcolor="#EEEEEE">地址</td>
                     <td width="10%" align="center" bgcolor="#EEEEEE">操作</td>
                   </tr>
                   <c:forEach items="${list}" var="bean" varStatus="status">
@@ -162,21 +238,14 @@ function del(id){
 				      ${status.index + 1 }
 				      </div></td>
 				    <td height="20" bgcolor="#FFFFFF"><div align="center">
-					   ${bean.vsupplierName }
+					   <a class="menu-btn"  href="javascript:void(0)"  onclick="selinkman(${bean.id})">${bean.vsupplierName }</a>
 					</div></td>
-                    <td height="20" bgcolor="#FFFFFF"><div align="center">${bean.vsupplierCode }</div></td>
-					<td height="20" bgcolor="#FFFFFF" align="center"><div align="center" class="STYLE1">${bean.company }</div></td>
-					<td height="20" bgcolor="#FFFFFF" align="center"><div align="center" class="STYLE1">${bean.supplier }</div></td>
-					<td height="20" bgcolor="#FFFFFF" align="center"><div align="center" class="STYLE1">${bean.wxcode }</div></td>
-					<td height="20" bgcolor="#FFFFFF" align="center"><div align="center" class="STYLE1">${bean.qq}</div></td>
-					<td height="20" bgcolor="#FFFFFF" align="center"><div align="center" class="STYLE1">${bean.phone}</div></td>
-					<td height="20" bgcolor="#FFFFFF" align="center"><div align="center" class="STYLE1">${bean.tel}</div></td>
-					<td height="20" bgcolor="#FFFFFF" align="center"><div align="center" class="STYLE1">${bean.address}</div></td>
-					<td height="20" bgcolor="#FFFFFF" align="center"><div align="center" class="STYLE1">${bean.account_holder}</div></td>
+					<td height="20" bgcolor="#FFFFFF" align="center"><div align="center" class="STYLE1  companyid"  >${bean.company }</div></td>
+					 <td height="20"  bgcolor="#FFFFFF"><div align="center" class="STYLE1">${bean.card_no}</div></td>
 					<td height="20" bgcolor="#FFFFFF" align="center"><div align="center" class="STYLE1">${bean.deposit_bank}</div></td>
-                    <td height="20"  bgcolor="#FFFFFF"><div align="center">${bean.card_no}</div></td>
-                    <td height="20"  bgcolor="#FFFFFF"><div align="center">${bean.post}</div></td>
-                    <td bgcolor="#FFFFFF"><div align="center"><a onclick="javasctipt:edit(${bean.id})" href="javascript:void()">修改</a> | <a onclick="javasctipt:del(${bean.id})" href="javascript:void()">删除</a></div></td>
+					<td height="20" bgcolor="#FFFFFF" align="center"><div align="center" class="STYLE1">${bean.account_holder}</div></td>
+                    <td height="20" bgcolor="#FFFFFF" align="center"><div align="center" class="STYLE1">${bean.address}</div></td>
+                    <td bgcolor="#FFFFFF"><div align="center"><a onclick="javasctipt:edit(${bean.id})" href="javascript:void(0)">修改</a> | <a onclick="javasctipt:del(${bean.id})" href="javascript:void(0)">删除</a></div></td>
                   </tr>
                   </c:forEach>
                 </table></td>
@@ -190,6 +259,7 @@ function del(id){
         </tr>
         <tr>
           <td height="33">
+          
           ${pagerinfo }
           </td>
         </tr>
