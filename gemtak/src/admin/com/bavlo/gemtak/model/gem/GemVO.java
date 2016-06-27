@@ -59,6 +59,8 @@ public class GemVO extends IdEntity implements Serializable {
 	private String multiple;
 	//     高度
 	private String height;
+	//     方位
+	private String position;
 	//		视角			
 	private String viewpoint;
 	//     变色性     默认为非变色性   1为非变色性 2为变色性
@@ -103,8 +105,6 @@ public class GemVO extends IdEntity implements Serializable {
 	private String vcode;
 	//		卖家（供应商）			微信企业号所绑定的账号---供应商标签
 	private String supplier;
-	//	    卖家编码（供应商）			
-	private String supplier_code;
 	//      公司
 	private String company;
 	
@@ -406,12 +406,6 @@ public class GemVO extends IdEntity implements Serializable {
 	public void setSupplier(String supplier) {
 		this.supplier = supplier;
 	}
-	public String getSupplier_code() {
-		return supplier_code;
-	}
-	public void setSupplier_code(String supplier_code) {
-		this.supplier_code = supplier_code;
-	}
 	public String getSupplier_tel() {
 		return supplier_tel;
 	}
@@ -495,6 +489,12 @@ public class GemVO extends IdEntity implements Serializable {
 	}
 	public void setHeight(String height) {
 		this.height = height;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
 	}
 	
 
