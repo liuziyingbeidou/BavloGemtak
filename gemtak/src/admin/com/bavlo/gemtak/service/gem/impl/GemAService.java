@@ -179,12 +179,12 @@ public class GemAService extends CommonService implements IGemService {
 		Boolean flag = false;
 		
 		/**
-		 * 1、首先根据供应商ID号判断是否已存在,非关闭态
-		 * 2、存在，返回主表ID；否则，保存返回ID
+		 * 1、首先根据供应商公司全称判断是否已存在,非关闭态
+		 * 2、存在，返回主表ID；
 		 */
 		Integer mid = getMidByCode(Brand);
 		/**
-		 * 3、根据主表ID和其他信息组织子表VO，保存
+		 * 3、根据传回的Gid和其他信息组织子表VO，保存
 		 */
 		if(mid != null){
 			String conts = " ifnull(dr,'0')='0' and gid='"+Gid+"'";
@@ -261,6 +261,17 @@ public class GemAService extends CommonService implements IGemService {
 	@Override
 	public void delLinkman(Integer id) {
 		delete(LinkmanVO.class, id);
+		
+	}
+
+	@Override
+	public void saveLinkman(LinkmanVO linkman) {
+		try {
+			saveOrUpdate(linkman);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
