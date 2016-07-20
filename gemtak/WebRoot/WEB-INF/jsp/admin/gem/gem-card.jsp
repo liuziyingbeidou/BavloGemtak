@@ -282,7 +282,8 @@ function deleteCert(){
 												lab-cn="${bean.pValueCN}">${pagevo['tableOrigin'] }
 												${bean.pValue}</option>
 										</c:forEach>
-									</select> <input type="hidden" name="origin_cn" class="h-origin-cn">
+									</select> 
+									<input type="hidden" name="origin_cn" class="h-origin-cn">
 									<input type="hidden" name="origin_en" class="h-origin-en">
 								</div>
 								<div class="li_inp_pr col-xs-6">
@@ -293,9 +294,9 @@ function deleteCert(){
 												lab-cn="${bean.pValueCN}">${pagevo['tableTreatment']
 												} ${bean.pValue}</option>
 										</c:forEach>
-									</select> <input type="hidden" name="treatment_cn"
-										class="h-treatment-cn"> <input type="hidden"
-										name="treatment_en" class="h-treatment-en">
+									</select> 
+									<input type="hidden" name="treatment_cn" class="h-treatment-cn"> 
+									<input type="hidden" name="treatment_en" class="h-treatment-en">
 								</div>
 							</li>
 							<li><textarea name="vmemo" class="form-control" rows="5"></textarea>
@@ -334,7 +335,7 @@ function deleteCert(){
 							</li>
 							<li><div class="li_inp_pl col-xs-6">
 									<input type="text" name="trade_price" class="form-control"
-										placeholder="${pagevo['tableTradePrice'] }"  value="${gem.trade_price }">
+										placeholder="${pagevo['tableTradePrice'] }"  value="${gem.trade_price }"/>
 								</div>
 								<div class="li_inp_pr col-xs-6">
 									<select class="form-control input-lg" name="trade_unit">
@@ -358,28 +359,28 @@ function deleteCert(){
 								<div class="li_inp_pl col-xs-6">
 									<select class="form-control input-lg sel-lab" name="lab_id">
 										<c:forEach var="bean" items="${listGemLab}">
-											<option value="${bean.pKey}" lab-en="${bean.pValueEN}"
-												lab-cn="${bean.pValueCN}">${pagevo['tableLabType']
-												} ${bean.pValue}</option>
+											<option value="${bean.pKey}" lab-en="${bean.pValueEN}" lab-cn="${bean.pValueCN}">
+											     ${pagevo['tableLabType']}  ${bean.pValue}
+											</option>
 										</c:forEach>
 									</select> <input type="hidden" name="lab_cn" class="h-lab-cn"> <input
 										type="hidden" name="lab_en" class="h-lab-en">
 								</div>
 								<div class="li_inp_pr col-xs-6">
 									<input type="text" name="lab_no" class="form-control"
-										placeholder="${pagevo['tableLabNo'] }">
+										placeholder="${pagevo['tableLabNo'] }"  value="${gem.lab_no}">
 								</div>
 							</li>
 							<li>
 								<div class="li_inp_pl col-xs-6">
-									<input type="text" name="supplier" class="form-control"
+									<input type="text" name="company" class="form-control"
 										value="${gem.company}"
 										placeholder="${pagevo['tableSupplier'] }">
 								</div>
 								<div class="li_inp_pr col-xs-6">
-									<input type="text" name="supplier_code" class="form-control"
-										value="${gem.supplier_code}"
-										placeholder="${pagevo['tableSupplierCode'] }">
+									<input type="text" name="equipment_id" class="form-control"
+										value="${gem.equipment_id}"
+										placeholder="公司ID">
 								</div>
 							</li>
 							<li><input type="text" name="location" class="form-control"
@@ -388,16 +389,14 @@ function deleteCert(){
 							<li>
 								<div class="li_inp_pl col-xs-5">
 									<div class="radio">
-										<label class="li_inp_pl col-xs-12"><input type="radio"
-											name="power" id="blankRadio1" value="A" aria-label="...">${pagevo['tableAllPower']
-											} </label> <label class="li_inp_pl col-xs-12"><input
-											type="radio" name="power" id="blankRadio2" value="B"
-											aria-label="...">${pagevo['tableSupplierPower'] } </label> <label
-											class="li_inp_pl col-xs-12"><input type="radio"
-											name="power" id="blankRadio3" value="M" aria-label="...">${pagevo['tableSelfPower']
-											}</label>
-									</div>
-								</div>
+										<label class="li_inp_pl col-xs-12">
+										   <input type="radio" name="power" id="blankRadio1" value="A" aria-label="...">${pagevo['tableAllPower']} </label> 
+										<label class="li_inp_pl col-xs-12">
+										   <input type="radio" name="power" id="blankRadio2" value="B" aria-label="...">${pagevo['tableSupplierPower'] } </label> 
+										<label class="li_inp_pl col-xs-12">
+										   <input type="radio" name="power" id="blankRadio3" value="M" aria-label="...">${pagevo['tableSelfPower']}</label>
+								   </div>
+							    </div>
 								<div class=" col-xs-2">
 									<p class="s_xian"></p>
 								</div>
