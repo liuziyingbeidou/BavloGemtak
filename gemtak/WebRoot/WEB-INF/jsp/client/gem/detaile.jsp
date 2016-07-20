@@ -233,31 +233,31 @@ function addShoppCar(id){
 					</li><li>切工：<span>${gem.cut_cn}</span>
 					</li><li>产地：<span>${gem.origin_cn}</span>
 					</li><li>处理：<span>${gem.treatment_cn}</span>
-					</li><li>证书：<span>国检（${gem.lab_en}） ${gem.supplier_code}</span>
-					</li><li>数量:  <span class="selquantity">1</span>
-					</li><li>编号：<span>${gem.stock_qty}</span>
+					</li><li>证书：<span>国检（${gem.lab_en}） ${gem.lab_no}</span>
+					</li><li>编号：<span>${gem.lab_no}</span>
 					</li><li>卖家：<span>${gem.company}</span></li>
+					</li><li>数量：<span class="selquantity">1</span>
 				</ul>
 				<c:if test="${bis=='Y'}">
 				 <c:if test="${gem.pairs=='sl'}">
-				   <p>价格（Price）：<span>¥${gem.trade_price} <em>/单粒</em></span></p>
+				   <p>价格：<span>¥${gem.trade_price} <em>/单粒</em></span></p>
 				 </c:if>
 				 <c:if test="${gem.pairs=='pl'}">
-				   <p>价格（Price）：<span>¥${gem.trade_price} <em>/配对</em></span></p>
+				   <p>价格：<span>¥${gem.trade_price} <em>/配对</em></span></p>
 				 </c:if>
 				 <c:if test="${gem.pairs=='ml'}">
-				   <p>价格（Price）：<span>¥${gem.trade_price} <em>/</em>多粒</span></p>
+				   <p>价格：<span>¥${gem.trade_price} <em>/</em>多粒</span></p>
 				 </c:if>
 				</c:if>
 				<c:if test="${bis!='Y'}">
 				  <c:if test="${gem.pairs=='sl'}">
-				   <p>价格（Price）：<span>¥${gem.retail_price} <em>/单粒</em></span></p>
+				   <p>价格：<span>¥${gem.retail_price} <em>/单粒</em></span></p>
 				 </c:if>
 				 <c:if test="${gem.pairs=='pl'}">
-				   <p>价格（Price）：<span>¥${gem.retail_price} <em>/配对</em></span></p>
+				   <p>价格：<span>¥${gem.retail_price} <em>/配对</em></span></p>
 				 </c:if>
 				 <c:if test="${gem.pairs=='ml'}">
-				   <p>价格（Price）：<span>¥${gem.retail_price} <em>/</em>多粒</span></p>
+				   <p>价格：<span>¥${gem.retail_price} <em>/</em>多粒</span></p>
 				 </c:if>
 				</c:if>
 				<b style="display: none"><img  class="360tupian" src="${ctx }/resources/client/images/cp2.jpg"/></b>
