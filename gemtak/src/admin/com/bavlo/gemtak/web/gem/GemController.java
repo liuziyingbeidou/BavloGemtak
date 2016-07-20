@@ -379,18 +379,29 @@ public class GemController extends BaseController {
 	}
 	
 	@RequestMapping("addLinkman")
-	public String addLinkman(Model model,HttpServletRequest request,HttpServletResponse response,Integer id){
+	public String addLinkman(Model model,HttpServletRequest request,HttpServletResponse response,Integer id,Integer equipmentId){
 		if(id!=null){
 			LinkmanVO linkman=gemService.getLinkmanByid(id);
 			model.addAttribute("linkman", linkman);
 		}
+		model.addAttribute("equipmentId", equipmentId);
 		return "/admin/gem/addLinkman";
 	}
 	
+	@RequestMapping("saveLinkman")
+	public void saveLinkman(Model model,HttpServletRequest request,HttpServletResponse response,LinkmanVO linkman){
+		gemService.saveLinkman(linkman);
+		renderText("{\"msg\":\"Y\"}");
+	}
+	
 	@RequestMapping("viewLinkman")
-	public void viewLinkman(Model model,HttpServletRequest request,HttpServletResponse response,Integer id){
+	public String viewLinkman(Model model,HttpServletRequest request,HttpServletResponse response,Integer id){
 		List<LinkmanVO> linkmanList = gemService.getLinkman(id);
-		renderJson(linkmanList);
+		if(linkmanList!=null){
+			model.addAttribute("linkmanList", linkmanList);
+			model.addAttribute("id", id);
+		}
+		return "/admin/gem/linkman_management";
 	}
 	
 	@RequestMapping("delLinkman")
