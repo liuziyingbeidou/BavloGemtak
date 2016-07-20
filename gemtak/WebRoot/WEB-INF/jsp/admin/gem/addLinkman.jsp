@@ -66,8 +66,11 @@ function save(){
 	} 
   var url = "<%=path %>/gemAdmin/saveLinkman.do";
   $.post(url,$('#linkmanVO').serialize(),function(data){
-	  alert("保存成功！");
-	  location.href = "<%=path %>/gemAdmin/viewSupplier.do";
+        alert(data);
+	    if(data=="Y"){
+	      alert("保存成功！");
+         location.href = "<%=path %>/gemAdmin/viewSupplier.do";
+	    }
   });
 }
 
@@ -98,7 +101,7 @@ function save(){
 					  <table border="0" cellpadding="2" cellspacing="1" style="width:100%">
 					  <tr>
 					    <td nowrap align="right" width="11%">联系人姓名:</td>
-					    <td width="27%"><input name=''name id="shopcode" type="text"  class="text  supplier" style="width:300px" value="${linkman.supplier}" /></td>
+					    <td width="27%"><input name='lname' id="shopcode" type="text"  class="text  supplier" style="width:300px" value="${linkman.lname}" /></td>
 					    <td align="right" width="25%">&nbsp;</td>
 					    <td width="37%">&nbsp;</td>
 					  </tr>
@@ -146,7 +149,15 @@ function save(){
 					  </tr>
 					 <tr>
 					    <td width="14%" align="right" nowrap>邮编:</td>
-					    <td width="27%"><input name='post' id="shopname" type="text" class="text  post" style="width:300px" value="${linkman.post }" /></td>
+					    <td width="27%">
+					       <input name='post' id="shopname" type="text" class="text  post" style="width:300px" value="${linkman.post }" />
+					    </td>
+					  </tr>
+					  <tr style="display: none;">
+					    <td width="14%" align="right" nowrap>所属公司:</td>
+					    <td width="27%">
+					       <input name="equipmentId"  type="hidden" class="text  post" style="width:300px" value="${equipmentId }" />
+					    </td>
 					  </tr>
 					  </table>
 			  <br />
