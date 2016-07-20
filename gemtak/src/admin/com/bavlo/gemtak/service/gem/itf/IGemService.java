@@ -126,6 +126,8 @@ public interface IGemService {
   public LinkmanVO getLinkmanByid(Integer id);
   
   public void delLinkman(Integer id);
+  
+  public void saveLinkman(LinkmanVO linkman);
 }
 
 
