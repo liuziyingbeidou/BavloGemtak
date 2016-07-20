@@ -11,7 +11,7 @@ public class LinkmanVO extends IdEntity{
         
 	private static final long serialVersionUID = 3453053583850358641L;
 		//  联系人姓名
-	    private String name;
+	    private String lname;
 	    // 	企业号账号
 		private String supplier;
 		//  个人微信号
@@ -32,11 +32,11 @@ public class LinkmanVO extends IdEntity{
 		private Integer equipmentId;
 		
 		
-		public String getName() {
-			return name;
+		public String getLname() {
+			return lname;
 		}
-		public void setName(String name) {
-			this.name = name;
+		public void setLname(String lname) {
+			this.lname = lname;
 		}
 		public String getSupplier() {
 			return supplier;
