@@ -47,8 +47,7 @@ function launchFullScreen(element) {
   }
 }
 // 在支持全屏的浏览器中启动全屏
-// 整个页面
-launchFullScreen(document.documentElement);
+launchFullScreen(document.getElementById("videoElement"));
 
 </script>
 
@@ -59,7 +58,7 @@ launchFullScreen(document.documentElement);
 </style>
 </head>
 <body> 
-	<div class="tit_img" style="width: 100%;">
+	<div id="videoElement" class="tit_img" style="width: 100%;">
 	   <jsp:include  page="load-img.jsp"></jsp:include>
 	   
 	   <span><a href="javascript:void(0)" >
