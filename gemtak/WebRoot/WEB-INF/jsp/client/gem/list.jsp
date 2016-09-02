@@ -24,68 +24,64 @@
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/gemClient.js"></script>
 <script language=javaScript>
 	 
-	function show_menuone(ID){
-			 var totalCat=8;
-         	 for(i=1;i<totalCat;i++)
-         	 {
-         	   if(ID!=i){
-               $('#typeid'+i).removeClass("pa_sal");
-			   $('#typeid'+i).addClass("");
-               $('#contid'+i).css({display:"none"});
-             }else{
-              $('#typeid'+i).addClass("pa_sal");
-			  $('#typeid'+i).removeClass("");
-              $('#contid'+ID).css({display:"block"});  
-         	          
-             }
-           }
-         }	
-		 
-		 function show_menu(ID){
-			 var totalCat=3;
-         	 for(i=1;i<totalCat;i++)
-         	 {
-         	   if(ID!=i){
-               $('#type'+i).removeClass("a_sel");
-			   $('#type'+i).addClass("");
-               $('#cont'+i).css({display:"none"});
-             }else{
-              $('#type'+i).addClass("a_sel");
-			  $('#type'+i).removeClass("");
-              $('#cont'+ID).css({display:"block"});  
-         	          
-             }
-           }
-         }
-         
-         
-         
-         $(function(){
-           //1.根据类型名称或id模糊查询 
-           $(".select-type").click(function(){
-            var typeval = $(".input-type-sel").val();
-            location.href = "selectClientByType.do?&typegem="+typeval;
-           });
-           
-           //2.按时间排序
-           $(".select-createdate").change(function(){
-            var switchover = $(".sel-show").val();
-            selectClientList(switchover);
-           });
-           
-           //3.横排展示界面
-           $(".show-line").click(function(){
-            $(".sel-show").val(2);
-            selectClientList(2);
-           });
-           
-           //4.宫格展示界面
-           $(".show-speed").click(function(){
-            $(".sel-show").val(1);
-             selectClientList(1);
-           });
-           
-         });
+function show_menuone(ID){
+   var totalCat=8;
+   for(i=1;i<totalCat;i++){
+	  if(ID!=i){
+	      $('#typeid'+i).removeClass("pa_sal");
+	      $('#typeid'+i).addClass("");
+	      $('#contid'+i).css({display:"none"});
+      }else{
+	     $('#typeid'+i).addClass("pa_sal");
+	     $('#typeid'+i).removeClass("");
+	     $('#contid'+ID).css({display:"block"});  
+      }
+   }
+ }	
+	 
+function show_menu(ID){
+   var totalCat=3;
+   for(i=1;i<totalCat;i++){
+      if(ID!=i){
+          $('#type'+i).removeClass("a_sel");
+          $('#type'+i).addClass("");
+          $('#cont'+i).css({display:"none"});
+        }else{
+	       $('#type'+i).addClass("a_sel");
+	       $('#type'+i).removeClass("");
+	       $('#cont'+ID).css({display:"block"});  
+        }
+   }
+}
+        
+        
+        
+$(function(){
+  //1.根据类型名称或id模糊查询 
+  $(".select-type").click(function(){
+   var typeval = $(".input-type-sel").val();
+   location.href = "selectClientByType.do?&typegem="+typeval;
+  });
+  
+  //2.按时间排序
+  $(".select-createdate").change(function(){
+   var switchover = $(".sel-show").val();
+   selectClientList(switchover);
+  });
+  
+  //3.横排展示界面
+  $(".show-line").click(function(){
+   $(".sel-show").val(2);
+   selectClientList(2);
+  });
+  
+  //4.宫格展示界面
+  $(".show-speed").click(function(){
+   $(".sel-show").val(1);
+    selectClientList(1);
+  });
+          
+});
          
 $(window).scroll(function(){
     t = $(document).scrollTop();
@@ -120,7 +116,7 @@ $(window).scroll(function(){
 			<a href="javascript:void(0);" id="typeid4"  onclick="javascript:show_menuone(4);">价格<b class="hidden-xs hidden-sm">Price</b></a>
 		</p>
 		<div class="sou col-md-4 hidden-xs hidden-sm">
-		  <input class="sear_ch_input input-type-sel" type="text" value="巴黎之吻"><input class="sear_ch_sub select-type" type="button"  value="">
+		  <input class="sear_ch_input input-type-sel" type="text"  placeholder="巴黎之吻"><input class="sear_ch_sub select-type" type="button"  value="">
 		</div>
 	  </div>
 	  <div class="line "></div>
