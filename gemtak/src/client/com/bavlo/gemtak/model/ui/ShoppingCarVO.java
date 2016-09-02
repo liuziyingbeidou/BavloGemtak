@@ -9,15 +9,15 @@ import com.bavlo.gemtak.model.IdEntity;
  * @Title: 宝珑Gemtak
  * @ClassName: ShoppingCardVO 
  * @Description: 购物车主表
- * @author lisuike
+ * @author lsk
  * @date 2016-3-28 上午10:10
  */
 @Entity
 @Table(name="gt_shopping")
 public class ShoppingCarVO extends IdEntity{
     /**
-	 * 
-	 */
+     * 
+     */
 	private static final long serialVersionUID = 1L;
 	//用户id
 	private Integer user_id;
