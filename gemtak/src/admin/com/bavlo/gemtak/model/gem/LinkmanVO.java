@@ -5,6 +5,14 @@ import javax.persistence.Table;
 
 import com.bavlo.gemtak.model.IdEntity;
 
+/**
+ * 
+ * @Title :宝珑Gemtak
+ * @ClassName :LinkmanVO
+ * @Description :供应商联系人VO
+ * @author lsk
+ * @date :
+ */
 @Entity
 @Table(name="gt_linkman")
 public class LinkmanVO extends IdEntity{
@@ -31,7 +39,9 @@ public class LinkmanVO extends IdEntity{
 		//   所属公司
 		private Integer equipmentId;
 		
+
 		
+/*--------------------------------------------------------------------------------*/
 		public String getLname() {
 			return lname;
 		}
