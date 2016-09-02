@@ -7,6 +7,14 @@ import javax.persistence.Table;
 
 import com.bavlo.gemtak.model.IdEntity;
 
+/**
+ * 
+ * @Title :宝珑Gemtak
+ * @ClassName :EquipmentVO
+ * @Description :供应商
+ * @author lsk
+ * @date 2016-9-2上午11:37:05
+ */
 @Entity
 @Table(name="gt_equipment")
 public class EquipmentVO extends IdEntity {
@@ -33,7 +41,9 @@ public class EquipmentVO extends IdEntity {
 	
 	private String address;
 	
+
 	
+/*--------------------------------------------------------------------------------*/
 	public String getVsupplierName() {
 		return vsupplierName;
 	}
