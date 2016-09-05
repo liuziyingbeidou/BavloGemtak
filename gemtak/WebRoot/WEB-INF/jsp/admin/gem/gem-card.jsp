@@ -254,9 +254,9 @@ function deleteCert(){
 									<select class="form-control input-lg sel-clarity"
 										name="clarity_id">
 										<c:forEach var="bean" items="${listGemClarity}">
-											<option value="${bean.pKey}" lab-en="${bean.pValueEN}"
-												lab-cn="${bean.pValueCN}">${pagevo['tableGemClarity']
-												} ${bean.pValue}</option>
+											<option value="${bean.pKey}" lab-en="${bean.pValueEN}" lab-cn="${bean.pValueCN}">
+											   ${pagevo['tableGemClarity']} ${bean.pValue}
+											</option>
 										</c:forEach>
 									</select> <input type="hidden" name="clarity_cn" class="h-clarity-cn">
 									<input type="hidden" name="clarity_en" class="h-clarity-en">
