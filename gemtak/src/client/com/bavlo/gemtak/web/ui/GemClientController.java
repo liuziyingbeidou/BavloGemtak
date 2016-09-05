@@ -4,10 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +25,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.apache.commons.lang3.StringUtils;
 
 import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.constant.controller.IClientForward;
@@ -46,19 +42,12 @@ import com.bavlo.gemtak.util.weixin.WXPayUtil;
 import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.DateUtil;
 import com.bavlo.gemtak.utils.GenerateQrCodeUtil;
-import com.bavlo.gemtak.utils.JsonUtils;
 import com.bavlo.gemtak.utils.QrCodeUtil;
-import com.bavlo.gemtak.utils.StringUtil;
 import com.bavlo.gemtak.utils.WebUtils;
 import com.bavlo.gemtak.utils.wxcode.WXUtil;
 import com.bavlo.gemtak.web.BaseController;
 import com.bavlo.gemtak.web.weixin.GetWeiXinCode;
 import com.bavlo.gemtak.weixin.qy.interceptor.OAuthRequired;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
 
 /**
  * @Title: 宝珑Gemtak
@@ -249,7 +238,7 @@ public class GemClientController extends BaseController {
 		GemVO gem = gemService.findGemVOByID(id);
 		gemService.updateGemVOPageViews(gem);//每查看一次详情页，浏览次数加1
 		model.addAttribute("gem", gem);
-		model.addAttribute("model", "hbx");   //gem.getUrl_360();
+		model.addAttribute("model", gem.getUrl_360());   //gem.getUrl_360();
 		/*return IClientForward.viewGemDetaile;*/
 		return "/client/gem/detaile";
 	}
@@ -264,14 +253,15 @@ public class GemClientController extends BaseController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value="viewGemPic")
-	public String viewGemPic(Model model,HttpServletResponse response,HttpServletRequest request) throws Exception{
+	public String viewGemPic(Model model,HttpServletResponse response,HttpServletRequest request,Integer id) throws Exception{
 		
 		//当前本地化语言
 		String lang = WebUtils.getLang(request);
 		System.out.println("Loc Lang："+lang);
 		//根据本地语言更新页面数据
 		GemClientPageModel.getCDetailePageModel(model,lang);
-		model.addAttribute("model", "hbx");
+		GemVO gem = gemService.findGemVOByID(id);
+		model.addAttribute("model", gem.getUrl_360());   //gem.getUrl_360();
 		return "/client/gem/full-img";
 	}
 	
@@ -1365,12 +1355,21 @@ public class GemClientController extends BaseController {
 		return IClientForward.gemUser;
 	}
 	
+	/**
+	 * 11.将图片文件夹传到360页面
+	 * @param model
+	 * @param response
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="loadImg")
 	public String loadImg(Model model,HttpServletResponse response,HttpServletRequest request){
 		
 		model.addAttribute("model", "hbx");
 		return "/client/gem/load-img";
 	}
+	
+	
 	@RequestMapping("imgValidate")
 	@ResponseBody
 	public String imgValidate(HttpServletRequest request,
