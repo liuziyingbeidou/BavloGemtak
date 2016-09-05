@@ -247,8 +247,7 @@ function selectClientList(switchover) {
 		inwheres += pairsk + "','";
 	}
 	inwheres = inwheres.substring(0, inwheres.length - 2);
-	$
-			.post(
+	$.post(
 					url,
 					{
 						typegem : gemType,
