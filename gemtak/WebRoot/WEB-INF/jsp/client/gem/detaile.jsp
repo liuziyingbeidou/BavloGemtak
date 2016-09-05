@@ -133,7 +133,8 @@ function addShoppCar(id){
  }
 
  function viewFullScreen(){
-  location.href="/gemtak/gemClient/viewGemPic.do";
+  var gid = $(".tit_sm").attr("gid");
+  location.href="/gemtak/gemClient/viewGemPic.do?id="+gid;
  }
 
 </script>
@@ -184,7 +185,7 @@ function addShoppCar(id){
 			   <p>Gemtak</p>
 			   <b>
 			     <a href="javascript:void(0)" onclick="viewFullScreen();">
-			      <img src="${ctx }/resources/client/images/full.png" />
+			      <img src="${ctx }/resources/client/images/full.png"  alt="全屏显示"/>
 			     </a>
 			   </b>
 			 </div>
@@ -222,7 +223,7 @@ function addShoppCar(id){
 				</li>			 
 			 </ul>      		    
 			</div>
-			<div class="tit_sm  col-sm-12 col-md-5">
+			<div class="tit_sm  col-sm-12 col-md-5" gid="${gem.id}">
 				<h6>${gem.weight} ${gem.type_cn} （${gem.type_en}）</h6>
 				<ul>
 					<li><span>${gem.company}</span> </li><li>TEL：${gem.supplier_tel}
