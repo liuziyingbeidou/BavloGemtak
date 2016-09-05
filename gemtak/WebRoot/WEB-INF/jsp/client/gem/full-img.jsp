@@ -67,7 +67,7 @@ launchFullScreen(document.getElementById("videoElement"));
 	   <p>Gemtak</p>
 	   <b>
 	     <a href="javascript:void(0)" onclick="history.go(-1);">
-	      <img src="${ctx }/resources/client/images/small.png" />
+	      <img src="${ctx }/resources/client/images/small.png"  alt="回看原图"/>
 	     </a>
 	   </b>
 	</div>
