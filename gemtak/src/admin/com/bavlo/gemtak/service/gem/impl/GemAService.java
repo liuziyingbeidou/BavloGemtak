@@ -1,15 +1,11 @@
 package com.bavlo.gemtak.service.gem.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
-import com.alibaba.druid.sql.dialect.sqlserver.ast.SQLServerColumnDefinition.Identity;
 import com.bavlo.gemtak.constant.IConstant;
-import com.bavlo.gemtak.model.IdEntity;
 import com.bavlo.gemtak.model.gem.EquipmentVO;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.model.gem.LinkmanVO;
@@ -46,9 +42,9 @@ public class GemAService extends CommonService implements IGemService {
 		
 	}
 
-	/*
-	 * 3.15 lisuike  新增、修改宝石
-	 * @see com.bavlo.gemtak.service.gem.itf.IGemService#saveGemVO(com.bavlo.gemtak.model.gem.GemVO)
+	/**
+	 * 1. 修改宝石
+	 * @atuhor lsk 3.15
 	 */
 	@Override
 	public void updateGemVO(GemVO gemVO) throws Exception {
@@ -59,7 +55,8 @@ public class GemAService extends CommonService implements IGemService {
 	}
 
 	/**
-	 * 3.15 lisuike 查询所有的宝石
+	 *2. 查询所有的宝石
+	 * @author 3.15 lisuike 
 	 * @see com.bavlo.gemtak.service.gem.itf.IGemService#findAllGemVO()
 	 */
 	@Override
@@ -69,7 +66,8 @@ public class GemAService extends CommonService implements IGemService {
 	}
 
 	/**
-	 * 3.15 lisuike 根据id查询 一个GemVO
+	 * 3.根据id查询一个宝石
+	 * @author 3.15 lisuike 
 	 * 
 	 */
 	@Override
@@ -85,7 +83,7 @@ public class GemAService extends CommonService implements IGemService {
 
 	
 	/**
-	 * 分页查询
+	 * 4. 分页查询
 	 * select * from tableName where 条件 limit 当前页码*页面容量-1 , 页面容量
 	 */
 	@Override
@@ -98,7 +96,9 @@ public class GemAService extends CommonService implements IGemService {
 		return listvo;
 	}
 
-	//点击发布按钮，修改数据库字段
+	/**
+	 * 5.点击发布按钮，修改数据库字段
+	 */
 	@Override
 	public void updateGemById(Integer id,String st) throws Exception {
 		String vrel = IConstant.RELEASE_S;
@@ -117,7 +117,9 @@ public class GemAService extends CommonService implements IGemService {
 	}
 
 	
-	//点击删除按钮，更新DR字段为1
+	/**
+	 * 6.点击删除按钮，更新DR字段为1
+	 */
 	public void updateDrGemById(Integer id) throws Exception {
 		if(id != null){
 			String[] attrname = new String[]{"dr"};
@@ -132,6 +134,9 @@ public class GemAService extends CommonService implements IGemService {
 		return getCountByHQL(GemVO.class, contions);
 	}
 
+	/**
+	 * 7.设备上传时，传GID
+	 */
 	@Transactional
 	@Override
 	public String saveHeadAndBody(String vcode){
@@ -158,7 +163,7 @@ public class GemAService extends CommonService implements IGemService {
 	}
 	
 	/**
-	 * @Description: 根据供应商公司  查询
+	 * 8.根据供应商公司  查询供应商
 	 * @param @param vcode
 	 * @param @return
 	 * @return Integer
@@ -173,7 +178,9 @@ public class GemAService extends CommonService implements IGemService {
 		return mid;
 	}
 
-	//参数为Gid、方位，视角、高度、公司、重量、倍数、变色性
+	/**
+	 * 9.参数为Gid、方位，视角、高度、公司、重量、倍数、变色性
+	 */
 	@Override
 	public Boolean getGemVOByGid(String Gid,String Direction,String ViewAngle,String Height,String Brand,String Weight,String Multiple,Integer LightType)throws Exception{
 		Boolean flag = false;
@@ -218,19 +225,26 @@ public class GemAService extends CommonService implements IGemService {
 	}
 
 	/**
-	 * 查询出所有的宝石供应商
+	 * 10.查询出所有的宝石供应商
 	 */
 	@Override
 	public List<EquipmentVO> getSupplier(){
 		List<EquipmentVO> list = findAll(EquipmentVO.class);
 		return list;
 	}
+	
+	/**
+	 * 11.根据供应商id查询供应商联系人
+	 */
 	@Override
 	 public List<LinkmanVO> getLinkman(Integer id){
 		List<LinkmanVO> linkmanlist = findAll(LinkmanVO.class,"  equipmentId="+id);
 		return linkmanlist;
 	  }
 	
+	/**
+	 * 12.保存供应商
+	 */
 	@Override
 	public void saveSupplier(EquipmentVO equipment){
 		try {
@@ -241,29 +255,44 @@ public class GemAService extends CommonService implements IGemService {
 		}
 	}
 	
+	/**
+	 * 13.根据id查询供应商
+	 */
 	@Override
 	public EquipmentVO getEquipmentByid(Integer id){
 		EquipmentVO equipmentVO = findFirst(EquipmentVO.class, "  id="+id);
 		return equipmentVO;
 	}
 	
+	/**
+	 * 14.删除
+	 */
 	@Override
 	 public void delSupplier(Integer id){
 		delete(EquipmentVO.class, id);
 	}
 	
+	/**
+	 * 15.根据id查询一个联系人
+	 */
 	@Override
 	public LinkmanVO getLinkmanByid(Integer id){
 		LinkmanVO linkman = findFirst(LinkmanVO.class, "  id="+id);
 		return linkman;
 	}
 
+	/**
+	 * 16.删除联系人
+	 */
 	@Override
 	public void delLinkman(Integer id) {
 		delete(LinkmanVO.class, id);
 		
 	}
 
+	/**
+	 * 17.保存联系人
+	 */
 	@Override
 	public void saveLinkman(LinkmanVO linkman) {
 		try {
