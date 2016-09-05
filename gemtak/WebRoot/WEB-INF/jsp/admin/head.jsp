@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${ctx }/resources/amazeui/css/amazeui.min.css"/>
 <script type="text/javascript" src="${ctx }/resources/amazeui/js/handlebars.min.js"></script>
 <script type="text/javascript" src="${ctx }/resources/amazeui/js/amazeui.min.js"></script>
-<<script type="text/javascript">
+<script type="text/javascript">
  function selGemList(){
    location.href = "${ctx}/gemAdmin/viewGemList.do";
  }
