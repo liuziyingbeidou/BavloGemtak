@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bavlo.gemtak.constant.IConstant;
 import com.bavlo.gemtak.constant.page.AGemListLang;
-import com.bavlo.gemtak.model.LoginVO;
 import com.bavlo.gemtak.model.gem.EquipmentVO;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.model.gem.LinkmanVO;
@@ -64,7 +63,7 @@ public class GemController extends BaseController {
 	 * @param shapegem
 	 * @param inputgem
 	 * @return
-	 * OAuthRequired 配置注解
+	 * OAuthRequired 配置注解 （开放授权）
 	 */
 	@OAuthRequired
 	@RequestMapping(value="viewGemList")
