@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bavlo.gemtak.model.gem.EquipmentVO;
 import com.bavlo.gemtak.service.gem.itf.IGemService;
-import com.bavlo.gemtak.utils.StringHelper;
-import com.bavlo.gemtak.utils.StringUtil;
 import com.bavlo.gemtak.web.BaseController;
-import com.google.zxing.common.StringUtils;
 
 /**
  * @Title: 接口Gemtak
@@ -33,6 +30,13 @@ public class InvokeController extends BaseController {
 	@Resource
 	IGemService gemService;
 	
+	/**
+	 * 1.设备上传图片接口
+	 * @param request
+	 * @param response
+	 * @param ecode
+	 * @return
+	 */
 	@RequestMapping("uploadGemPic")
 	@ResponseBody
 	public String uploadGemPic(HttpServletRequest request,HttpServletResponse response,String ecode){
@@ -47,7 +51,21 @@ public class InvokeController extends BaseController {
 		return gemId;
 	}
 	
-	//
+	/**
+	 * 2.设备上传完成调用的接口
+	 * @param request
+	 * @param respose
+	 * @param Gid
+	 * @param Direction
+	 * @param ViewAngle
+	 * @param Height
+	 * @param Brand
+	 * @param Weight
+	 * @param Multiple
+	 * @param LightType
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	@RequestMapping(value="saveGem",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String  saveGem(HttpServletRequest request,HttpServletResponse respose,String Gid,String Direction,
@@ -71,6 +89,13 @@ public class InvokeController extends BaseController {
 		return null;
 	}
 
+	/**
+	 * 3.将所有的供应商数据传给设备
+	 * @param request
+	 * @param respose
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	@RequestMapping(value="getSupplier",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String getSupplier(HttpServletRequest request,HttpServletResponse respose) throws UnsupportedEncodingException{
