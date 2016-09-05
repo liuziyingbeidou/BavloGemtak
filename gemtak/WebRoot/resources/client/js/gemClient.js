@@ -286,7 +286,7 @@ function selectClientList(switchover) {
 													"<li class='col-md-3 col-xs-6'>"
 															+ "<span><a href='javascript:void(0)' onclick='goDetail("
 															+ data[i].id
-															+ ")'><image class='360tupian'  src='/gemtak/resources/client/images/cp1.png' /></a></span>"
+															+ ")'><image class='360tupian'  src='http://stylepics.bavlo.com/Gemtak/gempic/"+data[i].gid+"s/001.jpg' /></a></span>"
 															+ "<h6><b>"
 															+ data[i].type_cn
 															+ "<font class='hidden-xs hidden-sm'>（"
@@ -310,7 +310,7 @@ function selectClientList(switchover) {
 									$(".appendClientList .cList")
 											.append(
 													"<tr>"
-															+ "<td><image src='/gemtak/resources/client/images/cp1.png' width='120px'/></td>"
+															+ "<td><image src='http://stylepics.bavlo.com/Gemtak/gempic/"+data[i].gid+"s/001.jpg'' width='120px'/></td>"
 															+ "<td><b>"
 															+ data[i].type_cn
 															+ "</b> <br />"
