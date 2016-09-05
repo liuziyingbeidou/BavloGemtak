@@ -146,7 +146,7 @@ function selGemCard(gemid){
 		 <dl class="nr_con col-md-12">
 		     <dt class="col-md-1 col-xs-3">
 		         <!-- 宝石列表 -后续完善-->
-				 <img onclick="selGemCard(${gem.id})" src="${ctx }/resources/1024/hbx/001.jpg" style="width:100%"/>
+				 <img onclick="selGemCard(${gem.id})" src="http://stylepics.bavlo.com/gemtak/${gem.gid}/${gem.is_cover}" style="width:100%"/>
 				 <p class=" hidden-md hidden-lg"><a href="" class="col-md-6 col-xs-6">${pagevo['ltGemDel'] }</a><a href="" class="col-md-6 col-xs-6">${pagevo['ltGemRelease'] }</a></p>
 			 </dt>
 			 <dd class="col-md-11 col-xs-9">
