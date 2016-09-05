@@ -53,7 +53,7 @@ public class GemController extends BaseController {
 	}
 	
 	/**
-	 * 管理首页
+	 * 1. 管理首页
 	 * @param model
 	 * @param request
 	 * @param response
@@ -114,7 +114,7 @@ public class GemController extends BaseController {
 	}
 	
 	/**
-	 * 根据条件获取宝石列表数据
+	 *2. 根据条件获取宝石列表数据
 	 */
 	@Deprecated
 	@RequestMapping(value="getGemListByWh")
@@ -169,7 +169,7 @@ public class GemController extends BaseController {
 	}*/
 	
 	/**
-	 * 1.点击宝石入库 根据gemid查询出一条宝石信息  跳转gem-card.jsp 
+	 * 3.点击宝石入库 根据gemid查询出一条宝石信息  跳转gem-card.jsp 
 	 * @Description:
 	 * @param @param model
 	 * @param @param request
@@ -193,7 +193,7 @@ public class GemController extends BaseController {
 	}
 	
 	/**
-	 * 2.修改gemVO的方法
+	 * 4.修改gemVO的方法
 	 * @Description: 
 	 * @param @param GemVO 
 	 * @param @param lisuike
@@ -216,7 +216,7 @@ public class GemController extends BaseController {
 	
 	
 	/**
-	 * 3.查询出所有gemVO
+	 * 5.查询出所有gemVO
 	 * @Description: 
 	 * @param @param List<GemVO>
 	 * @param @param lisuike
@@ -233,7 +233,7 @@ public class GemController extends BaseController {
 	}
 	
 	/**
-	 * 4.点击删除按钮，更新DR字段为1
+	 * 6.点击删除按钮，更新DR字段为1
 	 * @Description: TODO(点击删除按钮，更新DR字段为1) 
 	 * @param @param id
 	 * @param @param dr
@@ -251,7 +251,7 @@ public class GemController extends BaseController {
 	
 	
 	/**
-	 * 5.点击发布按钮 将其改为关闭
+	 * 7.点击发布按钮 将其改为关闭
 	 * @Description: 给据id查询出一条gemVO 
 	 * @param @param GemVO
 	 * @param @param lisuike
