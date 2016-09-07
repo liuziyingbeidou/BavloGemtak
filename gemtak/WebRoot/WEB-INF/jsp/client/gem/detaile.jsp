@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
   Object uname = request.getSession().getAttribute(IConstant.SESSIONUSERNAEM);
+  Object type = request.getSession().getAttribute("type");
+  Object shape = request.getSession().getAttribute("shape");
+  Object weight = request.getSession().getAttribute("weight");
  %>
  <c:set var="uname" value="<%=uname %>"/>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
@@ -10,14 +13,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="bavlo">
-<meta name="keywords" content="bavlo">
-<meta name="author" content="bavlo">
-<title>bavlo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="bavlo"/>
+<meta name="keywords" content="bavlo"/>
+<meta name="author" content="bavlo"/>
+<title>Gemtak 金塔宝石_<%=type%>_<%=shape%>_<%=weight%></title>
 <link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet"/>
 <link rel="stylesheet" href="${ctx }/resources/client/css/newfly.css" type="text/css"/>
