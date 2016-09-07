@@ -40,7 +40,7 @@ function loadGemList(p){
 				}
 				$(".list-gem").append("<dl class='nr_con col-md-12'>"+
 			     "<dt class='col-md-1 col-xs-3'>"+
-					"<img src='/gemtak/resources/admin/images/cp8.jpg' style='width:100%'/>"+
+					"<img src='http://stylepics.bavlo.com/Gemtak/"+data[i].gid+"s/001.jpg' style='width:100%'/>"+
 					 "<p class='hidden-md hidden-lg'><a href='' class='col-md-6 col-xs-6'>"+ltGemDel+"</a><a href='' class='col-md-6 col-xs-6'>"+btnRefAndClose+"</a></p>"+
 				 "</dt>"+
 				 "<dd class='col-md-11 col-xs-9'>"+
