@@ -49,7 +49,7 @@ public class GemAService extends CommonService implements IGemService {
 	@Override
 	public void updateGemVO(GemVO gemVO) throws Exception {
 		gemVO.setTs(DateUtil.getStrTimestamp(DateUtil.getCurDateTime()));
-		//gemVO.setDr(IConstant.SHORT_ZERO);
+		gemVO.setDr(IConstant.SHORT_ZERO);
 		//saveOrUpdate(gemVO);
 		update(gemVO);
 	}
