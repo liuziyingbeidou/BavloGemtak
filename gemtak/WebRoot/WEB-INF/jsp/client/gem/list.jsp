@@ -5,19 +5,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="author" content="bavlo">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta name="author" content="bavlo"/>
 	<title>彩色宝石、钻石、报价、3D、鉴定、珠宝定制</title>
     <meta content="彩色宝石、钻石、报价、3D、鉴定、珠宝定制、gemtak" name="keywords"/>
     <meta content="彩色宝石、钻石、报价、3D、鉴定、珠宝定制、gemtak" name="description"/>
 
 	<link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
-	<link rel="stylesheet" href="${ctx }/resources/client/css/swiper.css">
+	<link rel="stylesheet" href="${ctx }/resources/client/css/swiper.css"/>
 	<link rel="stylesheet" href="${ctx }/resources/client/css/newfly.css" type="text/css"/>
-	<link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
+	<link href="${ctx }/resources/client/css/index.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="${ctx }/resources/client/css/files/demo.css" type="text/css"></link>
     <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
