@@ -1,31 +1,22 @@
 package com.bavlo.gemtak.service.ui.impl;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.alibaba.druid.sql.dialect.sqlserver.ast.SQLServerColumnDefinition.Identity;
 import com.bavlo.gemtak.constant.IConstant;
-import com.bavlo.gemtak.model.IdEntity;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.model.ui.OrderBVO;
 import com.bavlo.gemtak.model.ui.OrderVO;
 import com.bavlo.gemtak.model.ui.ShoppingCarVO;
-import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.service.impl.CommonService;
+import com.bavlo.gemtak.service.ui.itf.IGemService;
 import com.bavlo.gemtak.utils.CommonUtils;
 import com.bavlo.gemtak.utils.DateUtil;
 import com.bavlo.gemtak.utils.ObjectToJSON;
-import com.bavlo.gemtak.web.BaseController;
-import com.google.zxing.common.StringUtils;
 
 /**
  * @Title: ±¦ççGemtak
@@ -378,7 +369,7 @@ public class GemCService extends CommonService implements IGemService {
 	public List<GemVO> getOrderGemById(String orderid) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select ");
-		sql.append(" g.type_cn,g.type_en,b.price,b.quantity");
+		sql.append(" g.type_cn,g.type_en,b.price,b.quantity,g.gid");
 		sql.append(" from gt_order_b b");
 		sql.append(" left join gt_gem g");
 		sql.append(" on b.gem_id = g.id");
@@ -399,6 +390,7 @@ public class GemCService extends CommonService implements IGemService {
 	    		gem.setType_en(CommonUtils.isNull(arry[1]) ? null:arry[1]+"");
 	    		gem.setVdef1(CommonUtils.isNull(arry[2]) ? null:arry[2]+"");
 	    		gem.setVdef2(CommonUtils.isNull(arry[3]) ? null:arry[3]+"");
+	    		gem.setVdef3(CommonUtils.isNull(arry[4]) ? null:arry[4]+"");
 	    		nlist.add(gem);
 	    	}
 	   }
