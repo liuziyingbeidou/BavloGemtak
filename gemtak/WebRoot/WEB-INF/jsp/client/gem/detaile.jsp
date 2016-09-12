@@ -20,7 +20,7 @@
 <meta name="description" content="bavlo"/>
 <meta name="keywords" content="bavlo"/>
 <meta name="author" content="bavlo"/>
-<title>Gemtak 金塔宝石_<%=type%>_<%=shape%>_<%=weight%></title>
+<title>Gemtak 金塔_<%=type%>_<%=shape%>_<%=weight%></title>
 <link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet"/>
 <link rel="stylesheet" href="${ctx }/resources/client/css/newfly.css" type="text/css"/>
