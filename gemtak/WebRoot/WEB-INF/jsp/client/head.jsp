@@ -73,48 +73,69 @@
 </div>
 <div class="nav col-xs-12">
    <ul>
-    <li class="nav_list hidden-md hidden-lg"><image src="${ctx }/resources/client/images/list.png" />
-    <nav data-am-widget="menu" class="am-menu  am-menu-offcanvas1"  
-     data-am-menu-offcanvas > 
-    <a href="javascript: void(0)" class="am-menu-toggle">
-          <i class="am-menu-toggle-icon "></i>
-    </a>
-
-    <div class="am-offcanvas" >
-      <div class="am-offcanvas-bar">
-      <ul class="am-menu-nav am-avg-sm-1">
-        <c:if test="${uname == null}">
-          <li class="">
-            <a href="${ctx }/gemClient/login.do?dengluNUM=1" class="" >${pagehfvo['hMSignIn'] }</a>
-          </li>
-          <li class="">
-            <a href="${ctx }/gemClient/login.do" class="" >${pagehfvo['hMReg'] }</a>
-          </li>
-        </c:if>
-      	<c:if test="${uname != null}">
-      	   <li class="t-css"><a href="##" class="" > Hi, ${uname}</a></li>
-      	   <li class="">
-            <a href="javascript:void(0)" class="view-MyOrder" >${pagehfvo['hMOrder'] }</a>
-          </li>
-          <li class="">
-            <a href="${ctx }/gemClient/logout.do" class="" >${pagehfvo['hMSignOut'] }</a>
-          </li>
-      	</c:if>
-         
-          <li class="">
-            <a href="javascript:void(0)" class="myCollapse" cls="cls-folder" >${pagehfvo['hMFavr'] }</a>
-          </li>
-          <li class="">
-            <a href="javascript:void(0)" class="view-shoppingcar" >${pagehfvo['hMShoppingCart'] }</a>
-          </li>
-      </ul>
-      </div>
-    </div>
-  </nav>
+   
+	<li class="nav_logo hidden-xs hidden-sm">
+	   <a href="${ctx }/gemClient/viewGemList.do"><image src="${ctx }/resources/client/images/Logo2.png" /></a>
+	</li>
+	<li class="nav_logo hidden-md hidden-lg">
+	   <a href="${ctx }/gemClient/viewGemList.do"><image src="${ctx }/resources/client/images/logos.png" /></a>
+	 </li>
+	<%-- <li class="nav_home hidden-md hidden-lg"><a href="./login.html"><image src="${ctx }/resources/client/images/home.png" /></a></li> --%>
+	 <li class="nav_list hidden-md hidden-lg"><image src="${ctx }/resources/client/images/list.png" />
+	    <nav data-am-widget="menu" class="am-menu  am-menu-offcanvas1"  data-am-menu-offcanvas > 
+	    <a href="javascript: void(0)" class="am-menu-toggle">
+	          <i class="am-menu-toggle-icon "></i>
+	    </a>
+	    <div class="am-offcanvas" >
+	      <div class="am-offcanvas-bar">
+	      <ul class="am-menu-nav am-avg-sm-1">
+	        <c:if test="${uname == null}">
+	          <li class="">
+	            <a href="${ctx }/gemClient/login.do?dengluNUM=1" class="" >${pagehfvo['hMSignIn'] }</a>
+	          </li>
+	          <li class="">
+	            <a href="${ctx }/gemClient/login.do" class="" >${pagehfvo['hMReg'] }</a>
+	          </li>
+	        </c:if>
+	      	<c:if test="${uname != null}">
+	      	   <li class="t-css"><a href="##" class="" > Hi, ${uname}</a></li>
+	      	   <li class="">
+	            <a href="javascript:void(0)" class="view-MyOrder" >${pagehfvo['hMOrder'] }</a>
+	          </li>
+	          <li class="">
+	            <a href="${ctx }/gemClient/logout.do" class="" >${pagehfvo['hMSignOut'] }</a>
+	          </li>
+	      	</c:if>
+	         
+	          <li class="">
+	            <a href="javascript:void(0)" class="myCollapse" cls="cls-folder" >${pagehfvo['hMFavr'] }</a>
+	          </li>
+	          <li class="">
+	            <a href="javascript:void(0)" class="view-shoppingcar" >${pagehfvo['hMShoppingCart'] }</a>
+	          </li>
+	          <li class="">
+	            <a href="http://mp.weixin.qq.com/s?__biz=MjM5OTMyODM4MQ==&mid=503438450&idx=1&sn=34c1ab3e01091f430556e91afedaa29f&scene=1&srcid=0913f0kzoWqioPQRNvHLgcWe#wechat_redirect">${pagehfvo['fAboutGemtak'] }</a>
+	          </li>
+	          <li class="">
+	            <a href="">${pagehfvo['fPrivacyClause'] }</a>
+	          </li>
+	          <li class="">
+	            <a href="">${pagehfvo['fCopyrightNotice'] }</a>
+	          </li>
+	          <li class="">
+	            <a href="">${pagehfvo['fQualityCommitment'] }</a>
+	          </li>
+	          <li class="">
+	            <a href="">${pagehfvo['fJoinUs'] }</a>
+	          </li>
+	          <li class="">
+	            <a href="">${pagehfvo['fICP'] }</a>
+	          </li>
+	      </ul>
+	      </div>
+	    </div>
+	  </nav>
     </li>
-	<li class="nav_logo hidden-xs hidden-sm"><a href="${ctx }/gemClient/viewGemList.do"><image src="${ctx }/resources/client/images/Logo2.png" /></a></li>
-	<li class="nav_logo hidden-md hidden-lg"><a href="${ctx }/gemClient/viewGemList.do"><image src="${ctx }/resources/client/images/logos.png" /></a></li>
-	<li class="nav_home hidden-md hidden-lg"><a href="./login.html"><image src="${ctx }/resources/client/images/home.png" /></a></li>
 </ul>
 </div> 
 
