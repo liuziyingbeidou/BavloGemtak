@@ -62,10 +62,8 @@
 	  <ul id="collapse-nav" class="am-nav am-collapse">
 	    <li>
 		    <ul class="am-slides show-cookies">
-		      <c:forEach items="${gemList}" var="gem">
-			    
-			   </c:forEach>
-			 </ul>
+		      
+			</ul>
 		 
 	    </li>
 	  </ul>
@@ -131,6 +129,9 @@
 	          <li class="">
 	            <a href="">${pagehfvo['fICP'] }</a>
 	          </li>
+	          <li class="">
+	            ${pagehfvo['fWeCal'] }
+	          </li>
 	      </ul>
 	      </div>
 	    </div>
@@ -186,6 +187,7 @@ function delCookie(id){
 			  });
 			});
 			  $(".delectPic-"+id+"").remove();
+			  location.reload();
 		  }
 	  });
 }
@@ -269,7 +271,7 @@ $(function(){
 	  			    var len = data.length;
 	  			    if(len > 0){
 		  			    for(var i=0;i<len;i++){
-		  			     $(".show-cookies").append("<li class='delectPic-"+data[i].id+"'><a onclick='goDetail("+data[i].id+")'><img src='http://s.amazeui.org/media/i/demos/pure-4.jpg?imageView2/0/w/640'  alt='"+data[i].retail_price+"'/></a><span onclick='delCookie("+data[i].id+")'><img src='${ctx }/resources/client/images/cola.png'/></span></li>");
+		  			     $(".show-cookies").append("<li class='delectPic-"+data[i].id+"'><a onclick='goDetail("+data[i].id+")'><img src='http://stylepics.bavlo.com/Gemtak/gempic/"+data[i].gid+"s/001.jpg'   alt='"+data[i].retail_price+"'/></a><span onclick='delCookie("+data[i].id+")'><img style='width: 20px; height: 20px;' src='${ctx }/resources/client/images/cola.png'/></span></li>");
 		  			    }
 	  			    }else{
 	                   layer.alert('您还没有收藏任何宝贝哟！', {
