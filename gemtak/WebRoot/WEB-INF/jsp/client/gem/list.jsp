@@ -96,8 +96,8 @@ $(window).scroll(function(){
  <style type="text/css">
  .yemianyanchi{
 	  position:fixed;
-	  left:700px;
-	  top:300px;
+	  left:900px;
+	  top:500px;
  }
  </style>
 </head>
@@ -294,11 +294,11 @@ $(window).scroll(function(){
 		     <span class="selects-shape ms-sel" ms-key=""></span>
 		     <span class="selects-weight ms-sel" ></span>
 		     <span class="selects-price ms-sel" ></span>
-			 <span class="span_item" ><input type="checkbox" class="pairs-sl" name="renamed" value="sl">单粒</span>
-			 <span class="span_item"><input type="checkbox"  class="pairs-pl" name="renamed" value="pl">配对</span>
-			 <span class="span_item"><input type="checkbox" class="pairs-ml" name="renamed" value="ml">多粒</span>
-			 <span class="span_item"><input type="checkbox" class="pairs-h" name="renamed" value="1">弧面</span>
-			 <span class="span_item"><input type="checkbox" class="pairs-k" name="renamed" value="1">刻面</span>
+			 <span class="span_item" ><input type="checkbox" class="pairs-sl" name="renamed" value="sl"/>单粒</span>
+			 <span class="span_item"><input type="checkbox"  class="pairs-pl" name="renamed" value="pl"/>配对</span>
+			 <span class="span_item"><input type="checkbox" class="pairs-ml" name="renamed" value="ml"/>多粒</span>
+			 <span class="span_item"><input type="checkbox" class="pairs-h" name="renamed" value="1"/>弧面</span>
+			 <span class="span_item"><input type="checkbox" class="pairs-k" name="renamed" value="1"/>刻面</span>
 		  </div>
 		  
 		  <!-- 延迟加载   start  loaders.css-->
