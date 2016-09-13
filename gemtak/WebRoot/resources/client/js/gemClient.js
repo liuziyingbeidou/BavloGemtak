@@ -197,7 +197,7 @@ function selGemNUM() {
 		dat = $.parseJSON(data);
 		var gemNo = dat.gemNo;
 		if (gemNo != null) {
-			var uname = $(".juname").val();
+			var uname = $(".juname").attr("value");
 			if (uname == "WxLogin") {
 				$(".selPhGemNO").empty();
 				$(".selPhGemNO").append(" " + gemNo + "");
