@@ -475,8 +475,8 @@ function deleteCert(){
 		$(this).css("background","#eeeeee");
 	},function(){
 		$(this).css("background","#FFF");
-	})
-  })
+	});
+  });
 
  </script>
 </body>
