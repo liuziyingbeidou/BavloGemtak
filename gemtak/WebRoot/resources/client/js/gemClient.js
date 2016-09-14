@@ -198,13 +198,13 @@ function selGemNUM() {
 		var gemNo = dat.gemNo;
 		if (gemNo != null) {
 			var uname = $(".juname").attr("value");
-			if (uname == "WxLogin") {
+			//if (uname == "WxLogin") {
 				$(".selPhGemNO").empty();
-				$(".selPhGemNO").append(" " + gemNo + "");
-			} else {
+				$(".selPhGemNO").text("" + gemNo + "");
+			//} else {
 				$(".selGemNO").empty();
-				$(".selGemNO").append(" " + gemNo + "");
-			}
+				$(".selGemNO").append("" + gemNo + "");
+			//}
 		}
 
 	});
