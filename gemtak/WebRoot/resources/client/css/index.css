@@ -239,7 +239,7 @@ em, i{ font-style:normal; }
 .cup_nav ul li a{float:left;display:block;color:#777777;height:35px;line-height:35px;padding:0px 20px;border: 1px solid #DDD;border-bottom:none;}
 .cup_nav ul li a:hover{background:#fff}
 .cup_nav ul li .a_sel{background:#fff}
-.cup_nav p{text-align:right;line-height:35px;float:right;}
+.cup_nav p{text-align:right;line-height:29px;float:right;}
 .cup_nav p b{display:none}
 .cup_nav p span{margin-left:30px;float:right;}
 .cup_nav p span img{margin:0px 10px}
@@ -419,7 +419,7 @@ background-size: 25px 15px;text-align:right;height: 25px;margin-right: 10px;curs
 
 .m_bottom_80{margin-bottom:80px}
 /*尾部position: fixed;*/
-.footer{left:0px;bottom:0px;width:100%;margin:0px auto 0px;overflow:hidden;}
+.footer{position:fixed; left:0px;bottom:0px;width:100%;margin:0px auto 0px;overflow:hidden;}
 .foot{background:#8c0000;margin:0px auto;overflow:hidden;line-height:30px;padding:5px 0px}
 .foot p{width:100%;line-height:30px;color:#bbbbbb;text-align:center}
 .foot p a{color:#bbbbbb;margin:0px 5px;}
