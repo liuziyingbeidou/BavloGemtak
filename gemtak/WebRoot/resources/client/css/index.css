@@ -239,10 +239,10 @@ em, i{ font-style:normal; }
 .cup_nav ul li a{float:left;display:block;color:#777777;height:35px;line-height:35px;padding:0px 20px;border: 1px solid #DDD;border-bottom:none;}
 .cup_nav ul li a:hover{background:#fff}
 .cup_nav ul li .a_sel{background:#fff}
-.cup_nav p{text-align:right;line-height:29px;float:right;}
+.cup_nav p{text-align:right;line-height:30px;float:right;}
 .cup_nav p b{display:none}
 .cup_nav p span{margin-left:30px;float:right;}
-.cup_nav p span img{margin:0px 10px}
+.cup_nav p span img{margin:0px 10px;vertical-align: top;}
 .cup_nav p select{width:40%;height:30px;}
 
 .job_xq{margin:0px auto ;overflow:hidden;}
