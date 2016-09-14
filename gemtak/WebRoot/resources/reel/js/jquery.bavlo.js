@@ -2127,7 +2127,7 @@
                   left: 0, bottom: 0,
                   height: opt.preloader,
                   overflow: _hidden_,
-                  backgroundColor: '#8c0000'
+                  backgroundColor: '#ff0000'
                 });
                 return preloader.$= $(tag(_div_), { 'class': preloader_klass })
               },
@@ -2136,7 +2136,7 @@
                   position: _absolute_,
                   width: 0, height: 0,
                   overflow: _hidden_,
-                  backgroundColor: '#8c0000'
+                  backgroundColor: '#ff0000'
                 });
                 return indicator['$'+axis]= $(tag(_div_), { 'class': indicator_klass+___+axis })
               },
