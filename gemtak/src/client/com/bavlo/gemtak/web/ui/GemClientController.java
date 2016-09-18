@@ -176,8 +176,9 @@ public class GemClientController extends BaseController {
             }
         }
         /****/
-        
-		renderJson(gems);
+        if(gems.size() != 0){
+        	renderJson(gems);
+        }
 	}
 	
 	
