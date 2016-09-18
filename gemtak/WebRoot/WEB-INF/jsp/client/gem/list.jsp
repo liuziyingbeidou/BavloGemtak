@@ -20,10 +20,11 @@
 	<link href="${ctx }/resources/client/css/index.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="${ctx }/resources/client/css/files/demo.css" type="text/css"></link>
     <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
-	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery.js"></script>
+	<script type="text/javascript" src="${ctx }/resources/client/js/jquery-1.12.4.js"></script>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/gemClient.js"></script>
+	
 <script language=javaScript>
-	 
+
 function show_menuone(ID){
    var totalCat=8;
    for(i=1;i<totalCat;i++){
@@ -99,6 +100,7 @@ $(window).scroll(function(){
 	  left:900px;
 	  top:500px;
  }
+ 
  </style>
 </head>
 <body>
@@ -321,7 +323,7 @@ $(window).scroll(function(){
 			    <li ><a class="a_sel" id="type1"  onclick="javascript:show_menu(1);" href="javascript:void(0);" >结果（Resault <i class="selGemNO"></i>）</a></li>
 			    <li><a  id="type2"  onclick="javascript:show_menu(2);" href="javascript:void(0);" >比较（Comparsion 5）</a></li>
 			 </ul>
-			 <p class="col-xs-12 col-md-4"><b class="visible-xs-inline-block visible-sm-inline-block ">找到<i class="selPhGemNO">${gemNo}</i>颗宝石</b>
+			 <p class="col-xs-12 col-md-4"><b class="visible-xs-inline-block visible-sm-inline-block ">找到&nbsp;<i class="selPhGemNO">${gemNo}</i>&nbsp;颗宝石</b>
 			    <select class="select-createdate">
 						<option value="-1">按上架时间</option>
 						<option value="htol">高到低</option>
