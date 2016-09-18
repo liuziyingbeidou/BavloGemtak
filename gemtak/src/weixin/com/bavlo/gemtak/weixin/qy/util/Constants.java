@@ -15,7 +15,7 @@ public class Constants {
 	public static final String encodingAESKey = "d69dAzyAziGUCLkNqE68NfVvyQZuVEyUmPlbrtuqfgu";
 	
 	/*项目配置常量*/
-	public static final String REQURL = "lzy348860554.imwork.net/gemtak";
+	public static final String REQURL = "www.gemtak.com/gemtak";
 	
 	/****标签定义*****/
 	//角色
