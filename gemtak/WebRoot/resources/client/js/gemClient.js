@@ -198,17 +198,18 @@ function selGemNUM() {
 		var gemNo = dat.gemNo;
 		if (gemNo != null) {
 			var uname = $(".juname").attr("value");
-			//if (uname == "WxLogin") {
+			if (uname == "WxLogin") {
 				$(".selPhGemNO").empty();
 				$(".selPhGemNO").text("" + gemNo + "");
-			//} else {
+			} else {
 				$(".selGemNO").empty();
 				$(".selGemNO").append("" + gemNo + "");
-			//}
+			}
 		}
 
 	});
 }
+
 
 function selectClientList(switchover) {
 	$(".yemianyanchi").show();
@@ -310,7 +311,7 @@ function selectClientList(switchover) {
 									$(".appendClientList .cList")
 											.append(
 													"<tr>"
-															+ "<td><image src='http://stylepics.bavlo.com/Gemtak/gempic/"+data[i].gid+"s/001.jpg'' width='120px'/></td>"
+															+ "<td><image class='360tupian' src='http://stylepics.bavlo.com/Gemtak/gempic/"+data[i].gid+"s/001.jpg'' width='120px'/></td>"
 															+ "<td><b>"
 															+ data[i].type_cn
 															+ "</b> <br />"
