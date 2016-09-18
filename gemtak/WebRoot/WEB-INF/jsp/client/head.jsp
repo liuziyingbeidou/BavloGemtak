@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${ctx }/resources/client/css/newfly.css" type="text/css"/>
 <link rel="stylesheet" href="${ctx }/resources/client/css/layer.css" type="text/css"></link>
 <link rel="stylesheet" href="${ctx }/resources/client/css/layer.ext.css" type="text/css"></link>
+
 <script type="text/javascript" src="${ctx }/resources/client/js/layer.ext.js"></script>
 <script type="text/javascript" src="${ctx }/resources/client/js/layer.js"></script>
 
@@ -71,7 +72,7 @@
 </div>
 <div class="nav col-xs-12">
    <ul>
-   
+   <li class="nav_list hidden-md hidden-lg"></li>
 	<li class="nav_logo hidden-xs hidden-sm">
 	   <a href="${ctx }/gemClient/viewGemList.do"><image src="${ctx }/resources/client/images/Logo2.png" /></a>
 	</li>
@@ -130,7 +131,7 @@
 	            <a href="">${pagehfvo['fICP'] }</a>
 	          </li>
 	          <li class="">
-	            ${pagehfvo['fWeCal'] }
+	            <a href="javascript:void(0);]">${pagehfvo['fWeCal'] }</a>
 	          </li>
 	      </ul>
 	      </div>
@@ -172,20 +173,22 @@ function goDetail(id){
  */
 function delCookie(id){
 	 var url = "removeCookie.do";
-	  $.post(url,{gemid:id},function(data){
+	 $.post(url,{gemid:id},function(data){
 		  data = $.parseJSON(data);
 		  var flag = data.msg;
 		  if(flag=="Y"){
 			  layer.alert('您已成功删除该宝贝！', {
-			  skin: 'layui-layer-molv' //样式类名
+			   title:'gemtak 提示:',
+			   skin: 'layui-layer-molv' //样式类名
 			  ,closeBtn: 0
 			}, function(){
-			  layer.alert('更多宝贝在等你喲！', {
+			  layer.alert('gemtak.com 欢迎您！', {
+			    title:'gemtak 提示:',
 			    skin: 'layui-layer-lan'
 			    ,closeBtn: 0
 			    ,shift: 4 //动画类型
 			  });
-			});
+			}); 
 			  $(".delectPic-"+id+"").remove();
 			  location.reload();
 		  }
@@ -194,101 +197,109 @@ function delCookie(id){
 
 $(function(){
      
-     //没登录状态下，点击购物车
-     $(".tologin").click(function(){
-       layer.alert('您还没有登录哟！', {
-			  skin: 'layui-layer-molv' //样式类名
-			  ,closeBtn: 0
-			}, function(){
-			  layer.alert('请先去登录吧！', {
-			    skin: 'layui-layer-lan'
-			    ,closeBtn: 0
-			    ,shift: 4 //动画类型
-			  });
-			  window.location.href="/gemtak/gemClient/login.do?dengluNUM=1";
-			});
-		
-     });
+  //没登录状态下，点击购物车
+$(".tologin").click(function(){
+  layer.alert('您还没有登录哟！', {
+       title:'gemtak 提示:',
+       skin: 'layui-layer-molv' //样式类名
+      ,closeBtn: 0
+	}, function(){
+	  layer.alert('请先去登录吧！', {
+	    title:'gemtak 提示:',
+	    skin: 'layui-layer-lan'
+	    ,closeBtn: 0
+	    ,shift: 4 //动画类型
+	  });
+	  window.location.href="/gemtak/gemClient/login.do?dengluNUM=1";
+	});
+
+ });
      
-     //我的订单
-     $(".view-MyOrder").click(function(){
-           location.href="${ctx }/gemClient/selMyOrder.do";
-         
-     });
+//我的订单
+$(".view-MyOrder").click(function(){
+      location.href="${ctx }/gemClient/selMyOrder.do";
+    
+});
 	 // 购物车
-	$(".view-shoppingcar").click(function(){
-		 var url = "/gemtak/gemClient/checkGemShoppingCar.do";
-		 $.post(url,function(data){
-		  if(data == "N"){
-		    layer.alert('您的购物车还没有宝贝哟！', {
-			  skin: 'layui-layer-molv' //样式类名
-			  ,closeBtn: 0
-			}, function(){
-			  layer.alert('请先去购物吧！', {
-			    skin: 'layui-layer-lan'
-			    ,closeBtn: 0
-			    ,shift: 4 //动画类型
-			  });
-			});
-		  }else if(data == "Y"){
-		   location.href = "/gemtak/gemClient/viewShoppingCar.do";
-		  }
-		 });
-		});
+$(".view-shoppingcar").click(function(){
+ var url = "/gemtak/gemClient/checkGemShoppingCar.do";
+ $.post(url,function(data){
+  if(data == "N"){
+    layer.alert('您的购物车还没有宝贝哟！', {
+      title:'gemtak 提示:',
+	  skin: 'layui-layer-molv' //样式类名
+	  ,closeBtn: 0
+	}, function(){
+	  layer.alert('请先去购物吧！', {
+	    title:'gemtak 提示:',
+	    skin: 'layui-layer-lan'
+	    ,closeBtn: 0
+	    ,shift: 4 //动画类型
+	  });
+	});
+  }else if(data == "Y"){
+   location.href = "/gemtak/gemClient/viewShoppingCar.do";
+  }
+ });
+});
 		
 	// 结算
-	$(".jesuan").click(function(){
-		 var url = "/gemtak/gemClient/checkGemShoppingCar.do";
-		 $.post(url,function(data){
-		  if(data == "N"){
-		    layer.alert('您还没有要结算的商品！', {
-			  skin: 'layui-layer-molv' //样式类名
-			  ,closeBtn: 0
-			}, function(){
-			  layer.alert('请先去购物吧！', {
-			    skin: 'layui-layer-lan'
-			    ,closeBtn: 0
-			    ,shift: 4 //动画类型
-			  });
-			});
-		  }else if(data == "Y"){
-		   location.href = "/gemtak//gemClient/order.do";
-		  }
-		 });
-		});
-		
-     //点击触发收藏夹
-  	$(".myCollapse").click(function(){
-		$("#collapse-nav").collapse('toggle');
-  		if(!$("#collapse-nav").hasClass('am-in')){
-  			var cls = $(this).attr("cls");
-	  		if(cls == "cls-folder"){
-	  			//收藏夹处理
-	  			var url = "/gemtak/gemClient/showCookies.do";
-	  			$.post(url,function(data){
-	  			  $(".show-cookies").empty();
-	  			  if(data != null){
-	  			    var len = data.length;
-	  			    if(len > 0){
-		  			    for(var i=0;i<len;i++){
-		  			     $(".show-cookies").append("<li class='delectPic-"+data[i].id+"'><a onclick='goDetail("+data[i].id+")'><img src='http://stylepics.bavlo.com/Gemtak/gempic/"+data[i].gid+"s/001.jpg'   alt='"+data[i].retail_price+"'/></a><span onclick='delCookie("+data[i].id+")'><img style='width: 20px; height: 20px;' src='${ctx }/resources/client/images/cola.png'/></span></li>");
-		  			    }
-	  			    }else{
-	                   layer.alert('您还没有收藏任何宝贝哟！', {
-						  skin: 'layui-layer-molv' //样式类名
-						  ,closeBtn: 0
-						}, function(){
-						  layer.alert('快去添加吧！', {
-						    skin: 'layui-layer-lan'
-						    ,closeBtn: 0
-						    ,shift: 4 //动画类型
-						  });
-						}); 
-	                }
-	  			  }
-                });
-	  		}
-  		}
+$(".jesuan").click(function(){
+ var url = "/gemtak/gemClient/checkGemShoppingCar.do";
+ $.post(url,function(data){
+  if(data == "N"){
+    layer.alert('您还没有要结算的商品！', {
+      title:'gemtak 提示:',
+	  skin: 'layui-layer-molv' //样式类名
+	  ,closeBtn: 0
+	}, function(){
+	  layer.alert('请先去购物吧！', {
+	    title:'gemtak 提示:',
+	    skin: 'layui-layer-lan'
+	    ,closeBtn: 0
+	    ,shift: 4 //动画类型
+	  });
 	});
+  }else if(data == "Y"){
+   location.href = "/gemtak//gemClient/order.do";
+  }
+ });
+});
+		
+//点击触发收藏夹
+ $(".myCollapse").click(function(){
+	$("#collapse-nav").collapse('toggle');
+	if(!$("#collapse-nav").hasClass('am-in')){
+		var cls = $(this).attr("cls");
+		if(cls == "cls-folder"){
+			//收藏夹处理
+			var url = "/gemtak/gemClient/showCookies.do";
+			$.post(url,function(data){
+			  $(".show-cookies").empty();
+			  if(data != null){
+			    var len = data.length;
+			    if(len > 0){
+ 			    for(var i=0;i<len;i++){
+ 			     $(".show-cookies").append("<li class='delectPic-"+data[i].id+"'><a onclick='goDetail("+data[i].id+")'><img src='http://stylepics.bavlo.com/Gemtak/gempic/"+data[i].gid+"s/001.jpg'   alt='"+data[i].retail_price+"'/></a><span onclick='delCookie("+data[i].id+")'><img style='width: 20px; height: 20px;' src='${ctx }/resources/client/images/cola.png'/></span></li>");
+ 			    }
+			    }else{
+                 layer.alert('您还没有收藏任何宝贝哟！', {
+                    title:'gemtak 提示:',
+			        skin: 'layui-layer-molv' //样式类名
+			        ,closeBtn: 0
+				 }, function(){
+				  layer.alert('gemtak.com 欢迎您！', {
+				    title:'gemtak 提示:',
+				    skin: 'layui-layer-lan'
+				    ,closeBtn: 0
+				    ,shift: 4 //动画类型
+				  });
+				}); 
+               }
+			 }
+          });
+		}
+}
+});
 });
 </script>
