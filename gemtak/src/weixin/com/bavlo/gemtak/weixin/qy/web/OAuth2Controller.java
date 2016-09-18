@@ -53,7 +53,7 @@ public class OAuth2Controller {
 	}
 
 	/**
-	 * 根据code获取Userid后跳转到需要带用户信息的最终页面
+	 *02. 根据code获取Userid后跳转到需要带用户信息的最终页面
 	 * 
 	 * @param request
 	 * @param code
@@ -108,7 +108,7 @@ public class OAuth2Controller {
 	}
 
 	/**
-	 * 构造带员工身份信息的URL
+	 *01. 构造带员工身份信息的URL
 	 * 
 	 * @param corpid
 	 *            企业id
