@@ -213,8 +213,8 @@ function addShoppCar(id){
 					   </div>
 					</div>   
 				</li>
-				<li class="tit_lir col-md-6 col-xs-12">				  				 
-				   	<%-- <div class="para">
+				<%-- <li class="tit_lir col-md-6 col-xs-12">				  				 
+				   	<div class="para">
 				   	  <span onclick="javascript:jian();" style="text-align:right"><img src="${ctx }/resources/client/images/j.png"/>
 					  <font>X4.5<font>
 					  </span>
@@ -222,8 +222,8 @@ function addShoppCar(id){
 					  <span style="float:right" onclick="javascript:jia();"><img src="${ctx }/resources/client/images/ja.png"/>
 					  <font>X0.7<font>
 					  </span>
-					</div>	 --%>
-				</li>			 
+					</div>
+				</li> --%>			 
 			 </ul>      		    
 			</div>
 			<div class="tit_sm  col-sm-12 col-md-5" gid="${gem.id}">
