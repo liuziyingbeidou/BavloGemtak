@@ -19,7 +19,47 @@
 	src="${ctx }/resources/common/js/jquery.min.js"></script>
 <script language="javascript" type="text/javascript"
 	src="${ctx }/resources/admin/js/gem-card.js"></script>
+<style type="text/css">
+.black_overlay{
+display: none;
+position: absolute;
+top: 0%;
+left: 0%;
+width: 100%;
+height: 100%;
+background-color: #DDDDDD;
+z-index:1001;
+-moz-opacity: 0.8;
+opacity:.80;
+filter: alpha(opacity=80);
+}
 
+.white_content_small {
+display: none;
+position: absolute;
+top: 20%;
+left: 30%;
+width: 40%;
+height: 50%;
+border: 16px solid lightblue;
+background-color: white;
+z-index:1002;
+overflow: auto;
+}
+
+.white_content {
+display: none;
+position: absolute;
+top: 10%;
+left: 20%;
+width: 55%;
+height: 75%;
+border: 3px solid lightblue;
+background-color: white;
+z-index:1002;
+overflow: auto;
+}
+</style>
 <script type="text/javascript">
 //宝石保存
 $(function(){
@@ -141,6 +181,23 @@ function deleteCert(){
 	});
 }
 //****************************end********************************
+
+//弹出隐藏层
+function ShowDiv(show_div,bg_div,sUrl){
+document.getElementById(show_div).style.display='block';
+document.getElementById(bg_div).style.display='block' ;
+var bgdiv = document.getElementById(bg_div);
+bgdiv.style.width = document.body.scrollWidth;
+// bgdiv.style.height = $(document).height();
+$("#"+bg_div).height($(document).height());
+$("#bigpic").html("<img src=\"" + sUrl + "\" style='width: 600px; height: 500px;'>");
+};
+//关闭弹出层
+function CloseDiv(show_div,bg_div)
+{
+document.getElementById(show_div).style.display='none';
+document.getElementById(bg_div).style.display='none';
+};
 </script>
 
 <style type="text/css">
@@ -187,8 +244,8 @@ function deleteCert(){
 						<div class="line col-sm-12 hidden-md hidden-lg"></div>
 						<!-- 显示的更新时间  ts-->
 						<p class="col-sm-12 col-md-5 ">
-							<span>${pagevo['tableModify'] }:${gem.ts}</span><span>${pagevo['tablePageviews']
-								}: ${gem.page_views} ${pagevo['tablePageviewsTime'] }</span>
+							<span>${pagevo['tableModify'] }:${gem.ts}</span>
+							<span>${pagevo['tablePageviews']}: ${gem.page_views} ${pagevo['tablePageviewsTime'] }</span>
 						</p>
 						<div class="line col-sm-12 hidden-xs hidden-sm"></div>
 					</div>
@@ -198,31 +255,31 @@ function deleteCert(){
 					<div class="game_ul">
 						<ul class="col-sm-5">
 
-							<li><select class="form-control input-lg sel-type"
-								name="type_id">
+							<li>
+							<select class="form-control input-lg sel-type" name="type_id">
 									<c:forEach var="bean" items="${listGemType}">
-										<option value="${bean.pKey}" lab-en="${bean.pValueEN}"
-											lab-cn="${bean.pValueCN}">${bean.pValue}</option>
+										<option value="${bean.pKey}" lab-en="${bean.pValueEN}" lab-cn="${bean.pValueCN}">${bean.pValue}</option>
 									</c:forEach>
-							</select> <input type="hidden" name="type_cn" class="h-type-cn"> <input
+							</select>
+							<input type="hidden" name="type_cn" class="h-type-cn"> <input
 								type="hidden" name="type_en" class="h-type-en">
 							</li>
-							<li><select class="form-control input-lg select-st"
-								name="isstand">
+							<li>
+							<select class="form-control input-lg select-st" name="isstand">
 									<option value="sst">${pagevo['tableSTSPNCB'] }</option>
 									<option value="cst">${pagevo['tableNSPNCB'] }</option>
 							</select>
 							</li>
-							<li><select class="form-control input-lg select-shape "
-								name="shape_id">
+							<li>
+							 <select class="form-control input-lg select-shape " name="shape_id">
 									<c:forEach var="bean" items="${listGemShape}">
 										<option value="${bean.pKey}" lab-en="${bean.pValueEN}"
 											lab-cn="${bean.pValueCN}">${bean.pValue}</option>
 									</c:forEach>
-							</select> <input type="hidden" name="shape_cn" class="h-shape-cn">
-								<input type="hidden" name="shape_en" class="h-shape-en">
-								<input name="shape_str" type="text"
-								class="form-control input-shape"
+							 </select>
+							 <input type="hidden" name="shape_cn" class="h-shape-cn">
+							 <input type="hidden" name="shape_en" class="h-shape-en">
+							 <input name="shape_str" type="text" class="form-control input-shape"
 								placeholder="${pagevo['tableGemShape'] }">
 							</li>
 							<li>
@@ -247,7 +304,8 @@ function deleteCert(){
 												lab-cn="${bean.pValueCN}">${pagevo['tableGemCut'] }
 												${bean.pValue}</option>
 										</c:forEach>
-									</select> <input type="hidden" name="cut_cn" class="h-cut-cn"> <input
+									</select> 
+									<input type="hidden" name="cut_cn" class="h-cut-cn"> <input
 										type="hidden" name="cut_en" class="h-cut-en">
 								</div>
 								<div class="li_inp_pr col-xs-6">
@@ -258,7 +316,8 @@ function deleteCert(){
 											   ${pagevo['tableGemClarity']} ${bean.pValue}
 											</option>
 										</c:forEach>
-									</select> <input type="hidden" name="clarity_cn" class="h-clarity-cn">
+									</select>
+									<input type="hidden" name="clarity_cn" class="h-clarity-cn">
 									<input type="hidden" name="clarity_en" class="h-clarity-en">
 								</div>
 							</li>
@@ -299,15 +358,16 @@ function deleteCert(){
 									<input type="hidden" name="treatment_en" class="h-treatment-en">
 								</div>
 							</li>
-							<li><textarea name="vmemo" class="form-control" rows="5"></textarea>
 							<li>
+							    <textarea name="vmemo" class="form-control" rows="5" placeholder="编辑您的宝石故事"></textarea>
+							</li>
 						</ul>
 						<ul class="col-sm-1 col-md-2 hidden-xs"></ul>
 						<ul class="mt_0 col-sm-6 col-md-5">
 							<li>
 								<div class="li_inp_p0 col-xs-4">
 									<input type="text" name="weight" class="form-control fc_a2"
-										placeholder="6.65ct"  readonly="readonly">
+										placeholder="6.65ct" >
 								</div>
 								<div class="col-xs-4">
 									<input type="text" name="stock_qty" class="form-control"
@@ -333,7 +393,8 @@ function deleteCert(){
 									</select>
 								</div>
 							</li>
-							<li><div class="li_inp_pl col-xs-6">
+							<li>
+							   <div class="li_inp_pl col-xs-6">
 									<input type="text" name="trade_price" class="form-control"
 										placeholder="${pagevo['tableTradePrice'] }"  value="${gem.trade_price }"/>
 								</div>
@@ -344,7 +405,8 @@ function deleteCert(){
 									</select>
 								</div>
 							</li>
-							<li><div class="li_inp_pl col-xs-6">
+							<li>
+							   <div class="li_inp_pl col-xs-6">
 									<input type="text" name="retail_price" class="form-control"
 										placeholder="${pagevo['tableRetailPrice'] }"  value="${gem.retail_price }">
 								</div>
@@ -435,8 +497,7 @@ function deleteCert(){
 							<span class="spic-name"></span>
 						</p>
 						<p class="zhizhao col-xs-2 col-md-4">
-							<img src="${ctx }/resources/admin/images/zhizhao.jpg"
-								class="sfile-name" />
+							<img src="${ctx }/resources/admin/images/zhizhao.jpg" class="sfile-name"  onclick="ShowDiv('MyDiv','fade',this.src)"/>
 						</p>
 						<p class="col-xs-4 col-md-4 btn-delete">
 							<a href="javascript:void(0)" class="btn btn-col btn-lg btn-block"
@@ -468,8 +529,17 @@ function deleteCert(){
 	<div class="footer hidden-xs hidden-sm">
 		<jsp:include page="../foot.jsp"></jsp:include>
 	</div>
-
-	<script language="Javascript">
+  <!--弹出层时背景层DIV-->
+<div id="fade" class="black_overlay">
+</div>
+<div id="MyDiv" class="white_content">
+<div style="text-align: right; cursor: default; height: 40px;">
+<!-- <span style="font-size: 16px;" onclick="CloseDiv('MyDiv','fade');"></span> -->
+<img src="${ctx }/resources/client/images/col.png" style="width: 26px;height: 26px;" title="关闭"   onclick="CloseDiv('MyDiv','fade');"/>
+</div> 
+<zi id="bigpic">目前来说，我还是喜欢这个自己改造的弹出层。自己在项目中也用的是这个.</zi>
+</div>
+<script language="Javascript">
   $(function(){
    $(".tit_table table tr").hover(function(){
 		$(this).css("background","#eeeeee");
