@@ -154,11 +154,15 @@ function selGemCard(gemid){
 				 <p class="col-md-5 col-xs-12">
 				   <span class="col-xs-12 col-md-6" >
 				      <!-- 宝石 入库、签收 -->
-				      ${pagevo['ltTypeGem'] }：<a href="javascript:updateGemVO(${gem.id})">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a>
+				      ${pagevo['ltTypeGem'] }：
+				      <a href="javascript:updateGemVO(${gem.id})">${pagevo['ltStorage'] }</a>
+				      <%-- <a href="">${pagevo['ltSign'] }</a> --%>
 				   </span>
 				   <span  class="col-xs-12 col-md-6 pad_0">
 				      <!-- 产品 -->
-				      ${pagevo['ltTypeProduct'] }：<a href="">${pagevo['ltStorage'] }</a><a href="">${pagevo['ltSign'] }</a>
+				      <%-- ${pagevo['ltTypeProduct'] }：
+				      <a href="">${pagevo['ltStorage'] }</a>
+				      <a href="">${pagevo['ltSign'] }</a> --%>
 				   </span>
 				 </p>
 				 <p class="col-md-2 hidden-xs hidden-sm">
