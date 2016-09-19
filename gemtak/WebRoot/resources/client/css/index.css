@@ -261,6 +261,7 @@ em, i{ font-style:normal; }
 
 .tit_table{margin:10px auto ;overflow:hidden;}
 .tit_table table{ border-collapse:collapse;width:100%}
+.tit_table table tr th{text-align: center;}
 .tit_table table tr td{border-bottom:1px solid #ddd;text-align:center;line-height:35px;padding:5px 3px}
 .fon1{padding:10px 20px;border-bottom:1px solid #ddd;margin-bottom:5px;font-weight:normal;}
 .fc_0a{color:#da5d5d}
