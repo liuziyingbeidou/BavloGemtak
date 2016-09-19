@@ -8860,18 +8860,18 @@ opacity
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	left: 0;
+	right: 0;
 	z-index: 1091;
-	width: 270px;
+	width: 200px;
 	max-width: 100%;
 	background: #333;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 	-webkit-transition: -webkit-transform .3s ease-in-out;
 	transition: transform .3s ease-in-out;
-	-webkit-transform: translateX(-100%);
-	-ms-transform: translateX(-100%);
-	transform: translateX(-100%)
+	-webkit-transform: translateX(100%);
+	-ms-transform: translateX(100%);
+	transform: translateX(100%)
 }
 
 .am-offcanvas-bar:after {
