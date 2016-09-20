@@ -44,7 +44,7 @@ public class WXZFService extends CommonService implements IWXZFService {
 		tpWxPay.setOrderId(orderId);
 		tpWxPay.setSpbillCreateIp(WebUtils.getIpAddr(request));
 		tpWxPay.setTotalFee(totalPrice);
-		PackageResult pr=WXPayUtil.getPackage(tpWxPay,IContant.notifyurl1);
+		PackageResult pr=WXPayUtil.getPackage(tpWxPay,IContant.notifyurl1);  //IContant微信服务号常量
 		map.put("pr", pr);
 		map.put("status", "Y");
 		map.put("price", "123");
