@@ -25,7 +25,7 @@
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet"/>
 <link rel="stylesheet" href="${ctx }/resources/client/css/newfly.css" type="text/css"/>
 <link href="${ctx }/resources/client/css/bootstrap-slider.min.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
+<%-- <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link> --%>
 
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/jquery-1.7.2.min.js"></script>
 <script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/bootstrap-slider.min.js"></script>
@@ -168,7 +168,7 @@ function addShoppCar(id){
 <div class="tit_all m_bottom_80 conbg">
 	  <div class="container">
 		  <div class="tit_all_left col-sm-12 col-md-7">
-             <div class="loader yemianyanchi" style="display: none;">
+             <!-- <div class="loader yemianyanchi" style="display: none;">
 		        <div class="loader-inner ball-pulse-rise">
 		          <div></div>
 		          <div></div>
@@ -176,7 +176,7 @@ function addShoppCar(id){
 		          <div></div>
 		          <div></div>
 		        </div>
-			 </div>
+			 </div> -->
 		     <div class="tit_img">
 			   <!--<image src="${ctx }/resources/client/images/ad.jpg" style="width:100%"/>-->
 			   <!--<iframe id="iframe" src="${ctx }/gemClient/loadImg.do" frameborder="no" width="100%"></iframe>-->
@@ -192,7 +192,11 @@ function addShoppCar(id){
 			     </a>
 			   </b>
 			 </div>
-			 
+			 <!-- 延迟加载   start  loaders.css-->
+				<div class="yemianyanchi">
+				<img src="${ctx }/resources/client/images/load2.gif"></img>
+				</div>
+			<!-- 延迟加载   end -->
 			 <ul class="tit_ul">
 				<li  class="tit_lie col-md-6 col-xs-12">
 				   <div class="col-xs-6">
