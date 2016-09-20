@@ -21,10 +21,10 @@ public interface IContant {
 	//统一下单URL
 	public static String createOrderURL = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 	/*项目配置常量*自定义回调URL*/
-	public static final String REDIRECT_URI = "http://lzy348860554.imwork.net/gemtak/gemClient/orderSuccess.do";//"http://lzy348860554.imwork.net/gemtak/get-weixin-code.html";//
+	public static final String REDIRECT_URI = "http://www.gemtak.com/gemtak/gemClient/orderSuccess.do";//"http://lzy348860554.imwork.net/gemtak/get-weixin-code.html";//
 	//授权，静默跳转
 	public static final String SCOPE = "snsapi_base";//
 	//微信支付成功后通知地址 必须要求80端口并且地址不能带参数
-	public static String notifyurl1 = "http://lzy348860554.imwork.net/gemtak/wx/payNoticeUrl.do";	
+	public static String notifyurl1 = "http://www.gemtak.com/gemtak/wx/payNoticeUrl.do";	
 	
 }
