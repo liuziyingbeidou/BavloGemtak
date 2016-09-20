@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="${ctx }/resources/client/css/newfly.css" type="text/css"/>
 	<link href="${ctx }/resources/client/css/index.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="${ctx }/resources/client/css/files/demo.css" type="text/css"></link>
-    <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
+    <%-- <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link> --%>
 	<script type="text/javascript" src="${ctx }/resources/client/js/jquery-1.12.4.js"></script>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/gemClient.js"></script>
 	
@@ -92,14 +92,15 @@ $(window).scroll(function(){
         $('#gotop').fadeOut('slow');
     }
 });
- 
+
 </script>
  <style type="text/css">
- .yemianyanchi{
-	  position:fixed;
+.yemianyanchi{
+	  /* position:fixed;
 	  left:900px;
-	  top:500px;
- }
+	  top:500px; */
+     text-align: center;
+ } 
  
  </style>
 </head>
@@ -303,20 +304,7 @@ $(window).scroll(function(){
 			 <span class="span_item"><input type="checkbox" class="pairs-k" name="renamed" value="1"/>刻面</span>
 		  </div>
 		  
-		  <!-- 延迟加载   start  loaders.css-->
-		      <div class="loader yemianyanchi" style="display: none;">
-		        <div class="loader-inner ball-spin-fade-loader">
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		        </div>
-		      </div>
-		      <!-- 延迟加载   end -->
+		  
 		  
           <div class="cup_nav col-md-12">
 		     <ul class="hidden-xs hidden-sm">
@@ -366,6 +354,23 @@ $(window).scroll(function(){
 <div class="footer hidden-xs hidden-sm">
     <jsp:include page="../../admin/foot.jsp"></jsp:include>
 </div>
+<!-- 延迟加载   start  loaders.css-->
+		      <!-- <div class="loader yemianyanchi" style="display: none;">
+		        <div class="loader-inner ball-spin-fade-loader">
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		          <div></div>
+		        </div>
+		      </div> -->
+<div class="yemianyanchi">
+<img src="${ctx }/resources/client/images/load2.gif"></img>
+</div>
+<!-- 延迟加载   end -->
 <script language="Javascript">
   $(function(){
     $(".tit_table table tr").hover(function(){
