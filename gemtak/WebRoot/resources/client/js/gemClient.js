@@ -197,14 +197,14 @@ function selGemNUM() {
 		dat = $.parseJSON(data);
 		var gemNo = dat.gemNo;
 		if (gemNo != null) {
-			var uname = $(".juname").attr("value");
-			if (uname == "WxLogin") {
+			//var uname = $(".juname").attr("value");
+			//if (uname == "WxLogin") {
 				$(".selPhGemNO").empty();
 				$(".selPhGemNO").text("" + gemNo + "");
-			} else {
+			//} else {
 				$(".selGemNO").empty();
 				$(".selGemNO").append("" + gemNo + "");
-			}
+			//}
 		}
 
 	});
@@ -398,7 +398,11 @@ function addFavorite(id) {
 		data = $.parseJSON(data);
 		var flag = data.msg;
 		if (flag == "Y") {
-			/* alert("您已成功收藏该宝贝！"); */
+			layer.alert('您已成功收藏该商品！', {
+			       title:'gemtak 提示:',
+			       icon: 1,
+			       skin: 'layui-layer-molv'
+			 });
 			$(".changimg-" + id).prop("src",
 					'/gemtak/resources/client/images/tu5.png');
 		}
