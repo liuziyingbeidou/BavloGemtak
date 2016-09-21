@@ -272,7 +272,7 @@ $(function(){
 				<h2><span>商品清单</span></h2>
 			    <c:forEach items="${gemList}" var="gem">
 				  <dl class="spqd">
-					 <dt><a href="javascript:void(0);"><img  src="http://stylepics.bavlo.com/Gemtak/${gem.gid}s/001.jpg" width="100%" /></a></dt>
+					 <dt><a href="javascript:void(0);"><img  src="http://stylepics.bavlo.com/Gemtak/gempic/${gem.gid}s/001.jpg" width="100%" /></a></dt>
 					 <dd><p class="gemid" nid="${gem.id}" sid="${gem.vdef1}" jid="${gem.retail_price}"><b>${gem.type_cn}•${gem.type_cn}</b></p>
 					     <p class="shopcarid" style="display:none"><span>${gem.vdef2}</span></p>
 						 <p class="shuliang" name="quantity">数量：<span>${gem.vdef1}</span></p>
@@ -290,7 +290,7 @@ $(function(){
 				 <h2><span>结算信息</span></h2>
 				  <div class="jsxx">
 					 <p>
-					    <input class="jsxx_m couponNum" type="text"   name="coupon" value="" />
+					    <input class="jsxx_m couponNum" type="text"   name="coupon" value=""  placeholder="如有优惠劵，请在填写优惠券编码。"/>
 					    <input class="jsxx_b sel_couppon"   type="button" title="添加" value="添加"/>
 					    <b class="couponNo" style="font-size: 14px;color: #8c0000;"></b>
 					    <input class="jsxx_m youhuijia" type="hidden"   name="coupon_fee" value="${youhuijia}" />
@@ -327,8 +327,11 @@ $(function(){
  $(".btn-save").click(function(){
   saveOrUpdate();
  });
+ 
+
  //新增用户收货地址
- function saveOrUpdate(){
+function saveOrUpdate(){
+ // checkEmpty();
   var realName = $(".username").val();
   var area = $(".area1").find("option:selected").text()+","+$(".area2").find("option:selected").text()+","+$(".area3").find("option:selected").text();
   var detailAddress =$(".detailAddress").val();
@@ -336,6 +339,7 @@ $(function(){
   var tel = $(".tel").val();
   var cellphone = $(".cellphone").val();
   var email = $(".email").val();
+  
   var aid = null;
   if($(".btn-save").attr("ntype") == "update"){
     $(".aaa").each(function(){
@@ -351,7 +355,12 @@ $(function(){
 	contentType:"application/x-www-form-urlencoded;charset=UTF-8",
 	success: function(data){ //成功 
 	 if(data == "true"){
-     alert("添加成功！");
+     //alert("添加成功！");
+      layer.alert('收货地址添加成功！', {
+         title:'gemtak 提示:',
+         icon: 1,
+         skin: 'layui-layer-molv'
+        });
      $(".selUser").empty();
      selectUserAddressHead();
      $(".selUser").append("<li class='urealname'>收货人姓名：<span>"+realName+"</span></li>"+
@@ -370,6 +379,8 @@ $(function(){
  //新增时 点击取消按钮
  $(".btn-clean").click(function(){
   $(".username").val("");
+  $("#vcity").find("option:selected").text("城市");
+  $("#vdistrict").find("option:selected").text("区县");
   $(".detailAddress").val("");
   $(".zipcode").val("");
   $(".tel").val("");
@@ -407,7 +418,12 @@ $(function(){
    var url = "/gemtak/gemClient/delUserAddress.do";
    $.post(url,{id:id},function(data){
     if(data == "true"){
-     alert("删除成功！");
+     //alert("删除成功！");
+     layer.alert('收货地址删除成功！', {
+         title:'gemtak 提示:',
+         icon: 1,
+         skin: 'layui-layer-molv'
+        });
      selectUserAddress();
     }
    });
