@@ -99,7 +99,7 @@ function addShoppCar(id){
         $("#my-popup").modal('toggle');
       }else{
         //加入购物车效果getCarNum();
-        layer.alert('恭喜您，宝贝已加入购物车！', {
+        /* layer.alert('恭喜您，宝贝已加入购物车！', {
 		  skin: 'layui-layer-molv' //样式类名
 		  ,closeBtn: 0
 		}, function(){
@@ -108,8 +108,12 @@ function addShoppCar(id){
 		    ,closeBtn: 0
 		    ,shift: 4 //动画类型
 		  });
-		});
-        
+		}); */
+        layer.alert('恭喜您，宝贝已加入购物车！', {
+	       title:'gemtak 提示:',
+	       icon: 1,
+	       skin: 'layui-layer-molv'
+	   });
       }
       var quantity =  $(".selquantity").text();
 	  var url = "/gemtak/gemClient/addShoppingCar.do";
