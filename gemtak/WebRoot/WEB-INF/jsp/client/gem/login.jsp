@@ -84,42 +84,49 @@
    var reguname = $(".reg-uname").val();
    var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
    if(reguname == ""|| reguname == null){
-     $(".errorname").text("E-mail不能为空！");
+     $(".errorname").empty();
+     $(".errorname").append("<label>&nbsp;</label><div class='s_te '>E-mail不能为空！</div>");
      return false;
    }else if (!filter.test(reguname)){
-     $(".errorname").text("您的E-mail格式不正确!");
-		 return false;
+     $(".errorname").empty();
+     $(".errorname").append("<label>&nbsp;</label><div class='s_te '>您的E-mail格式不正确!</div>");
+	return false;
    }else{
-     $(".errorname").text("");
+      $(".errorname").empty();
    }
 		 
    
    var regpwd = $(".reg-pwd").val();
    if(regpwd == ""|| regpwd == null){
-     $(".errorpwd").text("密码不能为空！");
+     $(".errorpwd").empty();
+     $(".errorpwd").append("<label>&nbsp;</label><div class='s_te '>密码不能为空！</div>");
      return false;
    }else if(regpwd.length < 6){
-     $(".errorpwd").text("密码最少六个字符！");
+     $(".errorpwd").empty();
+     $(".errorpwd").append("<label>&nbsp;</label><div class='s_te '>密码最少六个字符！</div>");
      return false;
    }else{
-     $(".errorpwd").text("");
+      $(".errorpwd").empty();
    }
    var regrpwd = $(".reg-rpwd").val();
    if(regrpwd == ""|| regrpwd == null){
-     $(".errorcpwd").text("请确认密码！");
+     $(".errorcpwd").empty();
+     $(".errorcpwd").append("<label>&nbsp;</label><div class='s_te '>请确认密码！</div>");
      return false;
    }else{
-     $(".errorcpwd").text("");
+     $(".errorcpwd").empty();
    }
    if(regrpwd != regrpwd){
-     $(".errorcpwd").text("两次输入的密码不相同！");
+     $(".errorcpwd").empty();
+     $(".errorcpwd").append("<label>&nbsp;</label><div class='s_te '>两次输入的密码不相同！</div>");
      return false;
    }else{
-     $(".errorcpwd").text("");
+     $(".errorcpwd").empty();
    }
    var regauthcode = $(".reg-authcode").val();
    if(regauthcode == ""|| regauthcode == null){
-     $(".errorauthcode").text("请输入验证码！");
+     $(".errorauthcode").empty();
+     $(".errorauthcode").append("<label>&nbsp;</label><div class='s_te '>请输入验证码！</div>");
      return false;
    }else{
      $(".errorauthcode").text("");
@@ -128,9 +135,11 @@
    $.post(url,{uname:reguname,upwd:regpwd,regauthcode:regauthcode},function(data){
        var flag = data;
        if(flag == "error1"){
-         $(".errorname").text("该E-mail已被注册！");
+         $(".errorname").empty();
+         $(".errorname").append("<label>&nbsp;</label><div class='s_te '>该E-mail已被注册！</div>");
        }else if(flag == "true"){
-         $(".errorname").text("恭喜您，注册成功！");
+         $(".errorname").empty();
+         $(".errorname").append("<label>&nbsp;</label><div class='s_te '>恭喜您，注册成功！</div>");
        }
    });
    });
@@ -230,13 +239,13 @@
 				<div class="pass">
 					<ul class="word">
 						<li><label>E-mail：</label><div class="s_te"><input class="inp_text reg-uname" type="text" value="" /><b class="error "></b></div></li>
-						<li style="margin:0px auto;line-height:20px;color: red;"><label>&nbsp;</label><div class="s_te errorname"></div></li>
+						<li style="margin:0px auto;line-height:20px;color: red;" class="errorname"></li>
 						<li><label>密码：</label><div class="s_te"><input class="inp_text reg-pwd" type="password" value="" /><b class="error "></b></div></li>
-						<li style="margin:0px auto;line-height:20px;color: red;"><label>&nbsp;</label><div class="s_te errorpwd"></div></li>
+						<li style="margin:0px auto;line-height:20px;color: red;" class="errorpwd"></li>
 						<li><label>确认密码：</label><div class="s_te"><input class="inp_text reg-rpwd" type="password" value="" /><b class="error "></b></div></li>
-						<li style="margin:0px auto;line-height:20px;color: red;"><label>&nbsp;</label><div class="s_te errorcpwd"></div></li>
+						<li style="margin:0px auto;line-height:20px;color: red;" class="errorcpwd"></li>
 						<li><label>验证码：</label><div class="s_te"><input class="inp_text reg-authcode" type="password" style="width:50%" value="" />&nbsp;<img src="" class="authcodeimg" onclick="refush('authcodeimg')"/><b class="error"></b></div></li>
-						<li style="margin:0px auto;line-height:20px;color: red;"><label>&nbsp;</label><div class="s_te errorauthcode"></div></li>
+						<li style="margin:0px auto;line-height:20px;color: red;" class="errorauthcode"></li>
 					</ul>
 					
 					<ul class="word redo">
