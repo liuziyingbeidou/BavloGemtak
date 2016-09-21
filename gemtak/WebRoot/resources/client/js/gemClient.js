@@ -398,7 +398,7 @@ function addFavorite(id) {
 		data = $.parseJSON(data);
 		var flag = data.msg;
 		if (flag == "Y") {
-			layer.alert('您已成功收藏该商品！', {
+			layer.alert('您已成功收藏该宝石！', {
 			       title:'gemtak 提示:',
 			       icon: 1,
 			       skin: 'layui-layer-molv'
