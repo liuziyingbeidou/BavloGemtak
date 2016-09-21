@@ -156,7 +156,12 @@
   function getCarNum(){
    var url = "${ctx }/gemClient/getCarNum.do";
    $.post(url,function(data){
-    selCarNO(data);
+    data = $.parseJSON(data);
+    if(data != null){
+      selCarNO(data.num);
+    }else{
+      selCarNO(0);
+    }
    });
   }
   
@@ -211,10 +216,22 @@ $(".tologin").click(function(){
      
 //我的订单
 $(".view-MyOrder").click(function(){
-     location.href="${ctx }/gemClient/selMyOrder.do";
-    
+  var url = "${ctx }/gemClient/selMyOrderNum.do";
+  $.post(url,function(data){
+    data = $.parseJSON(data);
+    if(data.num == "0"){
+        layer.alert('您的订单为空！', {
+         title:'gemtak 提示:',
+         icon: 1,
+         skin: 'layui-layer-molv'
+        });
+    }else{
+      location.href="${ctx }/gemClient/selMyOrder.do";
+    }
+  });
 });
-	 // 购物车  skin: 'layui-layer-lan'  shift: 4 //动画类型
+
+// 购物车  skin: 'layui-layer-lan'  shift: 4 //动画类型
 $(".view-shoppingcar").click(function(){
  var url = "/gemtak/gemClient/checkGemShoppingCar.do";
  $.post(url,function(data){
