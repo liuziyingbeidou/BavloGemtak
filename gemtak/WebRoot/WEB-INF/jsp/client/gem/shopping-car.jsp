@@ -27,7 +27,7 @@ $(function(){
      var url = "/gemtak/gemClient/checkGemShoppingCar.do";
 	 $.post(url,function(data){
 	  if(data == "N"){
-	    layer.alert('您的购物车还没有宝贝哟！', {
+	    /* layer.alert('您的购物车还没有宝贝哟！', {
 		  skin: 'layui-layer-molv' //样式类名
 		  ,closeBtn: 0
 		}, function(){
@@ -36,7 +36,12 @@ $(function(){
 		    ,closeBtn: 0
 		    ,shift: 4 //动画类型
 		  });
-		});
+		}); */
+		layer.alert('您的购物车空空如也，请先去购物吧！', {
+	       title:'gemtak 提示:',
+	       icon: 1,
+	       skin: 'layui-layer-molv'
+	   });
 	  }else if(data == "Y"){
 	   location.href = "/gemtak/gemClient/order.do";
 	  }
@@ -76,7 +81,7 @@ function delShoppCar(id){
 			  <c:forEach items="${gemList}" var="gem">
 				<div class="wrap_bj del-car-${gem.vdef2}"><h3>${gem.type_cn}<b>${gem.weight}</b></h3><a href="javascript:void(0)" onclick="delShoppCar('${gem.vdef2}')"></a></div>	 
 				<dl class="gwc1 del-car-${gem.vdef2}">
-					<dt class="col-xs-12 col-sm-5"><a href="javascript:void(0)"><img src="http://stylepics.bavlo.com/Gemtak/${gem.gid}s/001.png"/></a></dt>
+					<dt class="col-xs-12 col-sm-5"><a href="javascript:void(0)"><img src="http://stylepics.bavlo.com/Gemtak/gempic/${gem.gid}s/001.jpg"/></a></dt>
 					<dd class="col-xs-12 col-sm-7"><p>${gem.company}</p>
 						<p>形状： ${gem.shape_cn}</p>
 						<p>尺寸：  ${gem.size_l}x${gem.size_w}x${gem.size_h} </p>
