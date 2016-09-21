@@ -156,15 +156,13 @@
   function getCarNum(){
    var url = "${ctx }/gemClient/getCarNum.do";
    $.post(url,function(data){
-    data = $.parseJSON(data);
-    if(data != null){
-      selCarNO(data.num);
+    if(data != null || data != ""){
+     selCarNO(data);
     }else{
-      selCarNO(0);
+     selCarNO(0);
     }
-   });
-  }
-  
+  });
+ }
   /**
  * 跳转详情页
  */
