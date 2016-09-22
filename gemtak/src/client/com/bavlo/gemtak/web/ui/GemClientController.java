@@ -1026,6 +1026,24 @@ public class GemClientController extends BaseController {
 	}
 	
 	/**
+	 * 登录后点击我的订单 查询我的订单数
+	 * @param model
+	 * @param response
+	 * @param request
+	 */
+	@RequestMapping(value="selMyOrderNum")
+	public void selMyOrderNum(Model model,HttpServletResponse response,HttpServletRequest request){
+		//当前本地化语言
+		String lang = WebUtils.getLang(request);
+		System.out.println("Loc Lang："+lang);
+		//根据本地语言更新页面数据
+		GemClientPageModel.getCOrderPayPageModel(model,lang);
+		String uname = (String)session.getAttribute(IConstant.SESSIONUSERNAEM);
+		Integer num = gemService.getOrderNoByUname(uname);
+		renderText("{\"num\":\""+num+"\"}");
+	}
+	
+	/**
 	 * @Description: 查询 我的订单
 	 * @param @param model
 	 * @param @param response
@@ -1294,6 +1312,7 @@ public class GemClientController extends BaseController {
 	 * @param @return
 	 * @return String
 	 */
+	/*@Deprecated
 	@RequestMapping(value="goToList")
 	public String goToList(Model model,HttpServletRequest request,HttpServletResponse response,String uname){
 		//当前本地化语言
@@ -1311,7 +1330,7 @@ public class GemClientController extends BaseController {
 		model.addAttribute("carNum",num);
 		model.addAttribute("uname", uname);
 		return "/client/gem/list";
-	}
+	}*/
 	
 	
 	
