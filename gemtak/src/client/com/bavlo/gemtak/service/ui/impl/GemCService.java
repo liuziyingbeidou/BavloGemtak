@@ -229,7 +229,7 @@ public class GemCService extends CommonService implements IGemService {
 		StringBuilder sql = new StringBuilder();
 	    sql.append("select ");
 	    sql.append(" g.id, g.type_cn,g.weight,g.company,g.shape_cn,g.size_l,g.size_w,g.size_h,g.average_color,g.clarity_cn,g.cut_cn," +
-	    		"g.origin_cn,g.treatment_cn,g.lab_cn,g.supplier,g.retail_price,g.trade_price, s.quantity as vdef1,s.id as vdef2");
+	    		"g.origin_cn,g.treatment_cn,g.lab_cn,g.supplier,g.retail_price,g.trade_price, s.quantity as vdef1,s.id as vdef2,g.gid");
 	    sql.append(" from gt_shopping s");
 	    sql.append(" left join gt_gem g");
 	    sql.append(" on s.gem_id=g.id");
@@ -266,6 +266,7 @@ public class GemCService extends CommonService implements IGemService {
 	    		gem.setTrade_price(CommonUtils.isNull(arry[16]) ? null:Double.valueOf(arry[16]+""));
 	    		gem.setVdef1(CommonUtils.isNull(arry[17]) ? null:arry[17]+"");
 	    		gem.setVdef2(CommonUtils.isNull(arry[18]) ? null:arry[18]+"");
+	    		gem.setGid(CommonUtils.isNull(arry[19]) ? null:arry[19]+"");
 	    		nlist.add(gem);
 	    	}
 	    }
