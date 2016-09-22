@@ -50,8 +50,9 @@ $(function(){
 });
  //删除购物车中 选中的商品
 function delShoppCar(id){
-  var url = "/gemtak/gemClient/delShoppingCar.do";
-  $.post(url,{shoppingCarId:id},function(data){
+  layer.confirm('确定要删除吗?', function(){
+    var url = "/gemtak/gemClient/delShoppingCar.do";
+    $.post(url,{shoppingCarId:id},function(data){
     data = $.parseJSON(data);
     var flag = data.mess;
     if(flag=="Y"){
@@ -63,7 +64,10 @@ function delShoppCar(id){
      $(".total-price").text(money);
     }
   });
- }
+  layer.msg('删除成功！');
+			  
+  });
+}
  
  
  
