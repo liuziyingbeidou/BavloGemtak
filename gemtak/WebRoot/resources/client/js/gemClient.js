@@ -4,7 +4,7 @@
 
 $(function() {
 selectClientList(1);
-	/** 查询域* */
+/** 查询域* */
 // 宝石种类
 $(".p_default").click(
 function() {
@@ -343,8 +343,8 @@ function selectClientList(switchover) {
 								}
 							}
 							appendToFoot(switchover);
-							getCarNum(); // 查询购物车
 							$(".yemianyanchi").hide();
+							getCarNum(); // 查询购物车 
 							selGemNUM();
 						}
 					});
