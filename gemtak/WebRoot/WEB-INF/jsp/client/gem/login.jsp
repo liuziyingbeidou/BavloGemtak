@@ -54,9 +54,10 @@
         //data = $.parseJSON(data);
         if(data == "true"){
         	//登录成功处理...
-        	var number = "${dengluNo}";  //默认dengluNo为 1
+        	var number = "${dengluNo}";  //默认dengluNo为 1 
         	if(number == "1"){
-        	 location.href = "${ctx}/gemClient/goToList.do?uname="+uname;
+        	 //location.href = "${ctx}/gemClient/goToList.do?uname="+uname;
+        	 location.href = "${ctx}/gemClient/viewGemList.do";
         	}else if(number == "2"){
         	 /* window.parent.location.reload(); */
         	 window.parent.closeMwin(uname);  //closeMwin()在detaile.jsp 将用户名作为参数
