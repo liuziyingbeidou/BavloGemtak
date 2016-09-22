@@ -53,7 +53,7 @@
 	  </c:if>
 	  <c:if test="${uname != null}">
 	  
-	    <a  href="javascript:void(0)" class="view-shoppingcar">${pagehfvo['hMShoppingCart'] }<t class="cart-num"></t></a>
+	    <a  href="javascript:void(0)" class="view-shoppingcar">${pagehfvo['hMShoppingCart'] }<t class="cart-num">${carNum }</t></a>
 	   
 	    
 		<a href="javascript:void(0)" class="jesuan">${pagehfvo['hMBalance'] }</a>
