@@ -100,10 +100,10 @@ em, i{ font-style:normal; }
 .lt_ul2 .swiper-slide span{float:left;display:block;width:100%;text-align:center;}
 
 
-.swiper-button-prev {top:50%; background:url(../images/jia.png) no-repeat right top}
-.swiper-button-next{top:50%;background:url(../images/jiao.png) no-repeat right top;}
-.swiper-button-prev2 {top:50%; background:url(../images/jia.png) no-repeat right top}
-.swiper-button-next2{top:50%;background:url(../images/jiao.png) no-repeat right top;}
+.swiper-button-prev {top:35%; background:url(../images/jia.png) no-repeat right top}
+.swiper-button-next{top:35%;background:url(../images/jiao.png) no-repeat right top;}
+.swiper-button-prev2 {top:40%; background:url(../images/jia.png) no-repeat right top}
+.swiper-button-next2{top:40%;background:url(../images/jiao.png) no-repeat right top;}
 
 .more_ri{float:right;width:3%;margin:0px auto 0%;overflow:hidden;padding-top:3%}
 
