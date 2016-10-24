@@ -5,13 +5,21 @@
 $(function() {
 selectClientList(1);
 /** 查询域* */
-// 宝石种类
+// 宝石种类  ,"border-radius":"55px"
 $(".p_default").click(
 function() {
 	$(this).css({
-		"border" : "2px solid #e17878"
+		"border" : "3px solid #FF0000"
 	}).parents("div").siblings().find(".p_default").css("border",
 			"0px");
+	/*var vid = $(this).attr("vid");
+	$(this).css({"background":"url('/gemtak/resources/client/images/game/"+vid+"_s.png')top center no-repeat"});
+	$(this).parents("div").siblings().find(".p_default").each(function(em){
+		var subNode = $(this)[0];
+		var svid = $(subNode).attr("vid");
+		console.log(svid);
+		$(subNode).css({"background":"url('/gemtak/resources/client/images/game/"+svid+".png')top center no-repeat"});
+	});*/
 	$(".a_item_type").remove();
 	$(".selects-type").append(
 			"<a href='#' class='a_item a_item_type'>种类："
@@ -22,13 +30,21 @@ function() {
 	selectClientList(switchover);
 });
 
-// 宝石形状
+// 宝石形状 ,"border-radius":"75px"
 $(".nav_default").click(
 function() {
 	$(this).css({
-		"border" : "2px solid #e17878"
+		"border" : "3px solid #FF0000"
 	}).parents("div").siblings().find(".nav_default").css("border",
 			"0px");
+	/*var vid = $(this).attr("vid");
+	$(this).css({"background":"url('/gemtak/resources/client/images/mot/"+vid+"_s.png')top center no-repeat"});
+	$(this).parents("div").siblings().find(".nav_default").each(function(em){
+		var subNode = $(this)[0];
+		var svid = $(subNode).attr("vid");
+		console.log(svid);
+		$(subNode).css({"background":"url('/gemtak/resources/client/images/mot/"+svid+".png')top center no-repeat"});
+	})*/
 	$(".a_item_shape").remove();
 	$(".selects-shape").append(
 			"<a href='#' class='a_item a_item_shape'>形状："
@@ -265,7 +281,7 @@ function selectClientList(switchover) {
 					function(data) {
 						$(".appendClientList").empty();
 						appendToHead(switchover);
-						if (data != null) {
+						if (data != "") {
 							var len = data.length;
 							var jiage = null;
 							for ( var i = 0; i < len; i++) {
@@ -287,7 +303,7 @@ function selectClientList(switchover) {
 													"<li class='col-md-3 col-xs-6'>"
 															+ "<span><a href='javascript:void(0)' onclick='goDetail("
 															+ data[i].id
-															+ ")'><image class='360tupian'  src='http://stylepics.bavlo.com/Gemtak/gempic/"+data[i].gid+"s/001.jpg' /></a></span>"
+															+ ")'><image class='360tupian'  src='http://gemtakimg.b0.upaiyun.com/Gemtak/"+data[i].gid+"/001.jpg!mid' /></a></span>"
 															+ "<h6><b>"
 															+ data[i].type_cn
 															+ "<font class='hidden-xs hidden-sm'>（"
@@ -311,7 +327,7 @@ function selectClientList(switchover) {
 									$(".appendClientList .cList")
 											.append(
 													"<tr>"
-															+ "<td><image class='360tupian' src='http://stylepics.bavlo.com/Gemtak/gempic/"+data[i].gid+"s/001.jpg'' width='120px'/></td>"
+															+ "<td><image class='360tupian' src='http://gemtakimg.b0.upaiyun.com/Gemtak/"+data[i].gid+"/001.jpg!mid'' width='120px'/></td>"
 															+ "<td><b>"
 															+ data[i].type_cn
 															+ "</b> <br />"
@@ -343,11 +359,12 @@ function selectClientList(switchover) {
 								}
 							}
 							appendToFoot(switchover);
-							$(".yemianyanchi").hide();
-							getCarNum(); // 查询购物车 
-							selGemNUM();
 						}
+						getCarNum(); // 查询购物车 
+						selGemNUM();
+						$(".yemianyanchi").hide();
 					});
+	
 }
 
 function appendToHead(switchover) {
