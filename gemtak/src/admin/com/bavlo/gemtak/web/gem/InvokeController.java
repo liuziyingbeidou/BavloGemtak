@@ -65,15 +65,17 @@ public class InvokeController extends BaseController {
 	 * @param LightType
 	 * @return
 	 * @throws UnsupportedEncodingException
+	 * 
+	 * String LightType
 	 */
 	@RequestMapping(value="saveGem",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String  saveGem(HttpServletRequest request,HttpServletResponse respose,String Gid,String Direction,
-			String ViewAngle,String Height,String Brand,String Weight,String Multiple,String LightType) throws UnsupportedEncodingException{
-		Integer light = Integer(LightType);
+	public String  saveGem(HttpServletRequest request,HttpServletResponse respose,String Gid,String GemtypeId,
+			String ViewAngle,String Height,String Brand,String Weight,String Multiple) throws UnsupportedEncodingException{
+		//Integer light = Integer(LightType);
 		Boolean fg = false;
 		try {
-			gemService.getGemVOByGid(Gid,Direction,ViewAngle, Height, Brand,Weight,Multiple,light);
+			gemService.getGemVOByGid(Gid,GemtypeId,ViewAngle, Height, Brand,Weight,Multiple);
 			fg = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
