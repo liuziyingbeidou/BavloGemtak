@@ -2,12 +2,9 @@ package com.bavlo.gemtak.service.gem.itf;
 
 import java.util.List;
 
-import org.springframework.ui.Model;
-
 import com.bavlo.gemtak.model.gem.EquipmentVO;
 import com.bavlo.gemtak.model.gem.GemVO;
 import com.bavlo.gemtak.model.gem.LinkmanVO;
-import com.bavlo.gemtak.utils.CommonUtils;
 
 /**
  * @Title: 宝珑Gemtak
@@ -106,8 +103,7 @@ public interface IGemService {
 	 * @param gid
 	 * @return
 	 */
-  public Boolean getGemVOByGid(String Gid,String Direction,
-			String ViewAngle,String Height,String Brand,String Weight,String Multiple,Integer LightType)throws Exception;
+  public Boolean getGemVOByGid(String Gid,String GemtypeId,String ViewAngle,String Height,String Brand,String Weight,String Multiple)throws Exception;
   
   /**
    * 查询出所有的宝石供应商
