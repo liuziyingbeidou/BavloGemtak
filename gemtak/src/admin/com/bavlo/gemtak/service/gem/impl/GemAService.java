@@ -179,10 +179,10 @@ public class GemAService extends CommonService implements IGemService {
 	}
 
 	/**
-	 * 9.参数为Gid、方位，视角、高度、公司、重量、倍数、变色性
+	 * 9.参数为Gid、不传方位，视角、高度、公司、重量、倍数、光源色 Integer LightType、宝石类型
 	 */
 	@Override
-	public Boolean getGemVOByGid(String Gid,String Direction,String ViewAngle,String Height,String Brand,String Weight,String Multiple,Integer LightType)throws Exception{
+	public Boolean getGemVOByGid(String Gid,String GemtypeId,String ViewAngle,String Height,String Brand,String Weight,String Multiple)throws Exception{
 		Boolean flag = false;
 		
 		/**
@@ -205,13 +205,14 @@ public class GemAService extends CommonService implements IGemService {
 				gvo.setSupplier(lvo.getSupplier());
 				gvo.setCompany(evo.getCompany());
 				gvo.setSupplier_tel(lvo.getTel());
-				gvo.setLocation(lvo.getAddress());
-				gvo.setPosition(Direction);
+				gvo.setLocation(evo.getAddress());
+				//gvo.setPosition(Direction);        方位
+				gvo.setType_id(GemtypeId);
 				gvo.setHeight(Height);
 				gvo.setMultiple(Multiple);
 				gvo.setWeight(Weight);
 				gvo.setViewpoint(ViewAngle);
-				gvo.setLightType(LightType);
+				//gvo.setLightType(LightType);
 				try {
 					update(gvo);
 					flag = true;
