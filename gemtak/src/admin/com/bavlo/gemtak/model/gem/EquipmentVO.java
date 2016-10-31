@@ -38,7 +38,7 @@ public class EquipmentVO extends IdEntity {
 	private String bisClose;
 	//  创建日期
 	private Timestamp createdate;
-	
+	//   公司地址
 	private String address;
 	
 
