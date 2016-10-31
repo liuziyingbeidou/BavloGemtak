@@ -33,7 +33,7 @@ public class GemVO extends IdEntity implements Serializable {
 	private String color_id;
 	private String color_cn;
 	private String color_en;
-	//是否标准形状 非规格
+	//        是否标准形状 非规格
 	private String isstand;
 	//		宝石形状			接口
 	private String shape_id;
@@ -55,17 +55,18 @@ public class GemVO extends IdEntity implements Serializable {
 	private String clarity_id;
 	private String clarity_cn;
 	private String clarity_en;
-	//     倍数
+	//        倍数
 	private String multiple;
-	//     高度
+	//        高度
 	private String height;
-	//     方位
+	//        方位
 	private String position;
 	//		视角			
 	private String viewpoint;
-	//     变色性     默认为非变色性   1为非变色性 2为变色性
+	//        光源色 默认为白光  1为白光 2为黄光
 	private Integer lightType;
-	//     颜色
+	
+	//        颜色
 	private String average_color;
 	//		宝石产地			接口
 	private String origin_id;
@@ -101,14 +102,14 @@ public class GemVO extends IdEntity implements Serializable {
 	private String lab_no;
 	//		证书URL			
 	private String lab_url;
-	//     设备号
+	//       设备号
 	private String vcode;
 	//		卖家（供应商）			微信企业号所绑定的账号---供应商标签
 	private String supplier;
-	//      公司
+	//       公司
 	private String company;
 	
-	//      卖家电话
+	//       卖家电话
 	private String supplier_tel;
 	//		货址			
 	private String location;
@@ -124,27 +125,55 @@ public class GemVO extends IdEntity implements Serializable {
 	private String is_release;
 	//		创建日期			
 	private Timestamp createdate;
-	//发布日期
+	//         发布日期
 	private Timestamp releasedate;
 	
+	/**
+	 *  供应商ID
+	 * @return
+	 */
 	public Integer getEquipment_id() {
 		return equipment_id;
 	}
+	/**
+	 * 供应商ID
+	 * @param equipment_id
+	 */
 	public void setEquipment_id(Integer equipment_id) {
 		this.equipment_id = equipment_id;
 	}
+	/**
+	 * 宝石编码
+	 * @return
+	 */
 	public String getGid() {
 		return gid;
 	}
+	/**
+	 * 宝石编码
+	 * @param gid
+	 */
 	public void setGid(String gid) {
 		this.gid = gid;
 	}
+	/**
+	 * 宝石类型
+	 * @return
+	 */
 	public String getType_id() {
 		return type_id;
 	}
+	/**
+	 * 宝石类型
+	 * @param type_id
+	 */
 	public void setType_id(String type_id) {
 		this.type_id = type_id;
 	}
+	/**
+	 * 宝石类型中文名
+	 * @return
+	 */
 	public String getType_cn() {
 		return type_cn;
 	}
@@ -496,6 +525,5 @@ public class GemVO extends IdEntity implements Serializable {
 	public void setPosition(String position) {
 		this.position = position;
 	}
-	
 
 }
