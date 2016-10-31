@@ -22,7 +22,6 @@ import com.bavlo.gemtak.utils.SelectUtil;
 import com.bavlo.gemtak.utils.StringUtil;
 import com.bavlo.gemtak.utils.WebUtils;
 import com.bavlo.gemtak.web.BaseController;
-import com.bavlo.gemtak.weixin.qy.interceptor.OAuthRequired;
 
 /**
  * @Title: 宝珑Gemtak
@@ -65,7 +64,7 @@ public class GemController extends BaseController {
 	 * @return
 	 * OAuthRequired 配置注解 （开放授权）
 	 */
-	@OAuthRequired
+	//@OAuthRequired
 	@RequestMapping(value="viewGemList")
 	public String viewGemList(Model model,HttpServletRequest request,HttpServletResponse response,Integer dgpage,String allgem,String typegem,String shapegem,String inputgem){
 		/*if(checkU()){
@@ -81,7 +80,7 @@ public class GemController extends BaseController {
 		/**数据查询-start**/
 		//当前的条件根据登录商户的微信号来查  supplier='"+uid+"'
 		//微信授权登录获取信息
-		Object objUid = session.getAttribute("loginInfo");
+	/*	Object objUid = session.getAttribute("loginInfo");
 		if(objUid != null){
 			String uid = ((com.bavlo.gemtak.model.LoginVO) objUid).getUserId();
 			System.out.println("当前登录的用户是："+uid);
@@ -107,11 +106,11 @@ public class GemController extends BaseController {
 			
 			model.addAttribute("gems",gems);
 			model.addAttribute("total",CommonUtils.roundByNum(total,rows)); //CommonUtils类中 根据总数 当前页面大小获取总页数
-		}
+		}*/
 		/**数据查询-end**/
 		
 		
-		/*StringBuilder sql = new StringBuilder();
+		StringBuilder sql = new StringBuilder();
 		if(!("A".equals(allgem) || CommonUtils.isNull(allgem))){
 			sql.append( "  and  is_release = '"+allgem+"'");
 		}
@@ -133,7 +132,7 @@ public class GemController extends BaseController {
 		
 		model.addAttribute("gems",gems);
 		model.addAttribute("total",CommonUtils.roundByNum(total,rows)); //CommonUtils类中 根据总数 当前页面大小获取总页数
-	*/
+
 		return "/admin/gem/gem-list";
 	}
 	
@@ -213,6 +212,8 @@ public class GemController extends BaseController {
 		getCardPageModel(model,lang);
 		GemVO gem = gemService.findGemVOByID(Integer.valueOf(gemid));
 		model.addAttribute("gem",gem);
+		List<EquipmentVO> list = gemService.getSupplier();
+		model.addAttribute("list", list);
 		return "/admin/gem/gem-card";
 	}
 	
