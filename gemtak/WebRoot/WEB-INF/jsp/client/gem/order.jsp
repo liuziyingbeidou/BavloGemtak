@@ -12,7 +12,7 @@
 <meta name="description" content="bavlo">
 <meta name="keywords" content="bavlo">
 <meta name="author" content="bavlo">
-<title>bavlo</title>
+<title>金塔宝石库|Gemtak</title>
 <link rel="stylesheet" href="${ctx}/resources/client/css/bootstrap.css" />
 <link href="${ctx}/resources/client/css/index.css" rel="stylesheet"/>
 <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
@@ -272,7 +272,7 @@ $(function(){
 				<h2><span>商品清单</span></h2>
 			    <c:forEach items="${gemList}" var="gem">
 				  <dl class="spqd">
-					 <dt><a href="javascript:void(0);"><img  src="http://stylepics.bavlo.com/Gemtak/gempic/${gem.gid}s/001.jpg" width="100%" /></a></dt>
+					 <dt><a href="javascript:void(0);"><img  src="http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.gid}/${gem.is_cover}.jpg!mid" width="100%" /></a></dt>
 					 <dd><p class="gemid" nid="${gem.id}" sid="${gem.vdef1}" jid="${gem.retail_price}"><b>${gem.type_cn}•${gem.type_cn}</b></p>
 					     <p class="shopcarid" style="display:none"><span>${gem.vdef2}</span></p>
 						 <p class="shuliang" name="quantity">数量：<span>${gem.vdef1}</span></p>
