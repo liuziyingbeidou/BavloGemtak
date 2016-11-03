@@ -12,7 +12,7 @@
 <meta name="description" content="bavlo">
 <meta name="keywords" content="bavlo">
 <meta name="author" content="bavlo">
-<title>bavlo</title>
+<title>金塔宝石库|Gemtak</title>
 <link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
 <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
@@ -349,7 +349,7 @@ function selOrderGem(id){
  $.post(url,{orderid:id},function(data){
   if(data != null){
    for ( var i = 0; i < data.length; i++) {
-	  $(".selectGem"+id).append("<dl><dt class='col-xs-3'><a href=''><img src='http://stylepics.bavlo.com/Gemtak/gempic/"+data[i].vdef3+"s/001.jpg'  /></a></dt>"+
+	  $(".selectGem"+id).append("<dl><dt class='col-xs-3'><a href=''><img src='http://gemtakimg.b0.upaiyun.com/Gemtak/"+data[i].vdef3+"/"+data[i].is_cover+".jpg!mid'  /></a></dt>"+
 					"<dd class='col-xs-9'><p><b>"+data[i].type_cn+"</b></p><p>数量：<span>"+data[i].vdef2+"</span></p><p>原价：<span>￥"+data[i].vdef1+"</span></p></dd></dl>");
     }
   }
@@ -362,7 +362,7 @@ function selOldOrderGem(id){
   if(data != null){
    for ( var i = 0; i < data.length; i++) {
       $(".selectGem"+id).empty();
-	  $(".selectGem"+id).append("<dl><dt class='col-xs-3'><a href=''><img src='http://stylepics.bavlo.com/Gemtak/gempic/"+data[i].vdef3+"s/001.jpg'  /></a></dt>"+
+	  $(".selectGem"+id).append("<dl><dt class='col-xs-3'><a href=''><img src='http://gemtakimg.b0.upaiyun.com/Gemtak/"+data[i].vdef3+"/"+data[i].is_cover+".jpg!mid'  /></a></dt>"+
 					"<dd class='col-xs-9'><p><b>"+data[i].type_cn+"</b></p><p>数量：<span>"+data[i].vdef2+"</span></p><p>原价：<span>￥"+data[i].vdef1+"</span></p></dd></dl>");
     }
   }
