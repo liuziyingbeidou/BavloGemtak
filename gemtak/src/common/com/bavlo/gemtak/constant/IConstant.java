@@ -78,7 +78,7 @@ public interface IConstant {
 	public static final String POWER_M = "M";
 	
 	//·âÃæÍ¼Ãû³Æ
-	public static final String PIC_COVER = "001.jpg";
+	public static final String PIC_COVER = "00001.jpg";
 	
 	public static final Short SHORT_ZERO = 0;
 	
