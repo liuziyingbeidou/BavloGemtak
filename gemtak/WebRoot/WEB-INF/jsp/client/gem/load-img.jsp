@@ -3,10 +3,10 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 
-					<img src="http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/00001.jpg" width="100%" height="100%" 
+					<img src="http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/${gem.is_cover}!max" width="100%" height="100%" 
 					class="reel change"
 				   	id="image"
-				  	data-images="http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/#####.jpg"
+				  	data-images="http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/#####.jpg!max"
 				 	data-frames="200"
 				  	data-footage="50"
 				  	data-cw="false"
@@ -25,8 +25,8 @@
 
 	 function GetArgsFromHref() 
 	 { 
-		$("#image").prop("src","http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/00001.jpg");
-		$("#image").attr("data-images","http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/#####.jpg");
+		$("#image").prop("src","http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/${gem.is_cover}!max");
+		$("#image").attr("data-images","http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/#####.jpg!max");
 	 } 
  		
 	</script>
