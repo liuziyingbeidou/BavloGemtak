@@ -210,18 +210,18 @@ function selGemNUM() {
 		inwhere : inwhere,
 		inwheres : inwheres
 	}, function(data) {
-		dat = $.parseJSON(data);
-		var gemNo = dat.gemNo;
-		if (gemNo != null) {
+		//dat = $.parseJSON(data);
+		//var gemNo = dat.gemNo;
+		//if (gemNo != null) {
 			//var uname = $(".juname").attr("value");
 			//if (uname == "WxLogin") {
 				$(".selPhGemNO").empty();
-				$(".selPhGemNO").text("" + gemNo + "");
+				$(".selPhGemNO").text(data);
 			//} else {
 				$(".selGemNO").empty();
-				$(".selGemNO").append("" + gemNo + "");
+				$(".selGemNO").append(data);
 			//}
-		}
+		//}
 
 	});
 }
