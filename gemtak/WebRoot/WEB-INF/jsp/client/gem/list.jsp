@@ -22,7 +22,33 @@
     <%-- <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link> --%>
 	<script type="text/javascript" src="${ctx }/resources/client/js/jquery-1.12.4.js"></script>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/client/js/gemClient.js"></script>
-	
+
+<style type="text/css">
+.black_overlay{
+display: none;
+position: absolute;
+top: 0%;
+left: 0%;
+width: 100%;
+height: 100%;
+background-color: #DDDDDD;
+z-index:1001;
+-moz-opacity: 0.8;
+opacity:.80;
+filter: alpha(opacity=80);
+}
+
+.white_content {
+position: absolute;
+top: 40%;
+left: 20%;
+width: 55%;
+height: 75%;
+z-index:1002;
+overflow: auto;
+}
+</style>
+
 <script language=javaScript>
 
 function show_menuone(ID){
@@ -502,14 +528,21 @@ $(window).scroll(function(){
 				</li>
 			  </ul>
           </div> --%>
-	  </div>
+	    </div>
 	</div>
 </div>
+ <!--弹出层时背景层DIV-->
+<div id="fade" class="black_overlay  yemianyanchi">
+	<div id="" class="white_content">
+	<img src="${ctx }/resources/client/images/load2.gif"  style="text-align: center;"/>
+	</div>
+</div>
+
 <div class="footer hidden-xs hidden-sm">
     <jsp:include page="../../admin/foot.jsp"></jsp:include>
 </div>
 <!-- 延迟加载   start  loaders.css-->
-		      <!-- <div class="loader yemianyanchi" style="display: none;">
+		      <%-- <!-- <div class="loader yemianyanchi" style="display: none;">
 		        <div class="loader-inner ball-spin-fade-loader">
 		          <div></div>
 		          <div></div>
@@ -523,7 +556,7 @@ $(window).scroll(function(){
 		      </div> -->
 <div class="yemianyanchi">
 <img src="${ctx }/resources/client/images/load2.gif"></img>
-</div>
+</div> --%>
 <!-- 延迟加载   end -->
 <script language="Javascript">
   $(function(){
