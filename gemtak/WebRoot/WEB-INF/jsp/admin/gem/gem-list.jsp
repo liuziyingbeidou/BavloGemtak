@@ -12,11 +12,11 @@
 	<meta name="description" content="bavlo">
 	<meta name="keywords" content="bavlo">
 	<meta name="author" content="bavlo">
-<title>Gemtak</title>
+<title>彩色宝石、钻石、报价、3D、鉴定、珠宝定制、Gemtak</title>
 	<link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
 	<link rel="stylesheet" href="${ctx }/resources/common/css/css.page.css" />
 	<link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
-	<%-- <script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/jquery.js"></script> --%>
+	
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/common/js/jquery.min.js"></script>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-list.js"></script>
 	<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-common.js"></script>
@@ -61,10 +61,31 @@ function updeIs_release(id){
 		  });
 	 }
 }
+
+//3.手机页面点击发布按钮
+function updeIs_relea(id){
+ var st = $(".b-rele-"+id+"").attr("v-state");
+ var url = "/gemtak/gemAdmin/findGemVOByID.do";
+  $.post(url,{id:id,st:st},function(data){
+	data = $.parseJSON(data);
+    //根据返回值做相应处理
+    var flg = data.msg;
+    if(flg=="Y"){
+    	alert(data.warName+"成功！");
+    	$(".b-rele-"+id+"").text(data.btnNm);
+    	$(".b-rele-"+id+"").attr("v-state",data.bkst);
+        location.reload();
+    }else{
+    	alert(data.warName+"失败！");
+    	location.reload();
+    }
+  });
+ 
+}
 	 
-//点击图片跳转宝石修改界面
-function selGemCard(gemid){
-   window.location.href = "${ctx}/gemAdmin/updateGem.do?gemid="+gemid;
+//点击图片查看宝石详情
+function selDetailGem(id){
+   location.href = "${ctx}/gemClient/viewGemDetaile.do?id="+id;
 }
 	 
 //点击宝石 入库跳转 修改宝石页面
@@ -72,6 +93,7 @@ function selGemCard(gemid){
     window.location.href = "${ctx}/gemAdmin/updateGem.do?gemid="+gemid;
  }
 </script>
+<link  rel="shortcut icon" href="../favicon.ico"/>
 </head>
 <body>
 
@@ -146,8 +168,16 @@ function selGemCard(gemid){
 		 <dl class="nr_con col-md-12">
 		     <dt class="col-md-1 col-xs-3">
 		         <!-- 宝石列表 -后续完善-->
-				 <img onclick="selGemCard(${gem.id})" src="http://stylepics.bavlo.com/Gemtak/gempic/${gem.gid}s/001.jpg" style="width:100%"/>
-				 <p class=" hidden-md hidden-lg"><a href="" class="col-md-6 col-xs-6">${pagevo['ltGemDel'] }</a><a href="" class="col-md-6 col-xs-6">${pagevo['ltGemRelease'] }</a></p>
+				 <img onmouseover="this.style.cursor='hand'" onclick="selDetailGem(${gem.id})" src="http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.gid}/00001.jpg!mid" style="width:100%"/>
+				 <p class=" hidden-md hidden-lg">
+				  <a href="javascript:updeIs_del(${gem.id})"  class="col-md-6 col-xs-6 b-del-${gem.id}"  >${pagevo['ltGemDel'] }</a>
+				  <c:if test="${gem.is_release=='Y'}">
+				  <a href="javascript:updeIs_relea(${gem.id})" class="col-md-6 col-xs-6 b-rele-${gem.id}"  v-state="${gem.is_release}">${pagevo['ltGemClose'] }</a>
+				  </c:if>
+				  <c:if test="${gem.is_release=='C'||gem.is_release=='E'}">
+				  <a href="javascript:updeIs_relea(${gem.id})" class="col-md-6 col-xs-6 b-rele-${gem.id}"  v-state="${gem.is_release}">${pagevo['ltGemRelease'] }</a>
+				  </c:if>
+				 </p>
 			 </dt>
 			 <dd class="col-md-11 col-xs-9">
 				 <p class="col-md-5 col-xs-12"><span class="col-md-6 col-xs-12"><font>${gem.type_cn}</font><font>${gem.shape_cn}</font><font>${gem.lab_cn}</font></span><span  class="col-md-6 col-xs-12"><font>${gem.weight}</font><font>${gem.stock_qty}${gem.pairs}</font><font class="fc_001">¥${gem.retail_price}</font></span></p>
