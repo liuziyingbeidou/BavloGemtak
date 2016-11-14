@@ -12,13 +12,11 @@
 <meta name="description" content="bavlo">
 <meta name="keywords" content="bavlo">
 <meta name="author" content="bavlo">
-<title>Gemtak</title>
+<title>彩色宝石、钻石、报价、3D、鉴定、珠宝定制、Gemtak</title>
 <link rel="stylesheet" href="${ctx }/resources/admin/css/bootstrap.css" />
 <link href="${ctx }/resources/admin/css/index.css" rel="stylesheet">
-<script type="text/javascript"
-	src="${ctx }/resources/common/js/jquery.min.js"></script>
-<script language="javascript" type="text/javascript"
-	src="${ctx }/resources/admin/js/gem-card.js"></script>
+<script type="text/javascript" src="${ctx }/resources/common/js/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="${ctx }/resources/admin/js/gem-card.js"></script>
 <style type="text/css">
 .black_overlay{
 display: none;
@@ -63,6 +61,14 @@ overflow: auto;
 <script type="text/javascript">
 //宝石保存
 $(function(){
+    $(".pairs").click(function(){
+      var stock = $(".stock").val();
+      if(stock == "2"){
+       $(".pairs1").removeAttr("disabled");
+      }else{
+      $(".pairs1").attr("disabled","disabled");
+      }
+    });
 	//保存
 	$(".btn-save").click(function(){	
 		saveOrupdate();
@@ -75,7 +81,9 @@ $(function(){
 	
 	//查看我的宝石
 	$(".selMyGem").click(function(){
+	  if(confirm("为保证您输入的数据不丢失，请先点击保存！")){
 	  location.href = "${ctx}/gemAdmin/viewGemList.do";
+	  }
 	});
 	
 	//删除证书
@@ -124,7 +132,9 @@ function saveOrupdate(){
 	  
 //查看详情页
 function selDetailGem(id){
+   if(confirm("为保证您输入的数据不丢失，请先点击保存！")){
    location.href = "${ctx}/gemClient/viewGemDetaile.do?id="+id;
+   }
 }
 	  
 //********************上传证书 start*****************
@@ -223,6 +233,8 @@ document.getElementById(bg_div).style.display='none';
 	java.util.Date currentTime = new java.util.Date();
 	String time = simpleDateFormat.format(currentTime).toString();
 %>
+
+<link  rel="shortcut icon" href="../favicon.ico"/>
 </head>
 <body>
 
@@ -238,7 +250,7 @@ document.getElementById(bg_div).style.display='none';
 					<!-- 表头 -->
 					<div class="tit_game">
 						<h2 class="col-sm-12 col-md-5 ">
-							<span>${pagevo['titleEdit'] }</span>${gem.id}
+							<span>${pagevo['titleEdit'] }</span>${gem.gid}
 						</h2>
 						<input type="hidden" name="id" value="${gem.id}" />
 						<div class="line col-sm-12 hidden-md hidden-lg"></div>
@@ -258,22 +270,22 @@ document.getElementById(bg_div).style.display='none';
 							<li>
 							<select class="form-control input-lg sel-type" name="type_id">
 									<c:forEach var="bean" items="${listGemType}">
-										<option value="${bean.pKey}" lab-en="${bean.pValueEN}" lab-cn="${bean.pValueCN}">${bean.pValue}</option>
+										<option <c:if test="${gem.type_id == bean.pKey }">selected="selected"</c:if> value="${bean.pKey}" lab-en="${bean.pValueEN}" lab-cn="${bean.pValueCN}">${bean.pValue}</option>
 									</c:forEach>
 							</select>
-							<input type="hidden" name="type_cn" class="h-type-cn"> <input
-								type="hidden" name="type_en" class="h-type-en">
+							<input type="hidden" name="type_cn" class="h-type-cn"> 
+							<input type="hidden" name="type_en" class="h-type-en">
 							</li>
 							<li>
 							<select class="form-control input-lg select-st" name="isstand">
-									<option value="sst">${pagevo['tableSTSPNCB'] }</option>
+									<option value="sst" >${pagevo['tableSTSPNCB'] }</option>
 									<option value="cst">${pagevo['tableNSPNCB'] }</option>
 							</select>
 							</li>
 							<li>
 							 <select class="form-control input-lg select-shape " name="shape_id">
-									<c:forEach var="bean" items="${listGemShape}">
-										<option value="${bean.pKey}" lab-en="${bean.pValueEN}"
+									<c:forEach  var="bean" items="${listGemShape}">
+										<option <c:if test="${gem.shape_id == bean.pKey }">selected="selected"</c:if> value="${bean.pKey}" lab-en="${bean.pValueEN}"
 											lab-cn="${bean.pValueCN}">${bean.pValue}</option>
 									</c:forEach>
 							 </select>
@@ -284,35 +296,31 @@ document.getElementById(bg_div).style.display='none';
 							</li>
 							<li>
 								<div class="li_inp_p0 col-xs-4">
-									<input type="text" name="size_l" class="form-control"
-										placeholder="${pagevo['tableGemCalibratedL'] }">
+									<input type="text" name="size_l" class="form-control" placeholder="${pagevo['tableGemCalibratedL'] }"  value="${gem.size_l }">mm
 								</div>
 								<div class="col-xs-4">
-									<input type="text" name="size_w" class="form-control"
-										placeholder="${pagevo['tableGemCalibratedW'] }">
+									<input type="text" name="size_w" class="form-control" placeholder="${pagevo['tableGemCalibratedW'] }"  value="${gem.size_w }">mm
 								</div>
 								<div class="li_inp_p0 col-xs-4">
-									<input type="text" name="size_h" class="form-control"
-										placeholder="${pagevo['tableGemCalibratedH'] }">
+									<input type="text" name="size_h" class="form-control" placeholder="${pagevo['tableGemCalibratedH'] }"  value="${gem.size_h }">mm
 								</div>
 							</li>
 							<li>
 								<div class="li_inp_pl col-xs-6">
 									<select class="form-control input-lg sel-cut" name="cut_id">
 										<c:forEach var="bean" items="${listGemCut}">
-											<option value="${bean.pKey}" lab-en="${bean.pValueEN}"
+											<option <c:if test="${gem.cut_id == bean.pKey }">selected="selected"</c:if> value="${bean.pKey}" lab-en="${bean.pValueEN}"
 												lab-cn="${bean.pValueCN}">${pagevo['tableGemCut'] }
 												${bean.pValue}</option>
 										</c:forEach>
 									</select> 
-									<input type="hidden" name="cut_cn" class="h-cut-cn"> <input
-										type="hidden" name="cut_en" class="h-cut-en">
+									<input type="hidden" name="cut_cn" class="h-cut-cn"> 
+									<input type="hidden" name="cut_en" class="h-cut-en">
 								</div>
 								<div class="li_inp_pr col-xs-6">
-									<select class="form-control input-lg sel-clarity"
-										name="clarity_id">
+									<select class="form-control input-lg sel-clarity" name="clarity_id">
 										<c:forEach var="bean" items="${listGemClarity}">
-											<option value="${bean.pKey}" lab-en="${bean.pValueEN}" lab-cn="${bean.pValueCN}">
+											<option <c:if test="${gem.clarity_id == bean.pKey }">selected="selected"</c:if> value="${bean.pKey}" lab-en="${bean.pValueEN}" lab-cn="${bean.pValueCN}">
 											   ${pagevo['tableGemClarity']} ${bean.pValue}
 											</option>
 										</c:forEach>
@@ -323,13 +331,10 @@ document.getElementById(bg_div).style.display='none';
 							</li>
 							<li>
 								<div class="li_inp_pl col-xs-6">
-									<input type="text" name="viewpoint" class="form-control  fc_a2"
-										placeholder="${pagevo['tableViewpoint'] }"  readonly="readonly">
+									<input type="text" name="viewpoint" class="form-control  fc_a2" placeholder="${pagevo['tableViewpoint'] }"  readonly="readonly"  value="${gem.viewpoint }">
 								</div>
 								<div class="li_inp_pr col-xs-6">
-									<input type="text" name="average_color"
-										class="form-control  fc_a3"
-										placeholder="${pagevo['tableAverageColor'] }"  readonly="readonly">
+									<input type="text" name="average_color"  class="form-control  fc_a3" placeholder="${pagevo['tableAverageColor'] }">
 								</div>
 							</li>
 							<li>
@@ -337,10 +342,12 @@ document.getElementById(bg_div).style.display='none';
 									<select class="form-control input-lg sel-origin"
 										name="origin_id">
 										<c:forEach var="bean" items="${listGemOrigin}">
-											<option value="${bean.pKey}" lab-en="${bean.pValueEN}"
+											<option <c:if test="${gem.origin_id == bean.pKey }">selected="selected"</c:if>  value="${bean.pKey}" lab-en="${bean.pValueEN}"
 												lab-cn="${bean.pValueCN}">${pagevo['tableOrigin'] }
-												${bean.pValue}</option>
+												${bean.pValue}
+											</option>
 										</c:forEach>
+											<option value="${bean.pKey}" >${pagevo['tableOrigin'] } 不详</option>
 									</select> 
 									<input type="hidden" name="origin_cn" class="h-origin-cn">
 									<input type="hidden" name="origin_en" class="h-origin-en">
@@ -349,17 +356,18 @@ document.getElementById(bg_div).style.display='none';
 									<select class="form-control input-lg sel-treatment"
 										name="treatment_id">
 										<c:forEach var="bean" items="${listGemTreatment}">
-											<option value="${bean.pKey}" lab-en="${bean.pValueEN}"
-												lab-cn="${bean.pValueCN}">${pagevo['tableTreatment']
-												} ${bean.pValue}</option>
+											<option <c:if test="${gem.treatment_id == bean.pKey }">selected="selected"</c:if> value="${bean.pKey}" lab-en="${bean.pValueEN}"
+												lab-cn="${bean.pValueCN}">${pagevo['tableTreatment']} ${bean.pValue}
+											</option>
 										</c:forEach>
+										   <option value="${bean.pKey}" >${pagevo['tableTreatment'] } 不详</option>
 									</select> 
 									<input type="hidden" name="treatment_cn" class="h-treatment-cn"> 
 									<input type="hidden" name="treatment_en" class="h-treatment-en">
 								</div>
 							</li>
 							<li>
-							    <textarea name="vmemo" class="form-control" rows="5" placeholder="编辑您的宝石故事"></textarea>
+							    <textarea name="vmemo" class="form-control" rows="5" placeholder="编辑您的宝石故事">${gem.vmemo }</textarea>
 							</li>
 						</ul>
 						<ul class="col-sm-1 col-md-2 hidden-xs"></ul>
@@ -367,18 +375,21 @@ document.getElementById(bg_div).style.display='none';
 							<li>
 								<div class="li_inp_p0 col-xs-4">
 									<input type="text" name="weight" class="form-control fc_a2"
-										placeholder="6.65ct" >
+										placeholder="6.65ct"  value="${gem.weight }">
 								</div>
 								<div class="col-xs-4">
-									<input type="text" name="stock_qty" class="form-control"
+									<input type="text" name="stock_qty" class="form-control stock"
 										placeholder="${pagevo['tableStockQty'] }">
 								</div>
-								<div class="li_inp_p0 col-xs-4">
-									<select class="form-control input-lg" name="pairs">
+								<div class="col-xs-4">
+									<%-- <select class="form-control input-lg" name="pairs">
 										<option value="sl">${pagevo['tablePairsSL'] }</option>
 										<option value="ml">${pagevo['tablePairsML'] }</option>
 										<option value="pl">${pagevo['tablePairsPL'] }</option>
-									</select>
+									</select> --%>
+									<!-- 单粒 配对  -->
+									<input class="pairs1" disabled="disabled"  type="checkbox" value="sl"  name="pairs"/>
+									<b onmouseover="this.style.cursor='hand'" class="pairs">${pagevo['tablePairsPL'] }</b>
 								</div>
 							</li>
 							<li>
@@ -398,6 +409,7 @@ document.getElementById(bg_div).style.display='none';
 									<input type="text" name="trade_price" class="form-control"
 										placeholder="${pagevo['tableTradePrice'] }"  value="${gem.trade_price }"/>
 								</div>
+								
 								<div class="li_inp_pr col-xs-6">
 									<select class="form-control input-lg" name="trade_unit">
 										<option value="gl">${pagevo['tablePriceUnitGL'] }</option>
@@ -425,8 +437,10 @@ document.getElementById(bg_div).style.display='none';
 											     ${pagevo['tableLabType']}  ${bean.pValue}
 											</option>
 										</c:forEach>
-									</select> <input type="hidden" name="lab_cn" class="h-lab-cn"> <input
-										type="hidden" name="lab_en" class="h-lab-en">
+										<option value="无" >无</option>
+									</select> 
+									<input type="hidden" name="lab_cn" class="h-lab-cn">
+									<input type="hidden" name="lab_en" class="h-lab-en">
 								</div>
 								<div class="li_inp_pr col-xs-6">
 									<input type="text" name="lab_no" class="form-control"
@@ -435,9 +449,16 @@ document.getElementById(bg_div).style.display='none';
 							</li>
 							<li>
 								<div class="li_inp_pl col-xs-6">
-									<input type="text" name="company" class="form-control"
+									<%-- <input type="text" name="company" class="form-control"
 										value="${gem.company}"
-										placeholder="${pagevo['tableSupplier'] }">
+										placeholder="${pagevo['tableSupplier'] }"> --%>
+									<select class="form-control input-lg sel-lab" name="company">
+										<c:forEach var="bean" items="${list}">
+											<option  value="${bean.company}" >
+											     ${bean.company}
+											</option>
+										</c:forEach>
+									</select>
 								</div>
 								<div class="li_inp_pr col-xs-6">
 									<input type="text" name="equipment_id" class="form-control"
@@ -445,9 +466,11 @@ document.getElementById(bg_div).style.display='none';
 										placeholder="公司ID">
 								</div>
 							</li>
-							<li><input type="text" name="location" class="form-control"
+							<li>
+							 <input type="text" name="location" class="form-control"
 								value="${gem.location}"
-								placeholder="${pagevo['tableLocation'] }"></li>
+								placeholder="${pagevo['tableLocation'] }">
+							</li>
 							<li>
 								<div class="li_inp_pl col-xs-5">
 									<div class="radio">
@@ -476,7 +499,16 @@ document.getElementById(bg_div).style.display='none';
 						</ul>
 					</div>
 				</div>
-				<input type="hidden" class="input-lab_url" name="lab_url" value="">
+				<input type="hidden" class="input-lab_url" name="lab_url" value="${gem.lab_url }">
+				<input type="hidden"  name="gid" value="${gem.gid }">
+				<input type="hidden"  name="url_360" value="${gem.url_360 }">
+				<input type="hidden"  name="is_release" value="${gem.is_release}">
+				<input type="hidden"  name="equipment_id" value="${gem.equipment_id}">
+				<input type="hidden"  name="supplier" value="${gem.supplier}">
+				<input type="hidden"  name="supplier_tel" value="${gem.supplier_tel}">
+				<input type="hidden"  name="height" value="${gem.height}">
+				<input type="hidden"  name="multiple" value="${gem.multiple}">
+				<input type="hidden"  name="lightType" value="${gem.lightType}">
 			</form>
 
 			<!-- 上传证书 -->
@@ -512,14 +544,12 @@ document.getElementById(bg_div).style.display='none';
 					<div class="col-xs-5 col-md-5">
 						<p class="col-xs-6 col-md-5">
 							<button type="button"
-								class="btn btn-col btn-lg btn-block btn-close">${pagevo['buttonClose']
-								}</button>
+								class="btn btn-col btn-lg btn-block btn-close">${pagevo['buttonClose']}</button>
 						</p>
 						<p class="col-xs-1 col-md-2"></p>
 						<p class="col-xs-5 col-md-5">
 							<button type="button"
-								class="btn btn-col btn-lg btn-block btn-save">${pagevo['buttonSave']
-								}</button>
+								class="btn btn-col btn-lg btn-block btn-save">${pagevo['buttonSave']}</button>
 						</p>
 					</div>
 				</div>
