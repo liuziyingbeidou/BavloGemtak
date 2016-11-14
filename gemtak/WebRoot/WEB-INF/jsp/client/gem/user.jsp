@@ -12,7 +12,7 @@
 <meta name="description" content="bavlo">
 <meta name="keywords" content="bavlo">
 <meta name="author" content="bavlo">
-<title>金塔宝石库|Gemtak</title>
+<title>彩色宝石、钻石、报价、3D、鉴定、珠宝定制、Gemtak</title>
 <link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
 <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
@@ -419,6 +419,7 @@ function jsPayFee(id){
           $(".mrtype").val("mobile");
         } 
 </script>
+<link  rel="shortcut icon" href="../favicon.ico"/>
 </head>
 <body>
 <div>

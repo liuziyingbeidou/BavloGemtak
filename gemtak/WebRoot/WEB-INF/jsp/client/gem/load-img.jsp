@@ -3,16 +3,16 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 
-					<img src="http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/${gem.is_cover }.jpg!max" width="100%" height="100%" 
+					<img src="http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/00001.jpg" width="100%" height="100%" 
 					class="reel change"
 				   	id="image"
-				  	data-images="http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/#####.jpg!max"
+				  	data-images="http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/#####.jpg"
 				 	data-frames="200"
 				  	data-footage="50"
-				  	data-cw="true"
+				  	data-cw="false"
 				  	data-orbital="0"
 				  	data-inversed="true"
-				  	data-speed="0.1"
+				  	data-speed="0.08"
 					data-revolution="800"
 					data-scrollable="true"
 					data-cursor="hand"
@@ -25,8 +25,8 @@
 
 	 function GetArgsFromHref() 
 	 { 
-		$("#image").prop("src","http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/${gem.is_cover }.jpg!max");
-		$("#image").attr("data-images","http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/#####.jpg!max");
+		$("#image").prop("src","http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/00001.jpg");
+		$("#image").attr("data-images","http://gemtakimg.b0.upaiyun.com/Gemtak/${gem.url_360 }/#####.jpg");
 	 } 
  		
 	</script>
