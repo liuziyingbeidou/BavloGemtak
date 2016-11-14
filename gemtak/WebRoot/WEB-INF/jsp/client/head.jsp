@@ -76,7 +76,7 @@
    <ul>
    <li class="nav_list hidden-md hidden-lg"></li>
 	<li class="nav_logo hidden-xs hidden-sm">
-	   <a href="${ctx }/gemClient/viewGemList.do"><image src="${ctx }/resources/client/images/Logo2.png" /></a>
+	   <a href="${ctx }/gemClient/viewGemList.do"><image src="${ctx }/resources/client/images/logo.png" width:416px;height:72px/></a>
 	</li>
 	<li class="nav_logo hidden-md hidden-lg">
 	   <a href="${ctx }/gemClient/viewGemList.do"><image src="${ctx }/resources/client/images/logos.png" /></a>

@@ -12,7 +12,7 @@
 <meta name="description" content="bavlo">
 <meta name="keywords" content="bavlo">
 <meta name="author" content="bavlo">
-<title>bavlo</title>
+<title>Gemtak登录页面</title>
 <link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 <link rel="stylesheet" href="${ctx }/resources/client/css/files/loaders.css" type="text/css"></link>
 <link href="${ctx }/resources/client/css/index.css" rel="stylesheet">
@@ -197,7 +197,7 @@
  
 
 </script>
-
+ <link  rel="shortcut icon" href="../favicon.ico"/>
 </head>
 <body>
 <div>

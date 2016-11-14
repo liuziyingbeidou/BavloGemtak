@@ -151,6 +151,7 @@ function addShoppCar(id){
  	text-align: center;
  }
 </style>
+ <link  rel="shortcut icon" href="../favicon.ico"/>
 </head>
 <body>
 <div>
@@ -197,9 +198,9 @@ function addShoppCar(id){
 			   </b>
 			 </div>
 			 <!-- 延迟加载   start  loaders.css-->
-				<div class="yemianyanchi">
+				<%-- <div class="yemianyanchi">
 				<img src="${ctx }/resources/client/images/load2.gif"></img>
-				</div>
+				</div> --%>
 			<!-- 延迟加载   end -->
 			 <ul class="tit_ul">
 				<li  class="tit_lie col-md-6 col-xs-12">
@@ -237,22 +238,22 @@ function addShoppCar(id){
 			<div class="tit_sm  col-sm-12 col-md-5" gid="${gem.id}">
 				<h6>${gem.weight} ${gem.type_cn} （${gem.type_en}）</h6>
 				<ul>
-					<li><span>${gem.company}</span> </li><li>TEL：${gem.supplier_tel}
-					</li><li>形状：<slian>${gem.shape_cn}</span>
-					</li><li>尺寸：<span>${gem.size_l} * ${gem.size_w} * ${gem.size_h}</span>
-					</li><li>颜色：<span> ${gem.average_color}</span>
-					</li><li>净度：<span>${gem.clarity_cn}（${gem.clarity_en}）</span>
-					</li><li>切工：<span>${gem.cut_cn}</span>
-					</li><li>产地：<span>${gem.origin_cn}</span>
-					</li><li>处理：<span>${gem.treatment_cn}</span>
-					</li><li>证书：<span>国检（${gem.lab_en}） ${gem.lab_no}</span>
-					</li><li>编号：<span>${gem.lab_no}</span>
-					</li><li>卖家：<span>${gem.company}</span></li>
-					</li><li>数量：<span class="selquantity">1</span>
+					<li ><c:if test="${not empty gem.company}">卖家：<span>${gem.company}</span></c:if></li>
+					<li ><c:if test="${not empty gem.supplier_tel }">TEL：${gem.supplier_tel}</c:if></li>
+					<li ><c:if test="${not empty gem.shape_cn}">形状：<span>${gem.shape_cn}</span></c:if></li>
+					<li ><c:if test="${not empty gem.size_l}">尺寸：<span>${gem.size_l} x ${gem.size_w} x ${gem.size_h} (mm)</span></c:if></li>
+					<li ><c:if test="${not empty gem.average_color}">颜色：<span> ${gem.average_color}</span></c:if></li>
+					<li ><c:if test="${not empty gem.clarity_cn}">净度：<span>${gem.clarity_cn} (${gem.clarity_en})</span></c:if></li>
+					<li ><c:if test="${not empty gem.cut_cn}">切工：<span>${gem.cut_cn}</span></c:if></li>
+					<li ><c:if test="${not empty gem.origin_cn}">产地：<span>${gem.origin_cn}</span></c:if></li>
+					<li ><c:if test="${not empty gem.treatment_cn}">处理：<span>${gem.treatment_cn}</span></c:if></li>
+					<li > <c:if test="${not empty gem.lab_en}">证书：<span>${gem.lab_cn} (${gem.lab_en})</span></c:if></li>
+					<li ><c:if test="${not empty gem.lab_no}">编号：<span>${gem.lab_no}</span></c:if></li>
+					<li>数量：<span class="selquantity">1</span></li>
 				</ul>
 				<c:if test="${bis=='Y'}">
 				 <c:if test="${gem.pairs=='sl'}">
-				   <p>价格：<span>¥${gem.trade_price} <em>/单粒</em></span></p>
+				   <p >价格：<span>¥${gem.trade_price} <em>/单粒</em></span></p>
 				 </c:if>
 				 <c:if test="${gem.pairs=='pl'}">
 				   <p>价格：<span>¥${gem.trade_price} <em>/配对</em></span></p>
@@ -279,6 +280,7 @@ function addShoppCar(id){
 				</div>
 		  </div>
 	  </div>
+	   
 </div>
 <div class="footer hidden-xs hidden-sm">
     <jsp:include page="../../admin/foot.jsp"></jsp:include>

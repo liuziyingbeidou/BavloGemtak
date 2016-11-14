@@ -10,9 +10,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<meta name="author" content="bavlo"/>
-	<title>彩色宝石、钻石、报价、3D、鉴定、珠宝定制</title>
-    <meta content="彩色宝石、钻石、报价、3D、鉴定、珠宝定制、gemtak" name="keywords"/>
-    <meta content="彩色宝石、钻石、报价、3D、鉴定、珠宝定制、gemtak" name="description"/>
+	<title>彩色宝石、钻石、报价、3D、鉴定、珠宝定制、Gemtak</title>
+    <meta content="彩色宝石、钻石、报价、3D、鉴定、珠宝定制、Gemtak" name="keywords"/>
+    <meta content="彩色宝石、钻石、报价、3D、鉴定、珠宝定制、Gemtak" name="description"/>
 
 	<link rel="stylesheet" href="${ctx }/resources/client/css/bootstrap.css" />
 	<link rel="stylesheet" href="${ctx }/resources/client/css/swiper.css"/>
@@ -103,6 +103,7 @@ $(window).scroll(function(){
  } 
  
  </style>
+ <link  rel="shortcut icon" href="../favicon.ico"/>
 </head>
 <body>
 <input type="hidden" class="juname" value="${uname }"/>
@@ -128,12 +129,204 @@ $(window).scroll(function(){
 		    <div class="swiper-container swiper-container-horizontal swiper1" >
 				<div class="swiper-wrapper list_ul2">
 					   <div class="swiper-slide"><a class="p_default" id="gemid" vid="a" vn="全部" style="background: url('/gemtak/resources/client/images/game/a.png') top center no-repeat;"></a><span >全部</span></div>
-					   <c:forEach var="bean" items="${listGemType}" varStatus="status">
+					   <%-- <c:forEach var="bean" items="${listGemType}" varStatus="status">
 						  <div class="swiper-slide">
 						   <a id="gemid${bean.pKey }" class="p_default type-gem"  vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/game/${bean.pKey }.png') top center no-repeat;"></a>
 						  <span>${bean.pValue}</span>
 						  </div>
-					   </c:forEach>
+					   </c:forEach> --%>
+					   <div class="swiper-slide">
+						   <a id="gemid1" class="p_default type-gem"  vn="钻石" vid="1" style="background: url('/gemtak/resources/client/images/game/1.png') top center no-repeat;"></a>
+						  <span>钻石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid2" class="p_default type-gem"  vn="红宝石" vid="2" style="background: url('/gemtak/resources/client/images/game/2.png') top center no-repeat;"></a>
+						  <span>红宝石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid3" class="p_default type-gem"  vn="蓝宝石" vid="3" style="background: url('/gemtak/resources/client/images/game/3.png') top center no-repeat;"></a>
+						  <span>蓝宝石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid4" class="p_default type-gem"  vn="祖母绿" vid="4" style="background: url('/gemtak/resources/client/images/game/4.png') top center no-repeat;"></a>
+						  <span>祖母绿</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid5" class="p_default type-gem"  vn="紫晶" vid="5" style="background: url('/gemtak/resources/client/images/game/5.png') top center no-repeat;"></a>
+						  <span>紫晶</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid6" class="p_default type-gem"  vn="海蓝宝" vid="6" style="background: url('/gemtak/resources/client/images/game/6.png') top center no-repeat;"></a>
+						  <span>海蓝宝</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid7" class="p_default type-gem"  vn="黄晶" vid="7" style="background: url('/gemtak/resources/client/images/game/7.png') top center no-repeat;"></a>
+						  <span>黄晶</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid8" class="p_default type-gem"  vn="碧玺" vid="8" style="background: url('/gemtak/resources/client/images/game/8.png') top center no-repeat;"></a>
+						  <span>碧玺</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid9" class="p_default type-gem"  vn="柠檬黄" vid="9" style="background: url('/gemtak/resources/client/images/game/9.png') top center no-repeat;"></a>
+						  <span>柠檬黄</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid10" class="p_default type-gem"  vn="橄榄石" vid="10" style="background: url('/gemtak/resources/client/images/game/10.png') top center no-repeat;"></a>
+						  <span>橄榄石</span>
+						 </div>
+						 <div class="swiper-slide">
+						   <a id="gemid11" class="p_default type-gem"  vn="石榴石" vid="11" style="background: url('/gemtak/resources/client/images/game/11.png') top center no-repeat;"></a>
+						  <span>石榴石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid12" class="p_default type-gem"  vn="透辉石" vid="12" style="background: url('/gemtak/resources/client/images/game/12.png') top center no-repeat;"></a>
+						  <span>透辉石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid13" class="p_default type-gem"  vn="坦桑石" vid="13" style="background: url('/gemtak/resources/client/images/game/13.png') top center no-repeat;"></a>
+						  <span>坦桑石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid14" class="p_default type-gem"  vn="托帕石" vid="14" style="background: url('/gemtak/resources/client/images/game/14.png') top center no-repeat;"></a>
+						  <span>托帕石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid16" class="p_default type-gem"  vn="星光红宝石" vid="16" style="background: url('/gemtak/resources/client/images/game/16.png') top center no-repeat;"></a>
+						  <span>星光红宝石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid17" class="p_default type-gem"  vn="星光蓝宝石" vid="17" style="background: url('/gemtak/resources/client/images/game/17.png') top center no-repeat;"></a>
+						  <span>星光蓝宝石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid19" class="p_default type-gem"  vn="金绿宝石" vid="19" style="background: url('/gemtak/resources/client/images/game/19.png') top center no-repeat;"></a>
+						  <span>金绿宝石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid20" class="p_default type-gem"  vn="猫眼" vid="20" style="background: url('/gemtak/resources/client/images/game/20.png') top center no-repeat;"></a>
+						  <span>猫眼</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid21" class="p_default type-gem"  vn="摩根石" vid="21" style="background: url('/gemtak/resources/client/images/game/21.png') top center no-repeat;"></a>
+						  <span>摩根石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid22" class="p_default type-gem"  vn="绿柱石" vid="22" style="background: url('/gemtak/resources/client/images/game/22.png') top center no-repeat;"></a>
+						  <span>绿柱石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid23" class="p_default type-gem"  vn="变石" vid="23" style="background: url('/gemtak/resources/client/images/game/23.png') top center no-repeat;"></a>
+						  <span>变石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid24" class="p_default type-gem"  vn="变石猫眼" vid="24" style="background: url('/gemtak/resources/client/images/game/24.png') top center no-repeat;"></a>
+						  <span>变石猫眼</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid34" class="p_default type-gem"  vn="锰铝榴石" vid="34" style="background: url('/gemtak/resources/client/images/game/34.png') top center no-repeat;"></a>
+						  <span>锰铝榴石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid35" class="p_default type-gem"  vn="沙佛莱石" vid="35" style="background: url('/gemtak/resources/client/images/game/35.png') top center no-repeat;"></a>
+						  <span>沙佛莱石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid36" class="p_default type-gem"  vn="翠榴石" vid="36" style="background: url('/gemtak/resources/client/images/game/36.png') top center no-repeat;"></a>
+						  <span>翠榴石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid37" class="p_default type-gem"  vn="钙铝榴石" vid="37" style="background: url('/gemtak/resources/client/images/game/37.png') top center no-repeat;"></a>
+						  <span>钙铝榴石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid38" class="p_default type-gem"  vn="铁铝榴石" vid="38" style="background: url('/gemtak/resources/client/images/game/38.png') top center no-repeat;"></a>
+						  <span>铁铝榴石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid39" class="p_default type-gem"  vn="镁铝榴石" vid="39" style="background: url('/gemtak/resources/client/images/game/39.png') top center no-repeat;"></a>
+						  <span>镁铝榴石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid40" class="p_default type-gem"  vn="尖晶石" vid="40" style="background: url('/gemtak/resources/client/images/game/40.png') top center no-repeat;"></a>
+						  <span>尖晶石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid41" class="p_default type-gem"  vn="月光石" vid="41" style="background: url('/gemtak/resources/client/images/game/41.png') top center no-repeat;"></a>
+						  <span>月光石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid42" class="p_default type-gem"  vn="尖晶石" vid="42" style="background: url('/gemtak/resources/client/images/game/42.png') top center no-repeat;"></a>
+						  <span>欧泊</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid43" class="p_default type-gem"  vn="锆石" vid="43" style="background: url('/gemtak/resources/client/images/game/43.png') top center no-repeat;"></a>
+						  <span>锆石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid44" class="p_default type-gem"  vn="柱晶石" vid="44" style="background: url('/gemtak/resources/client/images/game/44.png') top center no-repeat;"></a>
+						  <span>柱晶石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid45" class="p_default type-gem"  vn="榍石" vid="45" style="background: url('/gemtak/resources/client/images/game/45.png') top center no-repeat;"></a>
+						  <span>榍石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid46" class="p_default type-gem"  vn="堇青石" vid="46" style="background: url('/gemtak/resources/client/images/game/46.png') top center no-repeat;"></a>
+						  <span>堇青石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid47" class="p_default type-gem"  vn="方柱石" vid="47" style="background: url('/gemtak/resources/client/images/game/47.png') top center no-repeat;"></a>
+						  <span>方柱石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid48" class="p_default type-gem"  vn="红柱石" vid="48" style="background: url('/gemtak/resources/client/images/game/48.png') top center no-repeat;"></a>
+						  <span>红柱石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid49" class="p_default type-gem"  vn="蓝晶石" vid="49" style="background: url('/gemtak/resources/client/images/game/49.png') top center no-repeat;"></a>
+						  <span>蓝晶石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid50" class="p_default type-gem"  vn="长石" vid="50" style="background: url('/gemtak/resources/client/images/game/50.png') top center no-repeat;"></a>
+						  <span>长石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid51" class="p_default type-gem"  vn="锂辉石" vid="51" style="background: url('/gemtak/resources/client/images/game/51.png') top center no-repeat;"></a>
+						  <span>锂辉石</span>
+					   </div>
+					    <div class="swiper-slide">
+						   <a id="gemid52" class="p_default type-gem"  vn="赛黄晶" vid="52" style="background: url('/gemtak/resources/client/images/game/52.png') top center no-repeat;"></a>
+						  <span>赛黄晶</span>
+					   </div>
+					    <div class="swiper-slide">
+						   <a id="gemid53" class="p_default type-gem"  vn="磷灰石" vid="53" style="background: url('/gemtak/resources/client/images/game/53.png') top center no-repeat;"></a>
+						  <span>磷灰石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid54" class="p_default type-gem"  vn="太阳石" vid="54" style="background: url('/gemtak/resources/client/images/game/54.png') top center no-repeat;"></a>
+						  <span>太阳石</span>
+					   </div>
+					    <div class="swiper-slide">
+						   <a id="gemid55" class="p_default type-gem"  vn="火玛瑙" vid="55" style="background: url('/gemtak/resources/client/images/game/55.png') top center no-repeat;"></a>
+						  <span>火玛瑙</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid57" class="p_default type-gem"  vn="钙铁榴石" vid="57" style="background: url('/gemtak/resources/client/images/game/57.png') top center no-repeat;"></a>
+						  <span>钙铁榴石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid58" class="p_default type-gem"  vn="葡萄石" vid="58" style="background: url('/gemtak/resources/client/images/game/58.png') top center no-repeat;"></a>
+						  <span>葡萄石</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid61" class="p_default type-gem"  vn="粉晶" vid="61" style="background: url('/gemtak/resources/client/images/game/61.png') top center no-repeat;"></a>
+						  <span>粉晶</span>
+					   </div>
+					   <div class="swiper-slide">
+						   <a id="gemid63" class="p_default type-gem"  vn="人造锆" vid="63" style="background: url('/gemtak/resources/client/images/game/63.png') top center no-repeat;"></a>
+						  <span>人造锆</span>
+					   </div>
 				</div>
 					
              </div>
@@ -144,12 +337,96 @@ $(window).scroll(function(){
 			<div class="swiper-container swiper-container-horizontal swiper2" >
 				 <div class="swiper-wrapper lt_ul2">
 				 	<div class="swiper-slide"><a class="nav_default" id="metalid0" vid="a" vn="全部" style="background: url('/gemtak/resources/client/images/mot/a.png') top center no-repeat;"></a><span>全部</span></div>	
-				 	<c:forEach var="bean" items="${listGemShape}" varStatus="status">
+				 	<%-- <c:forEach var="bean" items="${listGemShape}" varStatus="status">
 					    <div class="swiper-slide">
-					    <a id="metalid${bean.pKey }" class="nav_default  shape-gem" vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/mot/${bean.pKey }.png') top center no-repeat;"></a>
-					  <span>${bean.pValue}</span>
+					     <a id="metalid${bean.pKey }" class="nav_default  shape-gem" vn="${bean.pValue}" vid="${bean.pKey }" style="background: url('/gemtak/resources/client/images/mot/${bean.pKey }.png') top center no-repeat;"></a>
+					     <span>${bean.pValue}</span>
+					    </div>
+					</c:forEach> --%>
+					 <div class="swiper-slide">
+					     <a id="metalid4" class="nav_default  shape-gem" vn="圆形" vid="4" style="background: url('/gemtak/resources/client/images/mot/4.png') top center no-repeat;"></a>
+					     <span>圆形</span>
 					  </div>
-					</c:forEach>
+					  <div class="swiper-slide">
+					     <a id="metalid5" class="nav_default  shape-gem" vn="长方形" vid="5" style="background: url('/gemtak/resources/client/images/mot/5.png') top center no-repeat;"></a>
+					     <span>长方形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid6" class="nav_default  shape-gem" vn="八角形" vid="6" style="background: url('/gemtak/resources/client/images/mot/6.png') top center no-repeat;"></a>
+					     <span>八角形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid7" class="nav_default  shape-gem" vn="心形形" vid="7" style="background: url('/gemtak/resources/client/images/mot/7.png') top center no-repeat;"></a>
+					     <span>心形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid8" class="nav_default  shape-gem" vn="马眼形" vid="8" style="background: url('/gemtak/resources/client/images/mot/8.png') top center no-repeat;"></a>
+					     <span>马眼形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid9" class="nav_default  shape-gem" vn="椭圆形" vid="9" style="background: url('/gemtak/resources/client/images/mot/9.png') top center no-repeat;"></a>
+					     <span>椭圆形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid10" class="nav_default  shape-gem" vn="梨形" vid="10" style="background: url('/gemtak/resources/client/images/mot/10.png') top center no-repeat;"></a>
+					     <span>梨形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid11" class="nav_default  shape-gem" vn="方形" vid="11" style="background: url('/gemtak/resources/client/images/mot/11.png') top center no-repeat;"></a>
+					     <span>方形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid12" class="nav_default  shape-gem" vn="三角形" vid="12" style="background: url('/gemtak/resources/client/images/mot/12.png') top center no-repeat;"></a>
+					     <span>三角形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid13" class="nav_default  shape-gem" vn="圆形" vid="13" style="background: url('/gemtak/resources/client/images/mot/13.png') top center no-repeat;"></a>
+					     <span>圆形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid14" class="nav_default  shape-gem" vn="梨形" vid="14" style="background: url('/gemtak/resources/client/images/mot/14.png') top center no-repeat;"></a>
+					     <span>梨形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid15" class="nav_default  shape-gem" vn="椭圆形" vid="15" style="background: url('/gemtak/resources/client/images/mot/15.png') top center no-repeat;"></a>
+					     <span>椭圆形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid16" class="nav_default  shape-gem" vn="心形" vid="16" style="background: url('/gemtak/resources/client/images/mot/16.png') top center no-repeat;"></a>
+					     <span>心形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid17" class="nav_default  shape-gem" vn="马眼形" vid="17" style="background: url('/gemtak/resources/client/images/mot/17.png') top center no-repeat;"></a>
+					     <span>马眼形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid18" class="nav_default  shape-gem" vn="球形" vid="18" style="background: url('/gemtak/resources/client/images/mot/18.png') top center no-repeat;"></a>
+					     <span>球形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid19" class="nav_default  shape-gem" vn="垫形" vid="19" style="background: url('/gemtak/resources/client/images/mot/19.png') top center no-repeat;"></a>
+					     <span>垫形</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid20" class="nav_default  shape-gem" vn="长方形2" vid="20" style="background: url('/gemtak/resources/client/images/mot/20.png') top center no-repeat;"></a>
+					     <span>长方形2</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid21" class="nav_default  shape-gem" vn="正方形2" vid="21" style="background: url('/gemtak/resources/client/images/mot/21.png') top center no-repeat;"></a>
+					     <span>正方形2</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid22" class="nav_default  shape-gem" vn="三角形2" vid="22" style="background: url('/gemtak/resources/client/images/mot/22.png') top center no-repeat;"></a>
+					     <span>三角形2</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid23" class="nav_default  shape-gem" vn="阿斯切" vid="23" style="background: url('/gemtak/resources/client/images/mot/23.png') top center no-repeat;"></a>
+					     <span>阿斯切</span>
+					  </div>
+					  <div class="swiper-slide">
+					     <a id="metalid24" class="nav_default  shape-gem" vn="雷帝恩" vid="24" style="background: url('/gemtak/resources/client/images/mot/24.png') top center no-repeat;"></a>
+					     <span>雷帝恩</span>
+					  </div>
                  </div>
 			</div> 
 			<div id="btn1"  class="hidden-xs hidden-sm swiper-button-prev2"></div>
