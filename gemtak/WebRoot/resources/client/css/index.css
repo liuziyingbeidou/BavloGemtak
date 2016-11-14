@@ -101,9 +101,9 @@ em, i{ font-style:normal; }
 
 
 .swiper-button-prev {top:35%; background:url(../images/jia.png) no-repeat right top}
-.swiper-button-next{top:35%;background:url(../images/jiao.png) no-repeat right top;}
+.swiper-button-next{top:35%;background:url(../images/jiao.png) no-repeat right top;right: 10px;}
 .swiper-button-prev2 {top:40%; background:url(../images/jia.png) no-repeat right top}
-.swiper-button-next2{top:40%;background:url(../images/jiao.png) no-repeat right top;}
+.swiper-button-next2{top:40%;background:url(../images/jiao.png) no-repeat right top;right: 10px;}
 
 .more_ri{float:right;width:3%;margin:0px auto 0%;overflow:hidden;padding-top:3%}
 
@@ -417,10 +417,10 @@ background-size: 25px 15px;text-align:right;height: 25px;margin-right: 10px;curs
  .scdd1 p{padding:0px;text-align:center} 
 .scdd1 p span{margin:0px 5px 0px 5px}
 .fc_0{color:#8c0000}
-
-.m_bottom_80{margin-bottom:80px}
-/*尾部position: fixed;*/
-.footer{position:fixed; left:0px;bottom:0px;width:100%;margin:0px auto 0px;overflow:hidden;}
+/*margin-bottom:80px*/
+ .m_bottom_80{}
+/*尾部position:fixed; left:0px;bottom:0px;*/
+.footer{width:100%;margin:0px auto 0px;overflow:hidden;}
 .foot{background:#8c0000;margin:0px auto;overflow:hidden;line-height:30px;padding:5px 0px}
 .foot p{width:100%;line-height:30px;color:#bbbbbb;text-align:center}
 .foot p a{color:#bbbbbb;margin:0px 5px;}
