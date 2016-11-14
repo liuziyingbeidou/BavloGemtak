@@ -300,10 +300,11 @@ function selectClientList(switchover) {
 											.append(
 													// <b>"+data[i].weight+"
 													// "+data[i].clarity_en+"
+													//
 													"<li class='col-md-3 col-xs-6'>"
 															+ "<span><a href='javascript:void(0)' onclick='goDetail("
 															+ data[i].id
-															+ ")'><image class='360tupian'  src='http://gemtakimg.b0.upaiyun.com/Gemtak/"+data[i].gid+"/"+data[i].is_cover+".jpg!mid' /></a></span>"
+															+ ")'><image class='360tupian'  src='http://gemtakimg.b0.upaiyun.com/Gemtak/"+data[i].gid+"/"+data[i].is_cover+"!mid' /></a></span>"
 															+ "<h6><b>"
 															+ data[i].type_cn
 															+ "<font class='hidden-xs hidden-sm'>（"
@@ -313,7 +314,7 @@ function selectClientList(switchover) {
 															+ "</i></h6>"
 															+ "<p><b>"
 															+ data[i].weight
-															+ " "
+															+ " &nbsp; "
 															+ data[i].clarity_en
 															+ " </b><i  onclick='addFavorite("
 															+ data[i].id
@@ -327,7 +328,7 @@ function selectClientList(switchover) {
 									$(".appendClientList .cList")
 											.append(
 													"<tr>"
-															+ "<td><image class='360tupian' src='http://gemtakimg.b0.upaiyun.com/Gemtak/"+data[i].gid+"/"+data[i].is_cover+".jpg!mid'' width='120px'/></td>"
+															+ "<td><image class='360tupian' src='http://gemtakimg.b0.upaiyun.com/Gemtak/"+data[i].gid+"/"+data[i].is_cover+"!mid'' width='120px'/></td>"
 															+ "<td><b>"
 															+ data[i].type_cn
 															+ "</b> <br />"
