@@ -542,21 +542,7 @@ $(window).scroll(function(){
     <jsp:include page="../../admin/foot.jsp"></jsp:include>
 </div>
 <!-- 延迟加载   start  loaders.css-->
-		      <%-- <!-- <div class="loader yemianyanchi" style="display: none;">
-		        <div class="loader-inner ball-spin-fade-loader">
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		        </div>
-		      </div> -->
-<div class="yemianyanchi">
-<img src="${ctx }/resources/client/images/load2.gif"></img>
-</div> --%>
+		   
 <!-- 延迟加载   end -->
 <script language="Javascript">
   $(function(){
