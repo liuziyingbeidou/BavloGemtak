@@ -38,9 +38,34 @@
   String bis = (String)session.getAttribute("bisBis");
  %>
  <c:set value="<%=bis %>" var="bis"/>
+<style type="text/css">
+.black_overlay{
+display: none;
+position: absolute;
+top: 0%;
+left: 0%;
+width: 100%;
+height: 100%;
+background-color: #DDDDDD;
+z-index:1001;
+-moz-opacity: 0.8;
+opacity:.80;
+filter: alpha(opacity=80);
+}
+
+.white_content {
+position: absolute;
+top: 40%;
+left: 20%;
+width: 55%;
+height: 75%;
+z-index:1002;
+overflow: auto;
+}
+</style>
 <script>
 $(document).ready(function() {
-    $(".yemianyanchi").show();
+    //$(".yemianyanchi").show();
 	getCarNum();
 	$(".dial").knob({
 	 max: 360,
@@ -60,7 +85,7 @@ $(document).ready(function() {
 	$("#ex8").slider({
 		tooltip: 'always'
 	});
-	 $(".yemianyanchi").hide(); 
+	//$(".yemianyanchi").hide(); 
 });
 
 //jquery.bavlo.js 颜色/方位
@@ -70,7 +95,7 @@ function setStation(frame){
 	$(".dial-station").trigger("change");
 }
 function setDial(frame){   //视角
-   var dl = 90;
+   var dl = 45;
    $(".dial").val(dl);
    $(".dial").trigger("change");
 }
@@ -173,15 +198,7 @@ function addShoppCar(id){
 <div class="tit_all m_bottom_80 conbg">
 	  <div class="container">
 		  <div class="tit_all_left col-sm-12 col-md-7">
-             <!-- <div class="loader yemianyanchi" style="display: none;">
-		        <div class="loader-inner ball-pulse-rise">
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		          <div></div>
-		        </div>
-			 </div> -->
+            
 		     <div class="tit_img">
 			   <!--<image src="${ctx }/resources/client/images/ad.jpg" style="width:100%"/>-->
 			   <!--<iframe id="iframe" src="${ctx }/gemClient/loadImg.do" frameborder="no" width="100%"></iframe>-->
@@ -281,6 +298,12 @@ function addShoppCar(id){
 		  </div>
 	  </div>
 	   
+</div>
+ <!--弹出层时背景层DIV-->
+<div id="fade" class="black_overlay  yemianyanchi">
+	<div id="" class="white_content">
+	<img src="${ctx }/resources/client/images/load2.gif"  style="text-align: center;"/>
+	</div>
 </div>
 <div class="footer hidden-xs hidden-sm">
     <jsp:include page="../../admin/foot.jsp"></jsp:include>
