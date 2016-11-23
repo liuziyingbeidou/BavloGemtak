@@ -38,31 +38,7 @@
   String bis = (String)session.getAttribute("bisBis");
  %>
  <c:set value="<%=bis %>" var="bis"/>
-<style type="text/css">
-.black_overlay{
-display: none;
-position: absolute;
-top: 0%;
-left: 0%;
-width: 100%;
-height: 100%;
-background-color: #DDDDDD;
-z-index:1001;
--moz-opacity: 0.8;
-opacity:.80;
-filter: alpha(opacity=80);
-}
 
-.white_content {
-position: absolute;
-top: 40%;
-left: 20%;
-width: 55%;
-height: 75%;
-z-index:1002;
-overflow: auto;
-}
-</style>
 <script>
 $(document).ready(function() {
     //$(".yemianyanchi").show();
@@ -270,24 +246,24 @@ function addShoppCar(id){
 				</ul>
 				<c:if test="${bis=='Y'}">
 				 <c:if test="${gem.pairs=='sl'}">
-				   <p >价格：<span>¥${gem.trade_price} <em>/单粒</em></span></p>
+				   <p >价格：<span>¥${gem.trade_price} <em>元/单粒</em></span></p>
 				 </c:if>
 				 <c:if test="${gem.pairs=='pl'}">
-				   <p>价格：<span>¥${gem.trade_price} <em>/配对</em></span></p>
+				   <p>价格：<span>¥${gem.trade_price} <em>元/配对</em></span></p>
 				 </c:if>
 				 <c:if test="${gem.pairs=='ml'}">
-				   <p>价格：<span>¥${gem.trade_price} <em>/</em>多粒</span></p>
+				   <p>价格：<span>¥${gem.trade_price} <em>元/多粒</em></span></p>
 				 </c:if>
 				</c:if>
 				<c:if test="${bis!='Y'}">
 				  <c:if test="${gem.pairs=='sl'}">
-				   <p>价格：<span>¥${gem.retail_price} <em>/单粒</em></span></p>
+				   <p>价格：<span>¥${gem.retail_price} <em>元/单粒</em></span></p>
 				 </c:if>
 				 <c:if test="${gem.pairs=='pl'}">
-				   <p>价格：<span>¥${gem.retail_price} <em>/配对</em></span></p>
+				   <p>价格：<span>¥${gem.retail_price} <em>元/配对</em></span></p>
 				 </c:if>
 				 <c:if test="${gem.pairs=='ml'}">
-				   <p>价格：<span>¥${gem.retail_price} <em>/</em>多粒</span></p>
+				   <p>价格：<span>¥${gem.retail_price} <em>元/多粒</em></span></p>
 				 </c:if>
 				</c:if>
 				<b style="display: none"><img  class="360tupian" src="${ctx }/resources/client/images/cp2.jpg"/></b>
@@ -299,12 +275,9 @@ function addShoppCar(id){
 	  </div>
 	   
 </div>
+<div></div>
  <!--弹出层时背景层DIV-->
-<div id="fade" class="black_overlay  yemianyanchi">
-	<div id="" class="white_content">
-	<img src="${ctx }/resources/client/images/load2.gif"  style="text-align: center;"/>
-	</div>
-</div>
+
 <div class="footer hidden-xs hidden-sm">
     <jsp:include page="../../admin/foot.jsp"></jsp:include>
 </div>
