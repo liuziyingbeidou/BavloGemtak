@@ -146,7 +146,8 @@ $(window).scroll(function(){
 			<a href="javascript:void(0);" id="typeid4"  onclick="javascript:show_menuone(4);">价格<b class="hidden-xs hidden-sm">Price</b></a>
 		</p>
 		<div class="sou col-md-4 hidden-xs hidden-sm">
-		  <input class="sear_ch_input input-type-sel" type="text"  placeholder="巴黎之吻"><input class="sear_ch_sub select-type" type="button"  value="">
+		  <input class="sear_ch_input input-type-sel" type="text"  placeholder="搜索宝石特性"/>
+		  <input class="sear_ch_sub select-type" type="button"  value=""/>
 		</div>
 	  </div>
 	  <div class="line "></div>
@@ -460,12 +461,18 @@ $(window).scroll(function(){
 			</div>
 			<div class="tab_cont " id="contid3" style="display:none">
 			      <div class="wpxz">
-					  <label>重量范围（ct）</label><input class="inp_s from-weight" type="text" >-&nbsp;<input class="inp_s to-weight" type="text" ><input class="inp_z btn-weight" type="submit" value="搜索" >
+					  <label>重量范围（ct）</label>
+					  <input class="inp_s from-weight" type="text" />-&nbsp;
+					  <input class="inp_s to-weight" type="text" />
+					  <input class="inp_z btn-weight" type="submit" value="搜索" />
 				  </div>
 			</div>
 			<div class="tab_cont " id="contid4" style="display:none">
 			      <div class="wpxz">
-					  <label>价格范围（元）</label><input class="inp_s from-price" type="text" >-&nbsp;<input class="inp_s to-price" type="text" ><input class="inp_z btn-price" type="submit" value="搜索" >
+					  <label>价格范围（元）</label>
+					  <input class="inp_s from-price" type="text" />-&nbsp;
+					  <input class="inp_s to-price" type="text"/>
+					  <input class="inp_z btn-price" type="submit" value="搜索" />
 				  </div>
 			</div>
 	  </div>
@@ -477,25 +484,33 @@ $(window).scroll(function(){
 		     <span class="selects-shape ms-sel" ms-key=""></span>
 		     <span class="selects-weight ms-sel" ></span>
 		     <span class="selects-price ms-sel" ></span>
-			 <span class="span_item" ><input type="checkbox" class="pairs-sl" name="renamed" value="sl"/>单粒</span>
-			 <span class="span_item"><input type="checkbox"  class="pairs-pl" name="renamed" value="pl"/>配对</span>
-			 <span class="span_item"><input type="checkbox" class="pairs-ml" name="renamed" value="ml"/>多粒</span>
-			 <span class="span_item"><input type="checkbox" class="pairs-h" name="renamed" value="1"/>弧面</span>
-			 <span class="span_item"><input type="checkbox" class="pairs-k" name="renamed" value="1"/>刻面</span>
+			 <span class="span_item" ><input type="radio" class="pairs-sl" name="renamed" value="sl"/>单粒</span>
+			 <span class="span_item"><input type="radio"  class="pairs-pl" name="renamed" value="pl"/>配对</span>
+			 <span class="span_item"><input type="radio" class="pairs-ml" name="renamed" value="ml"/>多粒</span>
+			 <!-- <span class="span_item"><input type="radio" class="pairs-h" name="renamed" value="1"/>弧面</span>
+			 <span class="span_item"><input type="radio" class="pairs-k" name="renamed" value="1"/>刻面</span> -->
 		  </div>
 		  
 		  
 		  
           <div class="cup_nav col-md-12">
 		     <ul class="hidden-xs hidden-sm">
-			    <li ><a class="a_sel" id="type1"  onclick="javascript:show_menu(1);" href="javascript:void(0);" >结果（Resault <i class="selGemNO"></i>）</a></li>
-			    <li><a  id="type2"  onclick="javascript:show_menu(2);" href="javascript:void(0);" >比较（Comparsion 5）</a></li>
+			    <li >
+			     <a class="a_sel" id="type1"  onclick="javascript:show_menu(1);" href="javascript:void(0);" >
+			      结果（Resault <i class="selGemNO"></i>）
+			     </a>
+			    </li>
+			    <li>
+			     <!-- <a  id="type2"  onclick="javascript:show_menu(2);" href="javascript:void(0);" >
+			        比较（Comparsion 5） 
+			      </a> -->
+			     </li>
 			 </ul>
 			 <p class="col-xs-12 col-md-4"><b class="visible-xs-inline-block visible-sm-inline-block ">找到&nbsp;<i class="selPhGemNO">${gemNo}</i>&nbsp;颗宝石</b>
 			    <select class="select-createdate">
-						<option value="-1">按上架时间</option>
-						<option value="htol">高到低</option>
-						<option value="ltoh">低到高</option>
+						<!-- <option value="-1">按上架时间</option> -->
+						<option value="htol">按最新上架时间</option>
+						<option value="ltoh">按默认上架时间</option>
 				</select>
 				<span class="hidden-xs hidden-sm">
 				 <a href="#" class="show-line"><image src="${ctx }/resources/client/images/tu1.png" /></a>
@@ -530,6 +545,7 @@ $(window).scroll(function(){
           </div> --%>
 	    </div>
 	</div>
+</div>
 </div>
  <!--弹出层时背景层DIV-->
 <div id="fade" class="black_overlay  yemianyanchi">
