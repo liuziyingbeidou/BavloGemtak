@@ -24,23 +24,6 @@ import com.bavlo.gemtak.utils.DateUtil;
 @Service
 public class GemAService extends CommonService implements IGemService {
 
-	@Override
-	public Integer saveGemInfo() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void saveGemInfoRID() throws Exception {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void updateGemInfo(Integer id) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
 	/**
 	 * 1. ÐÞ¸Ä±¦Ê¯
@@ -304,5 +287,28 @@ public class GemAService extends CommonService implements IGemService {
 		}
 		
 	}
-	
+
+	/* (non-Javadoc)
+	 * @see com.bavlo.gemtak.service.gem.itf.IGemService#saveGemInfo()
+	 */
+	public Integer saveGemInfo() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bavlo.gemtak.service.gem.itf.IGemService#saveGemInfoRID()
+	 */
+	public void saveGemInfoRID() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bavlo.gemtak.service.gem.itf.IGemService#updateGemInfo(java.lang.Integer)
+	 */
+	public void updateGemInfo(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }
